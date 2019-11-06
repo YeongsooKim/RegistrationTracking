@@ -1,0 +1,8 @@
+prefix=/workspace/TrackingWithRegistration/install
+
+Name: tracking_with_registration
+Description: Description of tracking_with_registration
+Version: 0.0.0
+Cflags: -I/workspace/TrackingWithRegistration/install/include
+Libs: -L/workspace/TrackingWithRegistration/install/lib 
+Requires: pcl_ros roscpp sensor_msgs

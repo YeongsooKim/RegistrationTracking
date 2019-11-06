@@ -1,0 +1,4 @@
+Symlinking /workspace/TrackingWithRegistration/devel/lib/pkgconfig/tracking_with_registration.pc
+Symlinking /workspace/TrackingWithRegistration/devel/lib/tracking_with_registration/tracking_with_registration
+Symlinking /workspace/TrackingWithRegistration/devel/share/tracking_with_registration/cmake/tracking_with_registrationConfig.cmake
+Symlinking /workspace/TrackingWithRegistration/devel/share/tracking_with_registration/cmake/tracking_with_registrationConfig-version.cmake

@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/setup.sh

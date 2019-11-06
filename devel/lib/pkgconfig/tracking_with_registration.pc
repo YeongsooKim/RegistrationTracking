@@ -1,0 +1,1 @@
+/workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/pkgconfig/tracking_with_registration.pc
