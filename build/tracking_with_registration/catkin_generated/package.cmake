@@ -1,6 +1,6 @@
 set(_CATKIN_CURRENT_PACKAGE "tracking_with_registration")
 set(tracking_with_registration_VERSION "0.0.0")
-set(tracking_with_registration_MAINTAINER "root <root@todo.todo>")
+set(tracking_with_registration_MAINTAINER "root <kimkys768@gmail.com>")
 set(tracking_with_registration_PACKAGE_FORMAT "2")
 set(tracking_with_registration_BUILD_DEPENDS "pcl_ros" "roscpp" "sensor_msgs")
 set(tracking_with_registration_BUILD_EXPORT_DEPENDS "pcl_ros" "roscpp" "sensor_msgs")

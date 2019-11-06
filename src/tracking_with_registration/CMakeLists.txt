@@ -131,7 +131,20 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(tracking_with_registration src/measurement.cpp)
+add_executable (
+	tracking_with_registration 
+	src/measurement.cpp 
+	src/ukf.cpp 
+	src/tools.cpp 
+	src/render/render.cpp
+	)
+
+target_link_libraries (
+	tracking_with_registration
+	${PCL_LIBRARIES}
+	${catkin_LIBRARIES}
+	)
+
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -144,7 +157,7 @@ add_executable(tracking_with_registration src/measurement.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(tracking_with_registration ${catkin_LIBRARIES})
+# target_link_libraries(tracking_with_registration ${catkin_LIBRARIES})
 
 #############
 ## Install ##
