@@ -1,0 +1,6 @@
+devel_space: /workspace/TrackingWithRegistration/devel
+install: false
+install_space: /workspace/TrackingWithRegistration/install
+profile: default
+source_space: /workspace/TrackingWithRegistration/src
+workspace: /workspace/TrackingWithRegistration
