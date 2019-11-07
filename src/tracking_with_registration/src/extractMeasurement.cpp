@@ -1,6 +1,6 @@
 #include "extractMeasurement.h"
 
-ExtractMeasurement::ExtractMeasurement()
+ExtractMeasurement::ExtractMeasurement(unsigned int size) : measurementN (size)
 {
 	// define publisher
 	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("output", 100);
@@ -8,6 +8,19 @@ ExtractMeasurement::ExtractMeasurement()
 	//m_pub_Origin = nh.advertise<visualization_msgs::Marker> ("Origin", 1);
 
 	m_maxIndexNumber = 0;	
+
+	vecOf_measurementCSV.resize(measurementN);
+
+	for (unsigned int measurementIndex = 0; measurementIndex < measurementN; measurementIndex++)
+	{
+		string num = std::to_string(measurementIndex);
+		vecOf_measurementCSV[measurementIndex].open ("measurement_" + num + ".csv");
+
+		if (vecOf_measurementCSV[measurementIndex].is_open()){
+			vecOf_measurementCSV[measurementIndex] << "timestamp, pose_x, pose_y" << std::endl;
+		}
+	}
+
 }
 
 void ExtractMeasurement::setParam()
@@ -68,7 +81,7 @@ void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInpu
 	euclideanCluster.extract (vecClusterIndices);
 }
 
-void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud)
+void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp)
 {
 	m_OriginalClusters.clear();
 
@@ -87,6 +100,8 @@ void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClu
 
 		std_msgs::Header dummy;
 		dummy.frame_id = "map";
+		dummy.stamp = ros::Time(timestamp/1e6);
+
 		// Cloring and calculate the cluster center point and quaternion
 		pCluster->SetCloud(pInputCloud, clusterIndice.indices, dummy, objectNumber, m_globalRGB[objectNumber].m_r, m_globalRGB[objectNumber].m_g, m_globalRGB[objectNumber].m_b, label, true);
 
@@ -123,35 +138,35 @@ void ExtractMeasurement::association()
 
 void ExtractMeasurement::displayShape ()//const std::vector<clusterPtr> pVecClusters)
 {
-//	// origin
-//	m_Origin.header.frame_id = "map";
-//	m_Origin.header.stamp = ros::Time::now();
-//
-//	m_Origin.ns = "/origin";
-//	m_Origin.id = 0;
-//
-//	m_Origin.type = visualization_msgs::Marker::SPHERE;
-//
-//	m_Origin.action = visualization_msgs::Marker::ADD;
-//
-//	m_Origin.pose.position.x = 0;
-//	m_Origin.pose.position.y = 0;
-//	m_Origin.pose.position.z = 0;
-//	m_Origin.pose.orientation.x = 0.0;
-//	m_Origin.pose.orientation.y = 0.0;
-//	m_Origin.pose.orientation.z = 0.0;
-//	m_Origin.pose.orientation.w = 1.0;
-//
-//	m_Origin.scale.x = 0.5;
-//	m_Origin.scale.y = 0.5;
-//	m_Origin.scale.z = 0.5;
-//
-//	m_Origin.color.r = 0.0f;
-//	m_Origin.color.g = 1.0f;
-//	m_Origin.color.b = 0.0f;
-//	m_Origin.color.a = 1.0;
-//
-//	m_Origin.lifetime = ros::Duration();
+	//	// origin
+	//	m_Origin.header.frame_id = "map";
+	//	m_Origin.header.stamp = ros::Time::now();
+	//
+	//	m_Origin.ns = "/origin";
+	//	m_Origin.id = 0;
+	//
+	//	m_Origin.type = visualization_msgs::Marker::SPHERE;
+	//
+	//	m_Origin.action = visualization_msgs::Marker::ADD;
+	//
+	//	m_Origin.pose.position.x = 0;
+	//	m_Origin.pose.position.y = 0;
+	//	m_Origin.pose.position.z = 0;
+	//	m_Origin.pose.orientation.x = 0.0;
+	//	m_Origin.pose.orientation.y = 0.0;
+	//	m_Origin.pose.orientation.z = 0.0;
+	//	m_Origin.pose.orientation.w = 1.0;
+	//
+	//	m_Origin.scale.x = 0.5;
+	//	m_Origin.scale.y = 0.5;
+	//	m_Origin.scale.z = 0.5;
+	//
+	//	m_Origin.color.r = 0.0f;
+	//	m_Origin.color.g = 1.0f;
+	//	m_Origin.color.b = 0.0f;
+	//	m_Origin.color.a = 1.0;
+	//
+	//	m_Origin.lifetime = ros::Duration();
 
 	// tracking objects
 	m_arrShapes.markers.clear();
@@ -162,6 +177,7 @@ void ExtractMeasurement::displayShape ()//const std::vector<clusterPtr> pVecClus
 
 		shape.lifetime = ros::Duration(0.5);
 		shape.header.frame_id = "map";
+		shape.header.stamp = ros::Time(pCluster->m_timestamp);
 		shape.id = pCluster->m_id;
 
 		// bounding box
@@ -182,6 +198,7 @@ void ExtractMeasurement::displayShape ()//const std::vector<clusterPtr> pVecClus
 		shape.color.a = 0.5;
 
 		m_arrShapes.markers.push_back(shape);
+		vecOf_measurementCSV[shape.id-1] << shape.header.stamp << "," << shape.pose.position.x << "," << shape.pose.position.y << std::endl;
 
 		// text
 		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;

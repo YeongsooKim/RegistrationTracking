@@ -23,6 +23,7 @@ void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,
 	m_id = iClusterNumber;
 	m_originalID = iClusterNumber;
 
+	m_timestamp = _header.stamp.toSec();
 	m_label = label;
 	m_r = r;
 	m_g = g;

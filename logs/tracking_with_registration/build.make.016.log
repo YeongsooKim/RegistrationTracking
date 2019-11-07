@@ -1,0 +1,44 @@
+[35m[1mScanning dependencies of target tracking_with_registration[0m
+[ 12%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o[0m
+[ 25%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o[0m
+[ 37%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o[0m
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp:[m[K In member function ‘[01m[Kvoid Cluster::SetCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr, const std::vector<int>&, std_msgs::Header, int, int, int, int, std::__cxx11::string, bool)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp:26:14:[m[K [01;31m[Kerror: [m[Kcannot convert ‘[01m[Kstd_msgs::Header_<std::allocator<void> >::_stamp_type {aka ros::Time}[m[K’ to ‘[01m[Kdouble[m[K’ in assignment
+  m_timestamp = _header.stamp;
+[01;32m[K              ^[m[K
+CMakeFiles/tracking_with_registration.dir/build.make:206: recipe for target 'CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o' failed
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::setCluster(std::vector<pcl::PointIndices>, pcl::PointCloud<pcl::PointXYZ>::Ptr, long long int)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:103:15:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator=[m[K’ (operand types are ‘[01m[Kstd_msgs::Header_<std::allocator<void> >::_stamp_type {aka ros::Time}[m[K’ and ‘[01m[Kdouble[m[K’)
+   dummy.stamp = timestamp/1e6;
+[01;32m[K               ^[m[K
+In file included from [01m[K/opt/ros/kinetic/include/ros/ros.h:38:0[m[K,
+                 from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:4[m[K,
+                 from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:1[m[K:
+[01m[K/opt/ros/kinetic/include/ros/time.h:180:22:[m[K [01;36m[Knote: [m[Kcandidate: ros::Time& ros::Time::operator=(const ros::Time&)
+   class ROSTIME_DECL Time : public TimeBase<Time, Duration>
+[01;32m[K                      ^[m[K
+[01m[K/opt/ros/kinetic/include/ros/time.h:180:22:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kdouble[m[K’ to ‘[01m[Kconst ros::Time&[m[K’
+[01m[K/opt/ros/kinetic/include/ros/time.h:180:22:[m[K [01;36m[Knote: [m[Kcandidate: ros::Time& ros::Time::operator=(ros::Time&&)
+[01m[K/opt/ros/kinetic/include/ros/time.h:180:22:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kdouble[m[K’ to ‘[01m[Kros::Time&&[m[K’
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::displayShape()[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:180:22:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator=[m[K’ (operand types are ‘[01m[Kstd_msgs::Header_<std::allocator<void> >::_stamp_type {aka ros::Time}[m[K’ and ‘[01m[Kdouble[m[K’)
+   shape.header.stamp = pCluster->m_timestamp;
+[01;32m[K                      ^[m[K
+In file included from [01m[K/opt/ros/kinetic/include/ros/ros.h:38:0[m[K,
+                 from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:4[m[K,
+                 from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:1[m[K:
+[01m[K/opt/ros/kinetic/include/ros/time.h:180:22:[m[K [01;36m[Knote: [m[Kcandidate: ros::Time& ros::Time::operator=(const ros::Time&)
+   class ROSTIME_DECL Time : public TimeBase<Time, Duration>
+[01;32m[K                      ^[m[K
+[01m[K/opt/ros/kinetic/include/ros/time.h:180:22:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kdouble[m[K’ to ‘[01m[Kconst ros::Time&[m[K’
+[01m[K/opt/ros/kinetic/include/ros/time.h:180:22:[m[K [01;36m[Knote: [m[Kcandidate: ros::Time& ros::Time::operator=(ros::Time&&)
+[01m[K/opt/ros/kinetic/include/ros/time.h:180:22:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kdouble[m[K’ to ‘[01m[Kros::Time&&[m[K’
+CMakeFiles/tracking_with_registration.dir/build.make:158: recipe for target 'CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o' failed
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o] Error 1
+CMakeFiles/Makefile2:163: recipe for target 'CMakeFiles/tracking_with_registration.dir/all' failed
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+Makefile:138: recipe for target 'all' failed
+make: *** [all] Error 2

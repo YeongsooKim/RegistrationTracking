@@ -30,6 +30,7 @@ class Cluster
 	int m_id;
 	int m_originalID;
 	int m_r, m_g, m_b;
+	double m_timestamp;
 
 	Eigen::Matrix3f m_eigen_vectors;
 	Eigen::Vector3f m_eigen_values;

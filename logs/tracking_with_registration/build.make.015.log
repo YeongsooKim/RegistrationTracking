@@ -1,0 +1,15 @@
+[35m[1mScanning dependencies of target tracking_with_registration[0m
+[ 12%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o[0m
+[ 37%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o[0m
+[ 37%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o[0m
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp:[m[K In member function ‘[01m[Kvoid Cluster::SetCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr, const std::vector<int>&, std_msgs::Header, int, int, int, int, std::__cxx11::string, bool)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp:26:2:[m[K [01;31m[Kerror: [m[K‘[01m[Km_timestamp[m[K’ was not declared in this scope
+  m_timestamp = _header.stamp;
+[01;32m[K  ^[m[K
+CMakeFiles/tracking_with_registration.dir/build.make:206: recipe for target 'CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o' failed
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+CMakeFiles/Makefile2:163: recipe for target 'CMakeFiles/tracking_with_registration.dir/all' failed
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+Makefile:138: recipe for target 'all' failed
+make: *** [all] Error 2

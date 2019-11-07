@@ -55,6 +55,8 @@ class ExtractMeasurement
 	double m_dClusterMinSize;
 	double m_dClusterMaxSize; 	
 
+	unsigned int measurementN;
+
 	std::vector<RGB> m_globalRGB;
 	int m_maxIndexNumber = 0;
 
@@ -67,13 +69,15 @@ class ExtractMeasurement
 	visualization_msgs::Marker m_Origin;
 	visualization_msgs::MarkerArray m_arrShapes;
 
-	ExtractMeasurement();
+	std::vector<std::ofstream> vecOf_measurementCSV;
+
+	ExtractMeasurement(unsigned int size);
 	void setParam();
 	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
 	void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);
 	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);
 	void generateColor(size_t indexNumber);
-	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
+	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp);
 	void association ();
 	void displayShape ();
 	void publish();
