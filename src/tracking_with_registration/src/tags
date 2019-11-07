@@ -335,6 +335,8 @@ assign_selector	Eigen/src/Core/Assign.h	/^struct assign_selector<Derived,OtherDe
 assign_selector	Eigen/src/Core/Assign.h	/^struct assign_selector<Derived,OtherDerived,true,true> {$/;"	s	namespace:Eigen::internal
 assign_traits	Eigen/src/Core/Assign.h	/^struct assign_traits$/;"	s	namespace:Eigen::internal
 asSluMatrix	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^SluMatrix asSluMatrix(MatrixType& mat)$/;"	f	namespace:Eigen::internal
+associate	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::associate()$/;"	f	language:C++	class:ExtractMeasurement
+associate	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void associate ();$/;"	p	language:C++	class:ExtractMeasurement
 associate	obstacle_tracking.cpp	/^void ObstacleTracking::associate (const std::vector<clusterPtr>& objList)$/;"	f	class:ObstacleTracking
 at	Eigen/src/SparseCore/CompressedStorage.h	/^    inline Scalar at(Index key, const Scalar& defaultValue = Scalar(0)) const$/;"	f	class:Eigen::internal::CompressedStorage
 atanh2	Eigen/src/Core/MathFunctions.h	/^inline EIGEN_MATHFUNC_RETVAL(atanh2, Scalar) atanh2(const Scalar& x, const Scalar& y)$/;"	f	namespace:Eigen::numext
@@ -703,12 +705,8 @@ clearFactors	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    void clearFactors()
 clearRays	render/render.cpp	/^void clearRays(pcl::visualization::PCLVisualizer::Ptr& viewer)$/;"	f
 clear_mark	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^static inline  Index clear_mark  \/* return the new value for tag_mark *\/$/;"	f	namespace:internal
 cloud	sensors/lidar.h	/^	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;$/;"	m	struct:Lidar
-Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::Cluster()$/;"	f	language:C++	class:Cluster
+Cluster	cluster.cpp	/^Cluster::Cluster()$/;"	f	class:Cluster
 Cluster	cluster.hpp	/^class Cluster$/;"	c
-Cluster::Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::Cluster()$/;"	f	language:C++	class:Cluster
-Cluster::GetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^pcl::PointCloud <pcl::PointXYZRGB>::Ptr Cluster::GetCloud()$/;"	f	language:C++	class:Cluster
-Cluster::SetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	f	language:C++	class:Cluster
-Cluster::~Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::~Cluster()$/;"	f	language:C++	class:Cluster
 clusterPtr	cluster.hpp	/^typedef boost::shared_ptr<Cluster> clusterPtr;$/;"	t
 cmp_EQ	Eigen/src/Core/util/Constants.h	/^    cmp_EQ = 0,$/;"	e	enum:Eigen::internal::ComparisonName
 cmp_LE	Eigen/src/Core/util/Constants.h	/^    cmp_LE = 2,$/;"	e	enum:Eigen::internal::ComparisonName
@@ -3025,6 +3023,8 @@ ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registr
 ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ExtractMeasurement();$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^class ExtractMeasurement$/;"	c	language:C++
 EXTRACTMEASUREMENT	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	2;"	d	language:C++
+ExtractMeasurement::associate	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::associate()$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::associate	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void associate ();$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices)$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m)$/;"	f	language:C++	class:ExtractMeasurement
@@ -3044,7 +3044,6 @@ ExtractMeasurement::m_maxIndexNumber	/workspace/TrackingWithRegistration/src/tra
 ExtractMeasurement::m_ObstacleTracking	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ObstacleTracking m_ObstacleTracking;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_OriginalClusters	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<clusterPtr> m_OriginalClusters;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_pub_result	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_result;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_resultCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	pcl::PointCloud<pcl::PointXYZ> m_resultCloud;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_tools	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	Tools m_tools;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::nh	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::NodeHandle nh;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::publish ()$/;"	f	language:C++	class:ExtractMeasurement
@@ -3374,7 +3373,7 @@ generic_aligned_realloc	Eigen/src/Core/util/Memory.h	/^inline void* generic_alig
 get	Eigen/src/SparseCore/SparseDenseProduct.h	/^    static Scalar get(const _RhsNested &rhs, Index outer, Dense = Dense())$/;"	f	class:Eigen::SparseDenseOuterProduct::InnerIterator
 get	Eigen/src/SparseCore/SparseDenseProduct.h	/^    static Scalar get(const _RhsNested &rhs, Index outer, Sparse = Sparse())$/;"	f	class:Eigen::SparseDenseOuterProduct::InnerIterator
 GetAction	Eigen/src/Core/util/Constants.h	/^enum Action {GetAction, SetAction};$/;"	e	enum:Eigen::Action
-GetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^pcl::PointCloud <pcl::PointXYZRGB>::Ptr Cluster::GetCloud()$/;"	f	language:C++	class:Cluster
+GetCloud	cluster.cpp	/^pcl::PointCloud <pcl::PointXYZRGB>::Ptr Cluster::GetCloud()$/;"	f	class:Cluster
 getL	Eigen/src/Cholesky/LDLT.h	/^  static inline MatrixL getL(const MatrixType& m) { return m.adjoint(); }$/;"	f	struct:Eigen::internal::LDLT_Traits
 getL	Eigen/src/Cholesky/LDLT.h	/^  static inline MatrixL getL(const MatrixType& m) { return m; }$/;"	f	struct:Eigen::internal::LDLT_Traits
 getL	Eigen/src/Cholesky/LLT.h	/^  static inline MatrixL getL(const MatrixType& m) { return m.adjoint(); }$/;"	f	struct:Eigen::internal::LLT_Traits
@@ -5813,7 +5812,6 @@ m_realSchur	Eigen/src/Eigenvalues/EigenSolver.h	/^    RealSchur<MatrixType> m_re
 m_reference	Eigen/src/SparseCore/SparseView.h	/^  Scalar m_reference;$/;"	m	class:Eigen::SparseView
 m_result	Eigen/src/Core/ProductBase.h	/^    mutable PlainObject m_result;$/;"	m	namespace:Eigen
 m_result	Eigen/src/Core/products/CoeffBasedProduct.h	/^    mutable PlainObject m_result;$/;"	m	class:Eigen::CoeffBasedProduct
-m_resultCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	pcl::PointCloud<pcl::PointXYZ> m_resultCloud;$/;"	m	language:C++	class:ExtractMeasurement
 m_returnOne	Eigen/src/SparseCore/SparseTriangularView.h	/^    bool m_returnOne;$/;"	m	class:Eigen::SparseTriangularView::InnerIterator
 m_rhs	Eigen/src/Core/CwiseBinaryOp.h	/^    RhsNested m_rhs;$/;"	m	class:Eigen::CwiseBinaryOp
 m_rhs	Eigen/src/Core/ProductBase.h	/^    RhsNested m_rhs;$/;"	m	namespace:Eigen
@@ -9051,7 +9049,7 @@ set	Eigen/src/Core/GeneralProduct.h	/^    struct set  { template<typename Dst, t
 setAcceleration	render/render.h	/^	void setAcceleration(float setAcc)$/;"	f	struct:Car
 SetAction	Eigen/src/Core/util/Constants.h	/^enum Action {GetAction, SetAction};$/;"	e	enum:Eigen::Action
 setBounds	Eigen/src/SparseCore/AmbiVector.h	/^    void setBounds(Index start, Index end) { m_start = start; m_end = end; }$/;"	f	class:Eigen::internal::AmbiVector
-SetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	f	language:C++	class:Cluster
+SetCloud	cluster.cpp	/^void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	f	class:Cluster
 setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud)$/;"	f	language:C++	class:ExtractMeasurement
 setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);$/;"	p	language:C++	class:ExtractMeasurement
 setConstant	Eigen/src/Core/CwiseNullaryOp.h	/^EIGEN_STRONG_INLINE Derived& DenseBase<Derived>::setConstant(const Scalar& val)$/;"	f	class:Eigen::DenseBase
@@ -10881,7 +10879,7 @@ __OBSTACLE_TRACKING_H__	obstacle_tracking.hpp	2;"	d
 ~CholmodSimplicialLDLT	Eigen/src/CholmodSupport/CholmodSupport.h	/^    ~CholmodSimplicialLDLT() {}$/;"	f	class:Eigen::CholmodSimplicialLDLT
 ~CholmodSimplicialLLT	Eigen/src/CholmodSupport/CholmodSupport.h	/^    ~CholmodSimplicialLLT() {}$/;"	f	class:Eigen::CholmodSimplicialLLT
 ~CholmodSupernodalLLT	Eigen/src/CholmodSupport/CholmodSupport.h	/^    ~CholmodSupernodalLLT() {}$/;"	f	class:Eigen::CholmodSupernodalLLT
-~Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::~Cluster()$/;"	f	language:C++	class:Cluster
+~Cluster	cluster.cpp	/^Cluster::~Cluster()$/;"	f	class:Cluster
 ~CommaInitializer	Eigen/src/Core/CommaInitializer.h	/^  inline ~CommaInitializer()$/;"	f	struct:Eigen::CommaInitializer
 ~CompressedStorage	Eigen/src/SparseCore/CompressedStorage.h	/^    ~CompressedStorage()$/;"	f	class:Eigen::internal::CompressedStorage
 ~ConjugateGradient	Eigen/src/IterativeLinearSolvers/ConjugateGradient.h	/^  ~ConjugateGradient() {}$/;"	f	class:Eigen::ConjugateGradient

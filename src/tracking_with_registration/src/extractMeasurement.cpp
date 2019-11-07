@@ -3,8 +3,7 @@
 ExtractMeasurement::ExtractMeasurement()
 {
 	// define publisher
-	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZ>> ("output", 100);
-	m_resultCloud.header.frame_id = "map";
+	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("output", 100);
 	m_maxIndexNumber = 0;	
 }
 
@@ -37,9 +36,6 @@ void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTra
 	{
 		pCloudTraffic = m_tools.loadPcd("/workspace/TrackingWithRegistration/src/tracking_with_registration/src/sensors/data/pcd/highway_"+std::to_string(timestamp)+".pcd");
 	}
-
-	m_resultCloud.clear();
-	m_resultCloud.points = pCloudTraffic->points;
 }
 
 
@@ -58,7 +54,7 @@ void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInpu
 	// Max cluster size is the maximum number of points in the circle with the tolerance as radius
 	// extract the index of each cluster to vecClusterIndices
 	pcl::EuclideanClusterExtraction<pcl::PointXYZ> euclideanCluster;
-	euclideanCluster.setClusterTolerance (0.70);
+	euclideanCluster.setClusterTolerance (1.0);
 	euclideanCluster.setMinClusterSize (50);
 	euclideanCluster.setMaxClusterSize (45000);
 	//	euclideanCluster.setClusterTolerance (m_dClusterErrRadius);
@@ -116,24 +112,26 @@ void ExtractMeasurement::generateColor(size_t indexNumber)
 	}
 }
 
-
-void ExtractMeasurement::publish ()
+void ExtractMeasurement::associate()
 {
-	m_pub_result.publish (m_resultCloud);
+	m_ObstacleTracking.associate(m_OriginalClusters);
 }
 
 
-//
-//	void dbscan (long long timestamp)
-//
-//		if(visualize_pcd)
-//		{
-//			pcl::PointCloud<pcl::PointXYZ>::Ptr trafficCloud = tools.loadPcd("../src/sensors/data/pcd/highway_"+std::to_string(timestamp)+".pcd");
-//			renderPointCloud(viewer, trafficCloud, "trafficCloud", Color((float)184/256,(float)223/256,(float)252/256));
-//		}
+
+void ExtractMeasurement::publish ()
+{
+	// Accumulate all cluster to pAccumulationCloud
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulationCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	pAccumulationCloud->header.frame_id = "map";
+
+//	// accumulation for publish
+//	for (const auto& pCluster : m_OriginalClusters)
+//		*pAccumulationCloud += *(pCluster->GetCloud());
+
+	*pAccumulationCloud += *(m_OriginalClusters[0]->GetCloud());
 
 
-
-
-
-
+	// publish
+	m_pub_result.publish (*pAccumulationCloud);
+}

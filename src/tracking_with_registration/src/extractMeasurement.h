@@ -46,8 +46,6 @@ class ExtractMeasurement
 //	ros::Publisher pub_shape;
 //	ros::Publisher pub_detectedObject;
 //	ros::Publisher pub_Origin;
-//
-	pcl::PointCloud<pcl::PointXYZ> m_resultCloud;
 
 	// param
 	double m_fMarkerDuration;
@@ -71,6 +69,7 @@ class ExtractMeasurement
 	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);
 	void generateColor(size_t indexNumber);
 	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
+	void associate ();
 
 	//		void generateColor(size_t indexNumber);
 	//		void displayShape (const std::vector<clusterPtr> pVecClusters);
