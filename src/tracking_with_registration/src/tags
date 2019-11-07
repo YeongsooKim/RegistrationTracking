@@ -3009,6 +3009,11 @@ extract	Eigen/src/Core/util/BlasUtil.h	/^  static inline ExtractType extract(con
 extract	Eigen/src/Core/util/BlasUtil.h	/^  static inline ExtractType extract(const XprType& x) { return x; }$/;"	f	struct:Eigen::internal::blas_traits
 extractData	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^void SuperLUBase<MatrixType,Derived>::extractData() const$/;"	f	class:Eigen::SuperLUBase
 extractData	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^void UmfPackLU<MatrixType>::extractData() const$/;"	f	class:Eigen::UmfPackLU
+ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^class ExtractMeasurement$/;"	c	language:C++
+EXTRACTMEASUREMENT	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	2;"	d	language:C++
+ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^		void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::m_tools	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^		Tools m_tools;$/;"	m	language:C++	class:ExtractMeasurement
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline const Scalar extractScalarFactor(const XprType&) { return Scalar(1); }$/;"	f	struct:Eigen::internal::blas_traits
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline Scalar extractScalarFactor(const XprType& x) { return Base::extractScalarFactor(x.nestedExpression()); }$/;"	f	struct:Eigen::internal::blas_traits
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline Scalar extractScalarFactor(const XprType& x) { return conj(Base::extractScalarFactor(x.nestedExpression())); }$/;"	f	struct:Eigen::internal::blas_traits
@@ -4664,6 +4669,8 @@ lmarker	tools.h	/^	lmarker(double setX, double setY)$/;"	f	struct:lmarker
 lmarker	tools.h	/^struct lmarker$/;"	s
 LMatrixType	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    typedef TriangularView<LUMatrixType, Lower|UnitDiag>  LMatrixType;$/;"	t	class:Eigen::SuperLU
 loadLhs	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void loadLhs(const LhsScalar* a, LhsPacket& dest) const$/;"	f	class:Eigen::internal::gebp_traits
+loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize)$/;"	f	language:C++	class:ExtractMeasurement
+loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^		void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);$/;"	p	language:C++	class:ExtractMeasurement
 loadPcd	tools.cpp	/^pcl::PointCloud<pcl::PointXYZ>::Ptr Tools::loadPcd(std::string file)$/;"	f	class:Tools
 loadRhs	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void loadRhs(const RhsScalar* b, DoublePacket& dest) const$/;"	f	class:Eigen::internal::gebp_traits
 loadRhs	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void loadRhs(const RhsScalar* b, ResPacket& dest) const { dest = *b; }$/;"	f	class:Eigen::internal::gebp_traits
@@ -5860,6 +5867,7 @@ m_tmp	Eigen/src/Eigenvalues/GeneralizedEigenSolver.h	/^    ColumnVectorType m_tm
 m_tolerance	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  RealScalar m_tolerance;$/;"	m	class:Eigen::IterativeSolverBase
 m_tolerance	Eigen/src/SparseCore/SparseProduct.h	/^    RealScalar m_tolerance;$/;"	m	class:Eigen::SparseSparseProduct
 m_tolerance	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    RealScalar m_tolerance; \/\/ treat columns with 2-norm below this tolerance as zero$/;"	m	class:Eigen::SPQR
+m_tools	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^		Tools m_tools;$/;"	m	language:C++	class:ExtractMeasurement
 m_trans	Eigen/src/Householder/HouseholderSequence.h	/^    bool m_trans;$/;"	m	class:Eigen::HouseholderSequence
 m_transpose	Eigen/src/SparseQR/SparseQR.h	/^  bool m_transpose;$/;"	m	struct:Eigen::SparseQR_QProduct
 m_transpose	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^  bool m_transpose; $/;"	m	struct:Eigen::SPQR_QProduct

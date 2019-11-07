@@ -1,0 +1,19 @@
+[35m[1mScanning dependencies of target tracking_with_registration[0m
+[ 16%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o[0m
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:35:2:[m[K [01;31m[Kerror: [m[K‘[01m[KExtractMeasurement[m[K’ was not declared in this scope
+  ExtractMeasurement measurement;
+[01;32m[K  ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:55:58:[m[K [01;31m[Kerror: [m[K‘[01m[KPointCloudXYZ[m[K’ does not name a type
+   pcl::PointCloud<pcl::PointXYZ>::Ptr pCloudTraffic (new PointCloudXYZ);
+[01;32m[K                                                          ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:56:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kmeasurement[m[K’ was not declared in this scope
+   measurement.loadPCD(pCloudTraffic, time_us, highway.visualize_pcd);
+[01;32m[K   ^[m[K
+CMakeFiles/tracking_with_registration.dir/build.make:62: recipe for target 'CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o' failed
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o] Error 1
+CMakeFiles/Makefile2:163: recipe for target 'CMakeFiles/tracking_with_registration.dir/all' failed
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+make: *** [all] Error 2
+Makefile:138: recipe for target 'all' failed

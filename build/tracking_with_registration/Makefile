@@ -1322,6 +1322,33 @@ gtest_main/fast:
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest_main.dir/build.make gtest/gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/extractMeasurement.o: src/extractMeasurement.cpp.o
+
+.PHONY : src/extractMeasurement.o
+
+# target to build an object file
+src/extractMeasurement.cpp.o:
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
+.PHONY : src/extractMeasurement.cpp.o
+
+src/extractMeasurement.i: src/extractMeasurement.cpp.i
+
+.PHONY : src/extractMeasurement.i
+
+# target to preprocess a source file
+src/extractMeasurement.cpp.i:
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.i
+.PHONY : src/extractMeasurement.cpp.i
+
+src/extractMeasurement.s: src/extractMeasurement.cpp.s
+
+.PHONY : src/extractMeasurement.s
+
+# target to generate assembly for a file
+src/extractMeasurement.cpp.s:
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.s
+.PHONY : src/extractMeasurement.cpp.s
+
 src/measurement.o: src/measurement.cpp.o
 
 .PHONY : src/measurement.o
@@ -1532,6 +1559,9 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/extractMeasurement.o"
+	@echo "... src/extractMeasurement.i"
+	@echo "... src/extractMeasurement.s"
 	@echo "... src/measurement.o"
 	@echo "... src/measurement.i"
 	@echo "... src/measurement.s"
