@@ -3009,6 +3009,12 @@ extract	Eigen/src/Core/util/BlasUtil.h	/^  static inline ExtractType extract(con
 extract	Eigen/src/Core/util/BlasUtil.h	/^  static inline ExtractType extract(const XprType& x) { return x; }$/;"	f	struct:Eigen::internal::blas_traits
 extractData	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^void SuperLUBase<MatrixType,Derived>::extractData() const$/;"	f	class:Eigen::SuperLUBase
 extractData	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^void UmfPackLU<MatrixType>::extractData() const$/;"	f	class:Eigen::UmfPackLU
+ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^ExtractMeasurement::ExtractMeasurement()$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement	extractMeasurement.h	/^class ExtractMeasurement$/;"	c
+EXTRACTMEASUREMENT	extractMeasurement.h	2;"	d
+ExtractMeasurement::ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^ExtractMeasurement::ExtractMeasurement()$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::publish ()$/;"	f	language:C++	class:ExtractMeasurement
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline const Scalar extractScalarFactor(const XprType&) { return Scalar(1); }$/;"	f	struct:Eigen::internal::blas_traits
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline Scalar extractScalarFactor(const XprType& x) { return Base::extractScalarFactor(x.nestedExpression()); }$/;"	f	struct:Eigen::internal::blas_traits
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline Scalar extractScalarFactor(const XprType& x) { return conj(Base::extractScalarFactor(x.nestedExpression())); }$/;"	f	struct:Eigen::internal::blas_traits
@@ -3519,7 +3525,7 @@ Highway::trackCars	/workspace/TrackingWithRegistration/src/tracking_with_registr
 Highway::traffic	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	std::vector<Car> traffic;$/;"	m	language:C++	class:Highway
 Highway::vec_of_csv	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	std::vector<std::ofstream> vec_of_csv;$/;"	m	language:C++	class:Highway
 Highway::visualize_lidar	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	bool visualize_lidar = true;$/;"	m	language:C++	class:Highway
-Highway::visualize_pcd	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	bool visualize_pcd = false;$/;"	m	language:C++	class:Highway
+Highway::visualize_pcd	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	bool visualize_pcd = true;$/;"	m	language:C++	class:Highway
 Highway::visualize_radar	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	bool visualize_radar = true;$/;"	m	language:C++	class:Highway
 Highway::~Highway	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	~Highway()$/;"	f	language:C++	class:Highway
 hnormalized	Eigen/src/Geometry/Homogeneous.h	/^MatrixBase<Derived>::hnormalized() const$/;"	f	class:Eigen::MatrixBase
@@ -4664,6 +4670,7 @@ lmarker	tools.h	/^	lmarker(double setX, double setY)$/;"	f	struct:lmarker
 lmarker	tools.h	/^struct lmarker$/;"	s
 LMatrixType	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    typedef TriangularView<LUMatrixType, Lower|UnitDiag>  LMatrixType;$/;"	t	class:Eigen::SuperLU
 loadLhs	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void loadLhs(const LhsScalar* a, LhsPacket& dest) const$/;"	f	class:Eigen::internal::gebp_traits
+loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize)$/;"	f	language:C++	class:ExtractMeasurement
 loadPcd	tools.cpp	/^pcl::PointCloud<pcl::PointXYZ>::Ptr Tools::loadPcd(std::string file)$/;"	f	class:Tools
 loadRhs	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void loadRhs(const RhsScalar* b, DoublePacket& dest) const$/;"	f	class:Eigen::internal::gebp_traits
 loadRhs	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void loadRhs(const RhsScalar* b, ResPacket& dest) const { dest = *b; }$/;"	f	class:Eigen::internal::gebp_traits
@@ -5719,9 +5726,11 @@ m_prescribedThreshold	Eigen/src/LU/FullPivLU.h	/^    RealScalar m_maxpivot, m_pr
 m_prescribedThreshold	Eigen/src/QR/ColPivHouseholderQR.h	/^    RealScalar m_prescribedThreshold, m_maxpivot;$/;"	m	class:Eigen::ColPivHouseholderQR
 m_prescribedThreshold	Eigen/src/QR/FullPivHouseholderQR.h	/^    RealScalar m_prescribedThreshold, m_maxpivot;$/;"	m	class:Eigen::FullPivHouseholderQR
 m_prescribedThreshold	Eigen/src/SVD/JacobiSVD.h	/^    RealScalar m_prescribedThreshold;$/;"	m	class:Eigen::JacobiSVD
+m_pResultCloud	extractMeasurement.h	/^	pcl::PointCloud<pcl::PointXYZ>::Ptr m_pResultCloud;$/;"	m	class:ExtractMeasurement
 m_prod	Eigen/src/Core/ProductBase.h	/^    const NestedProduct& m_prod;$/;"	m	class:ScaledProduct
 m_pt	Eigen/src/PardisoSupport/PardisoSupport.h	/^    mutable void *m_pt[64];$/;"	m	class:Eigen::PardisoImpl
 m_ptr	Eigen/src/Core/util/Memory.h	/^    T* m_ptr;$/;"	m	class:Eigen::internal::aligned_stack_memory_handler
+m_pub_result	extractMeasurement.h	/^	ros::Publisher m_pub_result;$/;"	m	class:ExtractMeasurement
 m_Q	Eigen/src/Eigenvalues/RealQZ.h	/^      MatrixType m_S, m_T, m_Q, m_Z;$/;"	m	class:Eigen::RealQZ
 m_q	Eigen/src/LU/FullPivLU.h	/^    PermutationQType m_q;$/;"	m	class:Eigen::FullPivLU
 m_Q	Eigen/src/SparseQR/SparseQR.h	/^    QRMatrixType m_Q;               \/\/ The orthogonal reflectors$/;"	m	class:Eigen::SparseQR
@@ -5860,6 +5869,7 @@ m_tmp	Eigen/src/Eigenvalues/GeneralizedEigenSolver.h	/^    ColumnVectorType m_tm
 m_tolerance	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  RealScalar m_tolerance;$/;"	m	class:Eigen::IterativeSolverBase
 m_tolerance	Eigen/src/SparseCore/SparseProduct.h	/^    RealScalar m_tolerance;$/;"	m	class:Eigen::SparseSparseProduct
 m_tolerance	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    RealScalar m_tolerance; \/\/ treat columns with 2-norm below this tolerance as zero$/;"	m	class:Eigen::SPQR
+m_tools	extractMeasurement.h	/^	Tools m_tools;$/;"	m	class:ExtractMeasurement
 m_trans	Eigen/src/Householder/HouseholderSequence.h	/^    bool m_trans;$/;"	m	class:Eigen::HouseholderSequence
 m_transpose	Eigen/src/SparseQR/SparseQR.h	/^  bool m_transpose;$/;"	m	struct:Eigen::SparseQR_QProduct
 m_transpose	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^  bool m_transpose; $/;"	m	struct:Eigen::SPQR_QProduct
@@ -5950,6 +5960,7 @@ NewInf	Eigen/src/Eigen2Support/Meta.h	/^      NewInf = int(TakeInf) ? InfX : int
 NewSup	Eigen/src/Core/util/Meta.h	/^      NewSup = int(TakeInf) ? int(MidX) : SupX$/;"	m	namespace:Eigen::internal
 NewSup	Eigen/src/Eigen2Support/Meta.h	/^      NewSup = int(TakeInf) ? int(MidX) : SupX$/;"	m	namespace:Eigen
 next	Eigen/src/SparseCore/AmbiVector.h	/^      Index next;$/;"	m	struct:Eigen::internal::AmbiVector::ListEl
+nh	extractMeasurement.h	/^	ros::NodeHandle nh;$/;"	m	class:ExtractMeasurement
 NIS_laser_	ukf.h	/^  double NIS_laser_;$/;"	m	class:UKF
 NIS_radar_	ukf.h	/^  double NIS_radar_;$/;"	m	class:UKF
 nnz	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    union {int nnz;int lda;};$/;"	m	union:Eigen::SluMatrix::__anon28::__anon29
@@ -7549,6 +7560,7 @@ psub	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packe
 psub	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4i psub<Packet4i>(const Packet4i& a, const Packet4i& b) { return _mm_sub_epi32(a,b); }$/;"	f	namespace:Eigen::internal
 psub	Eigen/src/Core/GenericPacketMath.h	/^psub(const Packet& a,$/;"	f	namespace:Eigen::internal
 ptan	Eigen/src/Core/GenericPacketMath.h	/^Packet ptan(const Packet& a) { using std::tan; return tan(a); }$/;"	f	namespace:Eigen::internal
+publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::publish ()$/;"	f	language:C++	class:ExtractMeasurement
 punpackp	Eigen/src/Core/arch/SSE/PacketMath.h	/^EIGEN_STRONG_INLINE void punpackp(Packet4f* vecs)$/;"	f	namespace:Eigen::internal
 pushDownZero	Eigen/src/Eigenvalues/RealQZ.h	/^    inline void RealQZ<MatrixType>::pushDownZero(Index z, Index f, Index l)$/;"	f	class:Eigen::RealQZ
 push_back	Eigen/src/StlSupport/StdDeque.h	/^  void push_back(const value_type& x)$/;"	f	class:std::deque
@@ -10502,7 +10514,7 @@ visitor_impl	Eigen/src/Core/Visitor.h	/^struct visitor_impl$/;"	s	namespace:Eige
 visitor_impl	Eigen/src/Core/Visitor.h	/^struct visitor_impl<Visitor, Derived, 1>$/;"	s	namespace:Eigen::internal
 visitor_impl	Eigen/src/Core/Visitor.h	/^struct visitor_impl<Visitor, Derived, Dynamic>$/;"	s	namespace:Eigen::internal
 visualize_lidar	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	bool visualize_lidar = true;$/;"	m	language:C++	class:Highway
-visualize_pcd	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	bool visualize_pcd = false;$/;"	m	language:C++	class:Highway
+visualize_pcd	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	bool visualize_pcd = true;$/;"	m	language:C++	class:Highway
 visualize_radar	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h	/^	bool visualize_radar = true;$/;"	m	language:C++	class:Highway
 vld1q_f32	Eigen/src/Core/arch/NEON/PacketMath.h	/^EIGEN_STRONG_INLINE float32x4_t vld1q_f32(const float* x) { return ::vld1q_f32((const float32_t*)x); }$/;"	f	namespace:Eigen::internal
 vld1_f32	Eigen/src/Core/arch/NEON/PacketMath.h	/^EIGEN_STRONG_INLINE float32x2_t vld1_f32 (const float* x) { return ::vld1_f32 ((const float32_t*)x); }$/;"	f	namespace:Eigen::internal

@@ -28,7 +28,7 @@ public:
 	// Visualize sensor measurements
 	bool visualize_lidar = true;
 	bool visualize_radar = true;
-	bool visualize_pcd = false;
+	bool visualize_pcd = true;
 	// Predict path in the future using UKF
 	double projectedTime = 0;
 	int projectedSteps = 0;
@@ -133,11 +133,11 @@ public:
 	void stepHighway(double egoVelocity, long long timestamp, int frame_per_sec, pcl::visualization::PCLVisualizer::Ptr& viewer)
 	{
 
-		if(visualize_pcd)
-		{
-			pcl::PointCloud<pcl::PointXYZ>::Ptr trafficCloud = tools.loadPcd("../src/sensors/data/pcd/highway_"+std::to_string(timestamp)+".pcd");
-			renderPointCloud(viewer, trafficCloud, "trafficCloud", Color((float)184/256,(float)223/256,(float)252/256));
-		}
+//		if(visualize_pcd)
+//		{
+//			pcl::PointCloud<pcl::PointXYZ>::Ptr trafficCloud = tools.loadPcd("/workspace/TrackingWithRegistration/src/tracking_with_registration/src/sensors/data/pcd/highway_"+std::to_string(timestamp)+".pcd");
+//			renderPointCloud(viewer, trafficCloud, "trafficCloud", Color((float)184/256,(float)223/256,(float)252/256));
+//		}
 		
 
 		// render highway environment with poles
@@ -147,7 +147,7 @@ public:
 		for (int i = 0; i < traffic.size(); i++)
 		{
 			traffic[i].move((double)1/frame_per_sec, timestamp);
-			if(!visualize_pcd)
+			if(visualize_pcd)
 				traffic[i].render(viewer);
 			// Sense surrounding cars with lidar and radar
 			if(trackCars[i])
@@ -214,5 +214,4 @@ public:
 		}
 		
 	}
-	
 };

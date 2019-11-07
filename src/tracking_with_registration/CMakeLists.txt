@@ -137,6 +137,7 @@ add_executable (
 	src/ukf.cpp 
 	src/tools.cpp 
 	src/render/render.cpp
+	src/extractMeasurement.cpp
 	)
 
 target_link_libraries (
