@@ -1,22 +1,22 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_7a1ef/fast"
-/usr/bin/make -f CMakeFiles/cmTC_7a1ef.dir/build.make CMakeFiles/cmTC_7a1ef.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_ae5dd/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ae5dd.dir/build.make CMakeFiles/cmTC_ae5dd.dir/build
 make[1]: Entering directory '/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_7a1ef.dir/CheckSymbolExists.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_7a1ef.dir/CheckSymbolExists.c.o   -c /workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_7a1ef
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7a1ef.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_7a1ef.dir/CheckSymbolExists.c.o  -o cmTC_7a1ef -rdynamic 
-CMakeFiles/cmTC_7a1ef.dir/CheckSymbolExists.c.o: In function `main':
+Building C object CMakeFiles/cmTC_ae5dd.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_ae5dd.dir/CheckSymbolExists.c.o   -c /workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_ae5dd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ae5dd.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_ae5dd.dir/CheckSymbolExists.c.o  -o cmTC_ae5dd -rdynamic 
+CMakeFiles/cmTC_ae5dd.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_7a1ef.dir/build.make:97: recipe for target 'cmTC_7a1ef' failed
-make[1]: *** [cmTC_7a1ef] Error 1
+CMakeFiles/cmTC_ae5dd.dir/build.make:97: recipe for target 'cmTC_ae5dd' failed
+make[1]: *** [cmTC_ae5dd] Error 1
 make[1]: Leaving directory '/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_7a1ef/fast' failed
-make: *** [cmTC_7a1ef/fast] Error 2
+Makefile:126: recipe for target 'cmTC_ae5dd/fast' failed
+make: *** [cmTC_ae5dd/fast] Error 2
 
 File /workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
@@ -36,20 +36,20 @@ int main(int argc, char** argv)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_65b53/fast"
-/usr/bin/make -f CMakeFiles/cmTC_65b53.dir/build.make CMakeFiles/cmTC_65b53.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_645b4/fast"
+/usr/bin/make -f CMakeFiles/cmTC_645b4.dir/build.make CMakeFiles/cmTC_645b4.dir/build
 make[1]: Entering directory '/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_65b53.dir/CheckFunctionExists.c.o
-/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_65b53.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
-Linking C executable cmTC_65b53
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_65b53.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_65b53.dir/CheckFunctionExists.c.o  -o cmTC_65b53 -rdynamic -lpthreads 
+Building C object CMakeFiles/cmTC_645b4.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_645b4.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_645b4
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_645b4.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_645b4.dir/CheckFunctionExists.c.o  -o cmTC_645b4 -rdynamic -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_65b53.dir/build.make:97: recipe for target 'cmTC_65b53' failed
-make[1]: *** [cmTC_65b53] Error 1
+CMakeFiles/cmTC_645b4.dir/build.make:97: recipe for target 'cmTC_645b4' failed
+make[1]: *** [cmTC_645b4] Error 1
 make[1]: Leaving directory '/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_65b53/fast' failed
-make: *** [cmTC_65b53/fast] Error 2
+Makefile:126: recipe for target 'cmTC_645b4/fast' failed
+make: *** [cmTC_645b4/fast] Error 2
 
 

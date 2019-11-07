@@ -74,7 +74,7 @@ class ExtractMeasurement
 	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);
 	void generateColor(size_t indexNumber);
 	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
-	void associate ();
+	void association ();
 	void displayShape ();
 	void publish();
 };

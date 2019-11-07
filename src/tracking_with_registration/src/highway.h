@@ -122,11 +122,6 @@ public:
 
 	~Highway()
 	{
-		for (unsigned int trafficIndex = 0; trafficIndex < traffic.size(); trafficIndex++)
-		{
-			vec_of_csv[trafficIndex].close();
-		}
-		ROS_ERROR_STREAM ("end");
 	}
 
 	

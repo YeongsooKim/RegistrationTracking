@@ -115,9 +115,9 @@ void ExtractMeasurement::generateColor(size_t indexNumber)
 	}
 }
 
-void ExtractMeasurement::associate()
+void ExtractMeasurement::association()
 {
-	m_ObstacleTracking.associate(m_OriginalClusters);
+	m_ObstacleTracking.association(m_OriginalClusters);
 }
 
 
