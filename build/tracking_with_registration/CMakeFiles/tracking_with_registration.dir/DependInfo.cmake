@@ -4,8 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp" "/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o"
   "/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp" "/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o"
   "/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp" "/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o"
+  "/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp" "/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o"
   "/workspace/TrackingWithRegistration/src/tracking_with_registration/src/render/render.cpp" "/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/tracking_with_registration.dir/src/render/render.cpp.o"
   "/workspace/TrackingWithRegistration/src/tracking_with_registration/src/tools.cpp" "/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/tracking_with_registration.dir/src/tools.cpp.o"
   "/workspace/TrackingWithRegistration/src/tracking_with_registration/src/ukf.cpp" "/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles/tracking_with_registration.dir/src/ukf.cpp.o"
@@ -23,6 +25,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/opt/ros/kinetic/include"
   "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/opt/ros/kinetic/include/opencv-3.3.1-dev"
+  "/opt/ros/kinetic/include/opencv-3.3.1-dev/opencv"
   "/usr/include/eigen3"
   "/usr/include/pcl-1.7"
   "/usr/include/ni"

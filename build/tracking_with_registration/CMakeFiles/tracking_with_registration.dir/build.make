@@ -177,13 +177,63 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o.provides:
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o.provides.build: CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
 
 
+CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o: CMakeFiles/tracking_with_registration.dir/flags.make
+CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o: /workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o -c /workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp
+
+CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp > CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.i
+
+CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp -o CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.s
+
+CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o.requires:
+
+.PHONY : CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o.requires
+
+CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o.provides: CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o.requires
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o.provides.build
+.PHONY : CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o.provides
+
+CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o.provides.build: CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o
+
+
+CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o: CMakeFiles/tracking_with_registration.dir/flags.make
+CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o: /workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o -c /workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp
+
+CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp > CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.i
+
+CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp -o CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.s
+
+CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o.requires:
+
+.PHONY : CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o.requires
+
+CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o.provides: CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o.requires
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o.provides.build
+.PHONY : CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o.provides
+
+CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o.provides.build: CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o
+
+
 # Object files for target tracking_with_registration
 tracking_with_registration_OBJECTS = \
 "CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o" \
 "CMakeFiles/tracking_with_registration.dir/src/ukf.cpp.o" \
 "CMakeFiles/tracking_with_registration.dir/src/tools.cpp.o" \
 "CMakeFiles/tracking_with_registration.dir/src/render/render.cpp.o" \
-"CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o"
+"CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o" \
+"CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o" \
+"CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o"
 
 # External object files for target tracking_with_registration
 tracking_with_registration_EXTERNAL_OBJECTS =
@@ -193,6 +243,8 @@ tracking_with_registration_EXTERNAL_OBJECTS =
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: CMakeFiles/tracking_with_registration.dir/src/tools.cpp.o
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: CMakeFiles/tracking_with_registration.dir/src/render/render.cpp.o
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
+/workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o
+/workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: CMakeFiles/tracking_with_registration.dir/build.make
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/libpcl_ros_filters.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/libpcl_ros_io.so
@@ -395,12 +447,16 @@ tracking_with_registration_EXTERNAL_OBJECTS =
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/libroscpp.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /usr/lib/x86_64-linux-gnu/libboost_signals.so
+/workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/libxmlrpcpp.so
+/workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/libcv_bridge.so
+/workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_core3.so.3.3.1
+/workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_imgproc3.so.3.3.1
+/workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_imgcodecs3.so.3.3.1
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/librosconsole.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/librosconsole_log4cxx.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/librosconsole_backend_interface.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /usr/lib/x86_64-linux-gnu/libboost_regex.so
-/workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/libxmlrpcpp.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/libroscpp_serialization.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/librostime.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /opt/ros/kinetic/lib/libcpp_common.so
@@ -412,7 +468,7 @@ tracking_with_registration_EXTERNAL_OBJECTS =
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /usr/lib/x86_64-linux-gnu/libpthread.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so
 /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration: CMakeFiles/tracking_with_registration.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/workspace/TrackingWithRegistration/build/tracking_with_registration/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tracking_with_registration.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -425,6 +481,8 @@ CMakeFiles/tracking_with_registration.dir/requires: CMakeFiles/tracking_with_reg
 CMakeFiles/tracking_with_registration.dir/requires: CMakeFiles/tracking_with_registration.dir/src/tools.cpp.o.requires
 CMakeFiles/tracking_with_registration.dir/requires: CMakeFiles/tracking_with_registration.dir/src/render/render.cpp.o.requires
 CMakeFiles/tracking_with_registration.dir/requires: CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o.requires
+CMakeFiles/tracking_with_registration.dir/requires: CMakeFiles/tracking_with_registration.dir/src/obstacle_tracking.cpp.o.requires
+CMakeFiles/tracking_with_registration.dir/requires: CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o.requires
 
 .PHONY : CMakeFiles/tracking_with_registration.dir/requires
 
