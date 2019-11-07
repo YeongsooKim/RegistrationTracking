@@ -681,6 +681,7 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/sensor_msgs/Image.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/sensor_msgs/PointCloud2.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/sensor_msgs/PointField.h
+CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/std_msgs/ColorRGBA.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/std_msgs/Header.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/tf/LinearMath/Matrix3x3.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/tf/LinearMath/MinMax.h
@@ -705,6 +706,8 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/tf2_msgs/FrameGraphResponse.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/tf2_ros/buffer.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/tf2_ros/buffer_interface.h
+CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/visualization_msgs/Marker.h
+CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/visualization_msgs/MarkerArray.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/xmlrpcpp/XmlRpcDecl.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /opt/ros/kinetic/include/xmlrpcpp/XmlRpcValue.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/include/eigen3/Eigen/Core
@@ -1451,6 +1454,7 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kineti
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/sensor_msgs/Image.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/sensor_msgs/PointCloud2.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/sensor_msgs/PointField.h
+CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/std_msgs/ColorRGBA.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/std_msgs/Header.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/tf/LinearMath/Matrix3x3.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/tf/LinearMath/MinMax.h
@@ -1475,6 +1479,8 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kineti
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/tf2_msgs/FrameGraphResponse.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/tf2_ros/buffer.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/tf2_ros/buffer_interface.h
+CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/visualization_msgs/Marker.h
+CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/visualization_msgs/MarkerArray.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/xmlrpcpp/XmlRpcDecl.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /opt/ros/kinetic/include/xmlrpcpp/XmlRpcValue.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/eigen3/Eigen/Core

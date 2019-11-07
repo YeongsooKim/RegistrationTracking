@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 	viewer->initCameraParameters();
 	float x_pos = 0;
 	viewer->setCameraPosition ( x_pos-26, 0, 15.0, x_pos+25, 0, 0, 0, 0, 1);
- 
+
 
 	Highway highway(viewer);
 	ExtractMeasurement measurement;
@@ -44,26 +44,29 @@ int main(int argc, char** argv)
 
 		//stepHighway(egoVelocity,time_us, frame_per_sec, viewer);
 		highway.stepHighway(egoVelocity,time_us, frame_per_sec, viewer);
-		
+
 		// load pcd 
 		pcl::PointCloud<pcl::PointXYZ>::Ptr pCloudTraffic (new pcl::PointCloud<pcl::PointXYZ>);
 		measurement.loadPCD(pCloudTraffic, time_us, highway.visualize_pcd);
-		
+
 		// downsample
 		pcl::PointCloud<pcl::PointXYZ>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZ>);
-		measurement.downsample(pCloudTraffic, pDownsampledCloud, 0.2);
+		measurement.downsample(pCloudTraffic, pDownsampledCloud, 0.1);
 
 		// dbscan
 		std::vector<pcl::PointIndices> vecClusterIndices;
 		measurement.dbscan(pDownsampledCloud, vecClusterIndices);
-		
+
 		// Set cluster pointcloud from clusterIndices and coloring
 		measurement.setCluster (vecClusterIndices, pDownsampledCloud);
 
 		// Associate 
 		measurement.associate();
-		
-	
+
+		// display shape
+		measurement.displayShape();
+
+		// publish	
 		measurement.publish();
 
 		viewer->spinOnce(1000/frame_per_sec);
@@ -71,6 +74,5 @@ int main(int argc, char** argv)
 		time_us = 1000000*frame_count/frame_per_sec;
 
 	}
-
 	return 0;
 }

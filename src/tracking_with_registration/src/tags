@@ -337,7 +337,7 @@ assign_traits	Eigen/src/Core/Assign.h	/^struct assign_traits$/;"	s	namespace:Eig
 asSluMatrix	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^SluMatrix asSluMatrix(MatrixType& mat)$/;"	f	namespace:Eigen::internal
 associate	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::associate()$/;"	f	language:C++	class:ExtractMeasurement
 associate	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void associate ();$/;"	p	language:C++	class:ExtractMeasurement
-associate	obstacle_tracking.cpp	/^void ObstacleTracking::associate (const std::vector<clusterPtr>& objList)$/;"	f	class:ObstacleTracking
+associate	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^void ObstacleTracking::associate (const std::vector<clusterPtr>& objList)$/;"	f	language:C++	class:ObstacleTracking
 at	Eigen/src/SparseCore/CompressedStorage.h	/^    inline Scalar at(Index key, const Scalar& defaultValue = Scalar(0)) const$/;"	f	class:Eigen::internal::CompressedStorage
 atanh2	Eigen/src/Core/MathFunctions.h	/^inline EIGEN_MATHFUNC_RETVAL(atanh2, Scalar) atanh2(const Scalar& x, const Scalar& y)$/;"	f	namespace:Eigen::numext
 atanh2_default_impl	Eigen/src/Core/MathFunctions.h	/^struct atanh2_default_impl$/;"	s	namespace:Eigen::internal
@@ -705,9 +705,40 @@ clearFactors	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    void clearFactors()
 clearRays	render/render.cpp	/^void clearRays(pcl::visualization::PCLVisualizer::Ptr& viewer)$/;"	f
 clear_mark	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^static inline  Index clear_mark  \/* return the new value for tag_mark *\/$/;"	f	namespace:internal
 cloud	sensors/lidar.h	/^	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;$/;"	m	struct:Lidar
-Cluster	cluster.cpp	/^Cluster::Cluster()$/;"	f	class:Cluster
-Cluster	cluster.hpp	/^class Cluster$/;"	c
-clusterPtr	cluster.hpp	/^typedef boost::shared_ptr<Cluster> clusterPtr;$/;"	t
+Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::Cluster()$/;"	f	language:C++	class:Cluster
+Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	Cluster();$/;"	p	language:C++	class:Cluster
+Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^class Cluster$/;"	c	language:C++
+Cluster::Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::Cluster()$/;"	f	language:C++	class:Cluster
+Cluster::Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	Cluster();$/;"	p	language:C++	class:Cluster
+Cluster::GetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^pcl::PointCloud <pcl::PointXYZRGB>::Ptr Cluster::GetCloud()$/;"	f	language:C++	class:Cluster
+Cluster::GetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	pcl::PointCloud<pcl::PointXYZRGB>::Ptr GetCloud();$/;"	p	language:C++	class:Cluster
+Cluster::m_b	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	language:C++	class:Cluster
+Cluster::m_center	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	geometry_msgs::Pose m_center;$/;"	m	language:C++	class:Cluster
+Cluster::m_dDistanceToCenter	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	double m_dDistanceToCenter;$/;"	m	language:C++	class:Cluster
+Cluster::m_dimensions	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	geometry_msgs::Vector3 m_dimensions;$/;"	m	language:C++	class:Cluster
+Cluster::m_eigen_values	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	Eigen::Vector3f m_eigen_values;$/;"	m	language:C++	class:Cluster
+Cluster::m_eigen_vectors	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	Eigen::Matrix3f m_eigen_vectors;$/;"	m	language:C++	class:Cluster
+Cluster::m_g	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	language:C++	class:Cluster
+Cluster::m_height	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	language:C++	class:Cluster
+Cluster::m_id	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_id;$/;"	m	language:C++	class:Cluster
+Cluster::m_label	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	std::string m_label;$/;"	m	language:C++	class:Cluster
+Cluster::m_length	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	language:C++	class:Cluster
+Cluster::m_max_point	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	pcl::PointXYZ m_max_point;$/;"	m	language:C++	class:Cluster
+Cluster::m_min_point	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	pcl::PointXYZ m_min_point;$/;"	m	language:C++	class:Cluster
+Cluster::m_originalID	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_originalID;$/;"	m	language:C++	class:Cluster
+Cluster::m_pointCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	pcl::PointCloud <pcl::PointXYZRGB>::Ptr m_pointCloud;$/;"	m	language:C++	class:Cluster
+Cluster::m_polygon	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	geometry_msgs::PolygonStamped m_polygon;$/;"	m	language:C++	class:Cluster
+Cluster::m_r	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	language:C++	class:Cluster
+Cluster::m_valid_cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	bool m_valid_cluster;$/;"	m	language:C++	class:Cluster
+Cluster::m_width	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	language:C++	class:Cluster
+Cluster::SetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	f	language:C++	class:Cluster
+Cluster::SetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	void SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	p	language:C++	class:Cluster
+Cluster::SetPointCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetPointCloud (pcl::PointCloud<pcl::PointXYZRGB>::Ptr pInputCloud)$/;"	f	language:C++	class:Cluster
+Cluster::SetPointCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	void SetPointCloud (pcl::PointCloud<pcl::PointXYZRGB>::Ptr pInputCloud);$/;"	p	language:C++	class:Cluster
+Cluster::SetValidity	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	void SetValidity(bool in_valid);$/;"	p	language:C++	class:Cluster
+Cluster::~Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::~Cluster()$/;"	f	language:C++	class:Cluster
+Cluster::~Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	virtual ~Cluster();$/;"	p	language:C++	class:Cluster
+clusterPtr	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^typedef boost::shared_ptr<Cluster> clusterPtr;$/;"	t	language:C++
 cmp_EQ	Eigen/src/Core/util/Constants.h	/^    cmp_EQ = 0,$/;"	e	enum:Eigen::internal::ComparisonName
 cmp_LE	Eigen/src/Core/util/Constants.h	/^    cmp_LE = 2,$/;"	e	enum:Eigen::internal::ComparisonName
 cmp_LT	Eigen/src/Core/util/Constants.h	/^    cmp_LT = 1,$/;"	e	enum:Eigen::internal::ComparisonName
@@ -1932,6 +1963,8 @@ DirectWriteAccessors	Eigen/src/Core/util/Constants.h	/^  DirectWriteAccessors$/;
 direct_selfadjoint_eigenvalues	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^template<typename SolverType,int Size,bool IsComplex> struct direct_selfadjoint_eigenvalues$/;"	s	namespace:Eigen::internal
 direct_selfadjoint_eigenvalues	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^template<typename SolverType> struct direct_selfadjoint_eigenvalues<SolverType,2,false>$/;"	s	namespace:Eigen::internal
 direct_selfadjoint_eigenvalues	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^template<typename SolverType> struct direct_selfadjoint_eigenvalues<SolverType,3,false>$/;"	s	namespace:Eigen::internal
+displayShape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::displayShape ()\/\/const std::vector<clusterPtr> pVecClusters)$/;"	f	language:C++	class:ExtractMeasurement
+displayShape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void displayShape ();$/;"	p	language:C++	class:ExtractMeasurement
 distance	Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h	/^  RealScalar distance(const VectorType& p) const { return ei_sqrt(squaredDistance(p)); }$/;"	f	class:Eigen::ParametrizedLine
 distance	Eigen/src/Geometry/ParametrizedLine.h	/^  RealScalar distance(const VectorType& p) const { using std::sqrt; return sqrt(squaredDistance(p)); }$/;"	f	class:Eigen::ParametrizedLine
 doComputeEigenvectors	Eigen/src/Eigenvalues/ComplexEigenSolver.h	/^void ComplexEigenSolver<MatrixType>::doComputeEigenvectors(const RealScalar& matrixnorm)$/;"	f	class:Eigen::ComplexEigenSolver
@@ -3027,6 +3060,8 @@ ExtractMeasurement::associate	/workspace/TrackingWithRegistration/src/tracking_w
 ExtractMeasurement::associate	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void associate ();$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices)$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::displayShape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::displayShape ()\/\/const std::vector<clusterPtr> pVecClusters)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::displayShape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void displayShape ();$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m)$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^ExtractMeasurement::ExtractMeasurement()$/;"	f	language:C++	class:ExtractMeasurement
@@ -3035,6 +3070,7 @@ ExtractMeasurement::generateColor	/workspace/TrackingWithRegistration/src/tracki
 ExtractMeasurement::generateColor	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void generateColor(size_t indexNumber);$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize)$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::m_arrShapes	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::MarkerArray m_arrShapes;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_dClusterErrRadius	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterErrRadius;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_dClusterMaxSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMaxSize; 	$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_dClusterMinSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMinSize;$/;"	m	language:C++	class:ExtractMeasurement
@@ -3042,8 +3078,11 @@ ExtractMeasurement::m_fMarkerDuration	/workspace/TrackingWithRegistration/src/tr
 ExtractMeasurement::m_globalRGB	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<RGB> m_globalRGB;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_maxIndexNumber	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	int m_maxIndexNumber = 0;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_ObstacleTracking	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ObstacleTracking m_ObstacleTracking;$/;"	m	language:C++	class:ExtractMeasurement
+ExtractMeasurement::m_Origin	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::Marker m_Origin;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_OriginalClusters	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<clusterPtr> m_OriginalClusters;$/;"	m	language:C++	class:ExtractMeasurement
+ExtractMeasurement::m_pub_Origin	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_Origin;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_pub_result	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_result;$/;"	m	language:C++	class:ExtractMeasurement
+ExtractMeasurement::m_pub_shape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_shape;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_tools	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	Tools m_tools;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::nh	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::NodeHandle nh;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::publish ()$/;"	f	language:C++	class:ExtractMeasurement
@@ -3373,7 +3412,8 @@ generic_aligned_realloc	Eigen/src/Core/util/Memory.h	/^inline void* generic_alig
 get	Eigen/src/SparseCore/SparseDenseProduct.h	/^    static Scalar get(const _RhsNested &rhs, Index outer, Dense = Dense())$/;"	f	class:Eigen::SparseDenseOuterProduct::InnerIterator
 get	Eigen/src/SparseCore/SparseDenseProduct.h	/^    static Scalar get(const _RhsNested &rhs, Index outer, Sparse = Sparse())$/;"	f	class:Eigen::SparseDenseOuterProduct::InnerIterator
 GetAction	Eigen/src/Core/util/Constants.h	/^enum Action {GetAction, SetAction};$/;"	e	enum:Eigen::Action
-GetCloud	cluster.cpp	/^pcl::PointCloud <pcl::PointXYZRGB>::Ptr Cluster::GetCloud()$/;"	f	class:Cluster
+GetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^pcl::PointCloud <pcl::PointXYZRGB>::Ptr Cluster::GetCloud()$/;"	f	language:C++	class:Cluster
+GetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	pcl::PointCloud<pcl::PointXYZRGB>::Ptr GetCloud();$/;"	p	language:C++	class:Cluster
 getL	Eigen/src/Cholesky/LDLT.h	/^  static inline MatrixL getL(const MatrixType& m) { return m.adjoint(); }$/;"	f	struct:Eigen::internal::LDLT_Traits
 getL	Eigen/src/Cholesky/LDLT.h	/^  static inline MatrixL getL(const MatrixType& m) { return m; }$/;"	f	struct:Eigen::internal::LDLT_Traits
 getL	Eigen/src/Cholesky/LLT.h	/^  static inline MatrixL getL(const MatrixType& m) { return m.adjoint(); }$/;"	f	struct:Eigen::internal::LLT_Traits
@@ -4824,7 +4864,7 @@ MaskLvalueBit	Eigen/src/Core/Diagonal.h	/^    MaskLvalueBit = is_lvalue<MatrixTy
 MaskPacketAccessBit	Eigen/src/Core/Block.h	/^    MaskPacketAccessBit = (InnerSize == Dynamic || (InnerSize % packet_traits<Scalar>::size) == 0)$/;"	e	enum:Eigen::internal::traits::__anon133
 match	Eigen/src/Core/Ref.h	/^  template<typename Derived> struct match {$/;"	s	struct:Eigen::internal::traits
 MatchAtCompileTime	Eigen/src/Core/Ref.h	/^      MatchAtCompileTime = HasDirectAccess && StorageOrderMatch && InnerStrideMatch && OuterStrideMatch && AlignmentMatch && ScalarTypeMatch$/;"	e	enum:Eigen::internal::traits::match::__anon238
-matchWithDistanceOnly	obstacle_tracking.cpp	/^void ObstacleTracking::matchWithDistanceOnly()$/;"	f	class:ObstacleTracking
+matchWithDistanceOnly	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^void ObstacleTracking::matchWithDistanceOnly()$/;"	f	language:C++	class:ObstacleTracking
 matPrefix	Eigen/src/Core/IO.h	/^  std::string matPrefix, matSuffix;$/;"	m	struct:Eigen::IOFormat
 matrix	Eigen/src/Core/ArrayBase.h	/^    const MatrixWrapper<const Derived> matrix() const { return derived(); }$/;"	f	class:Eigen::ArrayBase
 matrix	Eigen/src/Core/ArrayBase.h	/^    MatrixWrapper<Derived> matrix() { return derived(); }$/;"	f	class:Eigen::ArrayBase
@@ -5214,7 +5254,7 @@ memXpand	Eigen/src/SparseLU/SparseLU_Memory.h	/^Index SparseLUImpl<Scalar,Index>
 mem_expand	Eigen/src/SparseLU/SparseLU_column_dfs.h	/^  void mem_expand(IndexVector& lsub, Index& nextl, Index chmark)$/;"	f	struct:Eigen::internal::column_dfs_traits
 mem_expand	Eigen/src/SparseLU/SparseLU_panel_dfs.h	/^  void mem_expand(IndexVector& \/*glu.lsub*\/, Index \/*nextl*\/, Index \/*chmark*\/) {}$/;"	f	struct:Eigen::internal::panel_dfs_traits
 merged	Eigen/src/Geometry/AlignedBox.h	/^  inline AlignedBox merged(const AlignedBox& b) const$/;"	f	class:Eigen::AlignedBox
-MergeObjectAndTrack	obstacle_tracking.cpp	/^void ObstacleTracking::MergeObjectAndTrack (clusterPtr& track, clusterPtr& obj)$/;"	f	class:ObstacleTracking
+MergeObjectAndTrack	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^void ObstacleTracking::MergeObjectAndTrack (clusterPtr& track, clusterPtr& obj)$/;"	f	language:C++	class:ObstacleTracking
 meta_sqrt	Eigen/src/Core/util/Meta.h	/^class meta_sqrt<Y, InfX, SupX, true> { public:  enum { ret = (SupX*SupX <= Y) ? SupX : InfX }; };$/;"	c	namespace:Eigen
 MetisOrdering	Eigen/src/MetisSupport/MetisSupport.h	/^class MetisOrdering$/;"	c	namespace:Eigen
 METIS_SUPPORT_H	Eigen/src/MetisSupport/MetisSupport.h	10;"	d
@@ -5290,10 +5330,11 @@ m_angle	Eigen/src/Eigen2Support/Geometry/AngleAxis.h	/^  Scalar m_angle;$/;"	m	c
 m_angle	Eigen/src/Eigen2Support/Geometry/Rotation2D.h	/^  Scalar m_angle;$/;"	m	class:Eigen::Rotation2D
 m_angle	Eigen/src/Geometry/AngleAxis.h	/^  Scalar m_angle;$/;"	m	class:Eigen::AngleAxis
 m_angle	Eigen/src/Geometry/Rotation2D.h	/^  Scalar m_angle;$/;"	m	class:Eigen::Rotation2D
+m_arrShapes	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::MarkerArray m_arrShapes;$/;"	m	language:C++	class:ExtractMeasurement
 m_axis	Eigen/src/Eigen2Support/Geometry/AngleAxis.h	/^  Vector3 m_axis;$/;"	m	class:Eigen::AngleAxis
 m_axis	Eigen/src/Geometry/AngleAxis.h	/^  Vector3 m_axis;$/;"	m	class:Eigen::AngleAxis
+m_b	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	language:C++	class:Cluster
 m_b	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        uint8_t m_b;$/;"	m	language:C++	struct:_rgb
-m_b	cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	class:Cluster
 m_base	Eigen/src/Core/Functors.h	/^  mutable Packet m_base;$/;"	m	struct:Eigen::internal::linspaced_op_impl
 m_begin	Eigen/src/SparseCore/SparseBlock.h	/^      Index m_begin;$/;"	m	class:Eigen::BlockImpl::ReverseInnerIterator
 m_betas	Eigen/src/Eigenvalues/GeneralizedEigenSolver.h	/^    VectorType m_betas;$/;"	m	class:Eigen::GeneralizedEigenSolver
@@ -5313,7 +5354,7 @@ m_c	Eigen/src/Jacobi/Jacobi.h	/^    Scalar m_c, m_s;$/;"	m	class:Eigen::JacobiRo
 m_cachedIndex	Eigen/src/SparseCore/AmbiVector.h	/^    Index m_cachedIndex;          \/\/ current coordinate$/;"	m	class:Eigen::internal::AmbiVector::Iterator
 m_cachedValue	Eigen/src/SparseCore/AmbiVector.h	/^    Scalar m_cachedValue;       \/\/ current value$/;"	m	class:Eigen::internal::AmbiVector::Iterator
 m_cc	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    mutable cholmod_common m_cc; \/\/ Workspace and parameters$/;"	m	class:Eigen::SPQR
-m_center	cluster.hpp	/^	geometry_msgs::Pose m_center;$/;"	m	class:Cluster
+m_center	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	geometry_msgs::Pose m_center;$/;"	m	language:C++	class:Cluster
 m_cholmod	Eigen/src/CholmodSupport/CholmodSupport.h	/^    mutable cholmod_common m_cholmod;$/;"	m	class:Eigen::CholmodBase
 m_cholmodFactor	Eigen/src/CholmodSupport/CholmodSupport.h	/^    cholmod_factor* m_cholmodFactor;$/;"	m	class:Eigen::CholmodBase
 m_coeffs	Eigen/src/Core/BandMatrix.h	/^    CoefficientsType m_coeffs;$/;"	m	class:Eigen::internal::BandMatrix
@@ -5375,7 +5416,7 @@ m_data	Eigen/src/SparseCore/SparseVector.h	/^    Storage m_data;$/;"	m	class:Eig
 m_dClusterErrRadius	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterErrRadius;$/;"	m	language:C++	class:ExtractMeasurement
 m_dClusterMaxSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMaxSize; 	$/;"	m	language:C++	class:ExtractMeasurement
 m_dClusterMinSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMinSize;$/;"	m	language:C++	class:ExtractMeasurement
-m_dDistanceToCenter	cluster.hpp	/^	double m_dDistanceToCenter;$/;"	m	class:Cluster
+m_dDistanceToCenter	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	double m_dDistanceToCenter;$/;"	m	language:C++	class:Cluster
 m_deallocate	Eigen/src/Core/util/Memory.h	/^    bool m_deallocate;$/;"	m	class:Eigen::internal::aligned_stack_memory_handler
 m_dec	Eigen/src/misc/Image.h	/^    const DecompositionType& m_dec;$/;"	m	struct:Eigen::internal::image_retval_base
 m_dec	Eigen/src/misc/Kernel.h	/^    const DecompositionType& m_dec;$/;"	m	struct:Eigen::internal::kernel_retval_base
@@ -5396,7 +5437,7 @@ m_diagonal	Eigen/src/Core/DiagonalMatrix.h	/^    typename DiagonalVectorType::Ne
 m_diagonal	Eigen/src/Core/DiagonalProduct.h	/^    typename DiagonalType::Nested m_diagonal;$/;"	m	class:Eigen::DiagonalProduct
 m_diagpivotthresh	Eigen/src/SparseLU/SparseLU.h	/^    RealScalar m_diagpivotthresh; \/\/ Specifies the threshold used for a diagonal entry to be an acceptable pivot$/;"	m	class:Eigen::SparseLU
 m_diagSize	Eigen/src/SVD/JacobiSVD.h	/^    Index m_nonzeroSingularValues, m_rows, m_cols, m_diagSize;$/;"	m	class:Eigen::JacobiSVD
-m_dimensions	cluster.hpp	/^	geometry_msgs::Vector3 m_dimensions;$/;"	m	class:Cluster
+m_dimensions	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	geometry_msgs::Vector3 m_dimensions;$/;"	m	language:C++	class:Cluster
 m_direction	Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h	/^  VectorType m_origin, m_direction;$/;"	m	class:Eigen::ParametrizedLine
 m_direction	Eigen/src/Geometry/ParametrizedLine.h	/^  VectorType m_origin, m_direction;$/;"	m	class:Eigen::ParametrizedLine
 m_dparm	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    mutable Matrix<double,DPARM_SIZE,1> m_dparm; \/\/ Scalar vector for the input parameters$/;"	m	class:Eigen::PastixBase
@@ -5406,8 +5447,8 @@ m_eigenvectorsOk	Eigen/src/Eigenvalues/ComplexEigenSolver.h	/^    bool m_eigenve
 m_eigenvectorsOk	Eigen/src/Eigenvalues/EigenSolver.h	/^    bool m_eigenvectorsOk;$/;"	m	class:Eigen::EigenSolver
 m_eigenvectorsOk	Eigen/src/Eigenvalues/GeneralizedEigenSolver.h	/^    bool m_eigenvectorsOk;$/;"	m	class:Eigen::GeneralizedEigenSolver
 m_eigenvectorsOk	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^    bool m_eigenvectorsOk;$/;"	m	class:Eigen::SelfAdjointEigenSolver
-m_eigen_values	cluster.hpp	/^	Eigen::Vector3f m_eigen_values;$/;"	m	class:Cluster
-m_eigen_vectors	cluster.hpp	/^	Eigen::Matrix3f m_eigen_vectors;$/;"	m	class:Cluster
+m_eigen_values	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	Eigen::Vector3f m_eigen_values;$/;"	m	language:C++	class:Cluster
+m_eigen_vectors	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	Eigen::Matrix3f m_eigen_vectors;$/;"	m	language:C++	class:Cluster
 m_eivalues	Eigen/src/Eigenvalues/ComplexEigenSolver.h	/^    EigenvalueType m_eivalues;$/;"	m	class:Eigen::ComplexEigenSolver
 m_eivalues	Eigen/src/Eigenvalues/EigenSolver.h	/^    EigenvalueType m_eivalues;$/;"	m	class:Eigen::EigenSolver
 m_eivalues	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^    RealVectorType m_eivalues;$/;"	m	class:Eigen::SelfAdjointEigenSolver
@@ -5471,8 +5512,8 @@ m_functor	Eigen/src/SparseCore/SparseCwiseUnaryOp.h	/^    const UnaryOp m_functo
 m_functor	Eigen/src/SparseCore/SparseCwiseUnaryOp.h	/^    const UnaryOp m_functor;$/;"	m	class:Eigen::CwiseUnaryOpImpl::ReverseInnerIterator
 m_functor	Eigen/src/SparseCore/SparseCwiseUnaryOp.h	/^    const ViewOp m_functor;$/;"	m	class:Eigen::CwiseUnaryViewImpl::InnerIterator
 m_functor	Eigen/src/SparseCore/SparseCwiseUnaryOp.h	/^    const ViewOp m_functor;$/;"	m	class:Eigen::CwiseUnaryViewImpl::ReverseInnerIterator
+m_g	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	language:C++	class:Cluster
 m_g	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        uint8_t m_g;$/;"	m	language:C++	struct:_rgb
-m_g	cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	class:Cluster
 m_globalRGB	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<RGB> m_globalRGB;$/;"	m	language:C++	class:ExtractMeasurement
 m_global_iter	Eigen/src/Eigenvalues/RealQZ.h	/^      Index m_global_iter;$/;"	m	class:Eigen::RealQZ
 m_glu	Eigen/src/SparseLU/SparseLU.h	/^    typename Base::GlobalLU_t m_glu; $/;"	m	class:Eigen::SparseLU
@@ -5486,14 +5527,14 @@ m_hCoeffs	Eigen/src/QR/FullPivHouseholderQR.h	/^    HCoeffsType m_hCoeffs;$/;"	m
 m_hCoeffs	Eigen/src/QR/FullPivHouseholderQR.h	/^  typename HCoeffsType::Nested m_hCoeffs;$/;"	m	struct:Eigen::internal::FullPivHouseholderQRMatrixQReturnType
 m_hCoeffs	Eigen/src/QR/HouseholderQR.h	/^    HCoeffsType m_hCoeffs;$/;"	m	class:Eigen::HouseholderQR
 m_hcoeffs	Eigen/src/SparseQR/SparseQR.h	/^    ScalarVector m_hcoeffs;         \/\/ The Householder coefficients$/;"	m	class:Eigen::SparseQR
-m_height	cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	class:Cluster
+m_height	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	language:C++	class:Cluster
 m_hess	Eigen/src/Eigenvalues/ComplexSchur.h	/^    HessenbergDecomposition<MatrixType> m_hess;$/;"	m	class:Eigen::ComplexSchur
 m_hess	Eigen/src/Eigenvalues/HessenbergDecomposition.h	/^    const HessenbergDecomposition<MatrixType>& m_hess;$/;"	m	struct:Eigen::internal::HessenbergDecompositionMatrixHReturnType
 m_hess	Eigen/src/Eigenvalues/RealSchur.h	/^    HessenbergDecomposition<MatrixType> m_hess;$/;"	m	class:Eigen::RealSchur
 m_householder	Eigen/src/SVD/UpperBidiagonalization.h	/^    MatrixType m_householder;$/;"	m	class:Eigen::internal::UpperBidiagonalization
 m_HPinv	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    mutable Index *m_HPinv; \/\/ The row permutation of H$/;"	m	class:Eigen::SPQR
 m_HTau	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    mutable cholmod_dense *m_HTau; \/\/ The Householder coefficients$/;"	m	class:Eigen::SPQR
-m_id	cluster.hpp	/^	int m_id;$/;"	m	class:Cluster
+m_id	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_id;$/;"	m	language:C++	class:Cluster
 m_id	Eigen/src/SparseCore/MappedSparseMatrix.h	/^    Index m_id;$/;"	m	class:Eigen::MappedSparseMatrix::InnerIterator
 m_id	Eigen/src/SparseCore/MappedSparseMatrix.h	/^    Index m_id;$/;"	m	class:Eigen::MappedSparseMatrix::ReverseInnerIterator
 m_id	Eigen/src/SparseCore/SparseCwiseBinaryOp.h	/^    Index m_id;$/;"	m	class:Eigen::internal::sparse_cwise_binary_op_inner_iterator_selector
@@ -5589,11 +5630,11 @@ m_jsuper_ref	Eigen/src/SparseLU/SparseLU_column_dfs.h	/^  Index& m_jsuper_ref;$/
 m_kc	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    DenseIndex m_kc;$/;"	m	class:Eigen::internal::level3_blocking
 m_l	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    mutable LUMatrixType m_l;$/;"	m	class:Eigen::SuperLUBase
 m_l	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    mutable LUMatrixType m_l;$/;"	m	class:Eigen::UmfPackLU
-m_label	cluster.hpp	/^	std::string m_label;$/;"	m	class:Cluster
+m_label	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	std::string m_label;$/;"	m	language:C++	class:Cluster
 m_lastError	Eigen/src/SparseLU/SparseLU.h	/^    std::string m_lastError;$/;"	m	class:Eigen::SparseLU
 m_lastError	Eigen/src/SparseQR/SparseQR.h	/^    std::string m_lastError;$/;"	m	class:Eigen::SparseQR
 m_LDLT	Eigen/src/SparseCholesky/SimplicialCholesky.h	/^    bool m_LDLT;$/;"	m	class:Eigen::SimplicialCholesky
-m_length	cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	class:Cluster
+m_length	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	language:C++	class:Cluster
 m_length	Eigen/src/Householder/HouseholderSequence.h	/^    Index m_length;$/;"	m	class:Eigen::HouseholderSequence
 m_lhs	Eigen/src/Core/CwiseBinaryOp.h	/^    LhsNested m_lhs;$/;"	m	class:Eigen::CwiseBinaryOp
 m_lhs	Eigen/src/Core/ProductBase.h	/^    LhsNested m_lhs;$/;"	m	namespace:Eigen
@@ -5686,11 +5727,11 @@ m_maxpivot	Eigen/src/LU/FullPivLU.h	/^    RealScalar m_maxpivot, m_prescribedThr
 m_maxpivot	Eigen/src/QR/ColPivHouseholderQR.h	/^    RealScalar m_prescribedThreshold, m_maxpivot;$/;"	m	class:Eigen::ColPivHouseholderQR
 m_maxpivot	Eigen/src/QR/FullPivHouseholderQR.h	/^    RealScalar m_prescribedThreshold, m_maxpivot;$/;"	m	class:Eigen::FullPivHouseholderQR
 m_MAX_ASSOCIATION_DISTANCE	obstacle_tracking.hpp	/^	double m_MAX_ASSOCIATION_DISTANCE;$/;"	m	class:ObstacleTracking
-m_max_point	cluster.hpp	/^	pcl::PointXYZ m_max_point;$/;"	m	class:Cluster
+m_max_point	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	pcl::PointXYZ m_max_point;$/;"	m	language:C++	class:Cluster
 m_mc	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    DenseIndex m_mc;$/;"	m	class:Eigen::internal::level3_blocking
 m_min	Eigen/src/Eigen2Support/Geometry/AlignedBox.h	/^  VectorType m_min, m_max;$/;"	m	class:Eigen::AlignedBox
 m_min	Eigen/src/Geometry/AlignedBox.h	/^  VectorType m_min, m_max;$/;"	m	class:Eigen::AlignedBox
-m_min_point	cluster.hpp	/^	pcl::PointXYZ m_min_point;$/;"	m	class:Cluster
+m_min_point	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	pcl::PointXYZ m_min_point;$/;"	m	language:C++	class:Cluster
 m_mode	Eigen/src/SparseCore/AmbiVector.h	/^    Index m_mode;$/;"	m	class:Eigen::internal::AmbiVector
 m_msglvl	Eigen/src/PardisoSupport/PardisoSupport.h	/^    Index m_type, m_msglvl;$/;"	m	class:Eigen::PardisoImpl
 m_nc	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    DenseIndex m_nc;$/;"	m	class:Eigen::internal::level3_blocking
@@ -5712,10 +5753,11 @@ m_nzval_colptr	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    Index* m_nzv
 m_object	Eigen/src/Core/Ref.h	/^    TPlainObjectType m_object;$/;"	m	class:Eigen::Ref
 m_ObstacleTracking	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ObstacleTracking m_ObstacleTracking;$/;"	m	language:C++	class:ExtractMeasurement
 m_ordering	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    int m_ordering; \/\/ Ordering method to use, see SPQR's manual$/;"	m	class:Eigen::SPQR
+m_Origin	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::Marker m_Origin;$/;"	m	language:C++	class:ExtractMeasurement
 m_origin	Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h	/^  VectorType m_origin, m_direction;$/;"	m	class:Eigen::ParametrizedLine
 m_origin	Eigen/src/Geometry/ParametrizedLine.h	/^  VectorType m_origin, m_direction;$/;"	m	class:Eigen::ParametrizedLine
 m_OriginalClusters	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<clusterPtr> m_OriginalClusters;$/;"	m	language:C++	class:ExtractMeasurement
-m_originalID	cluster.hpp	/^	int m_originalID;$/;"	m	class:Cluster
+m_originalID	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_originalID;$/;"	m	language:C++	class:Cluster
 m_originalMatrix	Eigen/src/Eigen2Support/LU.h	/^    const MatrixType& m_originalMatrix;$/;"	m	class:Eigen::LU
 m_originalMatrix	Eigen/src/misc/Image.h	/^    const MatrixType& m_originalMatrix;$/;"	m	struct:Eigen::internal::image_retval_base
 m_other	Eigen/src/Core/Functors.h	/^  const Scalar m_other;$/;"	m	struct:Eigen::internal::scalar_add_op
@@ -5773,8 +5815,8 @@ m_Pinv	Eigen/src/IterativeLinearSolvers/IncompleteLUT.h	/^    PermutationMatrix<
 m_Pinv	Eigen/src/SparseCholesky/SimplicialCholesky.h	/^    PermutationMatrix<Dynamic,Dynamic,Index> m_Pinv;  \/\/ the inverse permutation$/;"	m	class:Eigen::SimplicialCholeskyBase
 m_pivotperm	Eigen/src/SparseQR/SparseQR.h	/^    PermutationType m_pivotperm;    \/\/ The permutation for rank revealing$/;"	m	class:Eigen::SparseQR
 m_pmat	Eigen/src/SparseQR/SparseQR.h	/^    QRMatrixType m_pmat;            \/\/ Temporary matrix$/;"	m	class:Eigen::SparseQR
-m_pointCloud	cluster.hpp	/^	pcl::PointCloud <pcl::PointXYZRGB>::Ptr m_pointCloud;$/;"	m	class:Cluster
-m_polygon	cluster.hpp	/^	geometry_msgs::PolygonStamped m_polygon;$/;"	m	class:Cluster
+m_pointCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	pcl::PointCloud <pcl::PointXYZRGB>::Ptr m_pointCloud;$/;"	m	language:C++	class:Cluster
+m_polygon	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	geometry_msgs::PolygonStamped m_polygon;$/;"	m	language:C++	class:Cluster
 m_precision	Eigen/src/QR/FullPivHouseholderQR.h	/^    RealScalar m_precision;$/;"	m	class:Eigen::FullPivHouseholderQR
 m_preconditioner	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  Preconditioner m_preconditioner;$/;"	m	class:Eigen::IterativeSolverBase
 m_prescribedThreshold	Eigen/src/LU/FullPivLU.h	/^    RealScalar m_maxpivot, m_prescribedThreshold;$/;"	m	class:Eigen::FullPivLU
@@ -5784,7 +5826,9 @@ m_prescribedThreshold	Eigen/src/SVD/JacobiSVD.h	/^    RealScalar m_prescribedThr
 m_prod	Eigen/src/Core/ProductBase.h	/^    const NestedProduct& m_prod;$/;"	m	class:ScaledProduct
 m_pt	Eigen/src/PardisoSupport/PardisoSupport.h	/^    mutable void *m_pt[64];$/;"	m	class:Eigen::PardisoImpl
 m_ptr	Eigen/src/Core/util/Memory.h	/^    T* m_ptr;$/;"	m	class:Eigen::internal::aligned_stack_memory_handler
+m_pub_Origin	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_Origin;$/;"	m	language:C++	class:ExtractMeasurement
 m_pub_result	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_result;$/;"	m	language:C++	class:ExtractMeasurement
+m_pub_shape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_shape;$/;"	m	language:C++	class:ExtractMeasurement
 m_Q	Eigen/src/Eigenvalues/RealQZ.h	/^      MatrixType m_S, m_T, m_Q, m_Z;$/;"	m	class:Eigen::RealQZ
 m_q	Eigen/src/LU/FullPivLU.h	/^    PermutationQType m_q;$/;"	m	class:Eigen::FullPivLU
 m_Q	Eigen/src/SparseQR/SparseQR.h	/^    QRMatrixType m_Q;               \/\/ The orthogonal reflectors$/;"	m	class:Eigen::SparseQR
@@ -5800,8 +5844,8 @@ m_qr	Eigen/src/SparseQR/SparseQR.h	/^  const SparseQRType& m_qr;$/;"	m	struct:Ei
 m_qr	Eigen/src/SVD/JacobiSVD.h	/^  QRType m_qr;$/;"	m	class:Eigen::internal::qr_preconditioner_impl
 m_qr_precond_morecols	Eigen/src/SVD/JacobiSVD.h	/^    internal::qr_preconditioner_impl<MatrixType, QRPreconditioner, internal::PreconditionIfMoreColsThanRows> m_qr_precond_morecols;$/;"	m	class:Eigen::JacobiSVD
 m_qr_precond_morerows	Eigen/src/SVD/JacobiSVD.h	/^    internal::qr_preconditioner_impl<MatrixType, QRPreconditioner, internal::PreconditionIfMoreRowsThanCols> m_qr_precond_morerows;$/;"	m	class:Eigen::JacobiSVD
+m_r	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	language:C++	class:Cluster
 m_r	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        uint8_t m_r;$/;"	m	language:C++	struct:_rgb
-m_r	cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	class:Cluster
 m_R	Eigen/src/SparseQR/SparseQR.h	/^    QRMatrixType m_R;               \/\/ The triangular factor matrix$/;"	m	class:Eigen::SparseQR
 m_R	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    mutable MatrixType m_R; \/\/ The sparse matrix R in Eigen format$/;"	m	class:Eigen::SPQR
 m_rank	Eigen/src/misc/Image.h	/^    Index m_rank, m_cols;$/;"	m	struct:Eigen::internal::image_retval_base
@@ -5945,7 +5989,7 @@ m_usePrescribedThreshold	Eigen/src/QR/ColPivHouseholderQR.h	/^    bool m_isIniti
 m_usePrescribedThreshold	Eigen/src/QR/FullPivHouseholderQR.h	/^    bool m_isInitialized, m_usePrescribedThreshold;$/;"	m	class:Eigen::FullPivHouseholderQR
 m_usePrescribedThreshold	Eigen/src/SVD/JacobiSVD.h	/^    bool m_isInitialized, m_isAllocated, m_usePrescribedThreshold;$/;"	m	class:Eigen::JacobiSVD
 m_Ustore	Eigen/src/SparseLU/SparseLU.h	/^    MappedSparseMatrix<Scalar,ColMajor,Index> m_Ustore; \/\/ The upper triangular matrix$/;"	m	class:Eigen::SparseLU
-m_valid_cluster	cluster.hpp	/^	bool m_valid_cluster;$/;"	m	class:Cluster
+m_valid_cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	bool m_valid_cluster;$/;"	m	language:C++	class:Cluster
 m_value	Eigen/src/SparseCore/SparseBlock.h	/^    Scalar m_value;$/;"	m	class:Eigen::internal::GenericSparseBlockInnerIteratorImpl
 m_value	Eigen/src/SparseCore/SparseCwiseBinaryOp.h	/^    Scalar m_value;$/;"	m	class:Eigen::internal::sparse_cwise_binary_op_inner_iterator_selector
 m_value	Eigen/src/SparseCore/SparseMatrix.h	/^        Index m_value;$/;"	m	class:Eigen::SparseMatrix::SingletonVector
@@ -5958,7 +6002,7 @@ m_values	Eigen/src/SparseCore/SparseMatrix.h	/^    const Scalar* m_values;$/;"	m
 m_vector	Eigen/src/SparseCore/AmbiVector.h	/^    const AmbiVector& m_vector; \/\/ the target vector$/;"	m	class:Eigen::internal::AmbiVector::Iterator
 m_vectors	Eigen/src/Householder/HouseholderSequence.h	/^    typename VectorsType::Nested m_vectors;$/;"	m	class:Eigen::HouseholderSequence
 m_view	Eigen/src/SparseCore/SparseView.h	/^  const SparseView& m_view;$/;"	m	class:Eigen::SparseView::InnerIterator
-m_width	cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	class:Cluster
+m_width	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	language:C++	class:Cluster
 m_workMatrix	Eigen/src/SVD/JacobiSVD.h	/^    WorkMatrixType m_workMatrix;$/;"	m	class:Eigen::JacobiSVD
 m_workspace	Eigen/src/Eigenvalues/RealQZ.h	/^      Matrix<Scalar,Dynamic,1> m_workspace;$/;"	m	class:Eigen::RealQZ
 m_workspace	Eigen/src/SVD/JacobiSVD.h	/^  typename internal::plain_col_type<MatrixType>::type m_workspace;$/;"	m	class:Eigen::internal::qr_preconditioner_impl
@@ -6101,8 +6145,13 @@ nzumax	Eigen/src/SparseLU/SparseLU_Structs.h	/^  Index   nzumax; \/\/ Current ma
 n_aug_	ukf.h	/^  int n_aug_;$/;"	m	class:UKF
 n_x_	ukf.h	/^  int n_x_;$/;"	m	class:UKF
 OBJECT_ALLOCATED_ON_STACK_IS_TOO_BIG	Eigen/src/Core/util/StaticAssert.h	/^        OBJECT_ALLOCATED_ON_STACK_IS_TOO_BIG,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
-ObstacleTracking	obstacle_tracking.cpp	/^ObstacleTracking::ObstacleTracking()$/;"	f	class:ObstacleTracking
+ObstacleTracking	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^ObstacleTracking::ObstacleTracking()$/;"	f	language:C++	class:ObstacleTracking
 ObstacleTracking	obstacle_tracking.hpp	/^class ObstacleTracking$/;"	c
+ObstacleTracking::associate	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^void ObstacleTracking::associate (const std::vector<clusterPtr>& objList)$/;"	f	language:C++	class:ObstacleTracking
+ObstacleTracking::matchWithDistanceOnly	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^void ObstacleTracking::matchWithDistanceOnly()$/;"	f	language:C++	class:ObstacleTracking
+ObstacleTracking::MergeObjectAndTrack	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^void ObstacleTracking::MergeObjectAndTrack (clusterPtr& track, clusterPtr& obj)$/;"	f	language:C++	class:ObstacleTracking
+ObstacleTracking::ObstacleTracking	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^ObstacleTracking::ObstacleTracking()$/;"	f	language:C++	class:ObstacleTracking
+ObstacleTracking::~ObstacleTracking	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^ObstacleTracking::~ObstacleTracking() {}$/;"	f	language:C++	class:ObstacleTracking
 offset	Eigen/src/Eigen2Support/Geometry/Hyperplane.h	/^  inline const Scalar& offset() const { return m_coeffs.coeff(dim()); }$/;"	f	class:Eigen::Hyperplane
 offset	Eigen/src/Eigen2Support/Geometry/Hyperplane.h	/^  inline Scalar& offset() { return m_coeffs(dim()); }$/;"	f	class:Eigen::Hyperplane
 offset	Eigen/src/Geometry/Hyperplane.h	/^  inline const Scalar& offset() const { return m_coeffs.coeff(dim()); }$/;"	f	class:Eigen::Hyperplane
@@ -9049,7 +9098,8 @@ set	Eigen/src/Core/GeneralProduct.h	/^    struct set  { template<typename Dst, t
 setAcceleration	render/render.h	/^	void setAcceleration(float setAcc)$/;"	f	struct:Car
 SetAction	Eigen/src/Core/util/Constants.h	/^enum Action {GetAction, SetAction};$/;"	e	enum:Eigen::Action
 setBounds	Eigen/src/SparseCore/AmbiVector.h	/^    void setBounds(Index start, Index end) { m_start = start; m_end = end; }$/;"	f	class:Eigen::internal::AmbiVector
-SetCloud	cluster.cpp	/^void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	f	class:Cluster
+SetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	f	language:C++	class:Cluster
+SetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	void SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	p	language:C++	class:Cluster
 setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud)$/;"	f	language:C++	class:ExtractMeasurement
 setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);$/;"	p	language:C++	class:ExtractMeasurement
 setConstant	Eigen/src/Core/CwiseNullaryOp.h	/^EIGEN_STRONG_INLINE Derived& DenseBase<Derived>::setConstant(const Scalar& val)$/;"	f	class:Eigen::DenseBase
@@ -9104,6 +9154,8 @@ setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/
 setPivotThreshold	Eigen/src/SparseLU/SparseLU.h	/^    void setPivotThreshold(const RealScalar& thresh)$/;"	f	class:Eigen::SparseLU
 setPivotThreshold	Eigen/src/SparseQR/SparseQR.h	/^    void setPivotThreshold(const RealScalar& threshold)$/;"	f	class:Eigen::SparseQR
 setPivotThreshold	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    void setPivotThreshold(const RealScalar& tol)$/;"	f	class:Eigen::SPQR
+SetPointCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetPointCloud (pcl::PointCloud<pcl::PointXYZRGB>::Ptr pInputCloud)$/;"	f	language:C++	class:Cluster
+SetPointCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	void SetPointCloud (pcl::PointCloud<pcl::PointXYZRGB>::Ptr pInputCloud);$/;"	p	language:C++	class:Cluster
 setRandom	Eigen/src/Core/Random.h	/^inline Derived& DenseBase<Derived>::setRandom()$/;"	f	class:Eigen::DenseBase
 setRandom	Eigen/src/Core/Random.h	/^PlainObjectBase<Derived>::setRandom(Index nbRows, Index nbCols)$/;"	f	class:Eigen::PlainObjectBase
 setRandom	Eigen/src/Core/Random.h	/^PlainObjectBase<Derived>::setRandom(Index newSize)$/;"	f	class:Eigen::PlainObjectBase
@@ -9125,6 +9177,7 @@ setThreshold	Eigen/src/SVD/JacobiSVD.h	/^    JacobiSVD& setThreshold(Default_t)$
 setTolerance	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  Derived& setTolerance(const RealScalar& tolerance)$/;"	f	class:Eigen::IterativeSolverBase
 setTrans	Eigen/src/Householder/HouseholderSequence.h	/^    HouseholderSequence& setTrans(bool trans)$/;"	f	class:Eigen::HouseholderSequence
 setUKF	render/render.h	/^	void setUKF(UKF tracker)$/;"	f	struct:Car
+SetValidity	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	void SetValidity(bool in_valid);$/;"	p	language:C++	class:Cluster
 setZero	Eigen/src/Cholesky/LDLT.h	/^    void setZero()$/;"	f	class:Eigen::LDLT
 setZero	Eigen/src/Core/CwiseNullaryOp.h	/^EIGEN_STRONG_INLINE Derived& DenseBase<Derived>::setZero()$/;"	f	class:Eigen::DenseBase
 setZero	Eigen/src/Core/CwiseNullaryOp.h	/^PlainObjectBase<Derived>::setZero(Index nbRows, Index nbCols)$/;"	f	class:Eigen::PlainObjectBase
@@ -10864,7 +10917,7 @@ _transformVector	Eigen/src/Geometry/RotationBase.h	/^    inline VectorType _tran
 _Vectorizable	Eigen/src/Core/DiagonalProduct.h	/^    _Vectorizable = bool(int(MatrixType::Flags)&PacketAccessBit) && _SameTypes && (_ScalarAccessOnDiag || (bool(int(DiagonalType::DiagonalVectorType::Flags)&PacketAccessBit))),$/;"	e	enum:Eigen::internal::traits::__anon254
 _XprTypeNested	Eigen/src/Core/Block.h	/^  typedef typename remove_reference<XprTypeNested>::type _XprTypeNested;$/;"	t	struct:Eigen::internal::traits
 _XprTypeNested	Eigen/src/Core/CwiseUnaryOp.h	/^  typedef typename remove_reference<XprTypeNested>::type _XprTypeNested;$/;"	t	struct:Eigen::internal::traits
-__CLUSTER_H__	cluster.hpp	2;"	d
+__CLUSTER_H__	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	2;"	d	language:C++
 __has_feature	Eigen/src/Core/util/Macros.h	365;"	d
 __OBSTACLE_TRACKING_H__	obstacle_tracking.hpp	2;"	d
 ~AlignedBox	Eigen/src/Eigen2Support/Geometry/AlignedBox.h	/^  ~AlignedBox() {}$/;"	f	class:Eigen::AlignedBox
@@ -10879,7 +10932,8 @@ __OBSTACLE_TRACKING_H__	obstacle_tracking.hpp	2;"	d
 ~CholmodSimplicialLDLT	Eigen/src/CholmodSupport/CholmodSupport.h	/^    ~CholmodSimplicialLDLT() {}$/;"	f	class:Eigen::CholmodSimplicialLDLT
 ~CholmodSimplicialLLT	Eigen/src/CholmodSupport/CholmodSupport.h	/^    ~CholmodSimplicialLLT() {}$/;"	f	class:Eigen::CholmodSimplicialLLT
 ~CholmodSupernodalLLT	Eigen/src/CholmodSupport/CholmodSupport.h	/^    ~CholmodSupernodalLLT() {}$/;"	f	class:Eigen::CholmodSupernodalLLT
-~Cluster	cluster.cpp	/^Cluster::~Cluster()$/;"	f	class:Cluster
+~Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::~Cluster()$/;"	f	language:C++	class:Cluster
+~Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.hpp	/^	virtual ~Cluster();$/;"	p	language:C++	class:Cluster
 ~CommaInitializer	Eigen/src/Core/CommaInitializer.h	/^  inline ~CommaInitializer()$/;"	f	struct:Eigen::CommaInitializer
 ~CompressedStorage	Eigen/src/SparseCore/CompressedStorage.h	/^    ~CompressedStorage()$/;"	f	class:Eigen::internal::CompressedStorage
 ~ConjugateGradient	Eigen/src/IterativeLinearSolvers/ConjugateGradient.h	/^  ~ConjugateGradient() {}$/;"	f	class:Eigen::ConjugateGradient
@@ -10895,7 +10949,7 @@ __OBSTACLE_TRACKING_H__	obstacle_tracking.hpp	2;"	d
 ~MappedSparseMatrix	Eigen/src/SparseCore/MappedSparseMatrix.h	/^    inline ~MappedSparseMatrix() {}$/;"	f	class:Eigen::MappedSparseMatrix
 ~MappedSuperNodalMatrix	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    ~MappedSuperNodalMatrix()$/;"	f	class:Eigen::internal::MappedSuperNodalMatrix
 ~noncopyable	Eigen/src/Core/util/Meta.h	/^  ~noncopyable() {}$/;"	f	class:Eigen::internal::noncopyable
-~ObstacleTracking	obstacle_tracking.cpp	/^ObstacleTracking::~ObstacleTracking() {}$/;"	f	class:ObstacleTracking
+~ObstacleTracking	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/obstacle_tracking.cpp	/^ObstacleTracking::~ObstacleTracking() {}$/;"	f	language:C++	class:ObstacleTracking
 ~ParametrizedLine	Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h	/^  ~ParametrizedLine() {}$/;"	f	class:Eigen::ParametrizedLine
 ~ParametrizedLine	Eigen/src/Geometry/ParametrizedLine.h	/^  ~ParametrizedLine() {}$/;"	f	class:Eigen::ParametrizedLine
 ~PardisoImpl	Eigen/src/PardisoSupport/PardisoSupport.h	/^    ~PardisoImpl()$/;"	f	class:Eigen::PardisoImpl

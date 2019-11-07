@@ -4,6 +4,9 @@ ExtractMeasurement::ExtractMeasurement()
 {
 	// define publisher
 	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("output", 100);
+	m_pub_shape = nh.advertise<visualization_msgs::MarkerArray>("Shape", 1);
+	//m_pub_Origin = nh.advertise<visualization_msgs::Marker> ("Origin", 1);
+
 	m_maxIndexNumber = 0;	
 }
 
@@ -54,9 +57,9 @@ void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInpu
 	// Max cluster size is the maximum number of points in the circle with the tolerance as radius
 	// extract the index of each cluster to vecClusterIndices
 	pcl::EuclideanClusterExtraction<pcl::PointXYZ> euclideanCluster;
-	euclideanCluster.setClusterTolerance (1.0);
+	euclideanCluster.setClusterTolerance (1.5);
 	euclideanCluster.setMinClusterSize (50);
-	euclideanCluster.setMaxClusterSize (45000);
+	euclideanCluster.setMaxClusterSize (23000);
 	//	euclideanCluster.setClusterTolerance (m_dClusterErrRadius);
 	//	euclideanCluster.setMinClusterSize (m_dClusterMinSize);
 	//	euclideanCluster.setMaxClusterSize (m_dClusterMaxSize);
@@ -118,6 +121,88 @@ void ExtractMeasurement::associate()
 }
 
 
+void ExtractMeasurement::displayShape ()//const std::vector<clusterPtr> pVecClusters)
+{
+//	// origin
+//	m_Origin.header.frame_id = "map";
+//	m_Origin.header.stamp = ros::Time::now();
+//
+//	m_Origin.ns = "/origin";
+//	m_Origin.id = 0;
+//
+//	m_Origin.type = visualization_msgs::Marker::SPHERE;
+//
+//	m_Origin.action = visualization_msgs::Marker::ADD;
+//
+//	m_Origin.pose.position.x = 0;
+//	m_Origin.pose.position.y = 0;
+//	m_Origin.pose.position.z = 0;
+//	m_Origin.pose.orientation.x = 0.0;
+//	m_Origin.pose.orientation.y = 0.0;
+//	m_Origin.pose.orientation.z = 0.0;
+//	m_Origin.pose.orientation.w = 1.0;
+//
+//	m_Origin.scale.x = 0.5;
+//	m_Origin.scale.y = 0.5;
+//	m_Origin.scale.z = 0.5;
+//
+//	m_Origin.color.r = 0.0f;
+//	m_Origin.color.g = 1.0f;
+//	m_Origin.color.b = 0.0f;
+//	m_Origin.color.a = 1.0;
+//
+//	m_Origin.lifetime = ros::Duration();
+
+	// tracking objects
+	m_arrShapes.markers.clear();
+
+	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
+	{
+		visualization_msgs::Marker shape;
+
+		shape.lifetime = ros::Duration(0.5);
+		shape.header.frame_id = "map";
+		shape.id = pCluster->m_id;
+
+		// bounding box
+		shape.type = visualization_msgs::Marker::CUBE;
+		shape.action = visualization_msgs::Marker::ADD;
+		shape.ns = "/BoundingBox";
+
+		shape.pose.position = pCluster->m_center.position;
+		shape.pose.orientation = pCluster->m_center.orientation;
+
+		shape.scale.x = pCluster->m_dimensions.x;
+		shape.scale.y = pCluster->m_dimensions.y;
+		shape.scale.z = pCluster->m_dimensions.z;
+
+		shape.color.r = pCluster->m_r/255.0f;
+		shape.color.g = pCluster->m_g/255.0f;
+		shape.color.b = pCluster->m_b/255.0f;
+		shape.color.a = 0.5;
+
+		m_arrShapes.markers.push_back(shape);
+
+		// text
+		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+		shape.ns = "/Text";
+
+		shape.points.clear();
+		shape.pose.position = pCluster->m_center.position;
+		shape.pose.orientation = pCluster->m_center.orientation;
+
+		shape.scale.x = 1.0;
+		shape.scale.y = 1.0;
+		shape.scale.z = 1.0;
+
+		shape.color.r = shape.color.g = shape.color.b = 1.0;
+		shape.color.a = 1.0;
+
+		shape.text = std::to_string(pCluster->m_id);
+
+		m_arrShapes.markers.push_back (shape);
+	}
+}
 
 void ExtractMeasurement::publish ()
 {
@@ -125,13 +210,11 @@ void ExtractMeasurement::publish ()
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulationCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 	pAccumulationCloud->header.frame_id = "map";
 
-//	// accumulation for publish
-//	for (const auto& pCluster : m_OriginalClusters)
-//		*pAccumulationCloud += *(pCluster->GetCloud());
-
-	*pAccumulationCloud += *(m_OriginalClusters[0]->GetCloud());
-
+	// accumulation for publish
+	for (const auto& pCluster : m_ObstacleTracking.m_TrackingObjects)
+		*pAccumulationCloud += *(pCluster->GetCloud());
 
 	// publish
 	m_pub_result.publish (*pAccumulationCloud);
+	m_pub_shape.publish (m_arrShapes);
 }

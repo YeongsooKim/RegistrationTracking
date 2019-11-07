@@ -1,6 +1,7 @@
 /* \author Aaron Brown */
 // Handle logic for creating traffic on highway and animating it
 
+#include <ros/ros.h>
 #include "render/render.h"
 #include "sensors/lidar.h"
 #include "tools.h"
@@ -125,6 +126,7 @@ public:
 		{
 			vec_of_csv[trafficIndex].close();
 		}
+		ROS_ERROR_STREAM ("end");
 	}
 
 	

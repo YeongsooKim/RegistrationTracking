@@ -11,6 +11,9 @@
 #include <pcl/segmentation/sac_segmentation.h>
 #include <pcl/segmentation/extract_clusters.h>
 
+#include "visualization_msgs/Marker.h"
+#include "visualization_msgs/MarkerArray.h"
+
 #include <sensor_msgs/PointCloud2.h>
 #include "cluster.hpp"
 #include "obstacle_tracking.hpp"
@@ -43,9 +46,8 @@ class ExtractMeasurement
 
 	// Declare publisher
 	ros::Publisher m_pub_result;
-//	ros::Publisher pub_shape;
-//	ros::Publisher pub_detectedObject;
-//	ros::Publisher pub_Origin;
+	ros::Publisher m_pub_shape;
+	ros::Publisher m_pub_Origin;
 
 	// param
 	double m_fMarkerDuration;
@@ -62,6 +64,9 @@ class ExtractMeasurement
 	public:
 	Tools m_tools;
 
+	visualization_msgs::Marker m_Origin;
+	visualization_msgs::MarkerArray m_arrShapes;
+
 	ExtractMeasurement();
 	void setParam();
 	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
@@ -70,10 +75,7 @@ class ExtractMeasurement
 	void generateColor(size_t indexNumber);
 	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
 	void associate ();
-
-	//		void generateColor(size_t indexNumber);
-	//		void displayShape (const std::vector<clusterPtr> pVecClusters);
-	//		void setDetectedObject (const std::vector<clusterPtr>& pVecClusters);
+	void displayShape ();
 	void publish();
 };
 
