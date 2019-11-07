@@ -5,7 +5,7 @@ ExtractMeasurement::ExtractMeasurement()
 	// define publisher
 	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZ>> ("output", 100);
 	m_resultCloud.header.frame_id = "map";
-	
+	m_maxIndexNumber = 0;	
 }
 
 void ExtractMeasurement::setParam()
@@ -67,6 +67,53 @@ void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInpu
 	euclideanCluster.setSearchMethod (pKdtreeDownsampledCloud);
 	euclideanCluster.setInputCloud (pInputCloud);
 	euclideanCluster.extract (vecClusterIndices);
+}
+
+void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud)
+{
+	m_OriginalClusters.clear();
+
+	int objectNumber = 0;
+	for (const auto& clusterIndice : vecClusterIndices)
+	{
+		std::string label_ = "vehicle";
+		std::string label = label_;
+		label.append (std::to_string(objectNumber));
+
+		// generate random color to globalRGB variable
+		generateColor(vecClusterIndices.size());
+
+		// pCluster is a local cluster
+		clusterPtr pCluster (new Cluster());
+
+		std_msgs::Header dummy;
+		dummy.frame_id = "map";
+		// Cloring and calculate the cluster center point and quaternion
+		pCluster->SetCloud(pInputCloud, clusterIndice.indices, dummy, objectNumber, m_globalRGB[objectNumber].m_r, m_globalRGB[objectNumber].m_g, m_globalRGB[objectNumber].m_b, label, true);
+
+		m_OriginalClusters.push_back(pCluster);
+
+		objectNumber++;
+	}
+}
+
+
+// generate random color
+void ExtractMeasurement::generateColor(size_t indexNumber)
+{
+	if (indexNumber > m_maxIndexNumber)
+	{
+		int addRGB = indexNumber - m_maxIndexNumber;
+		m_maxIndexNumber = indexNumber;
+
+		for (size_t i = 0; i < addRGB; i++)
+		{
+			uint8_t r = 1024 * rand () % 255;
+			uint8_t g = 1024 * rand () % 255;
+			uint8_t b = 1024 * rand () % 255;
+			m_globalRGB.push_back(RGB(r, g, b));
+		}
+	}
 }
 
 

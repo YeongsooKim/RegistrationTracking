@@ -12,7 +12,28 @@
 #include <pcl/segmentation/extract_clusters.h>
 
 #include <sensor_msgs/PointCloud2.h>
+#include "cluster.hpp"
+#include "obstacle_tracking.hpp"
 #include "tools.h"
+
+typedef struct _rgb RGB;
+struct _rgb
+{
+        uint8_t m_r;
+        uint8_t m_g;
+        uint8_t m_b;
+
+        _rgb ()
+        { }
+
+        _rgb (uint8_t r, uint8_t g, uint8_t b)
+        {
+                m_r = r;
+                m_g = g;
+                m_b = b;
+        }
+};
+
 
 class ExtractMeasurement
 {
@@ -34,16 +55,23 @@ class ExtractMeasurement
 	double m_dClusterMinSize;
 	double m_dClusterMaxSize; 	
 
+	std::vector<RGB> m_globalRGB;
+	int m_maxIndexNumber = 0;
+
+	std::vector<clusterPtr> m_OriginalClusters;
+	ObstacleTracking m_ObstacleTracking;
+
 	public:
 	Tools m_tools;
 
 	ExtractMeasurement();
 	void setParam();
 	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
-
 	void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);
 	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);
-	//		void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, std::vector<clusterPtr>& pOriginalClusters, const PointCloudXYZ::Ptr pInputCloud);
+	void generateColor(size_t indexNumber);
+	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
+
 	//		void generateColor(size_t indexNumber);
 	//		void displayShape (const std::vector<clusterPtr> pVecClusters);
 	//		void setDetectedObject (const std::vector<clusterPtr>& pVecClusters);

@@ -56,7 +56,14 @@ int main(int argc, char** argv)
 		// dbscan
 		std::vector<pcl::PointIndices> vecClusterIndices;
 		measurement.dbscan(pDownsampledCloud, vecClusterIndices);
+		//
+		// Set cluster pointcloud from clusterIndices and coloring
+		measurement.setCluster (vecClusterIndices, pDownsampledCloud);
 
+
+		//		// Associate and kalman filter tracking
+		//		m_ObstacleTracking.associate(m_OriginalClusters);
+		//
 		measurement.publish();
 
 		viewer->spinOnce(1000/frame_per_sec);

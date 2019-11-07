@@ -8,11 +8,15 @@ add_compile_options(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+	geometry_msgs
+	pcl_conversions
 	pcl_ros
 	roscpp
 	sensor_msgs
+	cv_bridge
 	)
 
+find_package (OpenCV REQUIRED)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -104,7 +108,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 	INCLUDE_DIRS include
-	CATKIN_DEPENDS pcl_ros roscpp sensor_msgs
+	CATKIN_DEPENDS 
+	pcl_ros 
+	roscpp 
+	sensor_msgs
 	)
 
 ###########
@@ -116,6 +123,8 @@ catkin_package(
 include_directories(
 	# include
 	${catkin_INCLUDE_DIRS}
+	${OpenCV_INCLUDE_DIRS}
+
 	)
 
 ## Declare a C++ library
@@ -138,12 +147,15 @@ add_executable (
 	src/tools.cpp 
 	src/render/render.cpp
 	src/extractMeasurement.cpp
+	src/obstacle_tracking.cpp
+	src/cluster.cpp
 	)
 
 target_link_libraries (
 	tracking_with_registration
 	${PCL_LIBRARIES}
 	${catkin_LIBRARIES}
+	${OpenCV_INCLUDE_DIRS}
 	)
 
 
