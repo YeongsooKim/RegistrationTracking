@@ -1,0 +1,41 @@
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:48:1:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K}[m[K’ at end of input
+ }
+[01;32m[K ^[m[K
+In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:8:0[m[K:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:[m[K In constructor ‘[01m[KHighway::Highway(pcl::visualization::PCLVisualizer::Ptr&)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:114:22:[m[K [01;31m[Kerror: [m[Kuse of deleted function ‘[01m[Kstd::basic_ofstream<_CharT, _Traits>::basic_ofstream(const std::basic_ofstream<_CharT, _Traits>&) [with _CharT = char; _Traits = std::char_traits<char>][m[K’
+   for (auto of_csv : vec_of_csv)
+[01;32m[K                      ^[m[K
+In file included from [01m[K/usr/include/pcl-1.7/pcl/io/impl/pcd_io.hpp:43:0[m[K,
+                 from [01m[K/usr/include/pcl-1.7/pcl/io/pcd_io.h:680[m[K,
+                 from [01m[K/opt/ros/kinetic/include/pcl_conversions/pcl_conversions.h:70[m[K,
+                 from [01m[K/opt/ros/kinetic/include/pcl_ros/point_cloud.h:9[m[K,
+                 from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:7[m[K:
+[01m[K/usr/include/c++/5/fstream:723:7:[m[K [01;36m[Knote: [m[Kdeclared here
+       basic_ofstream(const basic_ofstream&) = delete;
+[01;32m[K       ^[m[K
+In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:8:0[m[K:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:117:3:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before ‘[01m[Kfor[m[K’
+   for (unsigned int trafficIndex = 0; trafficIndex < traffic.size(); trafficIndex++)
+[01;32m[K   ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:117:39:[m[K [01;31m[Kerror: [m[K‘[01m[KtrafficIndex[m[K’ was not declared in this scope
+   for (unsigned int trafficIndex = 0; trafficIndex < traffic.size(); trafficIndex++)
+[01;32m[K                                       ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:137:2:[m[K [01;31m[Kerror: [m[Ka function-definition is not allowed here before ‘[01m[K{[m[K’ token
+  {
+[01;32m[K  ^[m[K
+In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:8:0[m[K:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:220:1:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K}[m[K’ at end of input
+ };
+[01;32m[K ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:[m[K In member function ‘[01m[Kint Highway::main(int, char**)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:40:11:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass Highway[m[K’ has no member named ‘[01m[KstepHighway[m[K’
+   highway.stepHighway(egoVelocity,time_us, frame_per_sec, viewer);
+[01;32m[K           ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:[m[K At global scope:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:48:1:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id at end of input
+ }
+[01;32m[K ^[m[K
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o] Error 1
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+make: *** [all] Error 2

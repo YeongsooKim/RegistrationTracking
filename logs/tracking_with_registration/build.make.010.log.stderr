@@ -1,0 +1,8 @@
+In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:8:0[m[K:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:[m[K In constructor ‘[01m[KHighway::Highway(pcl::visualization::PCLVisualizer::Ptr&)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:114:30:[m[K [01;31m[Kerror: [m[Kno match for call to ‘[01m[K(std::ofstream {aka std::basic_ofstream<char>}) (const char [9], const openmode&)[m[K’
+   ofCar1("car1.csv", ios::out);
+[01;32m[K                              ^[m[K
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o] Error 1
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+make: *** [all] Error 2

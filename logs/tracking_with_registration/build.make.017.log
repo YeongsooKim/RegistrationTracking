@@ -1,0 +1,13 @@
+[35m[1mScanning dependencies of target tracking_with_registration[0m
+[ 20%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o[0m
+In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:8:0[m[K:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:[m[K In constructor ‘[01m[KHighway::Highway(pcl::visualization::PCLVisualizer::Ptr&)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/highway.h:112:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kout[m[K’ is not a member of ‘[01m[Kstd[m[K’
+   std::out << "size: " << traffic.size();
+[01;32m[K   ^[m[K
+CMakeFiles/tracking_with_registration.dir/build.make:62: recipe for target 'CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o' failed
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o] Error 1
+CMakeFiles/Makefile2:163: recipe for target 'CMakeFiles/tracking_with_registration.dir/all' failed
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+Makefile:138: recipe for target 'all' failed
+make: *** [all] Error 2
