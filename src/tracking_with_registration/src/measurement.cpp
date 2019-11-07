@@ -3,17 +3,6 @@
 // for exploring self-driving car sensors
 
 //#include "render/render.h"
-#include <ros/ros.h>
-#include <pcl_ros/point_cloud.h>
-
-//#include <pcl/point_types.h>
-//#include <pcl/filters/extract_indices.h>
-//#include <pcl/filters/voxel_grid.h>
-//#include <pcl/kdtree/kdtree.h>
-//#include <pcl/segmentation/sac_segmentation.h>
-//#include <pcl/segmentation/extract_clusters.h>
-//
-//#include <sensor_msgs/PointCloud2.h>
 
 #include "highway.h"
 #include "extractMeasurement.h"
@@ -23,6 +12,7 @@
 
 int main(int argc, char** argv)
 {
+	ros::init (argc, argv, "extract_measurement");
 
 	pcl::visualization::PCLVisualizer::Ptr viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));
 	viewer->setBackgroundColor(0, 0, 0);
@@ -31,6 +21,7 @@ int main(int argc, char** argv)
 	viewer->initCameraParameters();
 	float x_pos = 0;
 	viewer->setCameraPosition ( x_pos-26, 0, 15.0, x_pos+25, 0, 0, 0, 0, 1);
+ 
 
 	Highway highway(viewer);
 	ExtractMeasurement measurement;
@@ -56,11 +47,17 @@ int main(int argc, char** argv)
 		pcl::PointCloud<pcl::PointXYZ>::Ptr pCloudTraffic (new pcl::PointCloud<pcl::PointXYZ>);
 		measurement.loadPCD(pCloudTraffic, time_us, highway.visualize_pcd);
 
+//		// dbscan
+//		std::vector<pcl::PointIndices> vecClusterIndices;
+//		measurement.dbscan(pCloudTraffic, vecClusterIndices);
 
+//		measurement.publish();
 
 		viewer->spinOnce(1000/frame_per_sec);
 		frame_count++;
 		time_us = 1000000*frame_count/frame_per_sec;
 
 	}
+
+	return 0;
 }

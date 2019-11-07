@@ -1,14 +1,28 @@
 #include "extractMeasurement.h"
 
+ExtractMeasurement::ExtractMeasurement()
+{
+	// define publisher
+	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZ>> ("output", 100);
+}
+
 
 void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize)
 {
 	if(doVisualize)
 	{
-		pCloudTraffic = m_tools.loadPcd("../src/sensors/data/pcd/highway_"+std::to_string(timestamp)+".pcd");
+		pCloudTraffic = m_tools.loadPcd("/workspace/TrackingWithRegistration/src/tracking_with_registration/src/sensors/data/pcd/highway_"+std::to_string(timestamp)+".pcd");
 	}
+
+	pCloudTraffic->header.frame_id = "map";
+
+	m_pub_result.publish (*pCloudTraffic);
 }
 
+
+void ExtractMeasurement::publish ()
+{
+}
 
 
 //
