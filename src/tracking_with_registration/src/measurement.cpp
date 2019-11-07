@@ -51,7 +51,7 @@ int main(int argc, char** argv)
 //		std::vector<pcl::PointIndices> vecClusterIndices;
 //		measurement.dbscan(pCloudTraffic, vecClusterIndices);
 
-//		measurement.publish();
+		measurement.publish();
 
 		viewer->spinOnce(1000/frame_per_sec);
 		frame_count++;

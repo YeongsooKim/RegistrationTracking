@@ -25,7 +25,7 @@ class ExtractMeasurement
 //	ros::Publisher pub_detectedObject;
 //	ros::Publisher pub_Origin;
 //
-	pcl::PointCloud<pcl::PointXYZ>::Ptr m_pResultCloud;
+	pcl::PointCloud<pcl::PointXYZ> m_resultCloud;
 
 	public:
 	Tools m_tools;
