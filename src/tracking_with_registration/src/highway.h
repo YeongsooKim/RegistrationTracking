@@ -18,8 +18,6 @@ public:
 	Lidar* lidar;
 
 	std::vector<std::ofstream> vec_of_csv;
-	//std::ofstream car2 ("car2.csv");
-	//std::ofstream car3 ("car3.csv");
 
 	// Parameters 
 	// --------------------------------

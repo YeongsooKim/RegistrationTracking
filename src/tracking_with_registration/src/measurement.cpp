@@ -26,6 +26,8 @@ int main(int argc, char** argv)
 	Highway highway(viewer);
 	ExtractMeasurement measurement;
 
+	measurement.setParam();
+
 	//initHighway(viewer);
 
 	int frame_per_sec = 30;
@@ -46,10 +48,14 @@ int main(int argc, char** argv)
 		// load pcd 
 		pcl::PointCloud<pcl::PointXYZ>::Ptr pCloudTraffic (new pcl::PointCloud<pcl::PointXYZ>);
 		measurement.loadPCD(pCloudTraffic, time_us, highway.visualize_pcd);
+		
+		// downsample
+		pcl::PointCloud<pcl::PointXYZ>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZ>);
+		downsample(pCloudTraffic, pDownsampledCloud, 0.2);
 
-//		// dbscan
-//		std::vector<pcl::PointIndices> vecClusterIndices;
-//		measurement.dbscan(pCloudTraffic, vecClusterIndices);
+		// dbscan
+		std::vector<pcl::PointIndices> vecClusterIndices;
+		measurement.dbscan(pDownsampledCloud, vecClusterIndices);
 
 		measurement.publish();
 

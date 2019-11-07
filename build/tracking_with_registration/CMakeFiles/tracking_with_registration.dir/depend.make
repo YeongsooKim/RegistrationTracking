@@ -289,6 +289,8 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/inc
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/impl/extract_indices.hpp
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/impl/filter.hpp
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/impl/filter_indices.hpp
+CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/impl/voxel_grid.hpp
+CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/voxel_grid.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/include/pcl-1.7/pcl/for_each_type.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/include/pcl-1.7/pcl/geometry/planar_polygon.h
 CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o: /usr/include/pcl-1.7/pcl/impl/cloud_iterator.hpp
@@ -769,6 +771,8 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/pc
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/impl/extract_indices.hpp
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/impl/filter.hpp
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/impl/filter_indices.hpp
+CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/impl/voxel_grid.hpp
+CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/pcl-1.7/pcl/filters/voxel_grid.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/pcl-1.7/pcl/for_each_type.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/pcl-1.7/pcl/geometry/planar_polygon.h
 CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o: /usr/include/pcl-1.7/pcl/impl/cloud_iterator.hpp

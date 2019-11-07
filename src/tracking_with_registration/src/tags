@@ -1653,6 +1653,8 @@ data	Eigen/src/SparseCore/SparseVector.h	/^    inline Storage& data() { return m
 DataRowsAtCompileTime	Eigen/src/Core/BandMatrix.h	/^      DataRowsAtCompileTime = ((Supers!=Dynamic) && (Subs!=Dynamic))$/;"	e	enum:Eigen::internal::BandMatrixBase::__anon165
 DataRowsAtCompileTime	Eigen/src/Core/BandMatrix.h	/^    DataRowsAtCompileTime = ((Supers!=Dynamic) && (Subs!=Dynamic)) ? 1 + Supers + Subs : Dynamic$/;"	e	enum:Eigen::internal::traits::__anon167
 DataRowsAtCompileTime	Eigen/src/Core/BandMatrix.h	/^    DataRowsAtCompileTime = ((Supers!=Dynamic) && (Subs!=Dynamic)) ? 1 + Supers + Subs : Dynamic$/;"	e	enum:Eigen::internal::traits::__anon168
+dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices)$/;"	f	language:C++	class:ExtractMeasurement
+dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);$/;"	p	language:C++	class:ExtractMeasurement
 dcomplex	Eigen/src/Core/util/MKL_support.h	/^typedef std::complex<double> dcomplex;$/;"	t	namespace:Eigen
 DEAD	Eigen/src/OrderingMethods/Eigen_Colamd.h	109;"	d
 DEAD_NON_PRINCIPAL	Eigen/src/OrderingMethods/Eigen_Colamd.h	113;"	d
@@ -1937,6 +1939,8 @@ dot	Eigen/src/SparseCore/SparseDot.h	/^SparseMatrixBase<Derived>::dot(const Spar
 dot_nocheck	Eigen/src/Core/Dot.h	/^struct dot_nocheck$/;"	s	namespace:Eigen::internal
 dot_nocheck	Eigen/src/Core/Dot.h	/^struct dot_nocheck<T, U, true>$/;"	s	namespace:Eigen::internal
 DoublePacket	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  struct DoublePacket$/;"	s	class:Eigen::internal::gebp_traits
+downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m)$/;"	f	language:C++	class:ExtractMeasurement
+downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);$/;"	p	language:C++	class:ExtractMeasurement
 dparm	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    Array<RealScalar,IPARM_SIZE,1>& dparm()$/;"	f	class:Eigen::PastixBase
 dparm	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    double& dparm(int idxparam)$/;"	f	class:Eigen::PastixBase
 DstHasDirectAccess	Eigen/src/Core/Assign.h	/^    DstHasDirectAccess = Derived::Flags & DirectAccessBit,$/;"	e	enum:Eigen::internal::assign_traits::__anon223
@@ -3013,16 +3017,26 @@ ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registr
 ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ExtractMeasurement();$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^class ExtractMeasurement$/;"	c	language:C++
 EXTRACTMEASUREMENT	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	2;"	d	language:C++
+ExtractMeasurement::dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^ExtractMeasurement::ExtractMeasurement()$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ExtractMeasurement();$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize)$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::m_dClusterErrRadius	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterErrRadius;$/;"	m	language:C++	class:ExtractMeasurement
+ExtractMeasurement::m_dClusterMaxSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMaxSize; 	$/;"	m	language:C++	class:ExtractMeasurement
+ExtractMeasurement::m_dClusterMinSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMinSize;$/;"	m	language:C++	class:ExtractMeasurement
+ExtractMeasurement::m_fMarkerDuration	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_fMarkerDuration;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_pub_result	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_result;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_resultCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	pcl::PointCloud<pcl::PointXYZ> m_resultCloud;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::m_tools	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	Tools m_tools;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::nh	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::NodeHandle nh;$/;"	m	language:C++	class:ExtractMeasurement
 ExtractMeasurement::publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::publish ()$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void publish();$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setParam()$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void setParam();$/;"	p	language:C++	class:ExtractMeasurement
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline const Scalar extractScalarFactor(const XprType&) { return Scalar(1); }$/;"	f	struct:Eigen::internal::blas_traits
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline Scalar extractScalarFactor(const XprType& x) { return Base::extractScalarFactor(x.nestedExpression()); }$/;"	f	struct:Eigen::internal::blas_traits
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline Scalar extractScalarFactor(const XprType& x) { return conj(Base::extractScalarFactor(x.nestedExpression())); }$/;"	f	struct:Eigen::internal::blas_traits
@@ -5351,6 +5365,9 @@ m_data	Eigen/src/SparseCore/SparseMatrix.h	/^    Storage m_data;$/;"	m	class:Eig
 m_data	Eigen/src/SparseCore/SparseVector.h	/^    const internal::CompressedStorage<Scalar,Index>& m_data;$/;"	m	class:Eigen::SparseVector::InnerIterator
 m_data	Eigen/src/SparseCore/SparseVector.h	/^    const internal::CompressedStorage<Scalar,Index>& m_data;$/;"	m	class:Eigen::SparseVector::ReverseInnerIterator
 m_data	Eigen/src/SparseCore/SparseVector.h	/^    Storage m_data;$/;"	m	class:Eigen::SparseVector
+m_dClusterErrRadius	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterErrRadius;$/;"	m	language:C++	class:ExtractMeasurement
+m_dClusterMaxSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMaxSize; 	$/;"	m	language:C++	class:ExtractMeasurement
+m_dClusterMinSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMinSize;$/;"	m	language:C++	class:ExtractMeasurement
 m_deallocate	Eigen/src/Core/util/Memory.h	/^    bool m_deallocate;$/;"	m	class:Eigen::internal::aligned_stack_memory_handler
 m_dec	Eigen/src/misc/Image.h	/^    const DecompositionType& m_dec;$/;"	m	struct:Eigen::internal::image_retval_base
 m_dec	Eigen/src/misc/Kernel.h	/^    const DecompositionType& m_dec;$/;"	m	struct:Eigen::internal::kernel_retval_base
@@ -5426,6 +5443,7 @@ m_factorizationIsOk	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    int m_factor
 m_factorizationIsOk	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    int m_factorizationIsOk;$/;"	m	class:Eigen::UmfPackLU
 m_fillfactor	Eigen/src/IterativeLinearSolvers/IncompleteLUT.h	/^    int m_fillfactor;$/;"	m	class:Eigen::IncompleteLUT
 m_firstRowElt	Eigen/src/SparseQR/SparseQR.h	/^    IndexVector m_firstRowElt;      \/\/ First element in each row$/;"	m	class:Eigen::SparseQR
+m_fMarkerDuration	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_fMarkerDuration;$/;"	m	language:C++	class:ExtractMeasurement
 m_format	Eigen/src/Core/IO.h	/^    IOFormat m_format;$/;"	m	class:Eigen::WithFormat
 m_functor	Eigen/src/Core/CwiseBinaryOp.h	/^    const BinaryOp m_functor;$/;"	m	class:Eigen::CwiseBinaryOp
 m_functor	Eigen/src/Core/CwiseNullaryOp.h	/^    const NullaryOp m_functor;$/;"	m	class:Eigen::CwiseNullaryOp
@@ -9042,6 +9060,8 @@ setOnes	Eigen/src/Core/CwiseNullaryOp.h	/^EIGEN_STRONG_INLINE Derived& DenseBase
 setOnes	Eigen/src/Core/CwiseNullaryOp.h	/^PlainObjectBase<Derived>::setOnes(Index nbRows, Index nbCols)$/;"	f	class:Eigen::PlainObjectBase
 setOnes	Eigen/src/Core/CwiseNullaryOp.h	/^PlainObjectBase<Derived>::setOnes(Index newSize)$/;"	f	class:Eigen::PlainObjectBase
 setOnes	Eigen/src/Core/TriangularMatrix.h	/^    TriangularView& setOnes() { return setConstant(Scalar(1)); }$/;"	f	class:Eigen::TriangularView
+setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setParam()$/;"	f	language:C++	class:ExtractMeasurement
+setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void setParam();$/;"	p	language:C++	class:ExtractMeasurement
 setPivotThreshold	Eigen/src/SparseLU/SparseLU.h	/^    void setPivotThreshold(const RealScalar& thresh)$/;"	f	class:Eigen::SparseLU
 setPivotThreshold	Eigen/src/SparseQR/SparseQR.h	/^    void setPivotThreshold(const RealScalar& threshold)$/;"	f	class:Eigen::SparseQR
 setPivotThreshold	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    void setPivotThreshold(const RealScalar& tol)$/;"	f	class:Eigen::SPQR

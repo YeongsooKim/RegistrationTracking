@@ -1,5 +1,15 @@
 [35m[1mScanning dependencies of target tracking_with_registration[0m
 [ 16%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o[0m
-[ 33%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o[0m
-[ 50%] [32m[1mLinking CXX executable /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration[0m
-[100%] Built target tracking_with_registration
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:53:62:[m[K [01;31m[Kerror: [m[K‘[01m[KPointCloudXYZI[m[K’ does not name a type
+   pcl::PointCloud<pcl::PointXYZ>::Ptr pDownsampledCloud (new PointCloudXYZI);
+[01;32m[K                                                              ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:54:51:[m[K [01;31m[Kerror: [m[K‘[01m[Kdownsample[m[K’ was not declared in this scope
+   downsample(pCloudTraffic, pDownsampledCloud, 0.2);
+[01;32m[K                                                   ^[m[K
+CMakeFiles/tracking_with_registration.dir/build.make:62: recipe for target 'CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o' failed
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o] Error 1
+CMakeFiles/Makefile2:163: recipe for target 'CMakeFiles/tracking_with_registration.dir/all' failed
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+Makefile:138: recipe for target 'all' failed
+make: *** [all] Error 2

@@ -290,6 +290,8 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
  /usr/include/pcl-1.7/pcl/filters/impl/extract_indices.hpp
  /usr/include/pcl-1.7/pcl/filters/impl/filter.hpp
  /usr/include/pcl-1.7/pcl/filters/impl/filter_indices.hpp
+ /usr/include/pcl-1.7/pcl/filters/impl/voxel_grid.hpp
+ /usr/include/pcl-1.7/pcl/filters/voxel_grid.h
  /usr/include/pcl-1.7/pcl/for_each_type.h
  /usr/include/pcl-1.7/pcl/geometry/planar_polygon.h
  /usr/include/pcl-1.7/pcl/impl/cloud_iterator.hpp
@@ -770,6 +772,8 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o
  /usr/include/pcl-1.7/pcl/filters/impl/extract_indices.hpp
  /usr/include/pcl-1.7/pcl/filters/impl/filter.hpp
  /usr/include/pcl-1.7/pcl/filters/impl/filter_indices.hpp
+ /usr/include/pcl-1.7/pcl/filters/impl/voxel_grid.hpp
+ /usr/include/pcl-1.7/pcl/filters/voxel_grid.h
  /usr/include/pcl-1.7/pcl/for_each_type.h
  /usr/include/pcl-1.7/pcl/geometry/planar_polygon.h
  /usr/include/pcl-1.7/pcl/impl/cloud_iterator.hpp
