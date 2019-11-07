@@ -3,7 +3,12 @@
 // for exploring self-driving car sensors
 
 //#include "render/render.h"
+#include <ros/ros.h>
+#include <pcl_ros/point_cloud.h>
 #include "highway.h"
+#include <fstream>
+#include <string>
+#include <iostream>
 
 int main(int argc, char** argv)
 {
@@ -39,5 +44,6 @@ int main(int argc, char** argv)
 		time_us = 1000000*frame_count/frame_per_sec;
 		
 	}
+
 
 }

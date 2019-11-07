@@ -16,7 +16,11 @@ public:
 	std::vector<double> rmseThreshold = {0.30,0.16,0.95,0.70};
 	std::vector<double> rmseFailLog = {0.0,0.0,0.0,0.0};
 	Lidar* lidar;
-	
+
+	std::vector<std::ofstream> vec_of_csv;
+	//std::ofstream car2 ("car2.csv");
+	//std::ofstream car3 ("car3.csv");
+
 	// Parameters 
 	// --------------------------------
 	// Set which cars to track with UKF
@@ -103,7 +107,28 @@ public:
 		car1.render(viewer);
 		car2.render(viewer);
 		car3.render(viewer);
+
+		vec_of_csv.resize(traffic.size());
+
+		for (unsigned int trafficIndex = 0; trafficIndex < traffic.size(); trafficIndex++)
+		{
+			string num = std::to_string(trafficIndex);
+			vec_of_csv[trafficIndex].open ("car" + num + ".csv");
+
+			if (vec_of_csv[trafficIndex].is_open()){
+				vec_of_csv[trafficIndex] << "timestamp, pose_x, pose_y, velocity_x, velocity_y, angle" << std::endl;
+			}
+		}
 	}
+
+	~Highway()
+	{
+		for (unsigned int trafficIndex = 0; trafficIndex < traffic.size(); trafficIndex++)
+		{
+			vec_of_csv[trafficIndex].close();
+		}
+	}
+
 	
 	void stepHighway(double egoVelocity, long long timestamp, int frame_per_sec, pcl::visualization::PCLVisualizer::Ptr& viewer)
 	{
@@ -129,6 +154,7 @@ public:
 			{
 				VectorXd gt(4);
 				gt << traffic[i].position.x, traffic[i].position.y, traffic[i].velocity*cos(traffic[i].angle), traffic[i].velocity*sin(traffic[i].angle);
+				vec_of_csv[i] << traffic[i].position.x << "," << traffic[i].position.y << "," << traffic[i].velocity*cos(traffic[i].angle) << "," << traffic[i].velocity*sin(traffic[i].angle) << "," << traffic[i].angle << std::endl;
 				tools.ground_truth.push_back(gt);
 				tools.lidarSense(traffic[i], viewer, timestamp, visualize_lidar);
 				tools.radarSense(traffic[i], egoCar, viewer, timestamp, visualize_radar);
