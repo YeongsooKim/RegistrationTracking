@@ -51,7 +51,7 @@ int main(int argc, char** argv)
 		
 		// downsample
 		pcl::PointCloud<pcl::PointXYZ>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZ>);
-		downsample(pCloudTraffic, pDownsampledCloud, 0.2);
+		measurement.downsample(pCloudTraffic, pDownsampledCloud, 0.2);
 
 		// dbscan
 		std::vector<pcl::PointIndices> vecClusterIndices;
