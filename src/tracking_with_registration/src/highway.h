@@ -116,7 +116,7 @@ public:
 			vec_of_csv[trafficIndex].open ("car" + num + ".csv");
 
 			if (vec_of_csv[trafficIndex].is_open()){
-				vec_of_csv[trafficIndex] << num;
+				vec_of_csv[trafficIndex] << "timestamp, pose_x, pose_y, velocity_x, velocity_y, angle" << std::endl;
 			}
 		}
 	}
@@ -154,6 +154,7 @@ public:
 			{
 				VectorXd gt(4);
 				gt << traffic[i].position.x, traffic[i].position.y, traffic[i].velocity*cos(traffic[i].angle), traffic[i].velocity*sin(traffic[i].angle);
+				vec_of_csv[i] << traffic[i].position.x << "," << traffic[i].position.y << "," << traffic[i].velocity*cos(traffic[i].angle) << "," << traffic[i].velocity*sin(traffic[i].angle) << "," << traffic[i].angle << std::endl;
 				tools.ground_truth.push_back(gt);
 				tools.lidarSense(traffic[i], viewer, timestamp, visualize_lidar);
 				tools.radarSense(traffic[i], egoCar, viewer, timestamp, visualize_radar);
