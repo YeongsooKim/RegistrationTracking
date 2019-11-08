@@ -881,6 +881,7 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
  /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
  /usr/include/eigen3/unsupported/Eigen/NonLinearOptimization
  /usr/include/eigen3/unsupported/Eigen/NumericalDiff
+ /usr/include/eigen3/unsupported/Eigen/Polynomials
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/HybridNonLinearSolver.h
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/LevenbergMarquardt.h
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/chkder.h
@@ -893,6 +894,9 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/r1updt.h
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/rwupdt.h
  /usr/include/eigen3/unsupported/Eigen/src/NumericalDiff/NumericalDiff.h
+ /usr/include/eigen3/unsupported/Eigen/src/Polynomials/Companion.h
+ /usr/include/eigen3/unsupported/Eigen/src/Polynomials/PolynomialSolver.h
+ /usr/include/eigen3/unsupported/Eigen/src/Polynomials/PolynomialUtils.h
  /usr/include/pcl-1.7/pcl/ModelCoefficients.h
  /usr/include/pcl-1.7/pcl/PCLHeader.h
  /usr/include/pcl-1.7/pcl/PCLImage.h
@@ -916,10 +920,13 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
  /usr/include/pcl-1.7/pcl/common/impl/eigen.hpp
  /usr/include/pcl-1.7/pcl/common/impl/io.hpp
  /usr/include/pcl-1.7/pcl/common/impl/projection_matrix.hpp
+ /usr/include/pcl-1.7/pcl/common/impl/transforms.hpp
  /usr/include/pcl-1.7/pcl/common/io.h
+ /usr/include/pcl-1.7/pcl/common/point_operators.h
  /usr/include/pcl-1.7/pcl/common/point_tests.h
  /usr/include/pcl-1.7/pcl/common/projection_matrix.h
  /usr/include/pcl-1.7/pcl/common/time.h
+ /usr/include/pcl-1.7/pcl/common/transforms.h
  /usr/include/pcl-1.7/pcl/console/print.h
  /usr/include/pcl-1.7/pcl/conversions.h
  /usr/include/pcl-1.7/pcl/correspondence.h
@@ -965,6 +972,28 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
  /usr/include/pcl-1.7/pcl/point_traits.h
  /usr/include/pcl-1.7/pcl/point_types.h
  /usr/include/pcl-1.7/pcl/register_point_struct.h
+ /usr/include/pcl-1.7/pcl/registration/boost.h
+ /usr/include/pcl-1.7/pcl/registration/convergence_criteria.h
+ /usr/include/pcl-1.7/pcl/registration/correspondence_estimation.h
+ /usr/include/pcl-1.7/pcl/registration/correspondence_rejection.h
+ /usr/include/pcl-1.7/pcl/registration/correspondence_sorting.h
+ /usr/include/pcl-1.7/pcl/registration/correspondence_types.h
+ /usr/include/pcl-1.7/pcl/registration/default_convergence_criteria.h
+ /usr/include/pcl-1.7/pcl/registration/eigen.h
+ /usr/include/pcl-1.7/pcl/registration/icp.h
+ /usr/include/pcl-1.7/pcl/registration/impl/correspondence_estimation.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/correspondence_rejection.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/correspondence_types.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/default_convergence_criteria.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/icp.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/registration.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/transformation_estimation_point_to_plane_lls.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/transformation_estimation_svd.hpp
+ /usr/include/pcl-1.7/pcl/registration/registration.h
+ /usr/include/pcl-1.7/pcl/registration/transformation_estimation.h
+ /usr/include/pcl-1.7/pcl/registration/transformation_estimation_point_to_plane_lls.h
+ /usr/include/pcl-1.7/pcl/registration/transformation_estimation_svd.h
+ /usr/include/pcl-1.7/pcl/registration/warp_point_rigid.h
  /usr/include/pcl-1.7/pcl/sample_consensus/boost.h
  /usr/include/pcl-1.7/pcl/sample_consensus/eigen.h
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/lmeds.hpp
@@ -986,6 +1015,7 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_parallel_plane.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_perpendicular_plane.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_plane.hpp
+ /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_registration.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_sphere.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_stick.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/lmeds.h
@@ -1011,6 +1041,7 @@ CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_parallel_plane.h
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_perpendicular_plane.h
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_plane.h
+ /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_registration.h
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_sphere.h
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_stick.h
  /usr/include/pcl-1.7/pcl/search/impl/kdtree.hpp
@@ -1539,6 +1570,7 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o
  /usr/include/eigen3/Eigen/src/StlSupport/details.h
  /usr/include/eigen3/unsupported/Eigen/NonLinearOptimization
  /usr/include/eigen3/unsupported/Eigen/NumericalDiff
+ /usr/include/eigen3/unsupported/Eigen/Polynomials
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/HybridNonLinearSolver.h
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/LevenbergMarquardt.h
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/chkder.h
@@ -1551,6 +1583,9 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/r1updt.h
  /usr/include/eigen3/unsupported/Eigen/src/NonLinearOptimization/rwupdt.h
  /usr/include/eigen3/unsupported/Eigen/src/NumericalDiff/NumericalDiff.h
+ /usr/include/eigen3/unsupported/Eigen/src/Polynomials/Companion.h
+ /usr/include/eigen3/unsupported/Eigen/src/Polynomials/PolynomialSolver.h
+ /usr/include/eigen3/unsupported/Eigen/src/Polynomials/PolynomialUtils.h
  /usr/include/pcl-1.7/pcl/ModelCoefficients.h
  /usr/include/pcl-1.7/pcl/PCLHeader.h
  /usr/include/pcl-1.7/pcl/PCLImage.h
@@ -1574,10 +1609,13 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o
  /usr/include/pcl-1.7/pcl/common/impl/eigen.hpp
  /usr/include/pcl-1.7/pcl/common/impl/io.hpp
  /usr/include/pcl-1.7/pcl/common/impl/projection_matrix.hpp
+ /usr/include/pcl-1.7/pcl/common/impl/transforms.hpp
  /usr/include/pcl-1.7/pcl/common/io.h
+ /usr/include/pcl-1.7/pcl/common/point_operators.h
  /usr/include/pcl-1.7/pcl/common/point_tests.h
  /usr/include/pcl-1.7/pcl/common/projection_matrix.h
  /usr/include/pcl-1.7/pcl/common/time.h
+ /usr/include/pcl-1.7/pcl/common/transforms.h
  /usr/include/pcl-1.7/pcl/console/print.h
  /usr/include/pcl-1.7/pcl/conversions.h
  /usr/include/pcl-1.7/pcl/correspondence.h
@@ -1623,6 +1661,28 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o
  /usr/include/pcl-1.7/pcl/point_traits.h
  /usr/include/pcl-1.7/pcl/point_types.h
  /usr/include/pcl-1.7/pcl/register_point_struct.h
+ /usr/include/pcl-1.7/pcl/registration/boost.h
+ /usr/include/pcl-1.7/pcl/registration/convergence_criteria.h
+ /usr/include/pcl-1.7/pcl/registration/correspondence_estimation.h
+ /usr/include/pcl-1.7/pcl/registration/correspondence_rejection.h
+ /usr/include/pcl-1.7/pcl/registration/correspondence_sorting.h
+ /usr/include/pcl-1.7/pcl/registration/correspondence_types.h
+ /usr/include/pcl-1.7/pcl/registration/default_convergence_criteria.h
+ /usr/include/pcl-1.7/pcl/registration/eigen.h
+ /usr/include/pcl-1.7/pcl/registration/icp.h
+ /usr/include/pcl-1.7/pcl/registration/impl/correspondence_estimation.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/correspondence_rejection.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/correspondence_types.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/default_convergence_criteria.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/icp.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/registration.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/transformation_estimation_point_to_plane_lls.hpp
+ /usr/include/pcl-1.7/pcl/registration/impl/transformation_estimation_svd.hpp
+ /usr/include/pcl-1.7/pcl/registration/registration.h
+ /usr/include/pcl-1.7/pcl/registration/transformation_estimation.h
+ /usr/include/pcl-1.7/pcl/registration/transformation_estimation_point_to_plane_lls.h
+ /usr/include/pcl-1.7/pcl/registration/transformation_estimation_svd.h
+ /usr/include/pcl-1.7/pcl/registration/warp_point_rigid.h
  /usr/include/pcl-1.7/pcl/sample_consensus/boost.h
  /usr/include/pcl-1.7/pcl/sample_consensus/eigen.h
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/lmeds.hpp
@@ -1644,6 +1704,7 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_parallel_plane.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_perpendicular_plane.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_plane.hpp
+ /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_registration.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_sphere.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/impl/sac_model_stick.hpp
  /usr/include/pcl-1.7/pcl/sample_consensus/lmeds.h
@@ -1669,6 +1730,7 @@ CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_parallel_plane.h
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_perpendicular_plane.h
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_plane.h
+ /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_registration.h
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_sphere.h
  /usr/include/pcl-1.7/pcl/sample_consensus/sac_model_stick.h
  /usr/include/pcl-1.7/pcl/search/impl/kdtree.hpp

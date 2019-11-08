@@ -18,7 +18,7 @@ public:
 	std::vector<double> rmseFailLog = {0.0,0.0,0.0,0.0};
 	Lidar* lidar;
 
-	std::vector<std::ofstream> vec_of_csv;
+	std::vector<std::ofstream> vecOf_refCSV;
 
 	// Parameters 
 	// --------------------------------
@@ -107,15 +107,15 @@ public:
 		car2.render(viewer);
 		car3.render(viewer);
 
-		vec_of_csv.resize(traffic.size());
+		vecOf_refCSV.resize(traffic.size());
 
 		for (unsigned int trafficIndex = 0; trafficIndex < traffic.size(); trafficIndex++)
 		{
 			string num = std::to_string(trafficIndex);
-			vec_of_csv[trafficIndex].open ("car" + num + ".csv");
+			vecOf_refCSV[trafficIndex].open ("reference_state_" + num + ".csv");
 
-			if (vec_of_csv[trafficIndex].is_open()){
-				vec_of_csv[trafficIndex] << "timestamp, pose_x, pose_y, velocity_x, velocity_y, angle" << std::endl;
+			if (vecOf_refCSV[trafficIndex].is_open()){
+				vecOf_refCSV[trafficIndex] << "timestamp, pose_x, pose_y, velocity_x, velocity_y, angle" << std::endl;
 			}
 		}
 	}
@@ -149,7 +149,7 @@ public:
 			{
 				VectorXd gt(4);
 				gt << traffic[i].position.x, traffic[i].position.y, traffic[i].velocity*cos(traffic[i].angle), traffic[i].velocity*sin(traffic[i].angle);
-				vec_of_csv[i] << traffic[i].position.x << "," << traffic[i].position.y << "," << traffic[i].velocity*cos(traffic[i].angle) << "," << traffic[i].velocity*sin(traffic[i].angle) << "," << traffic[i].angle << std::endl;
+				vecOf_refCSV[i] << timestamp/1e6 << "," << traffic[i].position.x << "," << traffic[i].position.y << "," << traffic[i].velocity*cos(traffic[i].angle) << "," << traffic[i].velocity*sin(traffic[i].angle) << "," << traffic[i].angle << std::endl;
 				tools.ground_truth.push_back(gt);
 				tools.lidarSense(traffic[i], viewer, timestamp, visualize_lidar);
 				tools.radarSense(traffic[i], egoCar, viewer, timestamp, visualize_radar);

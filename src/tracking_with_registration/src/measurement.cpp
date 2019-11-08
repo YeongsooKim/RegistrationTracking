@@ -22,9 +22,8 @@ int main(int argc, char** argv)
 	float x_pos = 0;
 	viewer->setCameraPosition ( x_pos-26, 0, 15.0, x_pos+25, 0, 0, 0, 0, 1);
 
-
 	Highway highway(viewer);
-	ExtractMeasurement measurement;
+	ExtractMeasurement measurement(highway.traffic.size());
 
 	measurement.setParam();
 
@@ -58,7 +57,7 @@ int main(int argc, char** argv)
 		measurement.dbscan(pDownsampledCloud, vecClusterIndices);
 
 		// Set cluster pointcloud from clusterIndices and coloring
-		measurement.setCluster (vecClusterIndices, pDownsampledCloud);
+		measurement.setCluster (vecClusterIndices, pDownsampledCloud, time_us);
 
 		// Associate 
 		measurement.association();
@@ -67,7 +66,7 @@ int main(int argc, char** argv)
 		measurement.displayShape();
 
 		// publish	
-		measurement.publish();
+		//measurement.publish();
 
 		viewer->spinOnce(1000/frame_per_sec);
 		frame_count++;
@@ -77,7 +76,8 @@ int main(int argc, char** argv)
 
 	for (unsigned int trafficIndex = 0; trafficIndex < highway.traffic.size(); trafficIndex++)
 	{
-		highway.vec_of_csv[trafficIndex].close();
+		highway.vecOf_refCSV[trafficIndex].close();
+		measurement.vecOf_measurementCSV[trafficIndex].close();
 	}
 
 	return 0;

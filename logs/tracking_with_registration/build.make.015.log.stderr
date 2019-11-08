@@ -1,0 +1,8 @@
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp:[m[K In member function ‘[01m[Kvoid Cluster::SetCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr, const std::vector<int>&, std_msgs::Header, int, int, int, int, std::__cxx11::string, bool)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp:26:2:[m[K [01;31m[Kerror: [m[K‘[01m[Km_timestamp[m[K’ was not declared in this scope
+  m_timestamp = _header.stamp;
+[01;32m[K  ^[m[K
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/cluster.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+make: *** [all] Error 2

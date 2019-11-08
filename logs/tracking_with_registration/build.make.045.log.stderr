@@ -1,0 +1,7 @@
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::point2pointICP(unsigned int)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:263:29:[m[K [01;31m[Kerror: [m[K‘[01m[KpcdSave[m[K’ was not declared in this scope
+   pcdSave(pAccumulationCloud);
+[01;32m[K                             ^[m[K
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o] Error 1
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+make: *** [all] Error 2
