@@ -1,0 +1,14 @@
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::point2pointICP(long long int)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:278:63:[m[K [01;31m[Kerror: [m[K‘[01m[KvehicleIndex[m[K’ was not declared in this scope
+   extractCenterPoint (timestamp, m_vecVehicleAccumulatedCloud[vehicleIndex], vehicleN);
+[01;32m[K                                                               ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::extractCenterPoint(long long int, const Ptr&, unsigned int)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:431:28:[m[K [01;31m[Kerror: [m[K‘[01m[Kshape[m[K’ was not declared in this scope
+  vecOf_accumMeasurementCSV[shape.id-1] << shape.header.stamp << "," << shape.pose.position.x << "," << shape.pose.position.y << std::endl;
+[01;32m[K                            ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:434:1:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ before ‘[01m[K}[m[K’ token
+ }
+[01;32m[K ^[m[K
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o] Error 1
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+make: *** [all] Error 2

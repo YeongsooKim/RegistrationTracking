@@ -60,13 +60,13 @@ int main(int argc, char** argv)
 		measurement.setCluster (vecClusterIndices, pDownsampledCloud, time_us);
 
 		// Associate 
-		measurement.association();
+		measurement.association(time_us);
 
 		// display shape
 		measurement.displayShape();
 
 		// publish	
-		//measurement.publish();
+		measurement.publish();
 
 		viewer->spinOnce(1000/frame_per_sec);
 		frame_count++;
@@ -78,6 +78,7 @@ int main(int argc, char** argv)
 	{
 		highway.vecOf_refCSV[trafficIndex].close();
 		measurement.vecOf_measurementCSV[trafficIndex].close();
+		measurement.vecOf_accumMeasurementCSV[trafficIndex].close();
 	}
 
 	return 0;

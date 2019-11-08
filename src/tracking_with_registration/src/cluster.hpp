@@ -14,7 +14,8 @@
 
 class Cluster
 {
-	pcl::PointCloud <pcl::PointXYZRGB>::Ptr m_pointCloud;
+	private:
+	pcl::PointCloud <pcl::PointXYZRGB>::Ptr m_pPointCloud;
 
 	public:
 	pcl::PointXYZ m_min_point;
@@ -45,8 +46,11 @@ class Cluster
 	virtual ~Cluster();
 	/* \brief Sets whether the Cluster is valid or not*/
 	void SetValidity(bool in_valid);
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr GetCloud();
 	void setPointCloud (pcl::PointCloud<pcl::PointXYZRGB>::Ptr pInputCloud);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr GetCloud();
+	void clear();
+	size_t size();
+	void SetCluster (long long timestamp, unsigned int iClusterNumber, unsigned int r, unsigned int g, unsigned int b);
 };
 
 typedef boost::shared_ptr<Cluster> clusterPtr;
