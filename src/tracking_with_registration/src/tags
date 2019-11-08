@@ -3061,6 +3061,8 @@ ExtractMeasurement::point2pointICP	/workspace/TrackingWithRegistration/src/track
 ExtractMeasurement::point2pointICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void point2pointICP (unsigned int iterationN);$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::publish ()$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void publish ();$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::savePCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::savePCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp)$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp);$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setParam()$/;"	f	language:C++	class:ExtractMeasurement
@@ -8701,6 +8703,8 @@ s	Eigen/src/Jacobi/Jacobi.h	/^    Scalar& s() { return m_s; }$/;"	f	class:Eigen:
 SameType	Eigen/src/Core/CwiseBinaryOp.h	/^    SameType = is_same<typename _LhsNested::Scalar,typename _RhsNested::Scalar>::value,$/;"	e	enum:Eigen::internal::traits::__anon243
 SameType	Eigen/src/Core/products/CoeffBasedProduct.h	/^      SameType = is_same<typename _LhsNested::Scalar,typename _RhsNested::Scalar>::value,$/;"	e	enum:Eigen::internal::traits::__anon193
 sample	Eigen/src/Geometry/AlignedBox.h	/^  inline VectorType sample() const$/;"	f	class:Eigen::AlignedBox
+savePCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud)$/;"	f	language:C++	class:ExtractMeasurement
+savePCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);$/;"	p	language:C++	class:ExtractMeasurement
 savePcd	tools.cpp	/^void Tools::savePcd(typename pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, std::string file)$/;"	f	class:Tools
 Scalar	Eigen/src/Cholesky/LDLT.h	/^    typedef typename MatrixType::Scalar Scalar;$/;"	t	class:Eigen::LDLT
 Scalar	Eigen/src/Cholesky/LLT.h	/^    typedef typename MatrixType::Scalar Scalar;$/;"	t	class:Eigen::LLT

@@ -11,6 +11,7 @@
 #include <pcl/segmentation/sac_segmentation.h>
 #include <pcl/segmentation/extract_clusters.h>
 #include <pcl/registration/icp.h>
+#include <pcl/io/pcd_io.h>
 
 #include "visualization_msgs/Marker.h"
 #include "visualization_msgs/MarkerArray.h"
@@ -86,6 +87,7 @@ class ExtractMeasurement
 	void point2pointICP (unsigned int iterationN);
 	void displayShape ();
 	void publish ();
+	void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);
 };
 
 
