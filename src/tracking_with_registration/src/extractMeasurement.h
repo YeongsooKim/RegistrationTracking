@@ -10,6 +10,7 @@
 #include <pcl/kdtree/kdtree.h>
 #include <pcl/segmentation/sac_segmentation.h>
 #include <pcl/segmentation/extract_clusters.h>
+#include <pcl/registration/icp.h>
 
 #include "visualization_msgs/Marker.h"
 #include "visualization_msgs/MarkerArray.h"
@@ -55,12 +56,15 @@ class ExtractMeasurement
 	double m_dClusterMinSize;
 	double m_dClusterMaxSize; 	
 
-	unsigned int measurementN;
+	unsigned int m_measurementN;
+	unsigned int m_maxIndexNumber;
+
+	bool m_bDoICP;
 
 	std::vector<RGB> m_globalRGB;
-	int m_maxIndexNumber = 0;
-
 	std::vector<clusterPtr> m_OriginalClusters;
+	std::vector<std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>> m_vecVehiclesTrackingCloud;
+
 	ObstacleTracking m_ObstacleTracking;
 
 	public:
@@ -71,16 +75,17 @@ class ExtractMeasurement
 
 	std::vector<std::ofstream> vecOf_measurementCSV;
 
-	ExtractMeasurement(unsigned int size);
-	void setParam();
+	ExtractMeasurement (unsigned int size);
+	void setParam ();
 	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
 	void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);
 	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);
 	void generateColor(size_t indexNumber);
 	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp);
 	void association ();
+	void point2pointICP (unsigned int iterationN);
 	void displayShape ();
-	void publish();
+	void publish ();
 };
 
 

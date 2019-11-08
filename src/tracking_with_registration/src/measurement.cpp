@@ -66,7 +66,7 @@ int main(int argc, char** argv)
 		measurement.displayShape();
 
 		// publish	
-		measurement.publish();
+		//measurement.publish();
 
 		viewer->spinOnce(1000/frame_per_sec);
 		frame_count++;

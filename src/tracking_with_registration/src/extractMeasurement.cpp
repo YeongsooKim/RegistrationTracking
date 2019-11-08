@@ -1,6 +1,6 @@
 #include "extractMeasurement.h"
 
-ExtractMeasurement::ExtractMeasurement(unsigned int size) : measurementN (size)
+ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size)
 {
 	// define publisher
 	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("output", 100);
@@ -9,9 +9,9 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size) : measurementN (size)
 
 	m_maxIndexNumber = 0;	
 
-	vecOf_measurementCSV.resize(measurementN);
+	vecOf_measurementCSV.resize(m_measurementN);
 
-	for (unsigned int measurementIndex = 0; measurementIndex < measurementN; measurementIndex++)
+	for (unsigned int measurementIndex = 0; measurementIndex < m_measurementN; measurementIndex++)
 	{
 		string num = std::to_string(measurementIndex);
 		vecOf_measurementCSV[measurementIndex].open ("measurement_" + num + ".csv");
@@ -21,6 +21,10 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size) : measurementN (size)
 		}
 	}
 
+	m_maxIndexNumber = 0;
+	m_bDoICP = true;
+
+	m_vecVehiclesTrackingCloud.resize(m_measurementN);
 }
 
 void ExtractMeasurement::setParam()
@@ -132,11 +136,136 @@ void ExtractMeasurement::generateColor(size_t indexNumber)
 
 void ExtractMeasurement::association()
 {
+	static int iterationN = -1;
 	m_ObstacleTracking.association(m_OriginalClusters);
+
+	// store data into vector of vehicles tracking cloud
+	for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
+	{
+		for (unsigned int objectIndex = 0; objectIndex < m_measurementN; objectIndex++)
+		{
+			if ((m_ObstacleTracking.m_TrackingObjects[objectIndex]->m_id-1) == vehicleIndex)
+			{
+				pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[objectIndex]->GetCloud());
+				m_vecVehiclesTrackingCloud[vehicleIndex].push_back (pTrackingCloud);
+				
+				break;
+			}
+		}
+	}
+
+//	if (m_bDoICP && (iterationN != -1))
+//	{
+//		point2pointICP(iterationN);
+//	}
+
+	if (m_bDoICP && (iterationN != -1) && (iterationN < 1))
+	{
+		point2pointICP(iterationN);
+	}
+
+	iterationN++;
 }
 
+//void ExtractMeasurement::point2pointICP(unsigned int iterationN)
+//{
+//	for (const auto& vehilceTrackingCloud : m_vecVehiclesTrackingCloud)
+//	{
+//		ROS_ERROR_STREAM ("-------------------------------------");
+//		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pSourceCloud (vehilceTrackingCloud[iterationN]);
+//		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTargetCloud (vehilceTrackingCloud[iterationN + 1]);
+//		ROS_INFO_STREAM (pSourceCloud->size());
+//		ROS_INFO_STREAM (pTargetCloud->size());
+//
+//		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
+//		icp.setInputSource (pSourceCloud);
+//		icp.setInputTarget (pTargetCloud);
+//		pcl::PointCloud<pcl::PointXYZRGB> Final;
+//		icp.align (Final);
+//
+//		ROS_INFO_STREAM (Final.size());
+//	}
+//}
 
-void ExtractMeasurement::displayShape ()//const std::vector<clusterPtr> pVecClusters)
+
+void ExtractMeasurement::point2pointICP(unsigned int iterationN)
+{
+	// Accumulate all cluster to pAccumulationCloud
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulationCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	pAccumulationCloud->header.frame_id = "map";
+
+	for (const auto& vehilceTrackingCloud : m_vecVehiclesTrackingCloud)
+	{
+		ROS_ERROR_STREAM ("-------------------------------------");
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pSourceCloud (vehilceTrackingCloud[iterationN]);
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTargetCloud (vehilceTrackingCloud[iterationN + 1]);
+		ROS_INFO_STREAM (pSourceCloud->size());
+		ROS_INFO_STREAM (pTargetCloud->size());
+
+
+		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
+		icp.setInputSource (pSourceCloud);
+		icp.setInputTarget (pTargetCloud);
+		pcl::PointCloud<pcl::PointXYZRGB> Final;
+		icp.align (Final);
+
+		pcl::PointCloud<pcl::PointXYZRGB> FinalRGBChange;
+		for (auto point : Final.points)
+		{
+			pcl::PointXYZRGB tmp;
+			tmp.x = point.x; 
+			tmp.y = point.y;
+			tmp.z = point.z;
+
+			tmp.r = 255;
+			tmp.g = 0;
+			tmp.b = 0;
+
+			FinalRGBChange.points.push_back (tmp);
+		}
+
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pSourceCloudRGBChange (new pcl::PointCloud<pcl::PointXYZRGB>);
+		for (auto point : pSourceCloud->points)
+		{
+			pcl::PointXYZRGB tmp;
+			tmp.x = point.x; 
+			tmp.y = point.y;
+			tmp.z = point.z;
+
+			tmp.r = 0;
+			tmp.g = 255;
+			tmp.b = 0;
+
+			pSourceCloudRGBChange->points.push_back (tmp);
+		}
+
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTargetCloudRGBChange (new pcl::PointCloud<pcl::PointXYZRGB>);
+		for (auto point : pTargetCloud->points)
+		{
+			pcl::PointXYZRGB tmp;
+			tmp.x = point.x; 
+			tmp.y = point.y;
+			tmp.z = point.z;
+
+			tmp.r = 0;
+			tmp.g = 0;
+			tmp.b = 255;
+
+			pTargetCloudRGBChange->points.push_back (tmp);
+		}
+
+		*pAccumulationCloud += *pSourceCloudRGBChange;
+		*pAccumulationCloud += *pTargetCloudRGBChange;
+		*pAccumulationCloud += FinalRGBChange;
+
+		m_pub_result.publish (*pAccumulationCloud);
+
+		ROS_INFO_STREAM (Final.size());
+		break;
+	}
+}
+
+void ExtractMeasurement::displayShape ()
 {
 	//	// origin
 	//	m_Origin.header.frame_id = "map";
