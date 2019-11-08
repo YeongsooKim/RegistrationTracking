@@ -3,8 +3,10 @@
 ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size)
 {
 	// define publisher
-	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("output", 100);
-	m_pub_shape = nh.advertise<visualization_msgs::MarkerArray>("Shape", 1);
+	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("OnlyBoundingBox", 100);
+	m_pub_resultICP = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("ICP", 100);
+	m_pub_shape = nh.advertise<visualization_msgs::MarkerArray>("Shape", 100);
+	m_pub_shapeICP = nh.advertise<visualization_msgs::MarkerArray>("ShapeICP", 100);
 	//m_pub_Origin = nh.advertise<visualization_msgs::Marker> ("Origin", 1);
 
 	m_maxIndexNumber = 0;	
@@ -33,8 +35,8 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size
 	m_vecVehicleTrackingClouds.resize(m_measurementN);
 	for (unsigned int measurementIndex = 0; measurementIndex < m_measurementN; measurementIndex++)
 	{
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-		m_vecVehicleAccumulatedCloud.push_back(pPointCloud);
+		clusterPtr pCluster (new Cluster());
+		m_vecVehicleAccumulatedCloud.push_back(pCluster);
 	}
 }
 
@@ -172,8 +174,19 @@ void ExtractMeasurement::association(long long timestamp)
 		{
 			for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
 			{
-				*m_vecVehicleAccumulatedCloud[vehicleIndex] += *m_vecVehicleTrackingClouds[vehicleIndex].back();
-				extractCenterPoint (timestamp, m_vecVehicleAccumulatedCloud[vehicleIndex], vehicleIndex);
+				*(m_vecVehicleAccumulatedCloud[vehicleIndex]->GetCloud()) += *m_vecVehicleTrackingClouds[vehicleIndex].back();
+
+				unsigned int r; unsigned int g; unsigned int b;
+				if (vehicleIndex == 0) {
+					r = 255; g = 0; b = 0;
+				}
+				else if (vehicleIndex == 1) {
+					r = 0; g = 255; b = 0;
+				}
+				else if (vehicleIndex == 2) {
+					r = 0; g = 0; b = 255;
+				}
+				m_vecVehicleAccumulatedCloud[vehicleIndex]->SetCluster (timestamp, vehicleIndex, r, g, b);
 			}
 
 			bIsFirst = false;
@@ -181,22 +194,16 @@ void ExtractMeasurement::association(long long timestamp)
 		else
 		{
 			point2pointICP(timestamp);
-
 		}
 	}
 }
 
 void ExtractMeasurement::point2pointICP(long long timestamp)
 {
-	// Accumulate all cluster to pAccumulationCloud
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulationCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	pAccumulationCloud->header.frame_id = "map";
-
 	unsigned int vehicleN = 0;
 	for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
 	{
-		ROS_INFO_STREAM ("-------------------------------------");
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pSourceCloud (m_vecVehicleAccumulatedCloud[vehicleN]);
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pSourceCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
 		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTargetCloud (vecVehicleTrackingCloud.back());
 
 		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
@@ -205,75 +212,35 @@ void ExtractMeasurement::point2pointICP(long long timestamp)
 		pcl::PointCloud<pcl::PointXYZRGB> Final;
 		icp.align (Final);
 
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pSourceCloudChangeRGB (new pcl::PointCloud<pcl::PointXYZRGB>);
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTargetCloudChangeRGB (new pcl::PointCloud<pcl::PointXYZRGB>);
-		pcl::PointCloud<pcl::PointXYZRGB> FinalChangeRGB;
-
-		for (auto point : pSourceCloud->points)
-		{
-			pcl::PointXYZRGB tmp;
-			tmp.x = point.x;
-			tmp.y = point.y;
-			tmp.z = point.z;
-			
-			tmp.r = 255;
-			tmp.g = 0;
-			tmp.b = 0;
-			pSourceCloudChangeRGB->points.push_back(tmp);
-		}
-		for (auto point : pTargetCloud->points)
-		{
-			pcl::PointXYZRGB tmp;
-			tmp.x = point.x;
-			tmp.y = point.y;
-			tmp.z = point.z;
-			
-			tmp.r = 0;
-			tmp.g = 255;
-			tmp.b = 0;
-			pTargetCloudChangeRGB->points.push_back(tmp);
-		}
-		for (auto point : Final.points)
-		{
-			pcl::PointXYZRGB tmp;
-			tmp.x = point.x;
-			tmp.y = point.y;
-			tmp.z = point.z;
-			
-			tmp.r = 0;
-			tmp.g = 0;
-			tmp.b = 255;
-			FinalChangeRGB.points.push_back(tmp);
-		}
-
-		*pAccumulationCloud += *pSourceCloudChangeRGB;
-		*pAccumulationCloud += *pTargetCloudChangeRGB;
-		*pAccumulationCloud += FinalChangeRGB;
-
-
 		if (icp.getFitnessScore() < 0.02)
 		{
-			ROS_INFO_STREAM (m_vecVehicleAccumulatedCloud[vehicleN]->size());
-			ROS_INFO_STREAM (icp.getFitnessScore());
-
 			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud2 (new pcl::PointCloud<pcl::PointXYZRGB>);
 			*pTmpPointCloud += Final;
 			*pTmpPointCloud += *pTargetCloud;
 
-			m_vecVehicleAccumulatedCloud[vehicleN]->clear();
-			downsample (pTmpPointCloud, m_vecVehicleAccumulatedCloud[vehicleN], 0.1);
-		}
-		else
-		{
-			ROS_ERROR_STREAM (m_vecVehicleAccumulatedCloud[vehicleN]->size());
-			ROS_ERROR_STREAM (icp.getFitnessScore());
-			*m_vecVehicleAccumulatedCloud[vehicleN] = *pTargetCloud;
+			downsample (pTmpPointCloud, pTmpPointCloud2, 0.09);
+			m_vecVehicleAccumulatedCloud[vehicleN]->clear ();
+			m_vecVehicleAccumulatedCloud[vehicleN]->setPointCloud (pTmpPointCloud2);
 		}
 
-		extractCenterPoint (timestamp, m_vecVehicleAccumulatedCloud[vehicleN], vehicleN);
+		else {
+			*(m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud()) = *pTargetCloud;
+		}
+
+
+		unsigned int r; unsigned int g; unsigned int b;
+		if (vehicleN == 0) {
+			r = 255; g = 0; b = 0;
+		}
+		else if (vehicleN == 1) {
+			r = 0; g = 255; b = 0;
+		}
+		else if (vehicleN == 2) {
+			r = 0; g = 0; b = 255;
+		}
+		m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (timestamp, vehicleN, r, g, b);
 		vehicleN++;
-
-		m_pub_result.publish (*pAccumulationCloud);
 	}
 }
 
@@ -311,12 +278,13 @@ void ExtractMeasurement::displayShape ()
 
 	// tracking objects
 	m_arrShapes.markers.clear();
+	m_arrShapesICP.markers.clear();
 
 	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
 		visualization_msgs::Marker shape;
 
-		shape.lifetime = ros::Duration(0.5);
+		shape.lifetime = ros::Duration();
 		shape.header.frame_id = "map";
 		shape.header.stamp = ros::Time(pCluster->m_timestamp);
 		shape.id = pCluster->m_id;
@@ -324,7 +292,7 @@ void ExtractMeasurement::displayShape ()
 		// bounding box
 		shape.type = visualization_msgs::Marker::CUBE;
 		shape.action = visualization_msgs::Marker::ADD;
-		shape.ns = "/BoundingBox";
+		shape.ns = "/OnlyBoundingBox";
 
 		shape.pose.position = pCluster->m_center.position;
 		shape.pose.orientation = pCluster->m_center.orientation;
@@ -360,6 +328,55 @@ void ExtractMeasurement::displayShape ()
 
 		m_arrShapes.markers.push_back (shape);
 	}
+
+	for (auto pCluster : m_vecVehicleAccumulatedCloud)
+	{
+		visualization_msgs::Marker shape;
+
+		shape.lifetime = ros::Duration();
+		shape.header.frame_id = "map";
+		shape.header.stamp = ros::Time(pCluster->m_timestamp);
+		shape.id = (pCluster->m_id)+1;
+
+		// bounding box
+		shape.type = visualization_msgs::Marker::CUBE;
+		shape.action = visualization_msgs::Marker::ADD;
+		shape.ns = "/Registration&accumulation";
+
+		shape.pose.position = pCluster->m_center.position;
+		shape.pose.orientation = pCluster->m_center.orientation;
+
+		shape.scale.x = pCluster->m_dimensions.x;
+		shape.scale.y = pCluster->m_dimensions.y;
+		shape.scale.z = pCluster->m_dimensions.z;
+
+		shape.color.r = pCluster->m_r/254.0f;
+		shape.color.g = pCluster->m_g/254.0f;
+		shape.color.b = pCluster->m_b/254.0f;
+		shape.color.a = 0.5;
+
+		m_arrShapesICP.markers.push_back(shape);
+		vecOf_accumMeasurementCSV[shape.id-1] << shape.header.stamp << "," << shape.pose.position.x << "," << shape.pose.position.y << std::endl;
+
+		// text
+		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+		shape.ns = "/Text";
+
+		shape.points.clear();
+		shape.pose.position = pCluster->m_center.position;
+		shape.pose.orientation = pCluster->m_center.orientation;
+
+		shape.scale.x = 1.0;
+		shape.scale.y = 1.0;
+		shape.scale.z = 1.0;
+
+		shape.color.r = shape.color.g = shape.color.b = 1.0;
+		shape.color.a = 1.0;
+
+		shape.text = std::to_string(shape.id);
+
+		m_arrShapesICP.markers.push_back (shape);
+	}
 }
 
 void ExtractMeasurement::publish ()
@@ -368,58 +385,27 @@ void ExtractMeasurement::publish ()
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulationCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 	pAccumulationCloud->header.frame_id = "map";
 
-	//	// accumulation for publish
-	//	for (const auto& pCluster : m_ObstacleTracking.m_TrackingObjects)
-	//		*pAccumulationCloud += *(pCluster->GetCloud());
+	// accumulation for publish
+	for (const auto& pCluster : m_ObstacleTracking.m_TrackingObjects)
+		*pAccumulationCloud += *(pCluster->GetCloud());
 
+	// Accumulate all cluster to pAccumCloudForICP
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumCloudForICP (new pcl::PointCloud<pcl::PointXYZRGB>);
+	pAccumCloudForICP->header.frame_id = "map";
+	//
 	// accumulation for publish
 	for (const auto& pVehicleTrackingCloud : m_vecVehicleAccumulatedCloud)
-		*pAccumulationCloud += *pVehicleTrackingCloud;
+		*pAccumCloudForICP += *(pVehicleTrackingCloud->GetCloud());
+
 
 	// publish
+	m_pub_resultICP.publish (*pAccumCloudForICP);
 	m_pub_result.publish (*pAccumulationCloud);
+	m_pub_shapeICP.publish (m_arrShapesICP);
 	m_pub_shape.publish (m_arrShapes);
 }
 
 void ExtractMeasurement::savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud)
 {
 	pcl::io::savePCDFile ("ICP_test.pcd", *pInputCloud);
-}
-
-
-void ExtractMeasurement::extractCenterPoint (long long timestamp, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, unsigned int vehicleIndex)
-{
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-
-	for (const auto& point : pInputCloud->points)
-	{
-		// fill new colored cluster point by point
-		pcl::PointXYZRGB tmpPoint;
-		tmpPoint.x = point.x;
-		tmpPoint.y = point.y;
-		tmpPoint.z = point.z;
-
-		pAccumulatedCloud->points.push_back(tmpPoint);
-	}
-
-	std::vector<cv::Point2f> points;
-	for (const auto& point : pAccumulatedCloud->points)
-	{
-		cv::Point2f pt;
-		pt.x = point.x;
-		pt.y = point.y;
-		points.push_back(pt);
-	}
-
-	std::vector<cv::Point2f> vecHull;
-	cv::convexHull(points, vecHull);
-
-
-	cv::RotatedRect box = minAreaRect(vecHull);
-//	m_center.position.x = box.center.x;
-//	m_center.position.y = box.center.y;
-//	m_dDistanceToCenter = hypot (m_center.position.y, m_center.position.x);
-//	m_dimensions.x = box.size.width;
-//	m_dimensions.y = box.size.height;
-	vecOf_accumMeasurementCSV[vehicleIndex] << timestamp/1e6 << "," << box.center.x << "," << box.center.y << std::endl;
 }

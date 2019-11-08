@@ -50,6 +50,7 @@ class Cluster
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr GetCloud();
 	void clear();
 	size_t size();
+	void SetCluster (long long timestamp, unsigned int iClusterNumber, unsigned int r, unsigned int g, unsigned int b);
 };
 
 typedef boost::shared_ptr<Cluster> clusterPtr;

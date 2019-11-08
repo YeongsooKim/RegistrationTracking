@@ -49,6 +49,8 @@ class ExtractMeasurement
 	// Declare publisher
 	ros::Publisher m_pub_result;
 	ros::Publisher m_pub_shape;
+	ros::Publisher m_pub_resultICP;
+	ros::Publisher m_pub_shapeICP;
 	ros::Publisher m_pub_Origin;
 
 	// param
@@ -64,8 +66,8 @@ class ExtractMeasurement
 
 	std::vector<RGB> m_globalRGB;
 	std::vector<clusterPtr> m_OriginalClusters;
+	std::vector<clusterPtr> m_vecVehicleAccumulatedCloud;
 	std::vector<std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>> m_vecVehicleTrackingClouds;
-	std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> m_vecVehicleAccumulatedCloud;
 
 	ObstacleTracking m_ObstacleTracking;
 
@@ -74,6 +76,7 @@ class ExtractMeasurement
 
 	visualization_msgs::Marker m_Origin;
 	visualization_msgs::MarkerArray m_arrShapes;
+	visualization_msgs::MarkerArray m_arrShapesICP;
 
 	std::vector<std::ofstream> vecOf_measurementCSV;
 	std::vector<std::ofstream> vecOf_accumMeasurementCSV;
@@ -91,7 +94,6 @@ class ExtractMeasurement
 	void displayShape ();
 	void publish ();
 	void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);
-	void extractCenterPoint (long long timestamp, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, unsigned int vehicleIndex);
 };
 
 
