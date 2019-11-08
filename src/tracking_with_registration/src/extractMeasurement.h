@@ -64,7 +64,8 @@ class ExtractMeasurement
 
 	std::vector<RGB> m_globalRGB;
 	std::vector<clusterPtr> m_OriginalClusters;
-	std::vector<std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>> m_vecVehiclesTrackingCloud;
+	std::vector<std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>> m_vecVehicleTrackingClouds;
+	std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> m_vecVehicleAccumulatedCloud;
 
 	ObstacleTracking m_ObstacleTracking;
 
@@ -75,19 +76,23 @@ class ExtractMeasurement
 	visualization_msgs::MarkerArray m_arrShapes;
 
 	std::vector<std::ofstream> vecOf_measurementCSV;
+	std::vector<std::ofstream> vecOf_accumMeasurementCSV;
 
 	ExtractMeasurement (unsigned int size);
 	void setParam ();
 	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
+	void downsample (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
+
 	void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);
 	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);
 	void generateColor(size_t indexNumber);
 	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp);
-	void association ();
-	void point2pointICP (unsigned int iterationN);
+	void association (long long timestamp);
+	void point2pointICP (long long timestamp);
 	void displayShape ();
 	void publish ();
 	void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);
+	void extractCenterPoint (long long timestamp, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, unsigned int vehicleIndex);
 };
 
 

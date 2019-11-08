@@ -1,0 +1,12 @@
+[35m[1mScanning dependencies of target tracking_with_registration[0m
+[ 12%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o[0m
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::point2pointICP(long long int)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:278:63:[m[K [01;31m[Kerror: [m[K‘[01m[KvehicleIndex[m[K’ was not declared in this scope
+   extractCenterPoint (timestamp, m_vecVehicleAccumulatedCloud[vehicleIndex], vehicleN);
+[01;32m[K                                                               ^[m[K
+CMakeFiles/tracking_with_registration.dir/build.make:158: recipe for target 'CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o' failed
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o] Error 1
+CMakeFiles/Makefile2:163: recipe for target 'CMakeFiles/tracking_with_registration.dir/all' failed
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+Makefile:138: recipe for target 'all' failed
+make: *** [all] Error 2
