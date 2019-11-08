@@ -7,12 +7,12 @@ Cluster::Cluster()
 
 pcl::PointCloud <pcl::PointXYZRGB>::Ptr Cluster::GetCloud()
 {
-	return m_pointCloud;
+	return m_pPointCloud;
 }
 
 void Cluster::setPointCloud (pcl::PointCloud<pcl::PointXYZRGB>::Ptr pInputCloud)
 {
-	m_pointCloud = pInputCloud;
+	m_pPointCloud = pInputCloud;
 }
 
 
@@ -144,9 +144,18 @@ void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,
 	pCurrentCluster->is_dense = true;
 
 	m_valid_cluster = true;
-	m_pointCloud = pCurrentCluster;
+	m_pPointCloud = pCurrentCluster;
 }
 
+void Cluster::clear()
+{
+	m_pPointCloud->clear();
+}
+
+size_t Cluster::size()
+{
+	return m_pPointCloud->size(); 
+}
 
 Cluster::~Cluster()
 { }
