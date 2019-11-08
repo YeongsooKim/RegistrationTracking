@@ -139,28 +139,23 @@ void ExtractMeasurement::association()
 	static int iterationN = -1;
 	m_ObstacleTracking.association(m_OriginalClusters);
 
-//	// store data into vector of vehicles tracking cloud
-//	for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
-//	{
-//		for (unsigned int objectIndex = 0; objectIndex < m_measurementN; objectIndex++)
-//		{
-//			if ((m_ObstacleTracking.m_TrackingObjects[objectIndex]->m_id-1) == vehicleIndex)
-//			{
-//				pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[objectIndex]->GetCloud());
-//				m_vecVehiclesTrackingCloud[vehicleIndex].push_back (pTrackingCloud);
-//				
-//				break;
-//			}
-//		}
-//	}
-
+	// store data into vector of vehicles tracking cloud
 	for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
 	{
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[vehicleIndex]->GetCloud());
-		m_vecVehiclesTrackingCloud[0].push_back (pTrackingCloud);
+		for (unsigned int objectIndex = 0; objectIndex < m_measurementN; objectIndex++)
+		{
+			if ((m_ObstacleTracking.m_TrackingObjects[objectIndex]->m_id-1) == vehicleIndex)
+			{
+				pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[objectIndex]->GetCloud());
+				m_vecVehiclesTrackingCloud[vehicleIndex].push_back (pTrackingCloud);
+				
+				break;
+			}
+		}
 	}
 
-	if (m_bDoICP && (iterationN != -1) && (iterationN < 1))
+
+	if (m_bDoICP && (iterationN != -1))
 	{
 		point2pointICP(iterationN);
 	}
@@ -260,7 +255,6 @@ void ExtractMeasurement::point2pointICP(unsigned int iterationN)
 		*pAccumulationCloud += FinalRGBChange;
 
 		m_pub_result.publish (*pAccumulationCloud);
-		savePCD (pAccumulationCloud);
 
 		ROS_INFO_STREAM (Final.size());
 		break;
