@@ -153,7 +153,14 @@ void ExtractMeasurement::association(long long timestamp)
 	static bool bIsFirst = true;
 	m_ObstacleTracking.association(m_OriginalClusters);
 
-	// store data into vector of vehicles tracking cloud
+	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
+	{
+		vecOf_measurementCSV[(pCluster->m_id)-1] << pCluster->m_timestamp << "," 
+			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
+	}
+
+
+	// Store data into vector of vehicles tracking cloud
 	for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
 	{
 		for (unsigned int objectIndex = 0; objectIndex < m_measurementN; objectIndex++)
@@ -168,8 +175,10 @@ void ExtractMeasurement::association(long long timestamp)
 		}
 	}
 
+	// ICP
 	if (m_bDoICP)
 	{
+		// Init target
 		if (bIsFirst)
 		{
 			for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
@@ -191,9 +200,16 @@ void ExtractMeasurement::association(long long timestamp)
 
 			bIsFirst = false;
 		}
+		// ICP 
 		else
 		{
 			point2pointICP(timestamp);
+		}
+
+		for (auto pCluster : m_vecVehicleAccumulatedCloud)
+		{
+			vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
+				<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
 		}
 	}
 }
@@ -307,7 +323,6 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 0.5;
 
 		m_arrShapes.markers.push_back(shape);
-		vecOf_measurementCSV[shape.id-1] << shape.header.stamp << "," << shape.pose.position.x << "," << shape.pose.position.y << std::endl;
 
 		// text
 		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
@@ -356,7 +371,6 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 0.5;
 
 		m_arrShapesICP.markers.push_back(shape);
-		vecOf_accumMeasurementCSV[shape.id-1] << shape.header.stamp << "," << shape.pose.position.x << "," << shape.pose.position.y << std::endl;
 
 		// text
 		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;

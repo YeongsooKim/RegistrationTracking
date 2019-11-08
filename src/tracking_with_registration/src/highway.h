@@ -35,7 +35,6 @@ public:
 
 	Highway(pcl::visualization::PCLVisualizer::Ptr& viewer)
 	{
-
 		tools = Tools();
 	
 		egoCar = Car(Vect3(0, 0, 0), Vect3(4, 2, 2), Color(0, 1, 0), 0, 0, 2, "egoCar");
@@ -147,9 +146,11 @@ public:
 			// Sense surrounding cars with lidar and radar
 			if(trackCars[i])
 			{
+				vecOf_refCSV[i] << timestamp/1e6 << "," << traffic[i].position.x << "," << traffic[i].position.y << "," << traffic[i].velocity*cos(traffic[i].angle) << "," << traffic[i].velocity*sin(traffic[i].angle) << "," << traffic[i].angle << std::endl;
+
+
 				VectorXd gt(4);
 				gt << traffic[i].position.x, traffic[i].position.y, traffic[i].velocity*cos(traffic[i].angle), traffic[i].velocity*sin(traffic[i].angle);
-				vecOf_refCSV[i] << timestamp/1e6 << "," << traffic[i].position.x << "," << traffic[i].position.y << "," << traffic[i].velocity*cos(traffic[i].angle) << "," << traffic[i].velocity*sin(traffic[i].angle) << "," << traffic[i].angle << std::endl;
 				tools.ground_truth.push_back(gt);
 				tools.lidarSense(traffic[i], viewer, timestamp, visualize_lidar);
 				tools.radarSense(traffic[i], egoCar, viewer, timestamp, visualize_radar);
