@@ -17,8 +17,8 @@ public:
 	std::vector<double> rmseThreshold = {0.30,0.16,0.95,0.70};
 	std::vector<double> rmseFailLog = {0.0,0.0,0.0,0.0};
 	Lidar* lidar;
-
 	std::vector<std::ofstream> vecOf_refCSV;
+	std::vector<VectorXd> m_vGroundTruth;
 
 	// Parameters 
 	// --------------------------------
@@ -35,7 +35,6 @@ public:
 
 	Highway(pcl::visualization::PCLVisualizer::Ptr& viewer)
 	{
-
 		tools = Tools();
 	
 		egoCar = Car(Vect3(0, 0, 0), Vect3(4, 2, 2), Color(0, 1, 0), 0, 0, 2, "egoCar");
@@ -147,9 +146,11 @@ public:
 			// Sense surrounding cars with lidar and radar
 			if(trackCars[i])
 			{
+				vecOf_refCSV[i] << timestamp/1e6 << "," << traffic[i].position.x << "," << traffic[i].position.y << "," << traffic[i].velocity*cos(traffic[i].angle) << "," << traffic[i].velocity*sin(traffic[i].angle) << "," << traffic[i].angle << std::endl;
+
+
 				VectorXd gt(4);
 				gt << traffic[i].position.x, traffic[i].position.y, traffic[i].velocity*cos(traffic[i].angle), traffic[i].velocity*sin(traffic[i].angle);
-				vecOf_refCSV[i] << timestamp/1e6 << "," << traffic[i].position.x << "," << traffic[i].position.y << "," << traffic[i].velocity*cos(traffic[i].angle) << "," << traffic[i].velocity*sin(traffic[i].angle) << "," << traffic[i].angle << std::endl;
 				tools.ground_truth.push_back(gt);
 				tools.lidarSense(traffic[i], viewer, timestamp, visualize_lidar);
 				tools.radarSense(traffic[i], egoCar, viewer, timestamp, visualize_radar);
@@ -162,6 +163,12 @@ public:
 				estimate << traffic[i].ukf.x_[0], traffic[i].ukf.x_[1], v1, v2;
 				tools.estimations.push_back(estimate);
 	
+			}
+			if (i == 0)
+			{
+				VectorXd gt(2);
+				gt << traffic[i].position.x, traffic[i].position.y;
+				m_vGroundTruth.push_back(gt);
 			}
 		}
 		viewer->addText("Accuracy - RMSE:", 30, 300, 20, 1, 1, 1, "rmse");
@@ -208,5 +215,10 @@ public:
 				viewer->addText("Vy: "+std::to_string(rmseFailLog[3]), 30, 50, 20, 1, 0, 0, "rmse_fail_vy");
 		}
 		
+	}
+
+	std::vector<VectorXd> getGroundTruth()
+	{
+		return m_vGroundTruth;
 	}
 };
