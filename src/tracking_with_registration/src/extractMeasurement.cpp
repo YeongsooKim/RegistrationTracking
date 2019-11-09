@@ -7,6 +7,7 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size
 	m_pub_resultICP = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("ICP", 100);
 	m_pub_shape = nh.advertise<visualization_msgs::MarkerArray>("Shape", 100);
 	m_pub_shapeICP = nh.advertise<visualization_msgs::MarkerArray>("ShapeICP", 100);
+	m_pub_shapeReference = nh.advertise<visualization_msgs::Marker>("ShapeReference", 100);
 	//m_pub_Origin = nh.advertise<visualization_msgs::Marker> ("Origin", 1);
 
 	m_maxIndexNumber = 0;	
@@ -454,6 +455,41 @@ void ExtractMeasurement::displayShape ()
 
 		m_arrShapesICP.markers.push_back (shape);
 	}
+
+	visualization_msgs::Marker shape;
+
+	shape.lifetime = ros::Duration();
+	shape.header.frame_id = "map";
+
+	// bounding box
+	shape.type = visualization_msgs::Marker::LINE_STRIP;
+	shape.action = visualization_msgs::Marker::ADD;
+	shape.ns = "/reference";
+
+	shape.pose.orientation.x = 0.0;
+	shape.pose.orientation.y = 0.0;
+	shape.pose.orientation.z = 0.0;
+	shape.pose.orientation.w = 1.0;
+
+	shape.scale.x = 0.09; 
+	shape.scale.y = 0.09; 
+	shape.scale.z = 0.09;
+
+	shape.color.r = 1.0;
+	shape.color.g = 0.0;
+	shape.color.b = 0.0;
+	shape.color.a = 1;
+
+	for (const auto& point : m_geomsgReferences.poses)
+	{
+		geometry_msgs::Point tmp;
+		tmp.x = point.position.x;
+		tmp.y = point.position.y;
+		tmp.z = point.position.z;
+		shape.points.push_back(tmp);
+	}
+
+	m_ShapesReference = shape;
 }
 
 void ExtractMeasurement::publish ()
@@ -478,6 +514,7 @@ void ExtractMeasurement::publish ()
 	// publish
 	m_pub_resultICP.publish (*pAccumCloudForICP);
 	m_pub_result.publish (*pAccumulationCloud);
+	m_pub_shapeReference.publish (m_ShapesReference);
 	m_pub_shapeICP.publish (m_arrShapesICP);
 	m_pub_shape.publish (m_arrShapes);
 }
@@ -490,8 +527,17 @@ void ExtractMeasurement::savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& 
 
 void ExtractMeasurement::calculateRMSE (const std::vector<VectorXd>& reference)
 {
+	VectorXd ref(reference.back());
+	geometry_msgs::Pose geomsgRefPose;
+
+	geomsgRefPose.position.x = ref[0];
+	geomsgRefPose.position.y = ref[1];
+
+	m_geomsgReferences.poses.push_back (geomsgRefPose);
+
+
 	m_vecResultRMSE.clear();
-	
+
 	VectorXd vOnlyBoundingBoxRMSE(2);
 	vOnlyBoundingBoxRMSE << 0,0;
 

@@ -17,6 +17,8 @@
 #include "visualization_msgs/MarkerArray.h"
 
 #include <sensor_msgs/PointCloud2.h>
+#include <geometry_msgs/PoseArray.h>
+#include <geometry_msgs/Pose.h>
 #include "cluster.hpp"
 #include "obstacle_tracking.hpp"
 #include "tools.h"
@@ -50,9 +52,10 @@ class ExtractMeasurement
 
 	// Declare publisher
 	ros::Publisher m_pub_result;
-	ros::Publisher m_pub_shape;
 	ros::Publisher m_pub_resultICP;
+	ros::Publisher m_pub_shape;
 	ros::Publisher m_pub_shapeICP;
+	ros::Publisher m_pub_shapeReference;
 	ros::Publisher m_pub_Origin;
 
 	// param
@@ -76,6 +79,7 @@ class ExtractMeasurement
 	std::vector<std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>> m_vecVehicleTrackingClouds;
 
 	ObstacleTracking m_ObstacleTracking;
+	geometry_msgs::PoseArray m_geomsgReferences;
 
 	public:
 	Tools m_tools;
@@ -83,6 +87,7 @@ class ExtractMeasurement
 	visualization_msgs::Marker m_Origin;
 	visualization_msgs::MarkerArray m_arrShapes;
 	visualization_msgs::MarkerArray m_arrShapesICP;
+	visualization_msgs::Marker m_ShapesReference;
 
 	std::vector<std::ofstream> vecOf_measurementCSV;
 	std::vector<std::ofstream> vecOf_accumMeasurementCSV;
