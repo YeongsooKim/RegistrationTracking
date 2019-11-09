@@ -235,8 +235,8 @@ void ExtractMeasurement::point2pointICP(long long timestamp)
 		pcl::PointCloud<pcl::PointXYZRGB> Final;
 		icp.align (Final);
 
-		if (icp.getFitnessScore() < 0.02)
-		{
+//		if (icp.getFitnessScore() < 0.02)
+//		{
 			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud2 (new pcl::PointCloud<pcl::PointXYZRGB>);
 			*pTmpPointCloud += Final;
@@ -245,11 +245,11 @@ void ExtractMeasurement::point2pointICP(long long timestamp)
 			downsample (pTmpPointCloud, pTmpPointCloud2, 0.09);
 			m_vecVehicleAccumulatedCloud[vehicleN]->clear ();
 			m_vecVehicleAccumulatedCloud[vehicleN]->setPointCloud (pTmpPointCloud2);
-		}
-
-		else {
-			*(m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud()) = *pTargetCloud;
-		}
+//		}
+//
+//		else {
+//			*(m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud()) = *pTargetCloud;
+//		}
 
 
 		unsigned int r; unsigned int g; unsigned int b;
@@ -490,6 +490,11 @@ void ExtractMeasurement::savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& 
 
 void ExtractMeasurement::calculateRMSE (const std::vector<VectorXd>& reference)
 {
+	VectorXd ref = reference.back();
+	geometry_msgs::position pose;
+	pose.x = ref[0];
+	pose.y = ref[1];
+
 	m_vecResultRMSE.clear();
 	
 	VectorXd vOnlyBoundingBoxRMSE(2);
@@ -518,4 +523,5 @@ void ExtractMeasurement::calculateRMSE (const std::vector<VectorXd>& reference)
 	vRegistrationAccumRMSE = vRegistrationAccumRMSE.array().sqrt();
 
 	m_vecResultRMSE.push_back (vRegistrationAccumRMSE);
+
 }
