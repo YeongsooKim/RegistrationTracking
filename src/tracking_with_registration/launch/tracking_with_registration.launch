@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="tracking_with_registration" type="tracking_with_registration" name="tracking_with_registration" output="screen" />
+	<node type="rviz" name="rviz" pkg="rviz" args="-d $(find tracking_with_registration)/rviz/measurement.rviz" />
+</launch>
