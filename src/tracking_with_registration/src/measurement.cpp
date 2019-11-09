@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 	viewer->setCameraPosition ( x_pos-26, 0, 15.0, x_pos+25, 0, 0, 0, 0, 1);
 
 	Highway highway(viewer);
-	ExtractMeasurement measurement(highway.traffic.size());
+	ExtractMeasurement measurement(highway.traffic.size(), highway.visualize_pcd);
 
 	measurement.setParam();
 
@@ -44,32 +44,9 @@ int main(int argc, char** argv)
 		//stepHighway(egoVelocity,time_us, frame_per_sec, viewer);
 		highway.stepHighway(egoVelocity,time_us, frame_per_sec, viewer);
 
-		// load pcd 
-		pcl::PointCloud<pcl::PointXYZ>::Ptr pCloudTraffic (new pcl::PointCloud<pcl::PointXYZ>);
-		measurement.loadPCD(pCloudTraffic, time_us, highway.visualize_pcd);
+		measurement.setData (highway.getGroundTruth(), time_us);
+		measurement.process ();
 
-		// downsample
-		pcl::PointCloud<pcl::PointXYZ>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZ>);
-		measurement.downsample(pCloudTraffic, pDownsampledCloud, 0.1);
-
-		// dbscan
-		std::vector<pcl::PointIndices> vecClusterIndices;
-		measurement.dbscan (pDownsampledCloud, vecClusterIndices);
-
-		// Set cluster pointcloud from clusterIndices and coloring
-		measurement.setCluster (vecClusterIndices, pDownsampledCloud, time_us);
-
-		// Associate 
-		measurement.association (time_us);
-
-		// calculate RMSE
-		measurement.calculateRMSE (highway.getGroundTruth());
-
-		// display shape
-		measurement.displayShape ();
-
-		// publish	
-		measurement.publish ();
 
 		viewer->spinOnce(1000/frame_per_sec);
 		frame_count++;
