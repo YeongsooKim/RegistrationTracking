@@ -54,19 +54,22 @@ int main(int argc, char** argv)
 
 		// dbscan
 		std::vector<pcl::PointIndices> vecClusterIndices;
-		measurement.dbscan(pDownsampledCloud, vecClusterIndices);
+		measurement.dbscan (pDownsampledCloud, vecClusterIndices);
 
 		// Set cluster pointcloud from clusterIndices and coloring
 		measurement.setCluster (vecClusterIndices, pDownsampledCloud, time_us);
 
 		// Associate 
-		measurement.association(time_us);
+		measurement.association (time_us);
+
+		// calculate RMSE
+		measurement.calculateRMSE (highway.getGroundTruth());
 
 		// display shape
-		measurement.displayShape();
+		measurement.displayShape ();
 
 		// publish	
-		measurement.publish();
+		measurement.publish ();
 
 		viewer->spinOnce(1000/frame_per_sec);
 		frame_count++;

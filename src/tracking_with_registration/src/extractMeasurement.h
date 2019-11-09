@@ -20,6 +20,8 @@
 #include "cluster.hpp"
 #include "obstacle_tracking.hpp"
 #include "tools.h"
+#include "Eigen/Dense"
+
 
 typedef struct _rgb RGB;
 struct _rgb
@@ -64,6 +66,10 @@ class ExtractMeasurement
 
 	bool m_bDoICP;
 
+	std::vector<VectorXd> m_rgvOnlyBoundingbox;
+	std::vector<VectorXd> m_rgvRegistrationAccum;
+	std::vector<VectorXd> m_vecResultRMSE;
+
 	std::vector<RGB> m_globalRGB;
 	std::vector<clusterPtr> m_OriginalClusters;
 	std::vector<clusterPtr> m_vecVehicleAccumulatedCloud;
@@ -94,6 +100,7 @@ class ExtractMeasurement
 	void displayShape ();
 	void publish ();
 	void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);
+	void calculateRMSE (const std::vector<VectorXd>& reference);
 };
 
 

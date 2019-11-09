@@ -159,6 +159,9 @@ void ExtractMeasurement::association(long long timestamp)
 			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
 	}
 
+	VectorXd meas(2);
+	meas << m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.x, m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.y;
+	m_rgvOnlyBoundingbox.push_back (meas);
 
 	// Store data into vector of vehicles tracking cloud
 	for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
@@ -211,6 +214,10 @@ void ExtractMeasurement::association(long long timestamp)
 			vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
 				<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
 		}
+
+		VectorXd meas2 (2);
+		meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
+		m_rgvRegistrationAccum.push_back (meas2);
 	}
 }
 
@@ -326,7 +333,7 @@ void ExtractMeasurement::displayShape ()
 
 		// text
 		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
-		shape.ns = "/Text";
+		shape.ns = "/vehicle number";
 
 		shape.points.clear();
 		shape.pose.position = pCluster->m_center.position;
@@ -340,6 +347,34 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 1.0;
 
 		shape.text = std::to_string(pCluster->m_id);
+
+		m_arrShapes.markers.push_back (shape);
+
+		// text
+		string s_x_RMSE = std::to_string(m_vecResultRMSE[0][0]);
+		string s_y_RMSE = std::to_string(m_vecResultRMSE[0][1]);
+		string sWholeText = "OnlyBoundingBox RMSE\r\nx: " + s_x_RMSE + "\r\ny: " + s_y_RMSE;
+
+		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+		shape.ns = "/RMSE";
+
+		shape.points.clear();
+		shape.pose.position.x = 0;
+		shape.pose.position.y = 30;
+		shape.pose.position.z = 0;
+		shape.pose.orientation.x = 0.0;
+		shape.pose.orientation.y = 0.0;
+		shape.pose.orientation.z = 0.0;
+		shape.pose.orientation.w = 1.0;
+
+		shape.scale.x = 2.0;
+		shape.scale.y = 2.0;
+		shape.scale.z = 2.0;
+
+		shape.color.r = shape.color.g = shape.color.b = 1.0;
+		shape.color.a = 1.0;
+
+		shape.text = sWholeText;
 
 		m_arrShapes.markers.push_back (shape);
 	}
@@ -374,7 +409,7 @@ void ExtractMeasurement::displayShape ()
 
 		// text
 		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
-		shape.ns = "/Text";
+		shape.ns = "/vehicle number";
 
 		shape.points.clear();
 		shape.pose.position = pCluster->m_center.position;
@@ -388,6 +423,34 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 1.0;
 
 		shape.text = std::to_string(shape.id);
+
+		m_arrShapesICP.markers.push_back (shape);
+
+		// text
+		string s_x_RMSE = std::to_string(m_vecResultRMSE[1][0]);
+		string s_y_RMSE = std::to_string(m_vecResultRMSE[1][1]);
+		string sWholeText = "Registraton and Accumulation RMSE\r\nx: " + s_x_RMSE + "\r\ny: " + s_y_RMSE;
+
+		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+		shape.ns = "/RMSE";
+
+		shape.points.clear();
+		shape.pose.position.x = 0;
+		shape.pose.position.y = 20;
+		shape.pose.position.z = 0;
+		shape.pose.orientation.x = 0.0;
+		shape.pose.orientation.y = 0.0;
+		shape.pose.orientation.z = 0.0;
+		shape.pose.orientation.w = 1.0;
+
+		shape.scale.x = 2.0;
+		shape.scale.y = 2.0;
+		shape.scale.z = 2.0;
+
+		shape.color.r = shape.color.g = shape.color.b = 1.0;
+		shape.color.a = 1.0;
+
+		shape.text = sWholeText;
 
 		m_arrShapesICP.markers.push_back (shape);
 	}
@@ -422,4 +485,37 @@ void ExtractMeasurement::publish ()
 void ExtractMeasurement::savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud)
 {
 	pcl::io::savePCDFile ("ICP_test.pcd", *pInputCloud);
+}
+
+
+void ExtractMeasurement::calculateRMSE (const std::vector<VectorXd>& reference)
+{
+	m_vecResultRMSE.clear();
+	
+	VectorXd vOnlyBoundingBoxRMSE(2);
+	vOnlyBoundingBoxRMSE << 0,0;
+
+	for (unsigned int measIndex = 0; measIndex < reference.size(); measIndex++)
+	{
+		VectorXd residual = reference[measIndex] - m_rgvOnlyBoundingbox[measIndex];
+		residual = residual.array() * residual.array();
+		vOnlyBoundingBoxRMSE += residual;
+	}
+	vOnlyBoundingBoxRMSE = vOnlyBoundingBoxRMSE.array().sqrt();
+
+	m_vecResultRMSE.push_back (vOnlyBoundingBoxRMSE);
+
+
+	VectorXd vRegistrationAccumRMSE(2);
+	vRegistrationAccumRMSE << 0,0;
+
+	for (unsigned int measIndex = 0; measIndex < reference.size(); measIndex++)
+	{
+		VectorXd residual = reference[measIndex] - m_rgvRegistrationAccum[measIndex];
+		residual = residual.array() * residual.array();
+		vRegistrationAccumRMSE += residual;
+	}
+	vRegistrationAccumRMSE = vRegistrationAccumRMSE.array().sqrt();
+
+	m_vecResultRMSE.push_back (vRegistrationAccumRMSE);
 }

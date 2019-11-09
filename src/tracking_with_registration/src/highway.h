@@ -17,8 +17,8 @@ public:
 	std::vector<double> rmseThreshold = {0.30,0.16,0.95,0.70};
 	std::vector<double> rmseFailLog = {0.0,0.0,0.0,0.0};
 	Lidar* lidar;
-
 	std::vector<std::ofstream> vecOf_refCSV;
+	std::vector<VectorXd> m_vGroundTruth;
 
 	// Parameters 
 	// --------------------------------
@@ -164,6 +164,12 @@ public:
 				tools.estimations.push_back(estimate);
 	
 			}
+			if (i == 0)
+			{
+				VectorXd gt(2);
+				gt << traffic[i].position.x, traffic[i].position.y;
+				m_vGroundTruth.push_back(gt);
+			}
 		}
 		viewer->addText("Accuracy - RMSE:", 30, 300, 20, 1, 1, 1, "rmse");
 		VectorXd rmse = tools.CalculateRMSE(tools.estimations, tools.ground_truth);
@@ -209,5 +215,10 @@ public:
 				viewer->addText("Vy: "+std::to_string(rmseFailLog[3]), 30, 50, 20, 1, 0, 0, "rmse_fail_vy");
 		}
 		
+	}
+
+	std::vector<VectorXd> getGroundTruth()
+	{
+		return m_vGroundTruth;
 	}
 };
