@@ -501,6 +501,7 @@ void ExtractMeasurement::calculateRMSE (const std::vector<VectorXd>& reference)
 		residual = residual.array() * residual.array();
 		vOnlyBoundingBoxRMSE += residual;
 	}
+	vOnlyBoundingBoxRMSE = vOnlyBoundingBoxRMSE/reference.size();
 	vOnlyBoundingBoxRMSE = vOnlyBoundingBoxRMSE.array().sqrt();
 
 	m_vecResultRMSE.push_back (vOnlyBoundingBoxRMSE);
@@ -515,6 +516,7 @@ void ExtractMeasurement::calculateRMSE (const std::vector<VectorXd>& reference)
 		residual = residual.array() * residual.array();
 		vRegistrationAccumRMSE += residual;
 	}
+	vRegistrationAccumRMSE = vRegistrationAccumRMSE/reference.size();
 	vRegistrationAccumRMSE = vRegistrationAccumRMSE.array().sqrt();
 
 	m_vecResultRMSE.push_back (vRegistrationAccumRMSE);
