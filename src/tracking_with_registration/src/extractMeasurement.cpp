@@ -278,8 +278,8 @@ void ExtractMeasurement::point2pointICP ()
 		pcl::PointCloud<pcl::PointXYZRGB> Final;
 		icp.align (Final);
 
-		if (icp.getFitnessScore() < 0.02)
-		{
+//		if (icp.getFitnessScore() < 0.02)
+//		{
 			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud2 (new pcl::PointCloud<pcl::PointXYZRGB>);
 			*pTmpPointCloud += Final;
@@ -288,11 +288,11 @@ void ExtractMeasurement::point2pointICP ()
 			downsample (pTmpPointCloud, pTmpPointCloud2, 0.09);
 			m_vecVehicleAccumulatedCloud[vehicleN]->clear ();
 			m_vecVehicleAccumulatedCloud[vehicleN]->setPointCloud (pTmpPointCloud2);
-		}
-
-		else {
-			*(m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud()) = *pTargetCloud;
-		}
+//		}
+//
+//		else {
+//			*(m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud()) = *pTargetCloud;
+//		}
 
 
 		//		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
@@ -621,7 +621,6 @@ void ExtractMeasurement::savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& 
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr ExtractMeasurement::loadPCD (std::string file)
 {
-
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 
 	if (pcl::io::loadPCDFile<pcl::PointXYZ> (file, *cloud) == -1) //* load the file

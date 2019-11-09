@@ -32,27 +32,27 @@ using namespace std;
 typedef struct _rgb RGB;
 struct _rgb
 {
-        uint8_t m_r;
-        uint8_t m_g;
-        uint8_t m_b;
+	uint8_t m_r;
+	uint8_t m_g;
+	uint8_t m_b;
 
-        _rgb ()
-        { }
+	_rgb ()
+	{ }
 
-        _rgb (uint8_t r, uint8_t g, uint8_t b)
-        {
-                m_r = r;
-                m_g = g;
-                m_b = b;
-        }
+	_rgb (uint8_t r, uint8_t g, uint8_t b)
+	{
+		m_r = r;
+		m_g = g;
+		m_b = b;
+	}
 };
 
 
 class ExtractMeasurement
 {
 	private:
-	// Declare nodehandler
-	ros::NodeHandle nh;
+		// Declare nodehandler
+		ros::NodeHandle nh;
 
 	// Declare publisher
 	ros::Publisher m_pub_result;
@@ -61,14 +61,14 @@ class ExtractMeasurement
 	ros::Publisher m_pub_shapeICP;
 	ros::Publisher m_pub_shapeReference;
 
-	// param
-	double m_fMarkerDuration;
-	double m_dClusterErrRadius;
-	double m_dClusterMinSize;
-	double m_dClusterMaxSize; 	
+		// param
+		double m_fMarkerDuration;
+		double m_dClusterErrRadius;
+		double m_dClusterMinSize;
+		double m_dClusterMaxSize; 	
 
-	unsigned int m_measurementN;
-	unsigned int m_maxIndexNumber;
+		unsigned int m_measurementN;
+		unsigned int m_maxIndexNumber;
 
 	bool m_bDoICP;
 	bool m_bDoVisualize;
@@ -112,6 +112,8 @@ class ExtractMeasurement
 	void calculateRMSE ();
 	void displayShape ();
 	void publish ();
+
+
 };
 
 
