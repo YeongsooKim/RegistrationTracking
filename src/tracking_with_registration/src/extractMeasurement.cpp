@@ -31,7 +31,6 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 	}
 
 	m_maxIndexNumber = 0;
-	m_bDoICP = true;
 
 	m_vecVehicleTrackingClouds.resize(m_measurementN);
 	for (unsigned int measurementIndex = 0; measurementIndex < m_measurementN; measurementIndex++)
@@ -202,11 +201,13 @@ void ExtractMeasurement::association()
 			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
 	}
 
+	// To store data in csv file, put the center point of OnlyBoundingBox tracking object into member variable with a data type of VectorXd
 	VectorXd meas(2);
 	meas << m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.x, m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.y;
 	m_vecVecXdOnlyBoundingbox.push_back (meas);
 
-	// Store data into vector of vehicles tracking cloud
+	// To calculate RMSE, store the pointcloud of OnlyBoundingBox tracking object into member variable with a data type of vector<pointcloud> 
+	// which store the same object in same vector
 	for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
 	{
 		for (unsigned int objectIndex = 0; objectIndex < m_measurementN; objectIndex++)
@@ -227,21 +228,12 @@ void ExtractMeasurement::association()
 		// Init target
 		if (bIsFirst)
 		{
-			for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
+			unsigned int vehicleN = 0;
+			for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
 			{
-				*(m_vecVehicleAccumulatedCloud[vehicleIndex]->GetCloud()) += *m_vecVehicleTrackingClouds[vehicleIndex].back();
+				*(m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud()) += *vecVehicleTrackingCloud.back();
 
-				unsigned int r; unsigned int g; unsigned int b;
-				if (vehicleIndex == 0) {
-					r = 255; g = 0; b = 0;
-				}
-				else if (vehicleIndex == 1) {
-					r = 0; g = 255; b = 0;
-				}
-				else if (vehicleIndex == 2) {
-					r = 0; g = 0; b = 255;
-				}
-				m_vecVehicleAccumulatedCloud[vehicleIndex]->SetCluster (m_llTimestamp_s, vehicleIndex, r, g, b);
+				vehicleN++;
 			}
 
 			bIsFirst = false;
@@ -249,63 +241,85 @@ void ExtractMeasurement::association()
 		// ICP 
 		else
 		{
-			point2pointICP();
+			unsigned int vehicleN = 0;
+			for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
+			{
+				pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
+				point2pointICPwithAccumulation (pAccumulatedCloud, vecVehicleTrackingCloud.back());
+
+				vehicleN++;
+			}
 		}
 
+		// set cluster
+		unsigned int vehicleN = 0;
+		for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
+		{
+			unsigned int r; unsigned int g; unsigned int b;
+			if (vehicleN == 0) {
+				r = 255; g = 0; b = 0;
+			}
+			else if (vehicleN == 1) {
+				r = 0; g = 255; b = 0;
+			}
+			else if (vehicleN == 2) {
+				r = 0; g = 0; b = 255;
+			}
+			pCluster->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
+			vehicleN++;
+		}
+
+
+		// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
 		for (auto pCluster : m_vecVehicleAccumulatedCloud)
 		{
 			vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
 				<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
 		}
 
+		// To calculate RMSE, store the pointcloud of registrated tracking object into member variable with a data type of vector<pointcloud> 
+		// which store the same object in same vector
 		VectorXd meas2 (2);
 		meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
 		m_vecVecXdRegistrationAccum.push_back (meas2);
 	}
+	//	else if (m_bDoNDT)
+	//	{
+	//		if (bIsFirst)
+	//		{
+	//		}
+	//		else
+	//		{
+	//		}
+	//	}
 }
 
-void ExtractMeasurement::point2pointICP ()
+void ExtractMeasurement::point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTarGetCloud)
 {
-	unsigned int vehicleN = 0;
-	for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pSourceCloud (pInputSourceCloud);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTarGetCloud (pInputTarGetCloud);
+
+	pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
+	icp.setInputSource (pSourceCloud);
+	icp.setInputTarget (pTarGetCloud);
+	pcl::PointCloud<pcl::PointXYZRGB> Final;
+	icp.align (Final);
+
+	if (icp.getFitnessScore() < 0.02)
 	{
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pSourceCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTargetCloud (vecVehicleTrackingCloud.back());
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		*pTmpPointCloud += Final;
+		*pTmpPointCloud += *pTarGetCloud;
 
-		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
-		icp.setInputSource (pSourceCloud);
-		icp.setInputTarget (pTargetCloud);
-		pcl::PointCloud<pcl::PointXYZRGB> Final;
-		icp.align (Final);
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud2 (new pcl::PointCloud<pcl::PointXYZRGB>);
+		downsample (pTmpPointCloud, pTmpPointCloud2, 0.09);
+		pInputSourceCloud->clear ();
+		pInputSourceCloud->swap (*pTmpPointCloud2);
+	}
 
-		if (icp.getFitnessScore() < 0.02)
-		{
-			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud2 (new pcl::PointCloud<pcl::PointXYZRGB>);
-			*pTmpPointCloud += Final;
-			*pTmpPointCloud += *pTargetCloud;
-
-			downsample (pTmpPointCloud, pTmpPointCloud2, 0.09);
-			m_vecVehicleAccumulatedCloud[vehicleN]->clear ();
-			m_vecVehicleAccumulatedCloud[vehicleN]->setPointCloud (pTmpPointCloud2);
-		}
-
-		else {
-			*(m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud()) = *pTargetCloud;
-		}
-
-		unsigned int r; unsigned int g; unsigned int b;
-		if (vehicleN == 0) {
-			r = 255; g = 0; b = 0;
-		}
-		else if (vehicleN == 1) {
-			r = 0; g = 255; b = 0;
-		}
-		else if (vehicleN == 2) {
-			r = 0; g = 0; b = 255;
-		}
-		m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
-		vehicleN++;
+	else {
+		pInputSourceCloud->clear ();
+		pInputSourceCloud->swap (*pTarGetCloud);
 	}
 }
 
