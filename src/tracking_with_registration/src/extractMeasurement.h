@@ -1,5 +1,5 @@
 #ifndef EXTRACTMEASUREMENT
-#define EXTRACTMEASUREMENT
+
 
 #include <ros/ros.h>
 #include <pcl_ros/point_cloud.h>
@@ -12,6 +12,7 @@
 #include <pcl/segmentation/extract_clusters.h>
 #include <pcl/registration/icp.h>
 #include <pcl/io/pcd_io.h>
+#include <pcl/registration/ndt.h>
 
 #include "visualization_msgs/Marker.h"
 #include "visualization_msgs/MarkerArray.h"
@@ -48,6 +49,16 @@ struct _rgb
 };
 
 
+struct pose
+{
+	double x;
+	double y;
+	double z;
+	double roll;
+	double pitch;
+	double yaw;
+};
+
 class ExtractMeasurement
 {
 	private:
@@ -70,8 +81,8 @@ class ExtractMeasurement
 		unsigned int m_measurementN;
 		unsigned int m_maxIndexNumber;
 
-		bool m_bDoICP = true;
-		bool m_bDoNDT = false;
+		bool m_bDoICP = false;
+		bool m_bDoNDT = true;
 		bool m_bDoVisualize;
 		long long m_llTimestamp_s;
 
@@ -89,9 +100,21 @@ class ExtractMeasurement
 		geometry_msgs::PoseArray m_geomsgReferences;
 
 		// about ndt variable
+		pcl::NormalDistributionsTransform<pcl::PointXYZRGB, pcl::PointXYZRGB> m_ndt; 
+
 		Eigen::Matrix4f m_mat4fBase2Local;
 		Eigen::Matrix4f m_mat4fLocal2Base;
 
+		pose m_previousPose;
+		pose m_currentPose;
+		pose m_ndtPose;
+		pose m_addedPose;
+		pose m_localizerPose;
+		
+		double m_diff_x = 0.0; 
+		double m_diff_y = 0.0; 
+		double m_diff_z = 0.0; 
+		double m_diff_yaw;  // current_pose - previous_pose
 
 
 	public:
@@ -119,8 +142,8 @@ class ExtractMeasurement
 		void calculateRMSE ();
 		void displayShape ();
 		void publish ();
-
-
+		void NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud);
+		double calcDiffForRadian(const double lhs_rad, const double rhs_rad);
 };
 
 
