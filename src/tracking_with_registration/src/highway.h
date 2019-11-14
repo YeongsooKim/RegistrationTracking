@@ -166,8 +166,8 @@ public:
 			}
 			if (i == 0)
 			{
-				VectorXd gt(2);
-				gt << traffic[i].position.x, traffic[i].position.y;
+				VectorXd gt(4);
+				gt << traffic[i].position.x, traffic[i].position.y, traffic[i].velocity*cos(traffic[i].angle), traffic[i].velocity*sin(traffic[i].angle);
 				m_vGroundTruth.push_back(gt);
 			}
 		}
