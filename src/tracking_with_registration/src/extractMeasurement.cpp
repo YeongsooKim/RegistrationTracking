@@ -192,7 +192,6 @@ void ExtractMeasurement::generateColor(size_t indexNumber)
 
 void ExtractMeasurement::association()
 {
-	static bool bIsFirst = true;
 	m_ObstacleTracking.association(m_OriginalClusters);
 
 	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
@@ -225,36 +224,12 @@ void ExtractMeasurement::association()
 	// ICP
 	if (m_bDoICP)
 	{
-		// Init target
-		if (bIsFirst)
-		{
-			unsigned int vehicleN = 0;
-			for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
-			{
-				*(m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud()) += *vecVehicleTrackingCloud.back();
-
-				vehicleN++;
-			}
-
-			bIsFirst = false;
-		}
-		// ICP 
-		else
-		{
-			unsigned int vehicleN = 0;
-			for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
-			{
-				pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
-				point2pointICPwithAccumulation (pAccumulatedCloud, vecVehicleTrackingCloud.back());
-
-				vehicleN++;
-			}
-		}
-
-		// set cluster
 		unsigned int vehicleN = 0;
-		for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
+		for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
 		{
+			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
+			point2pointICPwithAccumulation (pAccumulatedCloud, vecVehicleTrackingCloud.back());
+
 			unsigned int r; unsigned int g; unsigned int b;
 			if (vehicleN == 0) {
 				r = 255; g = 0; b = 0;
@@ -265,62 +240,73 @@ void ExtractMeasurement::association()
 			else if (vehicleN == 2) {
 				r = 0; g = 0; b = 255;
 			}
-			pCluster->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
+
+			m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
+
 			vehicleN++;
 		}
-
-
-		// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
-		for (auto pCluster : m_vecVehicleAccumulatedCloud)
-		{
-			vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
-				<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
-		}
-
-		// To calculate RMSE, store the pointcloud of registrated tracking object into member variable with a data type of vector<pointcloud> 
-		// which store the same object in same vector
-		VectorXd meas2 (2);
-		meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
-		m_vecVecXdRegistrationAccum.push_back (meas2);
 	}
+
+	// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
+	for (auto pCluster : m_vecVehicleAccumulatedCloud)
+	{
+		vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
+			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
+	}
+
+	// To calculate RMSE, store the pointcloud of registrated tracking object into member variable with a data type of vector<pointcloud> 
+	// which store the same object in same vector
+	VectorXd meas2 (2);
+	meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
+	m_vecVecXdRegistrationAccum.push_back (meas2);
 	//	else if (m_bDoNDT)
 	//	{
-	//		if (bIsFirst)
-	//		{
-	//		}
-	//		else
-	//		{
-	//		}
 	//	}
 }
 
 void ExtractMeasurement::point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTarGetCloud)
 {
+	static bool bIsFirst = true;
+
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pSourceCloud (pInputSourceCloud);
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTarGetCloud (pInputTarGetCloud);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTargetCloud (pInputTarGetCloud);
 
-	pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
-	icp.setInputSource (pSourceCloud);
-	icp.setInputTarget (pTarGetCloud);
-	pcl::PointCloud<pcl::PointXYZRGB> Final;
-	icp.align (Final);
 
-	if (icp.getFitnessScore() < 0.02)
+	if (bIsFirst)
 	{
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-		*pTmpPointCloud += Final;
-		*pTmpPointCloud += *pTarGetCloud;
-
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud2 (new pcl::PointCloud<pcl::PointXYZRGB>);
-		downsample (pTmpPointCloud, pTmpPointCloud2, 0.09);
-		pInputSourceCloud->clear ();
-		pInputSourceCloud->swap (*pTmpPointCloud2);
+		pSourceCloud->swap (*pTargetCloud);
+		bIsFirst = false;
 	}
+	else if(!bIsFirst)
+	{
+		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
+		icp.setInputSource (pSourceCloud);
+		icp.setInputTarget (pTargetCloud);
+		pcl::PointCloud<pcl::PointXYZRGB> Final;
+		icp.align (Final);
 
-	else {
-		pInputSourceCloud->clear ();
-		pInputSourceCloud->swap (*pTarGetCloud);
+		if (icp.getFitnessScore() < 0.02)
+		{
+			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+			*pTmpPointCloud += Final;
+			*pTmpPointCloud += *pTargetCloud;
+
+			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud2 (new pcl::PointCloud<pcl::PointXYZRGB>);
+			downsample (pTmpPointCloud, pTmpPointCloud2, 0.09);
+			pInputSourceCloud->clear ();
+			pInputSourceCloud->swap (*pTmpPointCloud2);
+		}
+
+		else {
+			pInputSourceCloud->clear ();
+			pInputSourceCloud->swap (*pTargetCloud);
+		}
 	}
+}
+
+void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTarGetCloud)
+{
+
 }
 
 void ExtractMeasurement::displayShape ()
@@ -653,7 +639,6 @@ void ExtractMeasurement::calculateRMSE ()
 	vOnlyBoundingBoxRMSE = vOnlyBoundingBoxRMSE.array().sqrt();
 
 	m_vecVecXdResultRMSE.push_back (vOnlyBoundingBoxRMSE);
-
 
 	VectorXd vRegistrationAccumRMSE(2);
 	vRegistrationAccumRMSE << 0,0;
