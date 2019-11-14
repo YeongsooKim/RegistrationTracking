@@ -33,11 +33,11 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 	m_maxIndexNumber = 0;
 
 	m_vecVehicleTrackingClouds.resize(m_measurementN);
-	for (unsigned int measurementIndex = 0; measurementIndex < m_measurementN; measurementIndex++)
-	{
-		clusterPtr pCluster (new Cluster());
-		m_vecVehicleAccumulatedCloud.push_back(pCluster);
-	}
+//	for (unsigned int measurementIndex = 0; measurementIndex < m_measurementN; measurementIndex++)
+//	{
+//		clusterPtr pCluster (new Cluster());
+//		m_vecVehicleAccumulatedCloud.push_back(pCluster);
+//	}
 
 	Eigen::Translation3f tl_btol(0.0, 0.0, 0.0);                 // tl: translation
 	Eigen::AngleAxisf rot_x_btol(0.0, Eigen::Vector3f::UnitX());  // rot: rotation
@@ -255,14 +255,21 @@ void ExtractMeasurement::association()
 		}
 	}
 
+	static bool bIsFirst = true;
 	// ICP
 	if (m_bDoICP)
 	{
 		unsigned int vehicleN = 0;
 		for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
 		{
+			if (bIsFirst)
+			{
+				clusterPtr pCluster (new Cluster());
+				m_vecVehicleAccumulatedCloud.push_back(pCluster);
+			}
+
 			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
-			point2pointICPwithAccumulation (pAccumulatedCloud, vecVehicleTrackingCloud.back());
+			point2pointICPwithAccumulation (pAccumulatedCloud, vecVehicleTrackingCloud.back(), bIsFirst);
 
 			unsigned int r; unsigned int g; unsigned int b;
 			if (vehicleN == 0) {
@@ -276,18 +283,23 @@ void ExtractMeasurement::association()
 			}
 
 			m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
-
 			vehicleN++;
 		}
 	}
-
+	// NDT
 	else if (m_bDoNDT)
 	{
 		unsigned int vehicleN = 0;
 		for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
 		{
+			if (bIsFirst)
+			{
+				clusterPtr pCluster (new Cluster());
+				m_vecVehicleAccumulatedCloud.push_back(pCluster);
+			}
+
 			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
-			ExtractMeasurement::NDT (pAccumulatedCloud, vecVehicleTrackingCloud.back());
+			ExtractMeasurement::NDT (pAccumulatedCloud, vecVehicleTrackingCloud.back(), bIsFirst);
 
 			unsigned int r; unsigned int g; unsigned int b;
 			if (vehicleN == 0) {
@@ -301,19 +313,16 @@ void ExtractMeasurement::association()
 			}
 
 			m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
-
 			vehicleN++;
 			break;
 		}
 	}
-
 
 	// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
 	for (auto pCluster : m_vecVehicleAccumulatedCloud)
 	{
 		vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
 			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
-		break;
 	}
 
 	// To calculate RMSE, store the center point of registrated tracking object into member variable with a data type of vector<VectorXd> 
@@ -321,12 +330,12 @@ void ExtractMeasurement::association()
 	VectorXd meas2 (2);
 	meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
 	m_vecVecXdRegistrationAccum.push_back (meas2);
+
+	bIsFirst = false;
 }
 
-void ExtractMeasurement::point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud)
+void ExtractMeasurement::point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst)
 {
-	static bool bIsFirst = true;
-
 	if (bIsFirst)
 	{
 		pInputSourceCloud->swap (*pInputTargetCloud);
@@ -359,10 +368,8 @@ void ExtractMeasurement::point2pointICPwithAccumulation (pcl::PointCloud<pcl::Po
 	}
 }
 
-void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud)
+void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, bool bIsInitSource)
 {
-	static bool bIsInitSource = true;
-
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 
 	// Add initial point cloud to 
@@ -405,7 +412,7 @@ void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTarg
 	Eigen::Matrix4f init_guess =
 		(init_translation * init_rotation_z * init_rotation_y * init_rotation_x).matrix() * m_mat4fBase2Local;
 
-	
+
 	Eigen::Matrix4f mat4fLocalizer (Eigen::Matrix4f::Identity());
 	Eigen::Matrix4f mat4fLocalizerInverse (Eigen::Matrix4f::Identity());
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pOutputCloud(new pcl::PointCloud<pcl::PointXYZRGB>);
@@ -454,7 +461,7 @@ void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTarg
 	m_previousPose.roll = m_currentPose.roll;
 	m_previousPose.pitch = m_currentPose.pitch;
 	m_previousPose.yaw = m_currentPose.yaw;
-	
+
 	//*pInputTargetCloud += *pDownsampledCloud;
 	*pInputTargetCloud += *pTransformedCloud;
 	m_ndt.setInputTarget(pInputTargetCloud);
@@ -462,12 +469,12 @@ void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTarg
 
 double ExtractMeasurement::calcDiffForRadian(const double lhs_rad, const double rhs_rad)
 {
-  double diff_rad = lhs_rad - rhs_rad;
-  if (diff_rad >= M_PI)
-    diff_rad = diff_rad - 2 * M_PI;
-  else if (diff_rad < -M_PI)
-    diff_rad = diff_rad + 2 * M_PI;
-  return diff_rad;
+	double diff_rad = lhs_rad - rhs_rad;
+	if (diff_rad >= M_PI)
+		diff_rad = diff_rad - 2 * M_PI;
+	else if (diff_rad < -M_PI)
+		diff_rad = diff_rad + 2 * M_PI;
+	return diff_rad;
 }
 
 void ExtractMeasurement::displayShape ()
@@ -669,8 +676,6 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 0.5;
 
 		m_arrShapesICP.markers.push_back (shape);
-
-		break;
 	}
 
 	// For reference
@@ -751,13 +756,10 @@ void ExtractMeasurement::publish ()
 	// Accumulate all cluster to pAccumCloudForICP
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumCloudForICP (new pcl::PointCloud<pcl::PointXYZRGB>);
 	pAccumCloudForICP->header.frame_id = "map";
-	
+
 	// accumulation for publish
 	for (const auto& pVehicleTrackingCloud : m_vecVehicleAccumulatedCloud)
-	{
 		*pAccumCloudForICP += *(pVehicleTrackingCloud->GetCloud());
-		break;
-	}
 
 
 	// publish
