@@ -231,6 +231,5 @@ size_t Cluster::size()
 	return m_pPointCloud->size(); 
 }
 
-
 Cluster::~Cluster()
 { }

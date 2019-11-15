@@ -22,6 +22,7 @@
 #include <geometry_msgs/Pose.h>
 
 #include <vector>
+#include <algorithm>
 #include "cluster.hpp"
 #include "obstacle_tracking.hpp"
 #include "Eigen/Dense"
@@ -90,6 +91,7 @@ class ExtractMeasurement
 		std::vector<VectorXd> m_vecVecXdRegistrationAccum;
 		std::vector<VectorXd> m_vecVecXdResultRMSE;
 		std::vector<VectorXd> m_vecVecXdRef;
+		std::vector<VectorXd> m_vecVecXdRefwithVelo;
 
 		std::vector<RGB> m_globalRGB;
 		std::vector<clusterPtr> m_OriginalClusters;

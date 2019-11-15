@@ -1,5 +1,11 @@
 #include "extractMeasurement.h"
 
+
+bool ID_sort (const clusterPtr& ID1, const clusterPtr& ID2)
+{
+	return ID1->m_id < ID2->m_id;
+}
+
 ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) : m_measurementN (size), m_bDoVisualize(bDoVisualizePCD)
 {
 	// define publisher
@@ -84,7 +90,16 @@ void ExtractMeasurement::setParam()
 
 void ExtractMeasurement::setData (const std::vector<VectorXd>& vecVecXdRef, long long timestamp)
 {
-	m_vecVecXdRef = vecVecXdRef;
+	m_vecVecXdRefwithVelo = vecVecXdRef;
+
+	m_vecVecXdRef.clear();
+	for (const auto& ref : m_vecVecXdRefwithVelo)
+	{
+		VectorXd tmp(2);
+		tmp[0] = ref[0];
+		tmp[1] = ref[1];
+		m_vecVecXdRef.push_back (tmp);
+	}
 	m_llTimestamp_s = timestamp;
 
 	VectorXd vecXdRef = m_vecVecXdRef.back();
@@ -255,6 +270,9 @@ void ExtractMeasurement::association()
 		}
 	}
 
+	// Sort the vector using predicate and std::sort
+	std::sort(m_ObstacleTracking.m_TrackingObjects.begin(), m_ObstacleTracking.m_TrackingObjects.end(), ID_sort);
+
 	static bool bIsFirst = true;
 	// ICP
 	if (m_bDoICP)
@@ -318,8 +336,22 @@ void ExtractMeasurement::association()
 		}
 	}
 
+
+	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
+	{
+		MeasurementPackage meas_package;
+		meas_package.raw_measurements_ = VectorXd(2);
+
+		meas_package.raw_measurements_ << pCluster->m_center.position.x, 
+			pCluster->m_center.position.y;
+		meas_package.timestamp_ = m_llTimestamp_s;
+
+		pCluster->KF.ProcessMeasurement(meas_package);
+	}
+
+
 	// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
-	for (auto pCluster : m_vecVehicleAccumulatedCloud)
+	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
 	{
 		vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
 			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
@@ -579,6 +611,7 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 0.5;
 
 		m_arrShapes.markers.push_back (shape);
+		break;
 	}
 
 	// For registration and accumulation
