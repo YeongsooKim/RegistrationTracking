@@ -71,6 +71,7 @@ class ExtractMeasurement
 		ros::Publisher m_pub_resultICP;
 		ros::Publisher m_pub_shape;
 		ros::Publisher m_pub_shapeICP;
+		ros::Publisher m_pub_shapeKalman;
 		ros::Publisher m_pub_shapeReference;
 
 		// param
@@ -123,6 +124,7 @@ class ExtractMeasurement
 	public:
 		visualization_msgs::MarkerArray m_arrShapes;
 		visualization_msgs::MarkerArray m_arrShapesICP;
+		visualization_msgs::MarkerArray m_arrShapesKalman;
 		visualization_msgs::MarkerArray m_arrShapesReference;
 
 		std::vector<std::ofstream> vecOf_measurementCSV;

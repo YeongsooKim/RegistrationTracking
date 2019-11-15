@@ -13,6 +13,7 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 	m_pub_resultICP = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("ICP", 100);
 	m_pub_shape = nh.advertise<visualization_msgs::MarkerArray>("Shape", 100);
 	m_pub_shapeICP = nh.advertise<visualization_msgs::MarkerArray>("ShapeICP", 100);
+	m_pub_shapeKalman = nh.advertise<visualization_msgs::MarkerArray>("ShapeKalman", 100);
 	m_pub_shapeReference = nh.advertise<visualization_msgs::MarkerArray>("ShapeReference", 100);
 	//m_pub_Origin = nh.advertise<visualization_msgs::Marker> ("Origin", 1);
 
@@ -45,11 +46,6 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 	m_maxIndexNumber = 0;
 
 	m_vecVehicleTrackingClouds.resize(m_measurementN);
-//	for (unsigned int measurementIndex = 0; measurementIndex < m_measurementN; measurementIndex++)
-//	{
-//		clusterPtr pCluster (new Cluster());
-//		m_vecVehicleAccumulatedCloud.push_back(pCluster);
-//	}
 
 	Eigen::Translation3f tl_btol(0.0, 0.0, 0.0);                 // tl: translation
 	Eigen::AngleAxisf rot_x_btol(0.0, Eigen::Vector3f::UnitX());  // rot: rotation
@@ -534,6 +530,7 @@ void ExtractMeasurement::displayShape ()
 	// Tracking objects
 	m_arrShapes.markers.clear();
 	m_arrShapesICP.markers.clear();
+	m_arrShapesKalman.markers.clear();
 	m_arrShapesReference.markers.clear();
 
 	// For OnlyBoundingBox
@@ -728,6 +725,27 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 0.5;
 
 		m_arrShapesICP.markers.push_back (shape);
+
+		visualization_msgs::Marker shapeForKalman;
+
+		shapeForKalman = shape;
+
+		shapeForKalman.ns = "/kalman center point";
+
+		shapeForKalman.points.clear();
+		shapeForKalman.pose.position.x = pCluster->KF.x_[0];
+		shapeForKalman.pose.position.y = pCluster->KF.x_[1];
+		shapeForKalman.pose.position.z = 0.0;
+		shapeForKalman.pose.orientation.x = 0.0;
+		shapeForKalman.pose.orientation.y = 0.0;
+		shapeForKalman.pose.orientation.z = 0.0;
+		shapeForKalman.pose.orientation.w = 1.0;
+
+		shapeForKalman.color.r = 1.0;
+		shapeForKalman.color.g = 0.0;
+		shapeForKalman.color.b = 1.0;
+		shapeForKalman.color.a = 0.5;
+		m_arrShapesKalman.markers.push_back (shapeForKalman);
 	}
 
 	// For reference
@@ -818,6 +836,7 @@ void ExtractMeasurement::publish ()
 	m_pub_resultICP.publish (*pAccumCloudForICP);
 	m_pub_result.publish (*pAccumulationCloud);
 	m_pub_shapeReference.publish (m_arrShapesReference);
+	m_pub_shapeKalman.publish (m_arrShapesKalman);
 	m_pub_shapeICP.publish (m_arrShapesICP);
 	m_pub_shape.publish (m_arrShapes);
 }
