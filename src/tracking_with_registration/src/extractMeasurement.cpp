@@ -20,6 +20,7 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 
 	vecOf_measurementCSV.resize (m_measurementN);
 	vecOf_accumMeasurementCSV.resize (m_measurementN);
+	vecOf_KalmanFilterCSV.resize (m_measurementN);
 
 	for (unsigned int measurementIndex = 0; measurementIndex < m_measurementN; measurementIndex++)
 	{
@@ -33,6 +34,11 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 		vecOf_accumMeasurementCSV[measurementIndex].open ("accumulation_measurement_" + num + ".csv");
 		if (vecOf_accumMeasurementCSV[measurementIndex].is_open()){
 			vecOf_accumMeasurementCSV[measurementIndex] << "timestamp, pose_x, pose_y" << std::endl;
+		}
+
+		vecOf_KalmanFilterCSV[measurementIndex].open ("Kalman_filter_" + num + ".csv");
+		if (vecOf_KalmanFilterCSV[measurementIndex].is_open()){
+			vecOf_KalmanFilterCSV[measurementIndex] << "timestamp, pose_x, pose_y, velocity_x, velocity_y" << std::endl;
 		}
 	}
 
@@ -242,6 +248,9 @@ void ExtractMeasurement::association()
 {
 	m_ObstacleTracking.association(m_OriginalClusters);
 
+	// Sort the vector using predicate and std::sort
+	std::sort(m_ObstacleTracking.m_TrackingObjects.begin(), m_ObstacleTracking.m_TrackingObjects.end(), ID_sort);
+
 	// To store data in csv file, put the center point of OnlyBoundingBox tracking object into member variable with a data type of VectorXd
 	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
@@ -255,23 +264,16 @@ void ExtractMeasurement::association()
 	meas << m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.x, m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.y;
 	m_vecVecXdOnlyBoundingbox.push_back (meas);
 
+	
 	// Store the each pointcloud of same obstacle over timestamp in same member variable 
-	for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
+	unsigned int vehicleN = 0;
+	for (const auto& pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
-		for (unsigned int objectIndex = 0; objectIndex < m_measurementN; objectIndex++)
-		{
-			if ((m_ObstacleTracking.m_TrackingObjects[objectIndex]->m_id-1) == vehicleIndex)
-			{
-				pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[objectIndex]->GetCloud());
-				m_vecVehicleTrackingClouds[vehicleIndex].push_back (pTrackingCloud);
-
-				break;
-			}
-		}
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (pCluster->GetCloud());
+		m_vecVehicleTrackingClouds[vehicleN].push_back (pTrackingCloud);
+		vehicleN++;
 	}
 
-	// Sort the vector using predicate and std::sort
-	std::sort(m_ObstacleTracking.m_TrackingObjects.begin(), m_ObstacleTracking.m_TrackingObjects.end(), ID_sort);
 
 	static bool bIsFirst = true;
 	// ICP
@@ -332,9 +334,21 @@ void ExtractMeasurement::association()
 
 			m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
 			vehicleN++;
-			break;
 		}
 	}
+
+	// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
+	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
+	{
+		vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
+			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
+	}
+
+	// To calculate RMSE, store the center point of registrated tracking object into member variable with a data type of vector<VectorXd> 
+	// which store the same object in same vector
+	VectorXd meas2 (2);
+	meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
+	m_vecVecXdRegistrationAccum.push_back (meas2);
 
 
 	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
@@ -349,19 +363,25 @@ void ExtractMeasurement::association()
 		pCluster->KF.ProcessMeasurement(meas_package);
 	}
 
-
-	// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
+	// To store data in csv file, put the center point of Kalman filter tracking object into member variable with a data type of VectorXd
 	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
 	{
-		vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
-			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
+		vecOf_KalmanFilterCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
+											  << pCluster->KF.x_[0] << ","
+											  << pCluster->KF.x_[1] << ","
+											  << pCluster->KF.x_[2] << ","
+											  << pCluster->KF.x_[3] << ","
+											  << std::endl;
 	}
 
-	// To calculate RMSE, store the center point of registrated tracking object into member variable with a data type of vector<VectorXd> 
+	// To calculate RMSE, store the center point of kalman filter tracking object into member variable with a data type of vector<VectorXd> 
 	// which store the same object in same vector
-	VectorXd meas2 (2);
-	meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
-	m_vecVecXdRegistrationAccum.push_back (meas2);
+	VectorXd meas3 (4);
+	meas3 << m_vecVehicleAccumulatedCloud[0]->KF.x_[0],
+			 m_vecVehicleAccumulatedCloud[0]->KF.x_[1],
+			 m_vecVehicleAccumulatedCloud[0]->KF.x_[2],
+			 m_vecVehicleAccumulatedCloud[0]->KF.x_[3],
+	m_vecVecXdKalmanFilter.push_back (meas3);
 
 	bIsFirst = false;
 }
@@ -611,7 +631,6 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 0.5;
 
 		m_arrShapes.markers.push_back (shape);
-		break;
 	}
 
 	// For registration and accumulation

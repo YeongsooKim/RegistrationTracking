@@ -89,6 +89,7 @@ class ExtractMeasurement
 
 		std::vector<VectorXd> m_vecVecXdOnlyBoundingbox;
 		std::vector<VectorXd> m_vecVecXdRegistrationAccum;
+		std::vector<VectorXd> m_vecVecXdKalmanFilter;
 		std::vector<VectorXd> m_vecVecXdResultRMSE;
 		std::vector<VectorXd> m_vecVecXdRef;
 		std::vector<VectorXd> m_vecVecXdRefwithVelo;
@@ -126,6 +127,7 @@ class ExtractMeasurement
 
 		std::vector<std::ofstream> vecOf_measurementCSV;
 		std::vector<std::ofstream> vecOf_accumMeasurementCSV;
+		std::vector<std::ofstream> vecOf_KalmanFilterCSV;
 
 		ExtractMeasurement (unsigned int size, bool bDoVisualizePCD);
 		void setParam ();
