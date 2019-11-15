@@ -109,6 +109,8 @@ void ExtractMeasurement::setData (const std::vector<VectorXd>& vecVecXdRef, long
 	geomsgRefPose.position.x = vecXdRef[0];
 	geomsgRefPose.position.y = vecXdRef[1];
 	m_geomsgReferences.poses.push_back (geomsgRefPose);
+
+	m_myTools.setTime (timestamp);
 }
 
 void ExtractMeasurement::process()
@@ -345,7 +347,6 @@ void ExtractMeasurement::association()
 	VectorXd meas2 (2);
 	meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
 	m_vecVecXdRegistrationAccum.push_back (meas2);
-
 
 	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
 	{
@@ -752,7 +753,7 @@ void ExtractMeasurement::displayShape ()
 		string s_py_RMSE = std::to_string(m_vecVecXdResultRMSE[2][1]);
 		string s_vx_RMSE = std::to_string(m_vecVecXdResultRMSE[2][2]);
 		string s_vy_RMSE = std::to_string(m_vecVecXdResultRMSE[2][3]);
-		sWholeText = "Kalman RMSE\r\npx: " + s_px_RMSE
+		sWholeText = "Kalman filter RMSE\r\npx: " + s_px_RMSE
 				   + "\r\npy: " + s_py_RMSE
 				   + "\r\nvx: " + s_vx_RMSE
 				   + "\r\nvy: " + s_vy_RMSE;
@@ -911,6 +912,7 @@ void ExtractMeasurement::calculateRMSE ()
 	vOnlyBoundingBoxRMSE = vOnlyBoundingBoxRMSE.array().sqrt();
 
 	m_vecVecXdResultRMSE.push_back (vOnlyBoundingBoxRMSE);
+	m_myTools.setOnlyBoundingBoxRMSE (vOnlyBoundingBoxRMSE);
 
 	VectorXd vRegistrationAccumRMSE(2);
 	vRegistrationAccumRMSE << 0,0;
@@ -925,6 +927,7 @@ void ExtractMeasurement::calculateRMSE ()
 	vRegistrationAccumRMSE = vRegistrationAccumRMSE.array().sqrt();
 
 	m_vecVecXdResultRMSE.push_back (vRegistrationAccumRMSE);
+	m_myTools.setAccumulationRMSE (vRegistrationAccumRMSE);
 
 	VectorXd vKalmanRMSE (4);
 	vKalmanRMSE << 0,0,0,0;
@@ -939,4 +942,5 @@ void ExtractMeasurement::calculateRMSE ()
 	vKalmanRMSE = vKalmanRMSE.array().sqrt();
 
 	m_vecVecXdResultRMSE.push_back (vKalmanRMSE);
+	m_myTools.setKalmanFilterRMSE (vKalmanRMSE);
 }
