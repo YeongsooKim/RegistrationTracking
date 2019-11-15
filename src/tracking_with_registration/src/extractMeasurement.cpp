@@ -746,6 +746,39 @@ void ExtractMeasurement::displayShape ()
 		shapeForKalman.color.b = 1.0;
 		shapeForKalman.color.a = 0.5;
 		m_arrShapesKalman.markers.push_back (shapeForKalman);
+
+		// text
+		string s_px_RMSE = std::to_string(m_vecVecXdResultRMSE[2][0]);
+		string s_py_RMSE = std::to_string(m_vecVecXdResultRMSE[2][1]);
+		string s_vx_RMSE = std::to_string(m_vecVecXdResultRMSE[2][2]);
+		string s_vy_RMSE = std::to_string(m_vecVecXdResultRMSE[2][3]);
+		sWholeText = "Kalman RMSE\r\npx: " + s_px_RMSE
+				   + "\r\npy: " + s_py_RMSE
+				   + "\r\nvx: " + s_vx_RMSE
+				   + "\r\nvy: " + s_vy_RMSE;
+
+		shapeForKalman.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+		shapeForKalman.ns = "/RMSE";
+
+		shapeForKalman.points.clear();
+		shapeForKalman.pose.position.x = 0;
+		shapeForKalman.pose.position.y = 10;
+		shapeForKalman.pose.position.z = 0;
+		shapeForKalman.pose.orientation.x = 0.0;
+		shapeForKalman.pose.orientation.y = 0.0;
+		shapeForKalman.pose.orientation.z = 0.0;
+		shapeForKalman.pose.orientation.w = 1.0;
+
+		shapeForKalman.scale.x = 2.0;
+		shapeForKalman.scale.y = 2.0;
+		shapeForKalman.scale.z = 2.0;
+
+		shapeForKalman.color.r = shapeForKalman.color.g = shapeForKalman.color.b = 1.0;
+		shapeForKalman.color.a = 1.0;
+
+		shapeForKalman.text = sWholeText;
+
+		m_arrShapesKalman.markers.push_back (shapeForKalman);
 	}
 
 	// For reference
@@ -892,4 +925,18 @@ void ExtractMeasurement::calculateRMSE ()
 	vRegistrationAccumRMSE = vRegistrationAccumRMSE.array().sqrt();
 
 	m_vecVecXdResultRMSE.push_back (vRegistrationAccumRMSE);
+
+	VectorXd vKalmanRMSE (4);
+	vKalmanRMSE << 0,0,0,0;
+
+	for (unsigned int measIndex = 0; measIndex < m_vecVecXdRefwithVelo.size(); measIndex++)
+	{
+		VectorXd residual = m_vecVecXdRefwithVelo[measIndex] - m_vecVecXdKalmanFilter[measIndex];
+		residual = residual.array() * residual.array();
+		vKalmanRMSE += residual;
+	}
+	vKalmanRMSE = vKalmanRMSE/m_vecVecXdRefwithVelo.size();
+	vKalmanRMSE = vKalmanRMSE.array().sqrt();
+
+	m_vecVecXdResultRMSE.push_back (vKalmanRMSE);
 }
