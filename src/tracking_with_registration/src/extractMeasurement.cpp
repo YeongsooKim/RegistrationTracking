@@ -367,8 +367,7 @@ void ExtractMeasurement::association()
 											  << pCluster->KF.x_[0] << ","
 											  << pCluster->KF.x_[1] << ","
 											  << pCluster->KF.x_[2] << ","
-											  << pCluster->KF.x_[3] << ","
-											  << std::endl;
+											  << pCluster->KF.x_[3] << std::endl;
 	}
 
 	// To calculate RMSE, store the center point of kalman filter tracking object into member variable with a data type of vector<VectorXd> 
@@ -682,7 +681,10 @@ void ExtractMeasurement::displayShape ()
 		// text
 		string s_x_RMSE = std::to_string(m_vecVecXdResultRMSE[1][0]);
 		string s_y_RMSE = std::to_string(m_vecVecXdResultRMSE[1][1]);
-		string sWholeText = "Registraton and Accumulation RMSE\r\nx: " + s_x_RMSE + "\r\ny: " + s_y_RMSE;
+		string time = std::to_string(m_llTimestamp_s/1e6);
+		string sWholeText = "Registraton and Accumulation RMSE\r\nx: " + s_x_RMSE 
+						  + "\r\ny: " + s_y_RMSE
+						  + "\r\ntime: " + time;
 
 		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 		shape.ns = "/RMSE";
@@ -898,7 +900,9 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr ExtractMeasurement::loadPCD (std::string fil
 void ExtractMeasurement::calculateRMSE ()
 {
 	m_vecVecXdResultRMSE.clear();
+	m_vecD_ResultDistanceRMSE.clear();
 
+	// Only bounding box x, y RMSE
 	VectorXd vOnlyBoundingBoxRMSE(2);
 	vOnlyBoundingBoxRMSE << 0,0;
 
@@ -914,6 +918,27 @@ void ExtractMeasurement::calculateRMSE ()
 	m_vecVecXdResultRMSE.push_back (vOnlyBoundingBoxRMSE);
 	m_myTools.setOnlyBoundingBoxRMSE (vOnlyBoundingBoxRMSE);
 
+	// Only bounding box distance RMSE
+	double vOnlyBoundingBoxDistanceRMSE = 0.0;
+
+	for (unsigned int measIndex = 0; measIndex < m_vecVecXdRef.size(); measIndex++)
+	{
+		double x_dt = m_vecVecXdRef[measIndex][0] - m_vecVecXdOnlyBoundingbox[measIndex][0];
+		double y_dt = m_vecVecXdRef[measIndex][1] - m_vecVecXdOnlyBoundingbox[measIndex][1];
+		double residual = x_dt*x_dt + y_dt*y_dt; 
+		vOnlyBoundingBoxDistanceRMSE += residual;
+	}
+
+	vOnlyBoundingBoxDistanceRMSE = vOnlyBoundingBoxDistanceRMSE/m_vecVecXdRef.size();
+	vOnlyBoundingBoxDistanceRMSE = std::sqrt(vOnlyBoundingBoxDistanceRMSE);
+
+	m_vecD_ResultDistanceRMSE.push_back (vOnlyBoundingBoxDistanceRMSE);
+	m_myTools.setOnlyBoxDistanceRMSE (vOnlyBoundingBoxDistanceRMSE);
+
+
+
+
+	// Accumulation x, y RMSE
 	VectorXd vRegistrationAccumRMSE(2);
 	vRegistrationAccumRMSE << 0,0;
 
@@ -929,6 +954,27 @@ void ExtractMeasurement::calculateRMSE ()
 	m_vecVecXdResultRMSE.push_back (vRegistrationAccumRMSE);
 	m_myTools.setAccumulationRMSE (vRegistrationAccumRMSE);
 
+	// Accumulation distance RMSE
+	double dAccumulationDistanceRMSE = 0.0;
+
+	for (unsigned int measIndex = 0; measIndex < m_vecVecXdRef.size(); measIndex++)
+	{
+		double x_dt = m_vecVecXdRef[measIndex][0] - m_vecVecXdRegistrationAccum[measIndex][0];
+		double y_dt = m_vecVecXdRef[measIndex][1] - m_vecVecXdRegistrationAccum[measIndex][1];
+		double residual = x_dt*x_dt + y_dt*y_dt; 
+		dAccumulationDistanceRMSE += residual;
+	}
+
+	dAccumulationDistanceRMSE = dAccumulationDistanceRMSE/m_vecVecXdRef.size();
+	dAccumulationDistanceRMSE = std::sqrt(dAccumulationDistanceRMSE);
+
+	m_vecD_ResultDistanceRMSE.push_back (dAccumulationDistanceRMSE);
+	m_myTools.setAccumulationDistanceRMSE (dAccumulationDistanceRMSE);
+
+
+
+
+	// Kalman filter x, y RMSE
 	VectorXd vKalmanRMSE (4);
 	vKalmanRMSE << 0,0,0,0;
 
@@ -943,4 +989,21 @@ void ExtractMeasurement::calculateRMSE ()
 
 	m_vecVecXdResultRMSE.push_back (vKalmanRMSE);
 	m_myTools.setKalmanFilterRMSE (vKalmanRMSE);
+
+	// Kalman filter distance RMSE
+	double dKalmanFilterDistanceRMSE = 0.0;
+
+	for (unsigned int measIndex = 0; measIndex < m_vecVecXdRef.size(); measIndex++)
+	{
+		double x_dt = m_vecVecXdRef[measIndex][0] - m_vecVecXdKalmanFilter[measIndex][0];
+		double y_dt = m_vecVecXdRef[measIndex][1] - m_vecVecXdKalmanFilter[measIndex][1];
+		double residual = x_dt*x_dt + y_dt*y_dt; 
+		dKalmanFilterDistanceRMSE += residual;
+	}
+
+	dKalmanFilterDistanceRMSE = dKalmanFilterDistanceRMSE/m_vecVecXdRef.size();
+	dKalmanFilterDistanceRMSE = std::sqrt(dKalmanFilterDistanceRMSE);
+
+	m_vecD_ResultDistanceRMSE.push_back (dKalmanFilterDistanceRMSE);
+	m_myTools.setKalmanFilterDistanceRMSE (dKalmanFilterDistanceRMSE);
 }

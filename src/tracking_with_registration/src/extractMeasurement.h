@@ -98,6 +98,8 @@ class ExtractMeasurement
 		std::vector<VectorXd> m_vecVecXdRef;
 		std::vector<VectorXd> m_vecVecXdRefwithVelo;
 
+		std::vector<double> m_vecD_ResultDistanceRMSE;
+
 		std::vector<RGB> m_globalRGB;
 		std::vector<clusterPtr> m_OriginalClusters;
 		std::vector<clusterPtr> m_vecVehicleAccumulatedCloud;

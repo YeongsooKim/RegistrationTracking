@@ -22,6 +22,23 @@ void MyTools::setKalmanFilterRMSE (VectorXd inputVectorXd)
 	m_vecVecXdKalmanFilterRMSE.push_back (inputVectorXd);
 }
 
+
+void MyTools::setOnlyBoxDistanceRMSE (double inputDistance)
+{
+	m_vecD_OnlyBoxDistanceRMSE.push_back (inputDistance);
+}
+
+void MyTools::setAccumulationDistanceRMSE (double inputDistance)
+{
+	m_vecD_AccumulationDistanceRMSE.push_back (inputDistance);
+}
+
+void MyTools::setKalmanFilterDistanceRMSE (double inputDistance)
+{
+	m_vecD_KalmanFilterDistanceRMSE.push_back (inputDistance);
+}
+
+
 void MyTools::plotting()
 {
 	std::vector<double> times_s (m_times_s.size());
@@ -33,6 +50,7 @@ void MyTools::plotting()
 	std::vector<double> vecD_KalmanFilterRMSE_y (m_vecVecXdKalmanFilterRMSE.size());
 	std::vector<double> vecD_KalmanFilterRMSE_vx (m_vecVecXdKalmanFilterRMSE.size());
 	std::vector<double> vecD_KalmanFilterRMSE_vy (m_vecVecXdKalmanFilterRMSE.size());
+
 
 	for (unsigned int stepIndex = 0; stepIndex < m_times_s.size(); stepIndex++)
 	{
@@ -49,32 +67,48 @@ void MyTools::plotting()
 	}
 
 
+//	plt::figure_size (1200, 780);
+//	plt::suptitle("x, y RMSE over time");
+//	// Set the "super title"
+//	plt::subplot(2, 1, 1);
+//	plt::title("x RMSE over time");
+//	plt::plot(times_s, vecD_OnlyBoundingBoxRMSE_x, "r-");
+//	plt::plot(times_s, vecD_AccumulationRMSE_x, "b-");
+//	plt::plot(times_s, vecD_KalmanFilterRMSE_x, "k");
+//	plt::named_plot("OnlyBox", times_s, vecD_OnlyBoundingBoxRMSE_x);
+//	plt::named_plot("Accumulation", times_s, vecD_AccumulationRMSE_x);
+//	plt::named_plot("Kalman filter", times_s, vecD_KalmanFilterRMSE_x);
+//	plt::legend();
+//	plt::ylabel ("RMSE (m)");
+//
+//	plt::subplot(2, 1, 2);
+//	plt::title("y RMSE over time");
+//	plt::plot(times_s, vecD_OnlyBoundingBoxRMSE_y, "r-");
+//	plt::plot(times_s, vecD_AccumulationRMSE_y, "b-");
+//	plt::plot(times_s, vecD_KalmanFilterRMSE_y, "k");
+//	plt::named_plot("OnlyBox", times_s, vecD_OnlyBoundingBoxRMSE_y);
+//	plt::named_plot("Accumulation", times_s, vecD_AccumulationRMSE_y);
+//	plt::named_plot("Kalman filter", times_s, vecD_KalmanFilterRMSE_y);
+//	plt::legend();
+//	plt::xlabel ("time (s)");
+//	plt::ylabel ("RMSE (m)");
+//
+//
+//	// Show plots
+//	plt::show();
+//
+//	plt::figure(2);
 	plt::figure_size (1200, 780);
-    plt::suptitle("RMSE over time");
-    // Set the "super title"
-    plt::subplot(2, 1, 1);
-    plt::title("x RMSE over time");
-	plt::plot(times_s, vecD_OnlyBoundingBoxRMSE_x, "r-");
-	plt::plot(times_s, vecD_AccumulationRMSE_x, "b-");
-	plt::plot(times_s, vecD_KalmanFilterRMSE_x, "k");
-    plt::named_plot("OnlyBox", times_s, vecD_OnlyBoundingBoxRMSE_x);
-    plt::named_plot("Accumulation", times_s, vecD_AccumulationRMSE_x);
-    plt::named_plot("Kalman filter", times_s, vecD_KalmanFilterRMSE_x);
+	plt::title("Diatnce RMSE over time");
+	plt::plot(times_s, m_vecD_OnlyBoxDistanceRMSE, "r-");
+	plt::plot(times_s, m_vecD_AccumulationDistanceRMSE, "b-");
+	plt::plot(times_s, m_vecD_KalmanFilterDistanceRMSE, "k");
+	plt::named_plot("OnlyBox", times_s, m_vecD_OnlyBoxDistanceRMSE);
+	plt::named_plot("Accumulation", times_s, m_vecD_AccumulationDistanceRMSE);
+	plt::named_plot("Kalman filter", times_s, m_vecD_KalmanFilterDistanceRMSE);
 	plt::legend();
 	plt::ylabel ("RMSE (m)");
-
-    plt::subplot(2, 1, 2);
-    plt::title("y RMSE over time");
-	plt::plot(times_s, vecD_OnlyBoundingBoxRMSE_y, "r-");
-	plt::plot(times_s, vecD_AccumulationRMSE_y, "b-");
-	plt::plot(times_s, vecD_KalmanFilterRMSE_y, "k");
-    plt::named_plot("OnlyBox", times_s, vecD_OnlyBoundingBoxRMSE_y);
-    plt::named_plot("Accumulation", times_s, vecD_AccumulationRMSE_y);
-    plt::named_plot("Kalman filter", times_s, vecD_KalmanFilterRMSE_y);
-	plt::legend();
 	plt::xlabel ("time (s)");
-	plt::ylabel ("RMSE (m)");
-
 
 	// Show plots
 	plt::show();
