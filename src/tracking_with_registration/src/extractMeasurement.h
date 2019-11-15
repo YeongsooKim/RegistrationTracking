@@ -22,13 +22,16 @@
 #include <geometry_msgs/Pose.h>
 
 #include <vector>
+#include <algorithm>
 #include "cluster.hpp"
 #include "obstacle_tracking.hpp"
+#include "myTools.hpp"
 #include "Eigen/Dense"
 
+
+using namespace std;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
-using namespace std;
 
 typedef struct _rgb RGB;
 struct _rgb
@@ -65,11 +68,13 @@ class ExtractMeasurement
 		// Declare nodehandler
 		ros::NodeHandle nh;
 
+
 		// Declare publisher
 		ros::Publisher m_pub_result;
 		ros::Publisher m_pub_resultICP;
 		ros::Publisher m_pub_shape;
 		ros::Publisher m_pub_shapeICP;
+		ros::Publisher m_pub_shapeKalman;
 		ros::Publisher m_pub_shapeReference;
 
 		// param
@@ -88,8 +93,10 @@ class ExtractMeasurement
 
 		std::vector<VectorXd> m_vecVecXdOnlyBoundingbox;
 		std::vector<VectorXd> m_vecVecXdRegistrationAccum;
+		std::vector<VectorXd> m_vecVecXdKalmanFilter;
 		std::vector<VectorXd> m_vecVecXdResultRMSE;
 		std::vector<VectorXd> m_vecVecXdRef;
+		std::vector<VectorXd> m_vecVecXdRefwithVelo;
 
 		std::vector<RGB> m_globalRGB;
 		std::vector<clusterPtr> m_OriginalClusters;
@@ -118,12 +125,16 @@ class ExtractMeasurement
 
 
 	public:
+		MyTools m_myTools;
+
 		visualization_msgs::MarkerArray m_arrShapes;
 		visualization_msgs::MarkerArray m_arrShapesICP;
+		visualization_msgs::MarkerArray m_arrShapesKalman;
 		visualization_msgs::MarkerArray m_arrShapesReference;
 
 		std::vector<std::ofstream> vecOf_measurementCSV;
 		std::vector<std::ofstream> vecOf_accumMeasurementCSV;
+		std::vector<std::ofstream> vecOf_KalmanFilterCSV;
 
 		ExtractMeasurement (unsigned int size, bool bDoVisualizePCD);
 		void setParam ();

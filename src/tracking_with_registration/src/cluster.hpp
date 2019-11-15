@@ -6,6 +6,7 @@
 #include <pcl/point_types.h>
 #include <geometry_msgs/PolygonStamped.h>
 
+#include "kalman_filter.h"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -35,6 +36,8 @@ class Cluster
 
 	Eigen::Matrix3f m_eigen_vectors;
 	Eigen::Vector3f m_eigen_values;
+
+	KalmanFilter KF;
 
 	bool m_valid_cluster;
 	void SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,

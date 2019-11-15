@@ -1,5 +1,11 @@
 #include "extractMeasurement.h"
 
+
+bool ID_sort (const clusterPtr& ID1, const clusterPtr& ID2)
+{
+	return ID1->m_id < ID2->m_id;
+}
+
 ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) : m_measurementN (size), m_bDoVisualize(bDoVisualizePCD)
 {
 	// define publisher
@@ -7,6 +13,7 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 	m_pub_resultICP = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("ICP", 100);
 	m_pub_shape = nh.advertise<visualization_msgs::MarkerArray>("Shape", 100);
 	m_pub_shapeICP = nh.advertise<visualization_msgs::MarkerArray>("ShapeICP", 100);
+	m_pub_shapeKalman = nh.advertise<visualization_msgs::MarkerArray>("ShapeKalman", 100);
 	m_pub_shapeReference = nh.advertise<visualization_msgs::MarkerArray>("ShapeReference", 100);
 	//m_pub_Origin = nh.advertise<visualization_msgs::Marker> ("Origin", 1);
 
@@ -14,6 +21,7 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 
 	vecOf_measurementCSV.resize (m_measurementN);
 	vecOf_accumMeasurementCSV.resize (m_measurementN);
+	vecOf_KalmanFilterCSV.resize (m_measurementN);
 
 	for (unsigned int measurementIndex = 0; measurementIndex < m_measurementN; measurementIndex++)
 	{
@@ -28,16 +36,16 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 		if (vecOf_accumMeasurementCSV[measurementIndex].is_open()){
 			vecOf_accumMeasurementCSV[measurementIndex] << "timestamp, pose_x, pose_y" << std::endl;
 		}
+
+		vecOf_KalmanFilterCSV[measurementIndex].open ("Kalman_filter_" + num + ".csv");
+		if (vecOf_KalmanFilterCSV[measurementIndex].is_open()){
+			vecOf_KalmanFilterCSV[measurementIndex] << "timestamp, pose_x, pose_y, velocity_x, velocity_y" << std::endl;
+		}
 	}
 
 	m_maxIndexNumber = 0;
 
 	m_vecVehicleTrackingClouds.resize(m_measurementN);
-//	for (unsigned int measurementIndex = 0; measurementIndex < m_measurementN; measurementIndex++)
-//	{
-//		clusterPtr pCluster (new Cluster());
-//		m_vecVehicleAccumulatedCloud.push_back(pCluster);
-//	}
 
 	Eigen::Translation3f tl_btol(0.0, 0.0, 0.0);                 // tl: translation
 	Eigen::AngleAxisf rot_x_btol(0.0, Eigen::Vector3f::UnitX());  // rot: rotation
@@ -84,7 +92,16 @@ void ExtractMeasurement::setParam()
 
 void ExtractMeasurement::setData (const std::vector<VectorXd>& vecVecXdRef, long long timestamp)
 {
-	m_vecVecXdRef = vecVecXdRef;
+	m_vecVecXdRefwithVelo = vecVecXdRef;
+
+	m_vecVecXdRef.clear();
+	for (const auto& ref : m_vecVecXdRefwithVelo)
+	{
+		VectorXd tmp(2);
+		tmp[0] = ref[0];
+		tmp[1] = ref[1];
+		m_vecVecXdRef.push_back (tmp);
+	}
 	m_llTimestamp_s = timestamp;
 
 	VectorXd vecXdRef = m_vecVecXdRef.back();
@@ -92,6 +109,8 @@ void ExtractMeasurement::setData (const std::vector<VectorXd>& vecVecXdRef, long
 	geomsgRefPose.position.x = vecXdRef[0];
 	geomsgRefPose.position.y = vecXdRef[1];
 	m_geomsgReferences.poses.push_back (geomsgRefPose);
+
+	m_myTools.setTime (timestamp);
 }
 
 void ExtractMeasurement::process()
@@ -227,6 +246,9 @@ void ExtractMeasurement::association()
 {
 	m_ObstacleTracking.association(m_OriginalClusters);
 
+	// Sort the vector using predicate and std::sort
+	std::sort(m_ObstacleTracking.m_TrackingObjects.begin(), m_ObstacleTracking.m_TrackingObjects.end(), ID_sort);
+
 	// To store data in csv file, put the center point of OnlyBoundingBox tracking object into member variable with a data type of VectorXd
 	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
@@ -240,20 +262,16 @@ void ExtractMeasurement::association()
 	meas << m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.x, m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.y;
 	m_vecVecXdOnlyBoundingbox.push_back (meas);
 
+	
 	// Store the each pointcloud of same obstacle over timestamp in same member variable 
-	for (unsigned int vehicleIndex = 0; vehicleIndex < m_measurementN; vehicleIndex++)
+	unsigned int vehicleN = 0;
+	for (const auto& pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
-		for (unsigned int objectIndex = 0; objectIndex < m_measurementN; objectIndex++)
-		{
-			if ((m_ObstacleTracking.m_TrackingObjects[objectIndex]->m_id-1) == vehicleIndex)
-			{
-				pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[objectIndex]->GetCloud());
-				m_vecVehicleTrackingClouds[vehicleIndex].push_back (pTrackingCloud);
-
-				break;
-			}
-		}
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (pCluster->GetCloud());
+		m_vecVehicleTrackingClouds[vehicleN].push_back (pTrackingCloud);
+		vehicleN++;
 	}
+
 
 	static bool bIsFirst = true;
 	// ICP
@@ -314,12 +332,11 @@ void ExtractMeasurement::association()
 
 			m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
 			vehicleN++;
-			break;
 		}
 	}
 
 	// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
-	for (auto pCluster : m_vecVehicleAccumulatedCloud)
+	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
 	{
 		vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
 			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
@@ -330,6 +347,38 @@ void ExtractMeasurement::association()
 	VectorXd meas2 (2);
 	meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
 	m_vecVecXdRegistrationAccum.push_back (meas2);
+
+	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
+	{
+		MeasurementPackage meas_package;
+		meas_package.raw_measurements_ = VectorXd(2);
+
+		meas_package.raw_measurements_ << pCluster->m_center.position.x, 
+			pCluster->m_center.position.y;
+		meas_package.timestamp_ = m_llTimestamp_s;
+
+		pCluster->KF.ProcessMeasurement(meas_package);
+	}
+
+	// To store data in csv file, put the center point of Kalman filter tracking object into member variable with a data type of VectorXd
+	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
+	{
+		vecOf_KalmanFilterCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
+											  << pCluster->KF.x_[0] << ","
+											  << pCluster->KF.x_[1] << ","
+											  << pCluster->KF.x_[2] << ","
+											  << pCluster->KF.x_[3] << ","
+											  << std::endl;
+	}
+
+	// To calculate RMSE, store the center point of kalman filter tracking object into member variable with a data type of vector<VectorXd> 
+	// which store the same object in same vector
+	VectorXd meas3 (4);
+	meas3 << m_vecVehicleAccumulatedCloud[0]->KF.x_[0],
+			 m_vecVehicleAccumulatedCloud[0]->KF.x_[1],
+			 m_vecVehicleAccumulatedCloud[0]->KF.x_[2],
+			 m_vecVehicleAccumulatedCloud[0]->KF.x_[3],
+	m_vecVecXdKalmanFilter.push_back (meas3);
 
 	bIsFirst = false;
 }
@@ -482,6 +531,7 @@ void ExtractMeasurement::displayShape ()
 	// Tracking objects
 	m_arrShapes.markers.clear();
 	m_arrShapesICP.markers.clear();
+	m_arrShapesKalman.markers.clear();
 	m_arrShapesReference.markers.clear();
 
 	// For OnlyBoundingBox
@@ -676,6 +726,60 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 0.5;
 
 		m_arrShapesICP.markers.push_back (shape);
+
+		visualization_msgs::Marker shapeForKalman;
+
+		shapeForKalman = shape;
+
+		shapeForKalman.ns = "/kalman center point";
+
+		shapeForKalman.points.clear();
+		shapeForKalman.pose.position.x = pCluster->KF.x_[0];
+		shapeForKalman.pose.position.y = pCluster->KF.x_[1];
+		shapeForKalman.pose.position.z = 0.0;
+		shapeForKalman.pose.orientation.x = 0.0;
+		shapeForKalman.pose.orientation.y = 0.0;
+		shapeForKalman.pose.orientation.z = 0.0;
+		shapeForKalman.pose.orientation.w = 1.0;
+
+		shapeForKalman.color.r = 1.0;
+		shapeForKalman.color.g = 0.0;
+		shapeForKalman.color.b = 1.0;
+		shapeForKalman.color.a = 0.5;
+		m_arrShapesKalman.markers.push_back (shapeForKalman);
+
+		// text
+		string s_px_RMSE = std::to_string(m_vecVecXdResultRMSE[2][0]);
+		string s_py_RMSE = std::to_string(m_vecVecXdResultRMSE[2][1]);
+		string s_vx_RMSE = std::to_string(m_vecVecXdResultRMSE[2][2]);
+		string s_vy_RMSE = std::to_string(m_vecVecXdResultRMSE[2][3]);
+		sWholeText = "Kalman filter RMSE\r\npx: " + s_px_RMSE
+				   + "\r\npy: " + s_py_RMSE
+				   + "\r\nvx: " + s_vx_RMSE
+				   + "\r\nvy: " + s_vy_RMSE;
+
+		shapeForKalman.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+		shapeForKalman.ns = "/RMSE";
+
+		shapeForKalman.points.clear();
+		shapeForKalman.pose.position.x = 0;
+		shapeForKalman.pose.position.y = 10;
+		shapeForKalman.pose.position.z = 0;
+		shapeForKalman.pose.orientation.x = 0.0;
+		shapeForKalman.pose.orientation.y = 0.0;
+		shapeForKalman.pose.orientation.z = 0.0;
+		shapeForKalman.pose.orientation.w = 1.0;
+
+		shapeForKalman.scale.x = 2.0;
+		shapeForKalman.scale.y = 2.0;
+		shapeForKalman.scale.z = 2.0;
+
+		shapeForKalman.color.r = shapeForKalman.color.g = shapeForKalman.color.b = 1.0;
+		shapeForKalman.color.a = 1.0;
+
+		shapeForKalman.text = sWholeText;
+
+		m_arrShapesKalman.markers.push_back (shapeForKalman);
 	}
 
 	// For reference
@@ -766,6 +870,7 @@ void ExtractMeasurement::publish ()
 	m_pub_resultICP.publish (*pAccumCloudForICP);
 	m_pub_result.publish (*pAccumulationCloud);
 	m_pub_shapeReference.publish (m_arrShapesReference);
+	m_pub_shapeKalman.publish (m_arrShapesKalman);
 	m_pub_shapeICP.publish (m_arrShapesICP);
 	m_pub_shape.publish (m_arrShapes);
 }
@@ -807,6 +912,7 @@ void ExtractMeasurement::calculateRMSE ()
 	vOnlyBoundingBoxRMSE = vOnlyBoundingBoxRMSE.array().sqrt();
 
 	m_vecVecXdResultRMSE.push_back (vOnlyBoundingBoxRMSE);
+	m_myTools.setOnlyBoundingBoxRMSE (vOnlyBoundingBoxRMSE);
 
 	VectorXd vRegistrationAccumRMSE(2);
 	vRegistrationAccumRMSE << 0,0;
@@ -821,4 +927,20 @@ void ExtractMeasurement::calculateRMSE ()
 	vRegistrationAccumRMSE = vRegistrationAccumRMSE.array().sqrt();
 
 	m_vecVecXdResultRMSE.push_back (vRegistrationAccumRMSE);
+	m_myTools.setAccumulationRMSE (vRegistrationAccumRMSE);
+
+	VectorXd vKalmanRMSE (4);
+	vKalmanRMSE << 0,0,0,0;
+
+	for (unsigned int measIndex = 0; measIndex < m_vecVecXdRefwithVelo.size(); measIndex++)
+	{
+		VectorXd residual = m_vecVecXdRefwithVelo[measIndex] - m_vecVecXdKalmanFilter[measIndex];
+		residual = residual.array() * residual.array();
+		vKalmanRMSE += residual;
+	}
+	vKalmanRMSE = vKalmanRMSE/m_vecVecXdRefwithVelo.size();
+	vKalmanRMSE = vKalmanRMSE.array().sqrt();
+
+	m_vecVecXdResultRMSE.push_back (vKalmanRMSE);
+	m_myTools.setKalmanFilterRMSE (vKalmanRMSE);
 }
