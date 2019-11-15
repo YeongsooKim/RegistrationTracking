@@ -54,6 +54,8 @@ int main(int argc, char** argv)
 
 	}
 
+	measurement.m_myTools.plotting();
+
 	for (unsigned int trafficIndex = 0; trafficIndex < highway.traffic.size(); trafficIndex++)
 	{
 		highway.vecOf_refCSV[trafficIndex].close();

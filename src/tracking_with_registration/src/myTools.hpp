@@ -20,6 +20,9 @@ class MyTools
 	std::vector<VectorXd> m_vecVecXdOnlyBoundingBoxRMSE;
 	std::vector<VectorXd> m_vecVecXdAccumulationRMSE;
 	std::vector<VectorXd> m_vecVecXdKalmanFilterRMSE;
+	std::vector<double> m_vecD_OnlyBoxDistanceRMSE;
+	std::vector<double> m_vecD_AccumulationDistanceRMSE;
+	std::vector<double> m_vecD_KalmanFilterDistanceRMSE;
 
 	public:
 	MyTools();
@@ -27,6 +30,9 @@ class MyTools
 	void setOnlyBoundingBoxRMSE (VectorXd inputVectorXd);
 	void setAccumulationRMSE (VectorXd inputVectorXd);
 	void setKalmanFilterRMSE (VectorXd inputVectorXd);
+	void setOnlyBoxDistanceRMSE (double inputDistance);
+	void setAccumulationDistanceRMSE (double inputDistance);
+	void setKalmanFilterDistanceRMSE (double inputDistance);
 	void plotting();
 };
 
