@@ -39,9 +39,9 @@ int main(int argc, char** argv)
 		frame_count++;
 		time_us = 1000000*frame_count/frame_per_sec;
 
-		char c;
-		while ((c = getchar()) != '\n' && c != EOF) { }
-		ROS_INFO_STREAM ("end iteration");
+//		char c;
+//		while ((c = getchar()) != '\n' && c != EOF) { }
+//		ROS_INFO_STREAM ("end iteration");
 	}
 
 	measurement.m_myTools.plotting();

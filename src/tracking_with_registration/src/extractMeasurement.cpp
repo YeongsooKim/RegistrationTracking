@@ -52,8 +52,6 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size
 
 	m_maxIndexNumber = 0;
 
-	m_vecVehicleTrackingClouds.resize(m_measurementN);
-
 	Eigen::Translation3f tl_btol(0.0, 0.0, 0.0);                 // tl: translation
 	Eigen::AngleAxisf rot_x_btol(0.0, Eigen::Vector3f::UnitX());  // rot: rotation
 	Eigen::AngleAxisf rot_y_btol(0.0, Eigen::Vector3f::UnitY());
@@ -149,10 +147,10 @@ void ExtractMeasurement::process()
 	calculateRMSE ();
 
 	// display shape
-	//displayShape ();
+	displayShape ();
 
 	// publish	
-	//publish ();
+	publish ();
 }
 
 
@@ -274,83 +272,52 @@ void ExtractMeasurement::association()
 	meas << m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.x, m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.y;
 	m_vecVecXdOnlyBoundingbox.push_back (meas);
 
-	
+//	// Store the each pointcloud of same obstacle over timestamp in same member variable 
+//	static unsigned int vehicleN = 0;
+//	for (; vehicleN < m_ObstacleTracking.m_TrackingObjects.size(); vehicleN++)
+//	{
+//		clusterPtr pCluster (new Cluster());
+//		m_vecVehicleAccumulatedCloud.push_back(pCluster);
+//	}
+
 	// Store the each pointcloud of same obstacle over timestamp in same member variable 
+	static unsigned int clusterN = 0;
+	for (; clusterN < 1; clusterN++)
+	{
+		clusterPtr pCluster (new Cluster());
+		m_vecVehicleAccumulatedCloud.push_back(pCluster);
+	}
+
+
 	unsigned int vehicleN = 0;
-	for (const auto& pCluster : m_ObstacleTracking.m_TrackingObjects)
+	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
 	{
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (pCluster->GetCloud());
-		m_vecVehicleTrackingClouds[vehicleN].push_back (pTrackingCloud);
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (pCluster->GetCloud());
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[vehicleN]->GetCloud());
+
+		// ICP
+		if (m_bDoICP) 
+			point2pointICPwithAccumulation (pTrackingCloud, pAccumulatedCloud, pCluster->getIsFristRegistration());
+		// NDT
+		else if (m_bDoNDT)
+			NDT (pTrackingCloud, pAccumulatedCloud, pCluster->getIsFristRegistration());
+
+		unsigned int r; unsigned int g; unsigned int b;
+		if (vehicleN == 0) {
+			r = 255; g = 0; b = 0;
+		}
+		else if (vehicleN == 1) {
+			r = 0; g = 255; b = 0;
+		}
+		else if (vehicleN == 2) {
+			r = 0; g = 0; b = 255;
+		}
+
+		pCluster->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
 		vehicleN++;
-		break;
 	}
 
-
-	static bool bIsFirst = true;
-	// ICP
-	if (m_bDoICP)
-	{
-		unsigned int vehicleN = 0;
-		for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
-		{
-			if (bIsFirst)
-			{
-				clusterPtr pCluster (new Cluster());
-				m_vecVehicleAccumulatedCloud.push_back(pCluster);
-			}
-
-			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
-			//point2pointICPwithAccumulation (pAccumulatedCloud, vecVehicleTrackingCloud.back(), bIsFirst);
-			point2pointICPwithAccumulation (vecVehicleTrackingCloud.back(), pAccumulatedCloud, bIsFirst);
-
-			unsigned int r; unsigned int g; unsigned int b;
-			if (vehicleN == 0) {
-				r = 255; g = 0; b = 0;
-			}
-			else if (vehicleN == 1) {
-				r = 0; g = 255; b = 0;
-			}
-			else if (vehicleN == 2) {
-				r = 0; g = 0; b = 255;
-			}
-
-			m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
-			vehicleN++;
-
-			break;
-		}
-	}
-	// NDT
-	else if (m_bDoNDT)
-	{
-		unsigned int vehicleN = 0;
-		for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
-		{
-			if (bIsFirst)
-			{
-				clusterPtr pCluster (new Cluster());
-				m_vecVehicleAccumulatedCloud.push_back(pCluster);
-			}
-
-			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
-			ExtractMeasurement::NDT (pAccumulatedCloud, vecVehicleTrackingCloud.back(), bIsFirst);
-
-			unsigned int r; unsigned int g; unsigned int b;
-			if (vehicleN == 0) {
-				r = 255; g = 0; b = 0;
-			}
-			else if (vehicleN == 1) {
-				r = 0; g = 255; b = 0;
-			}
-			else if (vehicleN == 2) {
-				r = 0; g = 0; b = 255;
-			}
-
-			m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
-			vehicleN++;
-		}
-	}
-
+		
 	// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
 	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
 	{
@@ -395,58 +362,131 @@ void ExtractMeasurement::association()
 			 m_vecVehicleAccumulatedCloud[0]->KF.x_[3],
 	m_vecVecXdKalmanFilter.push_back (meas3);
 
-	bIsFirst = false;
 }
 
-void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst)
+//void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst)
+//{
+//	// for test
+//	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedInputSourceCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//	for (const auto& point : pInputSourceCloud->points)
+//	{
+//		pcl::PointXYZRGB tmp;
+//		tmp.x = point.x;
+//		tmp.y = point.y;
+//		tmp.z = point.z;
+//		tmp.r = 0;
+//		tmp.g = 255;
+//		tmp.b = 0;
+//
+//		pColorChangedInputSourceCloud->points.push_back (tmp);
+//	}
+//	pInputSourceCloud->swap (*pColorChangedInputSourceCloud);
+//	// -------------------------------------------------------
+//
+//	pInputSourceCloud->header.frame_id = "map";
+//	m_pub_source.publish (*pInputSourceCloud);
+//
+//	// for test
+//	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedInputTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//	for (const auto& point : pInputTargetCloud->points)
+//	{
+//		pcl::PointXYZRGB tmp;
+//		tmp.x = point.x;
+//		tmp.y = point.y;
+//		tmp.z = point.z;
+//		tmp.r = 0;
+//		tmp.g = 0;
+//		tmp.b = 255;
+//
+//		pColorChangedInputTargetCloud->points.push_back (tmp);
+//	}
+//	pInputTargetCloud->swap (*pColorChangedInputTargetCloud);
+//	// -------------------------------------------------------
+//	
+//	pInputTargetCloud->header.frame_id = "map";
+//	m_pub_target.publish (*pInputTargetCloud);
+//
+//	
+//	if (bIsFirst)
+//	{
+//		pInputTargetCloud->swap (*pInputSourceCloud);
+//	}
+//	else if(!bIsFirst)
+//	{
+//		Eigen::Matrix4f finalTransformation;
+//		Eigen::Matrix4f finalTransformationInverse;
+//
+//		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
+//		icp.setInputSource (pInputSourceCloud);
+//		icp.setInputTarget (pInputTargetCloud);
+//		pcl::PointCloud<pcl::PointXYZRGB> finalCloud;
+//		icp.align (finalCloud);
+//
+//		// for test
+//		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedFinalCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//		for (const auto& point : finalCloud.points)
+//		{
+//			pcl::PointXYZRGB tmp;
+//			tmp.x = point.x;
+//			tmp.y = point.y;
+//			tmp.z = point.z;
+//			tmp.r = 255;
+//			tmp.g = 255;
+//			tmp.b = 0;
+//
+//			pColorChangedFinalCloud->points.push_back (tmp);
+//		}
+//
+//		pColorChangedFinalCloud->header.frame_id = "map";
+//		m_pub_final.publish (*pColorChangedFinalCloud);
+//		// -------------------------------------------------------
+//		
+//		finalTransformation = icp.getFinalTransformation();
+//		finalTransformationInverse = finalTransformation.inverse();
+//
+//		*pInputTargetCloud += finalCloud;
+//
+//		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedInputTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//		pcl::transformPointCloud (*pInputTargetCloud, *pTransformedInputTargetCloud, finalTransformationInverse);
+//
+//		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//		downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.04);
+//		pInputTargetCloud->swap (*pTmpPointCloud);
+//	}
+//
+//	// for test
+//	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedOutputCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//	for (const auto& point : pInputTargetCloud->points)
+//	{
+//		pcl::PointXYZRGB tmp;
+//		tmp.x = point.x;
+//		tmp.y = point.y;
+//		tmp.z = point.z;
+//		tmp.r = 255;
+//		tmp.g = 0;
+//		tmp.b = 0;
+//
+//		pColorChangedOutputCloud->points.push_back (tmp);
+//	}
+//	pOutputCloud->swap (*pColorChangedOutputCloud);
+//	// -------------------------------------------------------
+//
+//	pOutputCloud->header.frame_id = "map";
+//	ROS_INFO_STREAM("pointcloud output");
+//	m_pub_output.publish (*pOutputCloud);
+//}
+
+void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst)
 {
-	// for test
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedInputSourceCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	for (const auto& point : pInputSourceCloud->points)
-	{
-		pcl::PointXYZRGB tmp;
-		tmp.x = point.x;
-		tmp.y = point.y;
-		tmp.z = point.z;
-		tmp.r = 0;
-		tmp.g = 255;
-		tmp.b = 0;
-
-		pColorChangedInputSourceCloud->points.push_back (tmp);
-	}
-	pInputSourceCloud->swap (*pColorChangedInputSourceCloud);
-	// -------------------------------------------------------
-
-	pInputSourceCloud->header.frame_id = "map";
-	m_pub_source.publish (*pInputSourceCloud);
-
-	// for test
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedInputTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	for (const auto& point : pInputTargetCloud->points)
-	{
-		pcl::PointXYZRGB tmp;
-		tmp.x = point.x;
-		tmp.y = point.y;
-		tmp.z = point.z;
-		tmp.r = 0;
-		tmp.g = 0;
-		tmp.b = 255;
-
-		pColorChangedInputTargetCloud->points.push_back (tmp);
-	}
-	pInputTargetCloud->swap (*pColorChangedInputTargetCloud);
-	// -------------------------------------------------------
-	
-	pInputTargetCloud->header.frame_id = "map";
-	m_pub_target.publish (*pInputTargetCloud);
-
-	
 	if (bIsFirst)
 	{
 		pInputTargetCloud->swap (*pInputSourceCloud);
+		bIsFirst = false;
+		ROS_INFO_STREAM ("first");
 	}
 	else if(!bIsFirst)
 	{
+		ROS_INFO_STREAM ("not first");
 		Eigen::Matrix4f finalTransformation;
 		Eigen::Matrix4f finalTransformationInverse;
 
@@ -455,25 +495,6 @@ void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<p
 		icp.setInputTarget (pInputTargetCloud);
 		pcl::PointCloud<pcl::PointXYZRGB> finalCloud;
 		icp.align (finalCloud);
-
-		// for test
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedFinalCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-		for (const auto& point : finalCloud.points)
-		{
-			pcl::PointXYZRGB tmp;
-			tmp.x = point.x;
-			tmp.y = point.y;
-			tmp.z = point.z;
-			tmp.r = 255;
-			tmp.g = 255;
-			tmp.b = 0;
-
-			pColorChangedFinalCloud->points.push_back (tmp);
-		}
-
-		pColorChangedFinalCloud->header.frame_id = "map";
-		m_pub_final.publish (*pColorChangedFinalCloud);
-		// -------------------------------------------------------
 		
 		finalTransformation = icp.getFinalTransformation();
 		finalTransformationInverse = finalTransformation.inverse();
@@ -487,64 +508,10 @@ void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<p
 		downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.04);
 		pInputTargetCloud->swap (*pTmpPointCloud);
 	}
-
-	// for test
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedOutputCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	for (const auto& point : pInputTargetCloud->points)
-	{
-		pcl::PointXYZRGB tmp;
-		tmp.x = point.x;
-		tmp.y = point.y;
-		tmp.z = point.z;
-		tmp.r = 255;
-		tmp.g = 0;
-		tmp.b = 0;
-
-		pColorChangedOutputCloud->points.push_back (tmp);
-	}
-	pOutputCloud->swap (*pColorChangedOutputCloud);
-	// -------------------------------------------------------
-
-	pOutputCloud->header.frame_id = "map";
-	ROS_INFO_STREAM("pointcloud output");
-	m_pub_output.publish (*pOutputCloud);
 }
 
-//void ExtractMeasurement::point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst)
-//{
-//	if (bIsFirst)
-//	{
-//		pInputSourceCloud->swap (*pInputTargetCloud);
-//		bIsFirst = false;
-//	}
-//	else if(!bIsFirst)
-//	{
-//		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
-//		icp.setInputSource (pInputSourceCloud);
-//		icp.setInputTarget (pInputTargetCloud);
-//		pcl::PointCloud<pcl::PointXYZRGB> finalCloud;
-//		icp.align (finalCloud);
-//
-//		if (icp.getFitnessScore() < 0.02)
-//		{
-//			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-//			*pTmpPointCloud += finalCloud;
-//			*pTmpPointCloud += *pInputTargetCloud;
-//
-//			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud2 (new pcl::PointCloud<pcl::PointXYZRGB>);
-//			downsample (pTmpPointCloud, pTmpPointCloud2, 0.09);
-//			pInputSourceCloud->clear ();
-//			pInputSourceCloud->swap (*pTmpPointCloud2);
-//		}
-//
-//		else {
-//			pInputSourceCloud->clear ();
-//			pInputSourceCloud->swap (*pInputTargetCloud);
-//		}
-//	}
-//}
 
-void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, bool bIsInitSource)
+void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsInitSource)
 {
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 
@@ -568,6 +535,7 @@ void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTarg
 	if (bIsInitSource)
 	{
 		m_ndt.setInputTarget (pInputTargetCloud);
+		bIsInitSource = false;
 	}
 
 	pose guess_pose;
@@ -996,11 +964,8 @@ void ExtractMeasurement::publish ()
 	pAccumCloudForICP->header.frame_id = "map";
 
 	// accumulation for publish
-	for (const auto& pVehicleTrackingCloud : m_vecVehicleAccumulatedCloud)
-	{
-		*pAccumCloudForICP += *(pVehicleTrackingCloud->GetCloud());
-		break;
-	}
+	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
+		*pAccumCloudForICP += *(pCluster->GetCloud());
 
 
 	// publish

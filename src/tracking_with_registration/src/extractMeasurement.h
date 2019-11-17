@@ -112,7 +112,6 @@ class ExtractMeasurement
 		std::vector<RGB> m_globalRGB;
 		std::vector<clusterPtr> m_OriginalClusters;
 		std::vector<clusterPtr> m_vecVehicleAccumulatedCloud;
-		std::vector<std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>> m_vecVehicleTrackingClouds;
 
 		ObstacleTracking m_ObstacleTracking;
 		geometry_msgs::PoseArray m_geomsgReferences;
@@ -159,13 +158,13 @@ class ExtractMeasurement
 		void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
 		void association ();
 		//void point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst);
-		void point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst);
+		void point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
 		void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);
 		pcl::PointCloud<pcl::PointXYZ>::Ptr loadPCD (std::string file);
 		void calculateRMSE ();
 		void displayShape ();
 		void publish ();
-		void NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, bool bIsInitSource);
+		void NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsInitSource);
 		double calcDiffForRadian(const double lhs_rad, const double rhs_rad);
 };
 

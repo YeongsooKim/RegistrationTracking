@@ -17,6 +17,7 @@ class Cluster
 {
 	private:
 	pcl::PointCloud <pcl::PointXYZRGB>::Ptr m_pPointCloud;
+	bool m_bIsFirstRegistration;
 
 	public:
 	pcl::PointXYZ m_min_point;
@@ -54,6 +55,8 @@ class Cluster
 	void clear();
 	size_t size();
 	void SetCluster (long long timestamp, unsigned int iClusterNumber, unsigned int r, unsigned int g, unsigned int b);
+	bool& getIsFristRegistration();
+	void setIsFirstRegistration(bool isRegistration);
 };
 
 typedef boost::shared_ptr<Cluster> clusterPtr;

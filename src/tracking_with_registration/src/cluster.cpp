@@ -5,6 +5,8 @@ Cluster::Cluster()
 	m_valid_cluster = true;
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 	m_pPointCloud = pPointCloud;
+
+	m_bIsFirstRegistration = true;
 }
 
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr Cluster::GetCloud()
@@ -229,6 +231,16 @@ void Cluster::clear()
 size_t Cluster::size()
 {
 	return m_pPointCloud->size(); 
+}
+
+bool& Cluster::getIsFristRegistration()
+{
+	return m_bIsFirstRegistration;
+}
+
+void Cluster::setIsFirstRegistration(bool isRegistration)
+{
+	m_bIsFirstRegistration = isRegistration;
 }
 
 Cluster::~Cluster()
