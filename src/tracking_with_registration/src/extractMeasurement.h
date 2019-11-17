@@ -95,8 +95,8 @@ class ExtractMeasurement
 		unsigned int m_measurementN;
 		unsigned int m_maxIndexNumber;
 
-		bool m_bDoICP = true;
-		bool m_bDoNDT = false;
+		bool m_bDoICP = false;
+		bool m_bDoNDT = true;
 		bool m_bDoVisualize;
 		long long m_llTimestamp_s;
 
@@ -150,6 +150,7 @@ class ExtractMeasurement
 		void setParam ();
 		void setData (const std::vector<VectorXd>& vecVecXdRef, long long timestamp);
 		void process ();
+		void threshold (const pcl::PointCloud<pcl::PointXYZ> &inputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr &pOutput);
 		void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
 		void downsample (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
 		void getPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic);
