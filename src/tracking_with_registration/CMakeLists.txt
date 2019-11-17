@@ -7,6 +7,7 @@ add_compile_options(-std=c++11)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+find_package (PythonLibs 2.7)
 find_package(catkin REQUIRED COMPONENTS
 	geometry_msgs
 	pcl_conversions
@@ -149,6 +150,8 @@ add_executable (
 	src/extractMeasurement.cpp
 	src/obstacle_tracking.cpp
 	src/cluster.cpp
+	src/kalman_filter.cpp
+	src/myTools.cpp
 	)
 
 target_link_libraries (
@@ -156,6 +159,7 @@ target_link_libraries (
 	${PCL_LIBRARIES}
 	${catkin_LIBRARIES}
 	${OpenCV_INCLUDE_DIRS}
+	${PYHTON_LIBRARIES}
 	)
 
 
