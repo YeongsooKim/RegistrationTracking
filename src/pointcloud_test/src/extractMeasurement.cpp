@@ -103,8 +103,8 @@ void ExtractMeasurement::velodyneCallback (const sensor_msgs::PointCloud2::Const
 //	// publish	
 //	publish ();
 
-//	pThresholdedCloud->header.frame_id = "velodyne";
-//	m_pub_test_result.publish (*pThresholdedCloud);
+	pThresholdedCloud->header.frame_id = "velodyne";
+	m_pub_test_result.publish (*pThresholdedCloud);
 }
 
 void ExtractMeasurement::threshold (const pcl::PointCloud<pcl::PointXYZ> &inputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr &pOutput)
@@ -114,7 +114,7 @@ void ExtractMeasurement::threshold (const pcl::PointCloud<pcl::PointXYZ> &inputC
 	for (const auto& point : inputCloud.points)
 	{
 		double r = sqrt(pow(point.x, 2.0) + pow(point.y, 2.0));
-		if ((point.y > 5.5 || point.y < 1.5) || point.z < -1.25 || r > 17.0)
+		if ((point.y < -5.5 || point.y > -1.5) || (point.z < -1.25 || point.z > 1.0) || r > 17.0)
 			continue;
 		
 		pcl::PointXYZ p;
@@ -412,7 +412,7 @@ void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<p
 		pcl::transformPointCloud (*pInputTargetCloud, *pTransformedInputTargetCloud, finalTransformationInverse);
 
 		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-		downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
+		//downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
 		pInputTargetCloud->swap (*pTmpPointCloud);
 	}
 
@@ -434,7 +434,6 @@ void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<p
 	// -------------------------------------------------------
 
 	pOutputCloud->header.frame_id = "velodyne";
-	ROS_INFO_STREAM("pointcloud output");
 	m_pub_output.publish (*pOutputCloud);
 }
 
@@ -522,14 +521,15 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	}
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	downsample(pInputSourceCloud, pDownsampledCloud, 0.05);
+	downsample(pInputSourceCloud, pDownsampledCloud, 0.9);
 
 
 	m_ndt.setTransformationEpsilon(0.01);
 	m_ndt.setStepSize(0.1);
 	m_ndt.setResolution(1.0);
 	m_ndt.setMaximumIterations(30);
-	m_ndt.setInputSource (pDownsampledCloud);
+	//m_ndt.setInputSource (pDownsampledCloud);
+	m_ndt.setInputSource (pInputSourceCloud);
 
 	if (bIsInitSource)
 	{
@@ -542,6 +542,7 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	guess_pose.x = m_previousPose.x + m_diff_x;	// what is the coordinate of guess_pose
 	guess_pose.y = m_previousPose.y + m_diff_y;
 	guess_pose.z = m_previousPose.z + m_diff_z;
+	guess_pose.roll = m_previousPose.roll;
 	guess_pose.roll = m_previousPose.roll;
 	guess_pose.pitch = m_previousPose.pitch;
 	guess_pose.yaw = m_previousPose.yaw + m_diff_yaw;
@@ -567,7 +568,6 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	Eigen::Matrix4f mat4fBaseLinkInverse(Eigen::Matrix4f::Identity());
 	mat4fBaseLink = mat4fLocalizer * m_mat4fLocal2Base;
 	mat4fBaseLinkInverse = mat4fBaseLink.inverse();
-	ROS_INFO_STREAM (mat4fBaseLinkInverse);
 
 	//pcl::transformPointCloud(*pInputSourceCloud, *pTransformedCloud, mat4fLocalizer);
 
@@ -634,10 +634,10 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 
 	*pTransformedInputTargetCloud += *pInputSourceCloud;
 
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
-	pInputTargetCloud->swap (*pTmpPointCloud);
-	//pInputTargetCloud->swap (*pTransformedInputTargetCloud);
+	//pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	//downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
+	//pInputTargetCloud->swap (*pTmpPointCloud);
+	pInputTargetCloud->swap (*pTransformedInputTargetCloud);
 
 	m_ndt.setInputTarget (pInputTargetCloud);
 
