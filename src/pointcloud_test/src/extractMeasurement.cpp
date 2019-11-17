@@ -567,21 +567,22 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	Eigen::Matrix4f mat4fBaseLinkInverse(Eigen::Matrix4f::Identity());
 	mat4fBaseLink = mat4fLocalizer * m_mat4fLocal2Base;
 	mat4fBaseLinkInverse = mat4fBaseLink.inverse();
+	ROS_INFO_STREAM (mat4fBaseLinkInverse);
 
 	//pcl::transformPointCloud(*pInputSourceCloud, *pTransformedCloud, mat4fLocalizer);
 
 	tf::Matrix3x3 mat_b;
 
-	mat_b.setValue(static_cast<double>(mat4fBaseLinkInverse(0, 0)), static_cast<double>(mat4fBaseLinkInverse(0, 1)),
-			static_cast<double>(mat4fBaseLinkInverse(0, 2)), static_cast<double>(mat4fBaseLinkInverse(1, 0)),
-			static_cast<double>(mat4fBaseLinkInverse(1, 1)), static_cast<double>(mat4fBaseLinkInverse(1, 2)),
-			static_cast<double>(mat4fBaseLinkInverse(2, 0)), static_cast<double>(mat4fBaseLinkInverse(2, 1)),
-			static_cast<double>(mat4fBaseLinkInverse(2, 2)));
+	mat_b.setValue(static_cast<double>(mat4fBaseLink(0, 0)), static_cast<double>(mat4fBaseLink(0, 1)),
+			static_cast<double>(mat4fBaseLink(0, 2)), static_cast<double>(mat4fBaseLink(1, 0)),
+			static_cast<double>(mat4fBaseLink(1, 1)), static_cast<double>(mat4fBaseLink(1, 2)),
+			static_cast<double>(mat4fBaseLink(2, 0)), static_cast<double>(mat4fBaseLink(2, 1)),
+			static_cast<double>(mat4fBaseLink(2, 2)));
 
 	// Update m_ndtPose.
-	m_ndtPose.x = mat4fBaseLinkInverse(0, 3);
-	m_ndtPose.y = mat4fBaseLinkInverse(1, 3);
-	m_ndtPose.z = mat4fBaseLinkInverse(2, 3);
+	m_ndtPose.x = mat4fBaseLink(0, 3);
+	m_ndtPose.y = mat4fBaseLink(1, 3);
+	m_ndtPose.z = mat4fBaseLink(2, 3);
 	mat_b.getRPY(m_ndtPose.roll, m_ndtPose.pitch, m_ndtPose.yaw, 1);
 
 	m_currentPose.x = m_ndtPose.x;
@@ -604,6 +605,8 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	m_previousPose.roll = m_currentPose.roll;
 	m_previousPose.pitch = m_currentPose.pitch;
 	m_previousPose.yaw = m_currentPose.yaw;
+
+	ROS_INFO("x: %f, y: %f, z: %f", m_previousPose.x, m_previousPose.y, m_previousPose.z);
 
 	//*pInputTargetCloud += *pTransformedCloud;
 
@@ -631,10 +634,10 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 
 	*pTransformedInputTargetCloud += *pInputSourceCloud;
 
-	//pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	//downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
-	//pInputTargetCloud->swap (*pTmpPointCloud);
-	pInputTargetCloud->swap (*pTransformedInputTargetCloud);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
+	pInputTargetCloud->swap (*pTmpPointCloud);
+	//pInputTargetCloud->swap (*pTransformedInputTargetCloud);
 
 	m_ndt.setInputTarget (pInputTargetCloud);
 
@@ -656,7 +659,6 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	// -------------------------------------------------------
 
 	pOutputCloud->header.frame_id = "velodyne";
-	ROS_INFO_STREAM("pointcloud output");
 	m_pub_output.publish (*pOutputCloud);
 }
 
