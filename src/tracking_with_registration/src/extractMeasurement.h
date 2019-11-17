@@ -147,7 +147,7 @@ class ExtractMeasurement
 		std::vector<std::ofstream> vecOf_accumMeasurementCSV;
 		std::vector<std::ofstream> vecOf_KalmanFilterCSV;
 
-		ExtractMeasurement (unsigned int size, bool bDoVisualizePCD);
+		ExtractMeasurement (unsigned int size);
 		void setParam ();
 		void setData (const std::vector<VectorXd>& vecVecXdRef, long long timestamp);
 		void process ();

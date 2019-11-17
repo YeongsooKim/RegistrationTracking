@@ -6,7 +6,7 @@ bool ID_sort (const clusterPtr& ID1, const clusterPtr& ID2)
 	return ID1->m_id < ID2->m_id;
 }
 
-ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) : m_measurementN (size), m_bDoVisualize(bDoVisualizePCD)
+ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size) 
 {
 	// define publisher
 	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("OnlyBoundingBox", 100);
