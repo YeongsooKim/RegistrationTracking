@@ -13,6 +13,7 @@
 #include <pcl/registration/icp.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/registration/ndt.h>
+#include <pcl/registration/transforms.h>
 
 #include "visualization_msgs/Marker.h"
 #include "visualization_msgs/MarkerArray.h"
@@ -76,6 +77,14 @@ class ExtractMeasurement
 		ros::Publisher m_pub_shapeICP;
 		ros::Publisher m_pub_shapeKalman;
 		ros::Publisher m_pub_shapeReference;
+
+		
+		// Check for visualization cloud
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pOutputCloud;
+		ros::Publisher m_pub_source;
+		ros::Publisher m_pub_target;
+		ros::Publisher m_pub_final;
+		ros::Publisher m_pub_output;
 
 		// param
 		double m_fMarkerDuration;
@@ -149,7 +158,8 @@ class ExtractMeasurement
 		void generateColor(size_t indexNumber);
 		void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
 		void association ();
-		void point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst);
+		//void point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst);
+		void point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst);
 		void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);
 		pcl::PointCloud<pcl::PointXYZ>::Ptr loadPCD (std::string file);
 		void calculateRMSE ();

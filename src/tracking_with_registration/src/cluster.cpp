@@ -162,7 +162,7 @@ void Cluster::SetCluster (long long timestamp, unsigned int iClusterNumber, unsi
 	float max_z = -std::numeric_limits<float>::max();
 	float average_z = 0;
 
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	pcl::PointCloud<pcl::PointXYZRGB> tmpCloud;
 	for (const auto& point : m_pPointCloud->points)
 	{
 		pcl::PointXYZRGB tmp;
@@ -173,14 +173,14 @@ void Cluster::SetCluster (long long timestamp, unsigned int iClusterNumber, unsi
 		tmp.r = r;
 		tmp.g = g;
 		tmp.b = b;
-		pTmpCloud->points.push_back(tmp);
+		tmpCloud.points.push_back(tmp);
 
 		if (tmp.z > max_z)
 			max_z = tmp.z;
 		if (tmp.z < min_z)
 			min_z = tmp.z;
 	}
-	m_pPointCloud = pTmpCloud;
+	m_pPointCloud->swap (tmpCloud);
 
 	// min, max points
 	m_min_point.z = min_z;
@@ -214,7 +214,7 @@ void Cluster::SetCluster (long long timestamp, unsigned int iClusterNumber, unsi
 	m_dDistanceToCenter = hypot (m_center.position.y, m_center.position.x);
 	m_dimensions.x = box.size.width;
 	m_dimensions.y = box.size.height;
-	//
+	
 	// set bounding box direction
 	tf::Quaternion quat = tf::createQuaternionFromRPY(0.0, 0.0, rz);
 	tf::quaternionTFToMsg(quat, m_center.orientation);
