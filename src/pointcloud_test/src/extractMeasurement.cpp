@@ -83,16 +83,16 @@ void ExtractMeasurement::velodyneCallback (const sensor_msgs::PointCloud2::Const
 //	std::vector<pcl::PointIndices> vecClusterIndices;
 //	dbscan (pDownsampledCloud, vecClusterIndices);
 
-	// dbscan
-	std::vector<pcl::PointIndices> vecClusterIndices;
-	dbscan (pThresholdedCloud, vecClusterIndices);
-
-	// Set cluster pointcloud from clusterIndices and coloring
-	setCluster (vecClusterIndices, pThresholdedCloud);
-	//setCluster (vecClusterIndices, pDownsampledCloud);
-
-	// Associate 
-	association ();
+////	// dbscan
+////	std::vector<pcl::PointIndices> vecClusterIndices;
+////	dbscan (pThresholdedCloud, vecClusterIndices);
+////
+////	// Set cluster pointcloud from clusterIndices and coloring
+////	setCluster (vecClusterIndices, pThresholdedCloud);
+////	//setCluster (vecClusterIndices, pDownsampledCloud);
+////
+////	// Associate 
+////	association ();
 
 //	// calculate RMSE
 //	calculateRMSE ();
@@ -518,15 +518,31 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	{
 		pcl::transformPointCloud (*pInputSourceCloud, *pTransformedCloud, m_mat4fBase2Local);
 		pInputTargetCloud->swap (*pTransformedCloud);
+
+		pcl::PointCloud<pcl::PointXYZRGB> tmpCloud;
+		for (const auto& point : pInputTargetCloud->points)
+		{
+			pcl::PointXYZRGB p;
+			p.x = point.x + 0.01;
+			p.y = point.y + 0.01;
+			p.z = point.z + 0.01;
+			tmpCloud.points.push_back (p);
+			
+			p.x = point.x - 0.01;
+			p.y = point.y - 0.01;
+			p.z = point.z - 0.01;
+			tmpCloud.points.push_back (p);
+		}
+		*pInputTargetCloud += tmpCloud;
 	}
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	downsample(pInputSourceCloud, pDownsampledCloud, 0.9);
+	downsample(pInputSourceCloud, pDownsampledCloud, 0.03);
 
 
 	m_ndt.setTransformationEpsilon(0.01);
 	m_ndt.setStepSize(0.1);
-	m_ndt.setResolution(1.0);
+	m_ndt.setResolution(0.3);
 	m_ndt.setMaximumIterations(30);
 	//m_ndt.setInputSource (pDownsampledCloud);
 	m_ndt.setInputSource (pInputSourceCloud);
@@ -606,10 +622,6 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	m_previousPose.pitch = m_currentPose.pitch;
 	m_previousPose.yaw = m_currentPose.yaw;
 
-	ROS_INFO("x: %f, y: %f, z: %f", m_previousPose.x, m_previousPose.y, m_previousPose.z);
-
-	//*pInputTargetCloud += *pTransformedCloud;
-
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedInputTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 	pcl::transformPointCloud(*pInputTargetCloud, *pTransformedInputTargetCloud, mat4fBaseLinkInverse);
 	
@@ -634,10 +646,10 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 
 	*pTransformedInputTargetCloud += *pInputSourceCloud;
 
-	//pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	//downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
-	//pInputTargetCloud->swap (*pTmpPointCloud);
-	pInputTargetCloud->swap (*pTransformedInputTargetCloud);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
+	pInputTargetCloud->swap (*pTmpPointCloud);
+	//pInputTargetCloud->swap (*pTransformedInputTargetCloud);
 
 	m_ndt.setInputTarget (pInputTargetCloud);
 
