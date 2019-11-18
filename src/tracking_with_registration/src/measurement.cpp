@@ -29,8 +29,8 @@ int main(int argc, char** argv)
 	char d;
 	d = getchar();
 
-	//while (frame_count < (frame_per_sec*sec_interval))
-	while (frame_count < 145)
+	while (frame_count < (frame_per_sec*sec_interval))
+	//while (frame_count < 145)
 	{
 		highway.stepHighway(egoVelocity,time_us, frame_per_sec);
 

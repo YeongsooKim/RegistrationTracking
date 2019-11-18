@@ -165,7 +165,7 @@ void ExtractMeasurement::threshold (const pcl::PointCloud<pcl::PointXYZ> &inputC
 		pcl::PointXYZ p;
 		p.x = (double)point.x;
 		p.y = (double)point.y;
-		p.z = 0.0;
+		p.z = (double)point.z;
 
 		tmpCloud.push_back(p);
 	}
@@ -278,41 +278,54 @@ void ExtractMeasurement::association()
 	// Sort the vector using predicate and std::sort
 	std::sort(m_ObstacleTracking.m_TrackingObjects.begin(), m_ObstacleTracking.m_TrackingObjects.end(), ID_sort);
 
+	unsigned int index = 0;
 	// To store data in csv file, put the center point of OnlyBoundingBox tracking object into member variable with a data type of VectorXd
 	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
 		vecOf_measurementCSV[(pCluster->m_id)-1] << pCluster->m_timestamp << "," 
 			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
+
+		if (index == 1)
+		{
+			// To calculate RMSE, store the center point of OnlyBoundingBox tracking object into member variable with a data type of vector<VectorXd> 
+			// which store the same object in same vector
+			VectorXd meas(2);
+			meas << m_ObstacleTracking.m_TrackingObjects[index]->m_center.position.x, m_ObstacleTracking.m_TrackingObjects[index]->m_center.position.y;
+			m_vecVecXdOnlyBoundingbox.push_back (meas);
+		}
+
+		index++;
 	}
 
-	// To calculate RMSE, store the center point of OnlyBoundingBox tracking object into member variable with a data type of vector<VectorXd> 
-	// which store the same object in same vector
-	VectorXd meas(2);
-	meas << m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.x, m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.y;
-	m_vecVecXdOnlyBoundingbox.push_back (meas);
-
-//	// Store the each pointcloud of same obstacle over timestamp in same member variable 
-//	static unsigned int vehicleN = 0;
-//	for (; vehicleN < m_ObstacleTracking.m_TrackingObjects.size(); vehicleN++)
-//	{
-//		clusterPtr pCluster (new Cluster());
-//		m_vecVehicleAccumulatedCloud.push_back(pCluster);
-//	}
 
 	// Store the each pointcloud of same obstacle over timestamp in same member variable 
-	static unsigned int clusterN = 0;
-	for (; clusterN < 1; clusterN++)
+	static unsigned int vehicleN = 0;
+	for (; vehicleN < m_ObstacleTracking.m_TrackingObjects.size(); vehicleN++)
 	{
 		clusterPtr pCluster (new Cluster());
 		m_vecVehicleAccumulatedCloud.push_back(pCluster);
 	}
 
+//	// Store the each pointcloud of same obstacle over timestamp in same member variable 
+//	static unsigned int clusterN = 0;
+//	for (; clusterN < 1; clusterN++)
+//	{
+//		clusterPtr pCluster (new Cluster());
+//		m_vecVehicleAccumulatedCloud.push_back(pCluster);
+//	}
 
-	unsigned int vehicleN = 0;
+
+	unsigned int clusterN = 0;
 	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
 	{
+		if (clusterN != 1)
+		{
+			clusterN++;
+			continue;
+		}
+
 		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (pCluster->GetCloud());
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[vehicleN]->GetCloud());
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[clusterN]->GetCloud());
 
 		// ICP
 		if (m_bDoICP) 
@@ -322,36 +335,32 @@ void ExtractMeasurement::association()
 			NDT (pTrackingCloud, pAccumulatedCloud, pCluster->getIsFristRegistration());
 
 		unsigned int r; unsigned int g; unsigned int b;
-		if (vehicleN == 0) {
+		if (clusterN == 0) {
 			r = 255; g = 0; b = 0;
 		}
-		else if (vehicleN == 1) {
+		else if (clusterN == 1) {
 			r = 0; g = 255; b = 0;
 		}
-		else if (vehicleN == 2) {
+		else if (clusterN == 2) {
 			r = 0; g = 0; b = 255;
 		}
 
-		pCluster->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
-		vehicleN++;
-	}
+		pCluster->SetCluster (m_llTimestamp_s, clusterN, r, g, b);
 
-		
-	// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
-	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
-	{
+		// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
 		vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
 			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
-	}
 
-	// To calculate RMSE, store the center point of registrated tracking object into member variable with a data type of vector<VectorXd> 
-	// which store the same object in same vector
-	VectorXd meas2 (2);
-	meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
-	m_vecVecXdRegistrationAccum.push_back (meas2);
+		// To calculate RMSE, store the center point of registrated tracking object into member variable with a data type of vector<VectorXd> 
+		// which store the same object in same vector
+		if (clusterN == 1)
+		{
+			VectorXd meas2 (2);
+			meas2 << m_vecVehicleAccumulatedCloud[clusterN]->m_center.position.x,  m_vecVehicleAccumulatedCloud[clusterN]->m_center.position.y;
+			m_vecVecXdRegistrationAccum.push_back (meas2);
+		}
 
-	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
-	{
+		// kalman filter
 		MeasurementPackage meas_package;
 		meas_package.raw_measurements_ = VectorXd(2);
 
@@ -360,27 +369,28 @@ void ExtractMeasurement::association()
 		meas_package.timestamp_ = m_llTimestamp_s;
 
 		pCluster->KF.ProcessMeasurement(meas_package);
-	}
 
-	// To store data in csv file, put the center point of Kalman filter tracking object into member variable with a data type of VectorXd
-	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
-	{
+		// To store data in csv file, put the center point of Kalman filter tracking object into member variable with a data type of VectorXd
 		vecOf_KalmanFilterCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
 											  << pCluster->KF.x_[0] << ","
 											  << pCluster->KF.x_[1] << ","
 											  << pCluster->KF.x_[2] << ","
 											  << pCluster->KF.x_[3] << std::endl;
+
+		// To calculate RMSE, store the center point of kalman filter tracking object into member variable with a data type of vector<VectorXd> 
+		// which store the same object in same vector
+		if (clusterN == 1)
+		{
+			VectorXd meas3 (4);
+			meas3 << m_vecVehicleAccumulatedCloud[clusterN]->KF.x_[0],
+					 m_vecVehicleAccumulatedCloud[clusterN]->KF.x_[1],
+					 m_vecVehicleAccumulatedCloud[clusterN]->KF.x_[2],
+					 m_vecVehicleAccumulatedCloud[clusterN]->KF.x_[3];
+			m_vecVecXdKalmanFilter.push_back (meas3);
+		}
+
+		clusterN++;
 	}
-
-	// To calculate RMSE, store the center point of kalman filter tracking object into member variable with a data type of vector<VectorXd> 
-	// which store the same object in same vector
-	VectorXd meas3 (4);
-	meas3 << m_vecVehicleAccumulatedCloud[0]->KF.x_[0],
-			 m_vecVehicleAccumulatedCloud[0]->KF.x_[1],
-			 m_vecVehicleAccumulatedCloud[0]->KF.x_[2],
-			 m_vecVehicleAccumulatedCloud[0]->KF.x_[3],
-	m_vecVecXdKalmanFilter.push_back (meas3);
-
 }
 
 //void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst)
@@ -593,12 +603,12 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	}
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	downsample(pInputSourceCloud, pDownsampledCloud, 0.03);
+	downsample(pInputSourceCloud, pDownsampledCloud, 0.04);
 
 
-	m_ndt.setTransformationEpsilon(0.01);
-	m_ndt.setStepSize(0.1);
-	m_ndt.setResolution(0.3);
+	m_ndt.setTransformationEpsilon(0.001);
+	m_ndt.setStepSize(0.05);
+	m_ndt.setResolution(0.4);
 	m_ndt.setMaximumIterations(30);
 	//m_ndt.setInputSource (pDownsampledCloud);
 	m_ndt.setInputSource (pInputSourceCloud);
@@ -703,7 +713,7 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	*pTransformedInputTargetCloud += *pInputSourceCloud;
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
+	downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.02);
 	pInputTargetCloud->swap (*pTmpPointCloud);
 
 	m_ndt.setInputTarget (pInputTargetCloud);
@@ -727,6 +737,7 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 
 	pOutputCloud->header.frame_id = "map";
 	m_pub_output.publish (*pOutputCloud);
+	ROS_INFO ("points size: %d", (int)pInputTargetCloud->points.size());
 }
 
 
@@ -748,9 +759,16 @@ void ExtractMeasurement::displayShape ()
 	m_arrShapesKalman.markers.clear();
 	m_arrShapesReference.markers.clear();
 
+
+	unsigned int clusterN = 0;
 	// For OnlyBoundingBox
 	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
+		if (clusterN != 1)
+		{
+			clusterN++;
+			continue;
+		}
 		visualization_msgs::Marker shape;
 
 		shape.lifetime = ros::Duration();
@@ -844,12 +862,19 @@ void ExtractMeasurement::displayShape ()
 
 		m_arrShapes.markers.push_back (shape);
 
-		break;
+		clusterN++;
 	}
 
+	clusterN = 0;
 	// For registration and accumulation
 	for (auto pCluster : m_vecVehicleAccumulatedCloud)
 	{
+		if (clusterN != 1)
+		{
+			clusterN++;
+			continue;
+		}
+		
 		visualization_msgs::Marker shape;
 
 		shape.lifetime = ros::Duration();
@@ -999,6 +1024,8 @@ void ExtractMeasurement::displayShape ()
 		shapeForKalman.text = sWholeText;
 
 		m_arrShapesKalman.markers.push_back (shapeForKalman);
+
+		clusterN++;
 	}
 
 	// For reference
@@ -1072,21 +1099,36 @@ void ExtractMeasurement::publish ()
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulationCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 	pAccumulationCloud->header.frame_id = "map";
 
+	unsigned int clusterN = 0;
 	// accumulation for publish
 	for (const auto& pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
+		if (clusterN != 1)
+		{
+			clusterN++;
+			continue;
+		}
 		*pAccumulationCloud += *(pCluster->GetCloud());
-		break;
+		clusterN++;
 	}
 
 	// Accumulate all cluster to pAccumCloudForICP
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumCloudForICP (new pcl::PointCloud<pcl::PointXYZRGB>);
 	pAccumCloudForICP->header.frame_id = "map";
 
+	clusterN = 0;
 	// accumulation for publish
 	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
-		*pAccumCloudForICP += *(pCluster->GetCloud());
+	{
+		if (clusterN != 1)
+		{
+			clusterN++;
+			continue;
+		}
 
+		*pAccumCloudForICP += *(pCluster->GetCloud());
+		clusterN++;
+	}
 
 	// publish
 	m_pub_resultICP.publish (*pAccumCloudForICP);
