@@ -29,6 +29,9 @@
 #include "myTools.hpp"
 #include "Eigen/Dense"
 
+#define LAYER_SIZE 4
+#define BOUNDARY 0.17 
+
 
 using namespace std;
 using Eigen::MatrixXd;
@@ -98,7 +101,7 @@ class ExtractMeasurement
 		bool m_bDoICP = false;
 		bool m_bDoNDT = false;
 		bool m_bDoLayerBasedICP = true;
-		bool m_bDoVisualize;
+		bool m_bDoVisualize = true;
 		long long m_llTimestamp_s;
 
 		std::vector<VectorXd> m_vecVecXdOnlyBoundingbox;
@@ -160,9 +163,10 @@ class ExtractMeasurement
 		void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
 		void association ();
 		void point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
-		void point2pointICPwithAccumulation2 (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud,const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst);
+		Eigen::Matrix4f point2pointICPwithAccumulation2 (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputProjectedSourceCloud,
+														  const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputProjectedTargetCloud, bool bIsFirst);
 		void NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsInitSource);
-		void layed_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
+		void layer_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
 		void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);
 		pcl::PointCloud<pcl::PointXYZ>::Ptr loadPCD (std::string file);
 		void calculateRMSE ();

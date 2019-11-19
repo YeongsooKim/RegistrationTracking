@@ -26,23 +26,23 @@ int main(int argc, char** argv)
 
 	double egoVelocity = 25;
 	
-	char d;
-	d = getchar();
+	char key;
+	key = getchar();
 
 	while (frame_count < (frame_per_sec*sec_interval))
 	//while (frame_count < 145)
 	{
-		highway.stepHighway(egoVelocity,time_us, frame_per_sec);
+			highway.stepHighway(egoVelocity,time_us, frame_per_sec);
 
-		measurement.setData (highway.getGroundTruth(), time_us);
-		measurement.process ();
+			measurement.setData (highway.getGroundTruth(), time_us);
+			measurement.process ();
 
-		frame_count++;
-		time_us = 1000000*frame_count/frame_per_sec;
+			frame_count++;
+			time_us = 1000000*frame_count/frame_per_sec;
 
-//		char c;
-//		while ((c = getchar()) != '\n' && c != EOF) { }
-//		ROS_INFO_STREAM ("end iteration");
+			char c;
+			while ((c = getchar()) != '\n' && c != EOF) { }
+			ROS_INFO_STREAM ("end iteration");
 	}
 
 	measurement.m_myTools.plotting();
