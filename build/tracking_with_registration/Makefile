@@ -1363,6 +1363,33 @@ src/extractMeasurement.cpp.s:
 	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.s
 .PHONY : src/extractMeasurement.cpp.s
 
+src/kalman_filter.o: src/kalman_filter.cpp.o
+
+.PHONY : src/kalman_filter.o
+
+# target to build an object file
+src/kalman_filter.cpp.o:
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/kalman_filter.cpp.o
+.PHONY : src/kalman_filter.cpp.o
+
+src/kalman_filter.i: src/kalman_filter.cpp.i
+
+.PHONY : src/kalman_filter.i
+
+# target to preprocess a source file
+src/kalman_filter.cpp.i:
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/kalman_filter.cpp.i
+.PHONY : src/kalman_filter.cpp.i
+
+src/kalman_filter.s: src/kalman_filter.cpp.s
+
+.PHONY : src/kalman_filter.s
+
+# target to generate assembly for a file
+src/kalman_filter.cpp.s:
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/kalman_filter.cpp.s
+.PHONY : src/kalman_filter.cpp.s
+
 src/measurement.o: src/measurement.cpp.o
 
 .PHONY : src/measurement.o
@@ -1389,6 +1416,33 @@ src/measurement.s: src/measurement.cpp.s
 src/measurement.cpp.s:
 	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.s
 .PHONY : src/measurement.cpp.s
+
+src/myTools.o: src/myTools.cpp.o
+
+.PHONY : src/myTools.o
+
+# target to build an object file
+src/myTools.cpp.o:
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/myTools.cpp.o
+.PHONY : src/myTools.cpp.o
+
+src/myTools.i: src/myTools.cpp.i
+
+.PHONY : src/myTools.i
+
+# target to preprocess a source file
+src/myTools.cpp.i:
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/myTools.cpp.i
+.PHONY : src/myTools.cpp.i
+
+src/myTools.s: src/myTools.cpp.s
+
+.PHONY : src/myTools.s
+
+# target to generate assembly for a file
+src/myTools.cpp.s:
+	$(MAKE) -f CMakeFiles/tracking_with_registration.dir/build.make CMakeFiles/tracking_with_registration.dir/src/myTools.cpp.s
+.PHONY : src/myTools.cpp.s
 
 src/obstacle_tracking.o: src/obstacle_tracking.cpp.o
 
@@ -1605,9 +1659,15 @@ help:
 	@echo "... src/extractMeasurement.o"
 	@echo "... src/extractMeasurement.i"
 	@echo "... src/extractMeasurement.s"
+	@echo "... src/kalman_filter.o"
+	@echo "... src/kalman_filter.i"
+	@echo "... src/kalman_filter.s"
 	@echo "... src/measurement.o"
 	@echo "... src/measurement.i"
 	@echo "... src/measurement.s"
+	@echo "... src/myTools.o"
+	@echo "... src/myTools.i"
+	@echo "... src/myTools.s"
 	@echo "... src/obstacle_tracking.o"
 	@echo "... src/obstacle_tracking.i"
 	@echo "... src/obstacle_tracking.s"

@@ -1,7 +1,26 @@
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::displayShape()[m[K’:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:344:3:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ before ‘[01m[Kshape[m[K’
-   shape.type = visualization_msgs::Marker::CUBE;
-[01;32m[K   ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::association()[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:338:92:[m[K [01;31m[Kerror: [m[Kinvalid initialization of non-const reference of type ‘[01m[Kbool&[m[K’ from an rvalue of type ‘[01m[Kbool[m[K’
+    layed_based_ICP (pAccumulatedCloud, pTrackingCloud, pCluster->getIsFristRegistrationAddr());
+[01;32m[K                                                                                            ^[m[K
+In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:1:0[m[K:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:165:8:[m[K [01;36m[Knote: [m[K  initializing argument 3 of ‘[01m[Kvoid ExtractMeasurement::layed_based_ICP(pcl::PointCloud<pcl::PointXYZRGB>::Ptr&, const Ptr&, bool&)[m[K’
+   void layed_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
+[01;32m[K        ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K At global scope:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:431:6:[m[K [01;31m[Kerror: [m[Kprototype for ‘[01m[Kvoid ExtractMeasurement::point2pointICPwithAccumulation2(pcl::PointCloud<pcl::PointXYZRGB>::Ptr&, pcl::PointCloud<pcl::PointXYZRGB>::Ptr&, bool*)[m[K’ does not match any in class ‘[01m[KExtractMeasurement[m[K’
+ void ExtractMeasurement::point2pointICPwithAccumulation2 (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool * bIsFirst)
+[01;32m[K      ^[m[K
+In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:1:0[m[K:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:163:8:[m[K [01;31m[Kerror: [m[Kcandidate is: void ExtractMeasurement::point2pointICPwithAccumulation2(pcl::PointCloud<pcl::PointXYZRGB>::Ptr&, pcl::PointCloud<pcl::PointXYZRGB>::Ptr&, bool&)
+   void point2pointICPwithAccumulation2 (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
+[01;32m[K        ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:664:6:[m[K [01;31m[Kerror: [m[Kprototype for ‘[01m[Kvoid ExtractMeasurement::layed_based_ICP(pcl::PointCloud<pcl::PointXYZRGB>::Ptr&, const Ptr&, bool*)[m[K’ does not match any in class ‘[01m[KExtractMeasurement[m[K’
+ void ExtractMeasurement::layed_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool* bIsFirst)
+[01;32m[K      ^[m[K
+In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:1:0[m[K:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:165:8:[m[K [01;31m[Kerror: [m[Kcandidate is: void ExtractMeasurement::layed_based_ICP(pcl::PointCloud<pcl::PointXYZRGB>::Ptr&, const Ptr&, bool&)
+   void layed_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
+[01;32m[K        ^[m[K
 make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o] Error 1
 make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
 make: *** [all] Error 2

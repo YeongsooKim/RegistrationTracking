@@ -1,39 +1,51 @@
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:9:1:[m[K [01;31m[Kerror: [m[Kprototype for ‘[01m[KExtractMeasurement::ExtractMeasurement(unsigned int)[m[K’ does not match any in class ‘[01m[KExtractMeasurement[m[K’
+ ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size) 
+[01;32m[K ^[m[K
 In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:1:0[m[K:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:68:50:[m[K [01;31m[Kerror: [m[K‘[01m[KPtr[m[K’ in ‘[01m[Kclass std::vector<pcl::PointCloud<pcl::PointXYZRGB> >[m[K’ does not name a type
-  std::vector<pcl::PointCloud<pcl::PointXYZRGB>>::Ptr m_vecVehicleAccumulatedCloud;
-[01;32m[K                                                  ^[m[K
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In constructor ‘[01m[KExtractMeasurement::ExtractMeasurement(unsigned int)[m[K’:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:28:2:[m[K [01;31m[Kerror: [m[K‘[01m[Km_vecVehicleAccumulatedCloud[m[K’ was not declared in this scope
-  m_vecVehicleAccumulatedCloud.resize(m_measurementN);
-[01;32m[K  ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:67:7:[m[K [01;31m[Kerror: [m[Kcandidates are: ExtractMeasurement::ExtractMeasurement(ExtractMeasurement&&)
+ class ExtractMeasurement
+[01;32m[K       ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:67:7:[m[K [01;31m[Kerror: [m[K                ExtractMeasurement::ExtractMeasurement(const ExtractMeasurement&)
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:149:3:[m[K [01;31m[Kerror: [m[K                ExtractMeasurement::ExtractMeasurement()
+   ExtractMeasurement ();
+[01;32m[K   ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:98:96:[m[K [01;31m[Kerror: [m[Kno ‘[01m[Kvoid ExtractMeasurement::setData(const std::vector<Eigen::Matrix<double, -1, 1> >&, long long int)[m[K’ member function declared in class ‘[01m[KExtractMeasurement[m[K’
+ void ExtractMeasurement::setData (const std::vector<VectorXd>& vecVecXdRef, long long timestamp)
+[01;32m[K                                                                                                ^[m[K
 [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::association()[m[K’:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:164:6:[m[K [01;31m[Kerror: [m[K‘[01m[Km_vecVehicleAccumulatedCloud[m[K’ was not declared in this scope
-     *m_vecVehicleAccumulatedCloud[vehicleIndex] += *m_vecVehicleTrackingClouds[vehicleIndex].back();
-[01;32m[K      ^[m[K
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:171:19:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KExtractMeasurement::point2pointICP()[m[K’
-    point2pointICP();
-[01;32m[K                   ^[m[K
-In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:1:0[m[K:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:88:7:[m[K [01;36m[Knote: [m[Kcandidate: void ExtractMeasurement::point2pointICP(unsigned int)
-  void point2pointICP (unsigned int iterationN);
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:284:3:[m[K [01;31m[Kerror: [m[K‘[01m[KvecOf_measurementCSV[m[K’ was not declared in this scope
+   vecOf_measurementCSV[(pCluster->m_id)-1] << pCluster->m_timestamp << "," 
+[01;32m[K   ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:343:3:[m[K [01;31m[Kerror: [m[K‘[01m[KvecOf_accumMeasurementCSV[m[K’ was not declared in this scope
+   vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
+[01;32m[K   ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:368:3:[m[K [01;31m[Kerror: [m[K‘[01m[KvecOf_KalmanFilterCSV[m[K’ was not declared in this scope
+   vecOf_KalmanFilterCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
+[01;32m[K   ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:18:55:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KExtractMeasurement::ExtractMeasurement(std::vector<Car>::size_type)[m[K’
+  ExtractMeasurement measurement(highway.traffic.size());
+[01;32m[K                                                       ^[m[K
+In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:7:0[m[K:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:149:3:[m[K [01;36m[Knote: [m[Kcandidate: ExtractMeasurement::ExtractMeasurement()
+   ExtractMeasurement ();
+[01;32m[K   ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:149:3:[m[K [01;36m[Knote: [m[K  candidate expects 0 arguments, 1 provided
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:67:7:[m[K [01;36m[Knote: [m[Kcandidate: ExtractMeasurement::ExtractMeasurement(const ExtractMeasurement&)
+ class ExtractMeasurement
 [01;32m[K       ^[m[K
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:88:7:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K At global scope:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:176:6:[m[K [01;31m[Kerror: [m[Kprototype for ‘[01m[Kvoid ExtractMeasurement::point2pointICP()[m[K’ does not match any in class ‘[01m[KExtractMeasurement[m[K’
- void ExtractMeasurement::point2pointICP()
-[01;32m[K      ^[m[K
-In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:1:0[m[K:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:88:7:[m[K [01;31m[Kerror: [m[Kcandidate is: void ExtractMeasurement::point2pointICP(unsigned int)
-  void point2pointICP (unsigned int iterationN);
-[01;32m[K       ^[m[K
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::publish()[m[K’:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:298:43:[m[K [01;31m[Kerror: [m[K‘[01m[Km_vecVehicleAccumulatedCloud[m[K’ was not declared in this scope
-  for (const auto& pVehicleTrackingCloud : m_vecVehicleAccumulatedCloud)
-[01;32m[K                                           ^[m[K
-In file included from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:8:0[m[K:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:68:50:[m[K [01;31m[Kerror: [m[K‘[01m[KPtr[m[K’ in ‘[01m[Kclass std::vector<pcl::PointCloud<pcl::PointXYZRGB> >[m[K’ does not name a type
-  std::vector<pcl::PointCloud<pcl::PointXYZRGB>>::Ptr m_vecVehicleAccumulatedCloud;
-[01;32m[K                                                  ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:67:7:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kstd::vector<Car>::size_type {aka long unsigned int}[m[K’ to ‘[01m[Kconst ExtractMeasurement&[m[K’
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:67:7:[m[K [01;36m[Knote: [m[Kcandidate: ExtractMeasurement::ExtractMeasurement(ExtractMeasurement&&)
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:67:7:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kstd::vector<Car>::size_type {aka long unsigned int}[m[K’ to ‘[01m[KExtractMeasurement&&[m[K’
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:37:15:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass ExtractMeasurement[m[K’ has no member named ‘[01m[KsetData[m[K’
+   measurement.setData (highway.getGroundTruth(), time_us);
+[01;32m[K               ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:53:15:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass ExtractMeasurement[m[K’ has no member named ‘[01m[KvecOf_measurementCSV[m[K’
+   measurement.vecOf_measurementCSV[trafficIndex].close();
+[01;32m[K               ^[m[K
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp:54:15:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass ExtractMeasurement[m[K’ has no member named ‘[01m[KvecOf_accumMeasurementCSV[m[K’
+   measurement.vecOf_accumMeasurementCSV[trafficIndex].close();
+[01;32m[K               ^[m[K
 make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o] Error 1
 make[2]: *** Waiting for unfinished jobs....
 make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o] Error 1

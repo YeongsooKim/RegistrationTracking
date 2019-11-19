@@ -134,7 +134,7 @@ public:
 				tools.estimations.push_back(estimate);
 	
 			}
-			if (i == 2)
+			if (i == 0)
 			{
 				VectorXd gt(4);
 				gt << traffic[i].position.x, traffic[i].position.y, traffic[i].velocity*cos(traffic[i].angle), traffic[i].velocity*sin(traffic[i].angle);

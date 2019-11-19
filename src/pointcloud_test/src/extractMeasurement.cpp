@@ -75,24 +75,24 @@ void ExtractMeasurement::velodyneCallback (const sensor_msgs::PointCloud2::Const
 	threshold (tmpCloud, pThresholdedCloud);
 	//////////////////////////////////////////////////////////////////
 	
-//	// downsample
-//	pcl::PointCloud<pcl::PointXYZ>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZ>);
-//	downsample(pCloudTraffic, pDownsampledCloud, 0.02);
-//
+	// downsample
+	pcl::PointCloud<pcl::PointXYZ>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZ>);
+	downsample(pThresholdedCloud, pDownsampledCloud, 0.02);
+
+	// dbscan
+	std::vector<pcl::PointIndices> vecClusterIndices;
+	dbscan (pDownsampledCloud, vecClusterIndices);
+
 //	// dbscan
 //	std::vector<pcl::PointIndices> vecClusterIndices;
-//	dbscan (pDownsampledCloud, vecClusterIndices);
+//	dbscan (pThresholdedCloud, vecClusterIndices);
 
-////	// dbscan
-////	std::vector<pcl::PointIndices> vecClusterIndices;
-////	dbscan (pThresholdedCloud, vecClusterIndices);
-////
-////	// Set cluster pointcloud from clusterIndices and coloring
-////	setCluster (vecClusterIndices, pThresholdedCloud);
-////	//setCluster (vecClusterIndices, pDownsampledCloud);
-////
-////	// Associate 
-////	association ();
+	// Set cluster pointcloud from clusterIndices and coloring
+	setCluster (vecClusterIndices, pDownsampledCloud);
+	//setCluster (vecClusterIndices, pDownsampledCloud);
+
+	// Associate 
+	association ();
 
 //	// calculate RMSE
 //	calculateRMSE ();
@@ -103,8 +103,8 @@ void ExtractMeasurement::velodyneCallback (const sensor_msgs::PointCloud2::Const
 //	// publish	
 //	publish ();
 
-	pThresholdedCloud->header.frame_id = "velodyne";
-	m_pub_test_result.publish (*pThresholdedCloud);
+//	pThresholdedCloud->header.frame_id = "velodyne";
+//	m_pub_test_result.publish (*pThresholdedCloud);
 }
 
 void ExtractMeasurement::threshold (const pcl::PointCloud<pcl::PointXYZ> &inputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr &pOutput)
@@ -114,13 +114,13 @@ void ExtractMeasurement::threshold (const pcl::PointCloud<pcl::PointXYZ> &inputC
 	for (const auto& point : inputCloud.points)
 	{
 		double r = sqrt(pow(point.x, 2.0) + pow(point.y, 2.0));
-		if ((point.y < -5.5 || point.y > -1.5) || (point.z < -1.25 || point.z > 1.0) || r > 17.0)
+		if ((point.y > 5.5 || point.y < -2.0) || (point.z < -1.0 || point.z > 1.0) || (r > 13.0 || r < 1.0))
 			continue;
 		
 		pcl::PointXYZ p;
 		p.x = (double)point.x;
 		p.y = (double)point.y;
-		p.z = 0.0;
+		p.z = (double)point.z;
 
 		tmpCloud.push_back(p);
 	}
@@ -537,15 +537,15 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	}
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	downsample(pInputSourceCloud, pDownsampledCloud, 0.03);
+	downsample(pInputSourceCloud, pDownsampledCloud, 0.08);
 
 
-	m_ndt.setTransformationEpsilon(0.01);
+	m_ndt.setTransformationEpsilon(0.001);
 	m_ndt.setStepSize(0.1);
-	m_ndt.setResolution(0.3);
+	m_ndt.setResolution(0.4);
 	m_ndt.setMaximumIterations(30);
-	//m_ndt.setInputSource (pDownsampledCloud);
-	m_ndt.setInputSource (pInputSourceCloud);
+	m_ndt.setInputSource (pDownsampledCloud);
+	//m_ndt.setInputSource (pInputSourceCloud);
 
 	if (bIsInitSource)
 	{
@@ -649,7 +649,7 @@ void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInp
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 	downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.01);
 	pInputTargetCloud->swap (*pTmpPointCloud);
-	//pInputTargetCloud->swap (*pTransformedInputTargetCloud);
+
 
 	m_ndt.setInputTarget (pInputTargetCloud);
 

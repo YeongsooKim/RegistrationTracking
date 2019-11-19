@@ -1,7 +1,0 @@
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::point2pointICP()[m[K’:
-[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:251:22:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator+=[m[K’ (operand types are ‘[01m[Kpcl::PointCloud<pcl::PointXYZRGB>::Ptr {aka boost::shared_ptr<pcl::PointCloud<pcl::PointXYZRGB> >}[m[K’ and ‘[01m[Kpcl::PointCloud<pcl::PointXYZRGB>[m[K’)
-   pAccumulationCloud += FinalChangeRGB;
-[01;32m[K                      ^[m[K
-make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o] Error 1
-make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
-make: *** [all] Error 2

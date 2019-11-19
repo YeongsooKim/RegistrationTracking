@@ -96,7 +96,8 @@ class ExtractMeasurement
 		unsigned int m_maxIndexNumber;
 
 		bool m_bDoICP = false;
-		bool m_bDoNDT = true;
+		bool m_bDoNDT = false;
+		bool m_bDoLayerBasedICP = true;
 		bool m_bDoVisualize;
 		long long m_llTimestamp_s;
 
@@ -158,14 +159,15 @@ class ExtractMeasurement
 		void generateColor(size_t indexNumber);
 		void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
 		void association ();
-		//void point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst);
 		void point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
+		void point2pointICPwithAccumulation2 (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud,const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst);
+		void NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsInitSource);
+		void layed_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
 		void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);
 		pcl::PointCloud<pcl::PointXYZ>::Ptr loadPCD (std::string file);
 		void calculateRMSE ();
 		void displayShape ();
 		void publish ();
-		void NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsInitSource);
 		double calcDiffForRadian(const double lhs_rad, const double rhs_rad);
 };
 
