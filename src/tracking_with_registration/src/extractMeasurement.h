@@ -13,6 +13,7 @@
 #include <pcl/registration/icp.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/registration/ndt.h>
+#include <pcl/registration/transforms.h>
 
 #include "visualization_msgs/Marker.h"
 #include "visualization_msgs/MarkerArray.h"
@@ -27,6 +28,9 @@
 #include "obstacle_tracking.hpp"
 #include "myTools.hpp"
 #include "Eigen/Dense"
+
+#define LAYER_SIZE 4
+#define BOUNDARY 0.17 
 
 
 using namespace std;
@@ -77,6 +81,14 @@ class ExtractMeasurement
 		ros::Publisher m_pub_shapeKalman;
 		ros::Publisher m_pub_shapeReference;
 
+		
+		// Check for visualization cloud
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pOutputCloud;
+		ros::Publisher m_pub_source;
+		ros::Publisher m_pub_target;
+		ros::Publisher m_pub_final;
+		ros::Publisher m_pub_output;
+
 		// param
 		double m_fMarkerDuration;
 		double m_dClusterErrRadius;
@@ -86,9 +98,10 @@ class ExtractMeasurement
 		unsigned int m_measurementN;
 		unsigned int m_maxIndexNumber;
 
-		bool m_bDoICP = true;
-		bool m_bDoNDT = false;
-		bool m_bDoVisualize;
+		bool m_bDoICP = false;
+		bool m_bDoNDT = true;
+		bool m_bDoLayerBasedICP = false;
+		bool m_bDoVisualize = true;
 		long long m_llTimestamp_s;
 
 		std::vector<VectorXd> m_vecVecXdOnlyBoundingbox;
@@ -103,7 +116,6 @@ class ExtractMeasurement
 		std::vector<RGB> m_globalRGB;
 		std::vector<clusterPtr> m_OriginalClusters;
 		std::vector<clusterPtr> m_vecVehicleAccumulatedCloud;
-		std::vector<std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>> m_vecVehicleTrackingClouds;
 
 		ObstacleTracking m_ObstacleTracking;
 		geometry_msgs::PoseArray m_geomsgReferences;
@@ -138,10 +150,11 @@ class ExtractMeasurement
 		std::vector<std::ofstream> vecOf_accumMeasurementCSV;
 		std::vector<std::ofstream> vecOf_KalmanFilterCSV;
 
-		ExtractMeasurement (unsigned int size, bool bDoVisualizePCD);
+		ExtractMeasurement (unsigned int size);
 		void setParam ();
 		void setData (const std::vector<VectorXd>& vecVecXdRef, long long timestamp);
 		void process ();
+		void threshold (const pcl::PointCloud<pcl::PointXYZ> &inputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr &pOutput);
 		void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
 		void downsample (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);
 		void getPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic);
@@ -149,13 +162,16 @@ class ExtractMeasurement
 		void generateColor(size_t indexNumber);
 		void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud);
 		void association ();
-		void point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst);
+		void point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
+		Eigen::Matrix4f point2pointICPwithAccumulation2 (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputProjectedSourceCloud,
+														  const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputProjectedTargetCloud, bool bIsFirst);
+		void NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsInitSource);
+		void layer_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst);
 		void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);
 		pcl::PointCloud<pcl::PointXYZ>::Ptr loadPCD (std::string file);
 		void calculateRMSE ();
 		void displayShape ();
 		void publish ();
-		void NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, bool bIsInitSource);
 		double calcDiffForRadian(const double lhs_rad, const double rhs_rad);
 };
 

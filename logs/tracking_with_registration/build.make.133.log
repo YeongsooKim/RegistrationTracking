@@ -1,4 +1,20 @@
 [35m[1mScanning dependencies of target tracking_with_registration[0m
-[ 12%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o[0m
-[ 25%] [32m[1mLinking CXX executable /workspace/TrackingWithRegistration/devel/.private/tracking_with_registration/lib/tracking_with_registration/tracking_with_registration[0m
-[100%] Built target tracking_with_registration
+[ 10%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o[0m
+[ 20%] [32mBuilding CXX object CMakeFiles/tracking_with_registration.dir/src/measurement.cpp.o[0m
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:[m[K In member function ‘[01m[Kvoid ExtractMeasurement::layed_based_ICP(pcl::PointCloud<pcl::PointXYZRGB>::Ptr&, const Ptr&, bool&)[m[K’:
+[01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:733:27:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator+=[m[K’ (operand types are ‘[01m[Kpcl::PointCloud<pcl::PointXYZRGB>[m[K’ and ‘[01m[Kconst boost::shared_ptr<pcl::PointCloud<pcl::PointXYZRGB> >[m[K’)
+   *pAccumulatedLayerCloud += pLayerCloud;
+[01;32m[K                           ^[m[K
+In file included from [01m[K/opt/ros/kinetic/include/pcl_ros/point_cloud.h:5:0[m[K,
+                 from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h:5[m[K,
+                 from [01m[K/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp:1[m[K:
+[01m[K/usr/include/pcl-1.7/pcl/point_cloud.h:247:7:[m[K [01;36m[Knote: [m[Kcandidate: pcl::PointCloud<PointT>& pcl::PointCloud<PointT>::operator+=(const pcl::PointCloud<PointT>&) [with PointT = pcl::PointXYZRGB]
+       operator += (const PointCloud& rhs)
+[01;32m[K       ^[m[K
+[01m[K/usr/include/pcl-1.7/pcl/point_cloud.h:247:7:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kconst boost::shared_ptr<pcl::PointCloud<pcl::PointXYZRGB> >[m[K’ to ‘[01m[Kconst pcl::PointCloud<pcl::PointXYZRGB>&[m[K’
+CMakeFiles/tracking_with_registration.dir/build.make:158: recipe for target 'CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o' failed
+make[2]: *** [CMakeFiles/tracking_with_registration.dir/src/extractMeasurement.cpp.o] Error 1
+CMakeFiles/Makefile2:163: recipe for target 'CMakeFiles/tracking_with_registration.dir/all' failed
+make[1]: *** [CMakeFiles/tracking_with_registration.dir/all] Error 2
+Makefile:138: recipe for target 'all' failed
+make: *** [all] Error 2

@@ -6,9 +6,9 @@ bool ID_sort (const clusterPtr& ID1, const clusterPtr& ID2)
 	return ID1->m_id < ID2->m_id;
 }
 
-ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) : m_measurementN (size), m_bDoVisualize(bDoVisualizePCD)
+ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size) 
 {
-	// define publisher
+	// Define publisher
 	m_pub_result = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("OnlyBoundingBox", 100);
 	m_pub_resultICP = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("ICP", 100);
 	m_pub_shape = nh.advertise<visualization_msgs::MarkerArray>("Shape", 100);
@@ -16,6 +16,13 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 	m_pub_shapeKalman = nh.advertise<visualization_msgs::MarkerArray>("ShapeKalman", 100);
 	m_pub_shapeReference = nh.advertise<visualization_msgs::MarkerArray>("ShapeReference", 100);
 	//m_pub_Origin = nh.advertise<visualization_msgs::Marker> ("Origin", 1);
+
+	m_pub_source = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("source", 100);
+	m_pub_target = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("target", 100);
+	m_pub_final = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("final", 100);
+	m_pub_output = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB>> ("outputCl", 100);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr tmp (new pcl::PointCloud<pcl::PointXYZRGB>);
+	pOutputCloud = tmp;
 
 	m_maxIndexNumber = 0;	
 
@@ -44,8 +51,6 @@ ExtractMeasurement::ExtractMeasurement(unsigned int size, bool bDoVisualizePCD) 
 	}
 
 	m_maxIndexNumber = 0;
-
-	m_vecVehicleTrackingClouds.resize(m_measurementN);
 
 	Eigen::Translation3f tl_btol(0.0, 0.0, 0.0);                 // tl: translation
 	Eigen::AngleAxisf rot_x_btol(0.0, Eigen::Vector3f::UnitX());  // rot: rotation
@@ -115,34 +120,66 @@ void ExtractMeasurement::setData (const std::vector<VectorXd>& vecVecXdRef, long
 
 void ExtractMeasurement::process()
 {
+	static unsigned int count = 0;
+	ROS_INFO_STREAM ("Iteration: " << count);
+	ROS_INFO_STREAM ("Start get PCD");
 	// get pcd 
 	pcl::PointCloud<pcl::PointXYZ>::Ptr pCloudTraffic (new pcl::PointCloud<pcl::PointXYZ>);
 	getPCD(pCloudTraffic);
 
+	//	// threshold
+	//	pcl::PointCloud<pcl::PointXYZ>::Ptr pThresholdedCloud (new pcl::PointCloud<pcl::PointXYZ>);
+	//	threshold (*pCloudTraffic, pThresholdedCloud);
+
+	ROS_INFO_STREAM ("Downsampling");
 	// downsample
 	pcl::PointCloud<pcl::PointXYZ>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZ>);
-	downsample(pCloudTraffic, pDownsampledCloud, 0.1);
+	downsample(pCloudTraffic, pDownsampledCloud, 0.08);
 
+	ROS_INFO_STREAM ("Start dbscan");
 	// dbscan
 	std::vector<pcl::PointIndices> vecClusterIndices;
 	dbscan (pDownsampledCloud, vecClusterIndices);
 
+	ROS_INFO_STREAM ("Set cluster");
 	// Set cluster pointcloud from clusterIndices and coloring
 	setCluster (vecClusterIndices, pDownsampledCloud);
 
+	ROS_INFO_STREAM ("Associate");
 	// Associate 
 	association ();
 
+	ROS_INFO_STREAM ("Calculate RMSE");
 	// calculate RMSE
 	calculateRMSE ();
 
+	ROS_INFO_STREAM ("Display shape");
 	// display shape
 	displayShape ();
 
+	ROS_INFO_STREAM ("Publish topic");
 	// publish	
 	publish ();
+
+	count++;
 }
 
+void ExtractMeasurement::threshold (const pcl::PointCloud<pcl::PointXYZ> &inputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr &pOutput)
+{
+	// Thresholding 
+	pcl::PointCloud<pcl::PointXYZ> tmpCloud;
+	for (const auto& point : inputCloud.points)
+	{
+		pcl::PointXYZ p;
+		p.x = (double)point.x;
+		p.y = (double)point.y;
+		p.z = (double)point.z;
+
+		tmpCloud.push_back(p);
+	}
+
+	pOutput->swap (tmpCloud);
+}
 
 void ExtractMeasurement::downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m)
 {
@@ -183,7 +220,7 @@ void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInpu
 
 	pcl::EuclideanClusterExtraction<pcl::PointXYZ> euclideanCluster;
 	euclideanCluster.setClusterTolerance (1.5);
-	euclideanCluster.setMinClusterSize (50);
+	euclideanCluster.setMinClusterSize (10);
 	euclideanCluster.setMaxClusterSize (23000);
 	//	euclideanCluster.setClusterTolerance (m_dClusterErrRadius);
 	//	euclideanCluster.setMinClusterSize (m_dClusterMinSize);
@@ -249,107 +286,92 @@ void ExtractMeasurement::association()
 	// Sort the vector using predicate and std::sort
 	std::sort(m_ObstacleTracking.m_TrackingObjects.begin(), m_ObstacleTracking.m_TrackingObjects.end(), ID_sort);
 
+	// check noise cluster
+	while (m_ObstacleTracking.m_TrackingObjects.size() > 3)
+	{
+		m_ObstacleTracking.m_TrackingObjects.erase (m_ObstacleTracking.m_TrackingObjects.begin()+3);
+	}
+
+
+	unsigned int index = 0;
 	// To store data in csv file, put the center point of OnlyBoundingBox tracking object into member variable with a data type of VectorXd
 	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
+
 		vecOf_measurementCSV[(pCluster->m_id)-1] << pCluster->m_timestamp << "," 
 			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
+
+		if (index == 0)
+		{
+			// To calculate RMSE, store the center point of OnlyBoundingBox tracking object into member variable with a data type of vector<VectorXd> 
+			// which store the same object in same vector
+			VectorXd meas(2);
+			meas << m_ObstacleTracking.m_TrackingObjects[index]->m_center.position.x, m_ObstacleTracking.m_TrackingObjects[index]->m_center.position.y;
+			m_vecVecXdOnlyBoundingbox.push_back (meas);
+		}
+
+		index++;
 	}
 
-	// To calculate RMSE, store the center point of OnlyBoundingBox tracking object into member variable with a data type of vector<VectorXd> 
-	// which store the same object in same vector
-	VectorXd meas(2);
-	meas << m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.x, m_ObstacleTracking.m_TrackingObjects[0]->m_center.position.y;
-	m_vecVecXdOnlyBoundingbox.push_back (meas);
 
-	
 	// Store the each pointcloud of same obstacle over timestamp in same member variable 
-	unsigned int vehicleN = 0;
-	for (const auto& pCluster : m_ObstacleTracking.m_TrackingObjects)
+	static unsigned int vehicleN = 0;
+	for (; vehicleN < m_ObstacleTracking.m_TrackingObjects.size(); vehicleN++)
 	{
-		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (pCluster->GetCloud());
-		m_vecVehicleTrackingClouds[vehicleN].push_back (pTrackingCloud);
-		vehicleN++;
+		clusterPtr pCluster (new Cluster());
+		m_vecVehicleAccumulatedCloud.push_back(pCluster);
 	}
 
-
-	static bool bIsFirst = true;
-	// ICP
-	if (m_bDoICP)
-	{
-		unsigned int vehicleN = 0;
-		for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
-		{
-			if (bIsFirst)
-			{
-				clusterPtr pCluster (new Cluster());
-				m_vecVehicleAccumulatedCloud.push_back(pCluster);
-			}
-
-			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
-			point2pointICPwithAccumulation (pAccumulatedCloud, vecVehicleTrackingCloud.back(), bIsFirst);
-
-			unsigned int r; unsigned int g; unsigned int b;
-			if (vehicleN == 0) {
-				r = 255; g = 0; b = 0;
-			}
-			else if (vehicleN == 1) {
-				r = 0; g = 255; b = 0;
-			}
-			else if (vehicleN == 2) {
-				r = 0; g = 0; b = 255;
-			}
-
-			m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
-			vehicleN++;
-		}
-	}
-	// NDT
-	else if (m_bDoNDT)
-	{
-		unsigned int vehicleN = 0;
-		for (const auto& vecVehicleTrackingCloud : m_vecVehicleTrackingClouds)
-		{
-			if (bIsFirst)
-			{
-				clusterPtr pCluster (new Cluster());
-				m_vecVehicleAccumulatedCloud.push_back(pCluster);
-			}
-
-			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (m_vecVehicleAccumulatedCloud[vehicleN]->GetCloud());
-			ExtractMeasurement::NDT (pAccumulatedCloud, vecVehicleTrackingCloud.back(), bIsFirst);
-
-			unsigned int r; unsigned int g; unsigned int b;
-			if (vehicleN == 0) {
-				r = 255; g = 0; b = 0;
-			}
-			else if (vehicleN == 1) {
-				r = 0; g = 255; b = 0;
-			}
-			else if (vehicleN == 2) {
-				r = 0; g = 0; b = 255;
-			}
-
-			m_vecVehicleAccumulatedCloud[vehicleN]->SetCluster (m_llTimestamp_s, vehicleN, r, g, b);
-			vehicleN++;
-		}
-	}
-
-	// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
+	unsigned int clusterN = 0;
 	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
 	{
+		if (clusterN != 0)
+		{
+			clusterN++;
+			continue;
+		}
+
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulatedCloud (pCluster->GetCloud());
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTrackingCloud (m_ObstacleTracking.m_TrackingObjects[clusterN]->GetCloud());
+
+		ROS_ERROR_STREAM ("Source size: " << pAccumulatedCloud->points.size() << ", Target size: " << pTrackingCloud->points.size());
+		// ICP
+		if (m_bDoICP) 
+			point2pointICPwithAccumulation (pTrackingCloud, pAccumulatedCloud, pCluster->getIsFristRegistration());
+		// NDT
+		else if (m_bDoNDT)
+			NDT (pTrackingCloud, pAccumulatedCloud, pCluster->getIsFristRegistration());
+		// Layer based icp
+		else if (m_bDoLayerBasedICP)
+			layer_based_ICP (pAccumulatedCloud, pTrackingCloud, pCluster->getIsFristRegistration());
+
+		unsigned int r; unsigned int g; unsigned int b;
+		if (clusterN == 0) {
+			r = 255; g = 0; b = 0;
+		}
+		else if (clusterN == 1) {
+			r = 0; g = 255; b = 0;
+		}
+		else if (clusterN == 2) {
+			r = 0; g = 0; b = 255;
+		}
+
+		pCluster->SetCluster (m_llTimestamp_s, clusterN, r, g, b);
+
+		// To store data in csv file, put the center point of registrated tracking object into member variable with a data type of VectorXd
 		vecOf_accumMeasurementCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
 			<< pCluster->m_center.position.x << "," << pCluster->m_center.position.y << std::endl;
-	}
 
-	// To calculate RMSE, store the center point of registrated tracking object into member variable with a data type of vector<VectorXd> 
-	// which store the same object in same vector
-	VectorXd meas2 (2);
-	meas2 << m_vecVehicleAccumulatedCloud[0]->m_center.position.x,  m_vecVehicleAccumulatedCloud[0]->m_center.position.y;
-	m_vecVecXdRegistrationAccum.push_back (meas2);
+		// To calculate RMSE, store the center point of registrated tracking object into member variable with a data type of vector<VectorXd> 
+		// which store the same object in same vector
+		if (clusterN == 0)
+		{
+			VectorXd meas2 (2);
+			meas2 << m_vecVehicleAccumulatedCloud[clusterN]->m_center.position.x,  m_vecVehicleAccumulatedCloud[clusterN]->m_center.position.y;
+			m_vecVecXdRegistrationAccum.push_back (meas2);
+		}
 
-	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
-	{
+		// kalman filter
 		MeasurementPackage meas_package;
 		meas_package.raw_measurements_ = VectorXd(2);
 
@@ -358,84 +380,197 @@ void ExtractMeasurement::association()
 		meas_package.timestamp_ = m_llTimestamp_s;
 
 		pCluster->KF.ProcessMeasurement(meas_package);
-	}
 
-	// To store data in csv file, put the center point of Kalman filter tracking object into member variable with a data type of VectorXd
-	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
-	{
+		// To store data in csv file, put the center point of Kalman filter tracking object into member variable with a data type of VectorXd
 		vecOf_KalmanFilterCSV[pCluster->m_id] << pCluster->m_timestamp << "," 
-											  << pCluster->KF.x_[0] << ","
-											  << pCluster->KF.x_[1] << ","
-											  << pCluster->KF.x_[2] << ","
-											  << pCluster->KF.x_[3] << std::endl;
+			<< pCluster->KF.x_[0] << ","
+			<< pCluster->KF.x_[1] << ","
+			<< pCluster->KF.x_[2] << ","
+			<< pCluster->KF.x_[3] << std::endl;
+
+		// To calculate RMSE, store the center point of kalman filter tracking object into member variable with a data type of vector<VectorXd> 
+		// which store the same object in same vector
+		if (clusterN == 0)
+		{
+			VectorXd meas3 (4);
+			meas3 << m_vecVehicleAccumulatedCloud[clusterN]->KF.x_[0],
+			m_vecVehicleAccumulatedCloud[clusterN]->KF.x_[1],
+			m_vecVehicleAccumulatedCloud[clusterN]->KF.x_[2],
+			m_vecVehicleAccumulatedCloud[clusterN]->KF.x_[3];
+			m_vecVecXdKalmanFilter.push_back (meas3);
+		}
+
+		clusterN++;
 	}
-
-	// To calculate RMSE, store the center point of kalman filter tracking object into member variable with a data type of vector<VectorXd> 
-	// which store the same object in same vector
-	VectorXd meas3 (4);
-	meas3 << m_vecVehicleAccumulatedCloud[0]->KF.x_[0],
-			 m_vecVehicleAccumulatedCloud[0]->KF.x_[1],
-			 m_vecVehicleAccumulatedCloud[0]->KF.x_[2],
-			 m_vecVehicleAccumulatedCloud[0]->KF.x_[3],
-	m_vecVecXdKalmanFilter.push_back (meas3);
-
-	bIsFirst = false;
 }
 
-void ExtractMeasurement::point2pointICPwithAccumulation (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst)
+void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst)
 {
 	if (bIsFirst)
 	{
-		pInputSourceCloud->swap (*pInputTargetCloud);
+		pInputTargetCloud->swap (*pInputSourceCloud);
 		bIsFirst = false;
 	}
 	else if(!bIsFirst)
 	{
+		Eigen::Matrix4f finalTransformation;
+		Eigen::Matrix4f finalTransformationInverse;
+
 		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
 		icp.setInputSource (pInputSourceCloud);
 		icp.setInputTarget (pInputTargetCloud);
-		pcl::PointCloud<pcl::PointXYZRGB> Final;
-		icp.align (Final);
+		pcl::PointCloud<pcl::PointXYZRGB> finalCloud;
+		icp.align (finalCloud);
 
-		if (icp.getFitnessScore() < 0.02)
-		{
-			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-			*pTmpPointCloud += Final;
-			*pTmpPointCloud += *pInputTargetCloud;
+		finalTransformation = icp.getFinalTransformation();
+		finalTransformationInverse = finalTransformation.inverse();
 
-			pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud2 (new pcl::PointCloud<pcl::PointXYZRGB>);
-			downsample (pTmpPointCloud, pTmpPointCloud2, 0.09);
-			pInputSourceCloud->clear ();
-			pInputSourceCloud->swap (*pTmpPointCloud2);
-		}
+		*pInputTargetCloud += finalCloud;
 
-		else {
-			pInputSourceCloud->clear ();
-			pInputSourceCloud->swap (*pInputTargetCloud);
-		}
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedInputTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		pcl::transformPointCloud (*pInputTargetCloud, *pTransformedInputTargetCloud, finalTransformationInverse);
+
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.1);
+		pInputTargetCloud->swap (*pTmpPointCloud);
 	}
 }
 
-void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, bool bIsInitSource)
+Eigen::Matrix4f ExtractMeasurement::point2pointICPwithAccumulation2 (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputProjectedSourceCloud,
+		const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputProjectedTargetCloud, bool bIsFirst)
 {
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	ROS_WARN_STREAM ("-- Start point2pointICPwithAccumulation2");
+	Eigen::Matrix4f finalTransformation (Eigen::Matrix4f::Identity());
+
+	if (bIsFirst)
+	{
+		ROS_INFO_STREAM ("-- init input source");
+	}
+	else if(!bIsFirst)
+	{
+
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pDownsampledSourceCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		ROS_INFO_STREAM ("-- Start downsample");
+		downsample (pInputProjectedSourceCloud, pDownsampledSourceCloud, 0.02); 
+		ROS_INFO_STREAM ("-- Complete downsample");
+
+
+		ROS_INFO_STREAM ("-- Calculate init guess");
+		pose guess_pose;
+
+		guess_pose.x = m_previousPose.x + m_diff_x;	// what is the coordinate of guess_pose
+		guess_pose.y = m_previousPose.y + m_diff_y;
+		guess_pose.z = pInputProjectedSourceCloud->points[0].z;
+		guess_pose.roll = 0;
+		guess_pose.pitch = 0;
+		guess_pose.yaw = m_previousPose.yaw + m_diff_yaw;
+
+		Eigen::AngleAxisf init_rotation_x (guess_pose.roll, Eigen::Vector3f::UnitX());
+		Eigen::AngleAxisf init_rotation_y (guess_pose.pitch, Eigen::Vector3f::UnitY());
+		Eigen::AngleAxisf init_rotation_z (guess_pose.yaw, Eigen::Vector3f::UnitZ());
+
+		Eigen::Translation3f init_translation(guess_pose.x, guess_pose.y, guess_pose.z);
+		Eigen::Matrix4f init_guess =
+			(init_translation * init_rotation_z * init_rotation_y * init_rotation_x).matrix() * m_mat4fBase2Local;
+
+		
+		ROS_INFO_STREAM ("-- Start ICP");
+		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
+
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedDownsampleCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		pcl::transformPointCloud (*pDownsampledSourceCloud, *pTransformedDownsampleCloud, init_guess);
+
+		//icp.setInputSource (pDownsampledSourceCloud);
+		icp.setInputSource (pTransformedDownsampleCloud);
+		icp.setInputTarget (pInputProjectedTargetCloud);
+
+		pcl::PointCloud<pcl::PointXYZRGB> finalCloud;
+		icp.align (finalCloud);
+		ROS_INFO_STREAM ("-- Complete ICP");
+
+		Eigen::Matrix4f mat4fLocalizer (Eigen::Matrix4f::Identity());
+		mat4fLocalizer = icp.getFinalTransformation();
+		finalTransformation = mat4fLocalizer * init_guess * m_mat4fLocal2Base;
+	}
+
+	ROS_INFO_STREAM ("-- Complete point2pointICPwithAccumulation2 function");
+	return finalTransformation;
+}
+void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsInitSource)
+{
+//	// for test
+//	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedInputSourceCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//	for (const auto& point : pInputSourceCloud->points)
+//	{
+//		pcl::PointXYZRGB tmp;
+//		tmp.x = point.x;
+//		tmp.y = point.y;
+//		tmp.z = point.z;
+//		tmp.r = 0;
+//		tmp.g = 255;
+//		tmp.b = 0;
+//
+//		pColorChangedInputSourceCloud->points.push_back (tmp);
+//	}
+//	pInputSourceCloud->swap (*pColorChangedInputSourceCloud);
+//	// -------------------------------------------------------
+//
+//	pInputSourceCloud->header.frame_id = "map";
+//	m_pub_source.publish (*pInputSourceCloud);
+
+//	// for test
+//	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedInputTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//	for (const auto& point : pInputTargetCloud->points)
+//	{
+//		pcl::PointXYZRGB tmp;
+//		tmp.x = point.x;
+//		tmp.y = point.y;
+//		tmp.z = point.z;
+//		tmp.r = 0;
+//		tmp.g = 0;
+//		tmp.b = 255;
+//
+//		pColorChangedInputTargetCloud->points.push_back (tmp);
+//	}
+//	pInputTargetCloud->swap (*pColorChangedInputTargetCloud);
+//	// -------------------------------------------------------
+//
+//	pInputTargetCloud->header.frame_id = "map";
+//	m_pub_target.publish (*pInputTargetCloud);
 
 	// Add initial point cloud to 
 	if (bIsInitSource)
 	{
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 		pcl::transformPointCloud (*pInputSourceCloud, *pTransformedCloud, m_mat4fBase2Local);
 		pInputTargetCloud->swap (*pTransformedCloud);
+
+		pcl::PointCloud<pcl::PointXYZRGB> tmpCloud;
+		for (const auto& point : pInputTargetCloud->points)
+		{
+			pcl::PointXYZRGB p;
+			p.x = point.x + 0.01;
+			p.y = point.y + 0.01;
+			p.z = point.z + 0.01;
+			tmpCloud.points.push_back (p);
+
+			p.x = point.x - 0.01;
+			p.y = point.y - 0.01;
+			p.z = point.z - 0.01;
+			tmpCloud.points.push_back (p);
+		}
+		*pInputTargetCloud += tmpCloud;
 	}
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pDownsampledCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-	downsample(pInputSourceCloud, pDownsampledCloud, 0.9);
-
+	//downsample(pInputSourceCloud, pDownsampledCloud, 0.04);
 
 	m_ndt.setTransformationEpsilon(0.01);
 	m_ndt.setStepSize(0.1);
-	m_ndt.setResolution(1.0);
+	m_ndt.setResolution(0.4);
 	m_ndt.setMaximumIterations(30);
-	m_ndt.setInputSource (pDownsampledCloud);
+	//m_ndt.setInputSource (pDownsampledCloud);
+	m_ndt.setInputSource (pInputSourceCloud);
 
 	if (bIsInitSource)
 	{
@@ -470,10 +605,9 @@ void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTarg
 	mat4fLocalizerInverse = mat4fLocalizer.inverse();
 
 	Eigen::Matrix4f mat4fBaseLink(Eigen::Matrix4f::Identity());
+	Eigen::Matrix4f mat4fBaseLinkInverse(Eigen::Matrix4f::Identity());
 	mat4fBaseLink = mat4fLocalizer * m_mat4fLocal2Base;
-
-	pcl::transformPointCloud(*pInputSourceCloud, *pTransformedCloud, mat4fLocalizer);
-	//pInputTargetCloud->swap (*pTransformedCloud);
+	mat4fBaseLinkInverse = mat4fBaseLink.inverse();
 
 	tf::Matrix3x3 mat_b;
 
@@ -510,10 +644,395 @@ void ExtractMeasurement::NDT (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTarg
 	m_previousPose.pitch = m_currentPose.pitch;
 	m_previousPose.yaw = m_currentPose.yaw;
 
-	//*pInputTargetCloud += *pDownsampledCloud;
-	*pInputTargetCloud += *pTransformedCloud;
-	m_ndt.setInputTarget(pInputTargetCloud);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedInputTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	pcl::transformPointCloud(*pInputTargetCloud, *pTransformedInputTargetCloud, mat4fBaseLinkInverse);
+
+//	// for test
+//	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedFinalCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//	for (const auto& point : pTransformedInputTargetCloud->points)
+//	{
+//		pcl::PointXYZRGB tmp;
+//		tmp.x = point.x;
+//		tmp.y = point.y;
+//		tmp.z = point.z;
+//		tmp.r = 255;
+//		tmp.g = 255;
+//		tmp.b = 0;
+//
+//		pColorChangedFinalCloud->points.push_back (tmp);
+//	}
+//
+//	pColorChangedFinalCloud->header.frame_id = "map";
+//	m_pub_final.publish (*pColorChangedFinalCloud);
+//	// -------------------------------------------------------
+
+	*pTransformedInputTargetCloud += *pInputSourceCloud;
+
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	downsample (pTransformedInputTargetCloud, pTmpPointCloud, 0.04);
+	pInputTargetCloud->swap (*pTmpPointCloud);
+
+	m_ndt.setInputTarget (pInputTargetCloud);
+
+//	// for test
+//	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedOutputCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+//	for (const auto& point : pInputTargetCloud->points)
+//	{
+//		pcl::PointXYZRGB tmp;
+//		tmp.x = point.x;
+//		tmp.y = point.y;
+//		tmp.z = point.z;
+//		tmp.r = 255;
+//		tmp.g = 0;
+//		tmp.b = 0;
+//
+//		pColorChangedOutputCloud->points.push_back (tmp);
+//	}
+//	pOutputCloud->swap (*pColorChangedOutputCloud);
+//	// -------------------------------------------------------
+//
+//	pOutputCloud->header.frame_id = "map";
+//	m_pub_output.publish (*pOutputCloud);
+	ROS_INFO_STREAM ("points size: " << pInputTargetCloud->points.size());
 }
+
+
+void ExtractMeasurement::layer_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst)
+{
+	// for test
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedInputSourceCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	for (const auto& point : pInputSourceCloud->points)
+	{
+		pcl::PointXYZRGB tmp;
+		tmp.x = point.x;
+		tmp.y = point.y;
+		tmp.z = point.z;
+		tmp.r = 0;
+		tmp.g = 255;
+		tmp.b = 0;
+
+		pColorChangedInputSourceCloud->points.push_back (tmp);
+	}
+
+	pColorChangedInputSourceCloud->header.frame_id = "map";
+	m_pub_source.publish (*pColorChangedInputSourceCloud);
+	// -------------------------------------------------------
+
+	// for test
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedInputTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	for (const auto& point : pInputTargetCloud->points)
+	{
+		pcl::PointXYZRGB tmp;
+		tmp.x = point.x;
+		tmp.y = point.y;
+		tmp.z = point.z;
+		tmp.r = 0;
+		tmp.g = 0;
+		tmp.b = 255;
+
+		pColorChangedInputTargetCloud->points.push_back (tmp);
+	}
+
+	pColorChangedInputTargetCloud->header.frame_id = "map";
+	m_pub_target.publish (*pColorChangedInputTargetCloud);
+	// -------------------------------------------------------
+
+
+	ROS_WARN_STREAM ("Start layer based ICP");
+	std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> vecPtrSourceLayerBasedCloud;
+	std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> vecPtrTargetLayerBasedCloud;
+
+	// Create each layer dynamic point cloud
+	for (unsigned int i = 0; i < LAYER_SIZE; i++)
+	{
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pLayerSourceCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		vecPtrSourceLayerBasedCloud.push_back (pLayerSourceCloud);
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pLayerTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		vecPtrTargetLayerBasedCloud.push_back (pLayerTargetCloud);
+	}
+
+	// Calculate min max z, height and interval in the whole point cloud
+	float min_z = std::numeric_limits<float>::max();
+	float max_z = -std::numeric_limits<float>::max();
+	float mean_z = 0;
+
+	pcl::PointCloud<pcl::PointXYZRGB> wholePointCloud;
+	wholePointCloud += *pInputSourceCloud;
+	wholePointCloud += *pInputTargetCloud;
+
+	for (const auto& point : wholePointCloud.points)
+	{
+		if (point.z > max_z && point.z < 2.1)
+			max_z = point.z;
+		if (point.z < min_z && point.z > -0.1)
+			min_z = point.z;
+	}
+
+	float height = max_z - min_z;	
+	float interval = height/(float)LAYER_SIZE;
+	//	float height = 1.91604;
+	//	float interval = height/(float)LAYER_SIZE;
+	//min_z = 0;
+	ROS_INFO_STREAM ("height: " << height << ", interval: " << interval << ", min: " << min_z << ", max: " << max_z);
+
+
+	// push the point into each layer
+	ROS_INFO_STREAM ("push the point into each layer, whole size: " << wholePointCloud.points.size());
+
+	for (const auto& point : pInputSourceCloud->points)
+	{
+		pcl::PointXYZRGB p;
+		p.x = point.x;
+		p.y = point.y;
+		p.z = point.z;
+		p.r = point.r;
+		p.g = point.g;
+		p.b = point.b;
+
+		for (unsigned int layerIndex = 0; layerIndex < LAYER_SIZE; ++layerIndex)
+		{
+			float min = min_z + layerIndex*interval;
+			float max = min + interval;
+			if (p.z >= min && p.z < max)
+			{
+				vecPtrSourceLayerBasedCloud[layerIndex]->points.push_back (p);
+				break;
+			}
+		}
+	}
+
+	for (const auto& point : pInputTargetCloud->points)
+	{
+		pcl::PointXYZRGB p;
+		p.x = point.x;
+		p.y = point.y;
+		p.z = point.z;
+		p.r = point.r;
+		p.g = point.g;
+		p.b = point.b;
+
+		for (unsigned int layerIndex = 0; layerIndex < LAYER_SIZE; ++layerIndex)
+		{
+			float min = min_z + layerIndex*interval;
+			float max = min + interval;
+			if (p.z >= min && p.z < max)
+			{
+				vecPtrTargetLayerBasedCloud[layerIndex]->points.push_back (p);
+				break;
+			}
+		}
+	}
+
+
+	// find min value of pointcloud size between source layer and target layer
+	// summation of pointcloud size 
+	std::vector<unsigned int> vecMinPointN;
+	unsigned int uiPointSizeSum = 0;
+	for (unsigned int layerIdx = 0; layerIdx < LAYER_SIZE; ++layerIdx)
+	{
+		unsigned int uiMinPointN = 0;
+		unsigned int uiSourceLayerPointN = vecPtrSourceLayerBasedCloud[layerIdx]->points.size();
+		unsigned int uiTargetLayerPointN = vecPtrTargetLayerBasedCloud[layerIdx]->points.size();
+
+		uiMinPointN = uiSourceLayerPointN < uiTargetLayerPointN ? uiSourceLayerPointN : uiTargetLayerPointN;
+
+		vecMinPointN.push_back (uiMinPointN);
+		uiPointSizeSum += vecMinPointN[layerIdx];
+
+		ROS_INFO_STREAM ("layer: " << layerIdx << " source point size: " << uiSourceLayerPointN << ", target point size: " << uiTargetLayerPointN
+				<< ", min size: " << vecMinPointN[layerIdx] << ", sum of point size: " << uiPointSizeSum);
+	}
+
+	// prevent weight from divergence
+	if (uiPointSizeSum < 0.001) 
+		uiPointSizeSum = 0.001;
+
+	std::vector<double> vecLayerWeight;
+	for (const auto& correspondencePointSize : vecMinPointN)
+	{
+		double weight = (double)correspondencePointSize/(double)uiPointSizeSum;
+		vecLayerWeight.push_back (weight);
+		ROS_INFO_STREAM ("each layer weight: " << weight);
+	}
+
+	ROS_INFO_STREAM ("Create vector of projected pointer pointcloud to input projected cloud");
+	std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> vecPtrProjectedSourceCloud;
+	std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> vecPtrProjectedTargetCloud;
+	// Create each layer dynamic point cloud
+	for (unsigned int i = 0; i < LAYER_SIZE; i++)
+	{
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pProjectedSourceCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		vecPtrProjectedSourceCloud.push_back (pProjectedSourceCloud);
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pProjectedTargetCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		vecPtrProjectedTargetCloud.push_back (pProjectedTargetCloud);
+	}
+
+	// Calculate each layer mean z and projection each layer into each mean z
+	for (unsigned int layerIndex = 0; layerIndex < LAYER_SIZE; ++layerIndex)
+	{
+		pcl::PointCloud<pcl::PointXYZRGB> layerWholePointCloud;
+		layerWholePointCloud += *vecPtrSourceLayerBasedCloud[layerIndex];
+		layerWholePointCloud += *vecPtrTargetLayerBasedCloud[layerIndex];
+
+		float mean_z = 0;
+		for (const auto& point : layerWholePointCloud.points)
+			mean_z += point.z;
+
+		mean_z = mean_z/layerWholePointCloud.points.size();
+
+		// project the point of within boundary into mean_z 
+		float min = mean_z - (float)BOUNDARY;
+		float max = mean_z + (float)BOUNDARY;
+		for (const auto& point : vecPtrSourceLayerBasedCloud[layerIndex]->points)
+		{
+			if (point.z < min || point.z > max) 
+				continue;
+
+			pcl::PointXYZRGB p;
+			p.x = point.x;
+			p.y = point.y;
+			p.z = mean_z;
+			p.r = point.r;
+			p.g = point.g;
+			p.b = point.b;
+
+			vecPtrProjectedSourceCloud[layerIndex]->points.push_back (p);
+		}
+
+		for (const auto& point : vecPtrTargetLayerBasedCloud[layerIndex]->points)
+		{
+			if (point.z < min || point.z > max) 
+				continue;
+
+			pcl::PointXYZRGB p;
+			p.x = point.x;
+			p.y = point.y;
+			p.z = mean_z;
+			p.r = point.r;
+			p.g = point.g;
+			p.b = point.b;
+
+			vecPtrProjectedTargetCloud[layerIndex]->points.push_back (p);
+		}
+		ROS_INFO_STREAM ("layer: " << layerIndex << ", mean z: " << mean_z << ", source size: " 
+				<< vecPtrProjectedSourceCloud[layerIndex]->points.size() << ", target size: "
+				<< vecPtrProjectedTargetCloud[layerIndex]->points.size());
+	}
+
+	unsigned int uiLayerN = 0;
+	Eigen::Matrix4f wholeTransformation = Eigen::Matrix4f::Zero(4,4);
+	for (const auto& pProjectedSourceCloud : vecPtrProjectedSourceCloud)
+	{
+		Eigen::Matrix4f transformation;
+
+		ROS_WARN_STREAM ("- Start Layer icp iteration: " << uiLayerN);
+
+		transformation = point2pointICPwithAccumulation2 (pProjectedSourceCloud, vecPtrProjectedTargetCloud[uiLayerN], bIsFirst);
+
+		ROS_INFO_STREAM ("- End Layer icp iteration: " << uiLayerN);
+
+		wholeTransformation += transformation * vecLayerWeight[uiLayerN];
+		uiLayerN++;
+	}
+
+	if (bIsFirst)
+	{
+		bIsFirst = false;
+		ROS_INFO_STREAM ("If it is first time, swap pInputSourceCloud into pInputTargetCloud");
+		pInputSourceCloud->swap (*pInputTargetCloud);
+	}
+	else
+	{
+		// Calculate error
+		float fMinDistance = 1000;
+		for (const auto& target_p : pInputTargetCloud->points)
+		{
+			for (const auto& source_p : pInputSourceCloud->points)
+			{
+				float f_x = target_p.x - source_p.x;
+				float f_y = target_p.y - source_p.y;
+				float f_d = f_x*f_x + f_y*f_y;
+
+				if (f_d < fMinDistance)
+				{
+					fMinDistance = f_d;
+				}
+			}
+		}
+
+
+		ROS_INFO_STREAM ("Transform pInputSourceCloud into pInputTargetCloud coordinate");
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTransformedInputSourceCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		pcl::transformPointCloud (*pInputSourceCloud, *pTransformedInputSourceCloud, wholeTransformation);
+		ROS_ERROR_STREAM ("pTransformedInputSourceCloud size: " << pTransformedInputSourceCloud->points.size());
+
+		// for test
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pColorChangedFinalCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		for (const auto& point : pTransformedInputSourceCloud->points)
+		{
+			pcl::PointXYZRGB tmp;
+			tmp.x = point.x;
+			tmp.y = point.y;
+			tmp.z = point.z;
+			tmp.r = 255;
+			tmp.g = 255;
+			tmp.b = 0;
+
+			pColorChangedFinalCloud->points.push_back (tmp);
+		}
+
+		pColorChangedFinalCloud->header.frame_id = "map";
+		m_pub_final.publish (*pColorChangedFinalCloud);
+		// -------------------------------------------------------
+
+		*pTransformedInputSourceCloud += *pInputTargetCloud;
+
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pTmpPointCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+		downsample (pTransformedInputSourceCloud, pTmpPointCloud, 0.03);
+
+		pInputSourceCloud->swap (*pTmpPointCloud);
+		ROS_INFO_STREAM ("pInputSourceCloud size: " << pInputSourceCloud->points.size());
+
+		// Calculate previous pose and current pose
+		tf::Matrix3x3 mat_b;
+
+		mat_b.setValue(static_cast<double>(wholeTransformation(0, 0)), static_cast<double>(wholeTransformation(0, 1)),
+				static_cast<double>(wholeTransformation(0, 2)), static_cast<double>(wholeTransformation(1, 0)),
+				static_cast<double>(wholeTransformation(1, 1)), static_cast<double>(wholeTransformation(1, 2)),
+				static_cast<double>(wholeTransformation(2, 0)), static_cast<double>(wholeTransformation(2, 1)),
+				static_cast<double>(wholeTransformation(2, 2)));
+
+		// Update m_ndtPose.
+		m_ndtPose.x = wholeTransformation(0, 3);
+		m_ndtPose.y = wholeTransformation(1, 3);
+		m_ndtPose.z = wholeTransformation(2, 3);
+		mat_b.getRPY(m_ndtPose.roll, m_ndtPose.pitch, m_ndtPose.yaw, 1);
+
+		m_currentPose.x = m_ndtPose.x;
+		m_currentPose.y = m_ndtPose.y;
+		m_currentPose.z = m_ndtPose.z;
+		m_currentPose.roll = m_ndtPose.roll;
+		m_currentPose.pitch = m_ndtPose.pitch;
+		m_currentPose.yaw = m_ndtPose.yaw;
+
+		// Calculate the offset (curren_pos - previous_pos)
+		m_diff_x = m_currentPose.x - m_previousPose.x;
+		m_diff_y = m_currentPose.y - m_previousPose.y;
+		m_diff_z = m_currentPose.z - m_previousPose.z;
+		m_diff_yaw = calcDiffForRadian(m_currentPose.yaw, m_previousPose.yaw);
+
+		// Update position and posture. current_pos -> previous_pos
+		m_previousPose.x = m_currentPose.x;
+		m_previousPose.y = m_currentPose.y;
+		m_previousPose.z = m_currentPose.z;
+		m_previousPose.roll = m_currentPose.roll;
+		m_previousPose.pitch = m_currentPose.pitch;
+		m_previousPose.yaw = m_currentPose.yaw;
+	}
+
+	ROS_WARN_STREAM ("End layer based ICP");
+}
+
 
 double ExtractMeasurement::calcDiffForRadian(const double lhs_rad, const double rhs_rad)
 {
@@ -533,9 +1052,16 @@ void ExtractMeasurement::displayShape ()
 	m_arrShapesKalman.markers.clear();
 	m_arrShapesReference.markers.clear();
 
+
+	unsigned int clusterN = 0;
 	// For OnlyBoundingBox
 	for (auto pCluster : m_ObstacleTracking.m_TrackingObjects)
 	{
+		if (clusterN != 0)
+		{
+			clusterN++;
+			continue;
+		}
 		visualization_msgs::Marker shape;
 
 		shape.lifetime = ros::Duration();
@@ -628,11 +1154,20 @@ void ExtractMeasurement::displayShape ()
 		shape.color.a = 0.5;
 
 		m_arrShapes.markers.push_back (shape);
+
+		clusterN++;
 	}
 
+	clusterN = 0;
 	// For registration and accumulation
 	for (auto pCluster : m_vecVehicleAccumulatedCloud)
 	{
+		if (clusterN != 0)
+		{
+			clusterN++;
+			continue;
+		}
+
 		visualization_msgs::Marker shape;
 
 		shape.lifetime = ros::Duration();
@@ -683,8 +1218,8 @@ void ExtractMeasurement::displayShape ()
 		string s_y_RMSE = std::to_string(m_vecVecXdResultRMSE[1][1]);
 		string time = std::to_string(m_llTimestamp_s/1e6);
 		string sWholeText = "Registraton and Accumulation RMSE\r\nx: " + s_x_RMSE 
-						  + "\r\ny: " + s_y_RMSE
-						  + "\r\ntime: " + time;
+			+ "\r\ny: " + s_y_RMSE
+			+ "\r\ntime: " + time;
 
 		shape.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 		shape.ns = "/RMSE";
@@ -756,9 +1291,9 @@ void ExtractMeasurement::displayShape ()
 		string s_vx_RMSE = std::to_string(m_vecVecXdResultRMSE[2][2]);
 		string s_vy_RMSE = std::to_string(m_vecVecXdResultRMSE[2][3]);
 		sWholeText = "Kalman filter RMSE\r\npx: " + s_px_RMSE
-				   + "\r\npy: " + s_py_RMSE
-				   + "\r\nvx: " + s_vx_RMSE
-				   + "\r\nvy: " + s_vy_RMSE;
+			+ "\r\npy: " + s_py_RMSE
+			+ "\r\nvx: " + s_vx_RMSE
+			+ "\r\nvy: " + s_vy_RMSE;
 
 		shapeForKalman.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 		shapeForKalman.ns = "/RMSE";
@@ -782,6 +1317,8 @@ void ExtractMeasurement::displayShape ()
 		shapeForKalman.text = sWholeText;
 
 		m_arrShapesKalman.markers.push_back (shapeForKalman);
+
+		clusterN++;
 	}
 
 	// For reference
@@ -855,18 +1392,36 @@ void ExtractMeasurement::publish ()
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumulationCloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 	pAccumulationCloud->header.frame_id = "map";
 
+	unsigned int clusterN = 0;
 	// accumulation for publish
 	for (const auto& pCluster : m_ObstacleTracking.m_TrackingObjects)
+	{
+		if (clusterN != 0)
+		{
+			clusterN++;
+			continue;
+		}
 		*pAccumulationCloud += *(pCluster->GetCloud());
+		clusterN++;
+	}
 
 	// Accumulate all cluster to pAccumCloudForICP
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pAccumCloudForICP (new pcl::PointCloud<pcl::PointXYZRGB>);
 	pAccumCloudForICP->header.frame_id = "map";
 
+	clusterN = 0;
 	// accumulation for publish
-	for (const auto& pVehicleTrackingCloud : m_vecVehicleAccumulatedCloud)
-		*pAccumCloudForICP += *(pVehicleTrackingCloud->GetCloud());
+	for (const auto& pCluster : m_vecVehicleAccumulatedCloud)
+	{
+		if (clusterN != 0)
+		{
+			clusterN++;
+			continue;
+		}
 
+		*pAccumCloudForICP += *(pCluster->GetCloud());
+		clusterN++;
+	}
 
 	// publish
 	m_pub_resultICP.publish (*pAccumCloudForICP);

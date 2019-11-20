@@ -244,6 +244,7 @@ AngleAxisType	Eigen/src/Geometry/Quaternion.h	/^  typedef AngleAxis<Scalar> Angl
 AngleAxisType	Eigen/src/Geometry/Quaternion.h	/^  typedef typename Base::AngleAxisType AngleAxisType;$/;"	t	class:Eigen::Quaternion
 angularDistance	Eigen/src/Eigen2Support/Geometry/Quaternion.h	/^inline Scalar Quaternion<Scalar>::angularDistance(const Quaternion& other) const$/;"	f	class:Eigen::Quaternion
 angularDistance	Eigen/src/Geometry/Quaternion.h	/^QuaternionBase<Derived>::angularDistance(const QuaternionBase<OtherDerived>& other) const$/;"	f	class:Eigen::QuaternionBase
+annotate	matplotlibcpp.h	/^inline bool annotate(std::string annotation, double x, double y)$/;"	f	namespace:matplotlibcpp
 any	Eigen/src/Core/BooleanRedux.h	/^inline bool DenseBase<Derived>::any() const$/;"	f	class:Eigen::DenseBase
 any	Eigen/src/Core/VectorwiseOp.h	/^    const typename ReturnType<internal::member_any>::Type any() const$/;"	f	class:Eigen::VectorwiseOp
 any_unroller	Eigen/src/Core/BooleanRedux.h	/^struct any_unroller$/;"	s	namespace:Eigen::internal
@@ -335,8 +336,7 @@ assign_selector	Eigen/src/Core/Assign.h	/^struct assign_selector<Derived,OtherDe
 assign_selector	Eigen/src/Core/Assign.h	/^struct assign_selector<Derived,OtherDerived,true,true> {$/;"	s	namespace:Eigen::internal
 assign_traits	Eigen/src/Core/Assign.h	/^struct assign_traits$/;"	s	namespace:Eigen::internal
 asSluMatrix	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^SluMatrix asSluMatrix(MatrixType& mat)$/;"	f	namespace:Eigen::internal
-association	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::association(long long timestamp)$/;"	f	language:C++	class:ExtractMeasurement
-association	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void association (long long timestamp);$/;"	p	language:C++	class:ExtractMeasurement
+association	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::association()$/;"	f	language:C++	class:ExtractMeasurement
 association	obstacle_tracking.cpp	/^void ObstacleTracking::association (const std::vector<clusterPtr>& objList)$/;"	f	class:ObstacleTracking
 at	Eigen/src/SparseCore/CompressedStorage.h	/^    inline Scalar at(Index key, const Scalar& defaultValue = Scalar(0)) const$/;"	f	class:Eigen::internal::CompressedStorage
 atanh2	Eigen/src/Core/MathFunctions.h	/^inline EIGEN_MATHFUNC_RETVAL(atanh2, Scalar) atanh2(const Scalar& x, const Scalar& y)$/;"	f	namespace:Eigen::numext
@@ -351,14 +351,18 @@ axis	Eigen/src/Eigen2Support/Geometry/AngleAxis.h	/^  const Vector3& axis() cons
 axis	Eigen/src/Eigen2Support/Geometry/AngleAxis.h	/^  Vector3& axis() { return m_axis; }$/;"	f	class:Eigen::AngleAxis
 axis	Eigen/src/Geometry/AngleAxis.h	/^  const Vector3& axis() const { return m_axis; }$/;"	f	class:Eigen::AngleAxis
 axis	Eigen/src/Geometry/AngleAxis.h	/^  Vector3& axis() { return m_axis; }$/;"	f	class:Eigen::AngleAxis
+axis	matplotlibcpp.h	/^inline void axis(const std::string &axisstr)$/;"	f	namespace:matplotlibcpp
 Ax_lBx	Eigen/src/Core/util/Constants.h	/^  Ax_lBx              = 0x100,$/;"	e	enum:Eigen::DecompositionOptions
 b	Eigen/src/SVD/JacobiSVD.h	/^         b = MatrixType::RowsAtCompileTime != Dynamic &&$/;"	e	enum:Eigen::internal::qr_preconditioner_should_do_anything::__anon427
 b	render/render.h	/^	float r, g, b;$/;"	m	struct:Color
+backend	matplotlibcpp.h	/^inline void backend(const std::string& name)$/;"	f	namespace:matplotlibcpp
 BandMatrix	Eigen/src/Core/BandMatrix.h	/^    inline BandMatrix(Index rows=Rows, Index cols=Cols, Index supers=Supers, Index subs=Subs)$/;"	f	class:Eigen::internal::BandMatrix
 BandMatrix	Eigen/src/Core/BandMatrix.h	/^class BandMatrix : public BandMatrixBase<BandMatrix<_Scalar,Rows,Cols,Supers,Subs,Options> >$/;"	c	namespace:Eigen::internal
 BandMatrixBase	Eigen/src/Core/BandMatrix.h	/^class BandMatrixBase : public EigenBase<Derived>$/;"	c	namespace:Eigen::internal
 BandMatrixWrapper	Eigen/src/Core/BandMatrix.h	/^    inline BandMatrixWrapper(const CoefficientsType& coeffs, Index rows=_Rows, Index cols=_Cols, Index supers=_Supers, Index subs=_Subs)$/;"	f	class:Eigen::internal::BandMatrixWrapper
 BandMatrixWrapper	Eigen/src/Core/BandMatrix.h	/^class BandMatrixWrapper : public BandMatrixBase<BandMatrixWrapper<_CoefficientsType,_Rows,_Cols,_Supers,_Subs,_Options> >$/;"	c	namespace:Eigen::internal
+bar	matplotlibcpp.h	/^bool bar(const std::vector<Numeric> &               x,$/;"	f	namespace:matplotlibcpp
+bar	matplotlibcpp.h	/^bool bar(const std::vector<Numeric> &               y,$/;"	f	namespace:matplotlibcpp
 Base	Eigen/src/CholmodSupport/CholmodSupport.h	/^    typedef CholmodBase<_MatrixType, _UpLo, CholmodDecomposition> Base;$/;"	t	class:Eigen::CholmodDecomposition
 Base	Eigen/src/CholmodSupport/CholmodSupport.h	/^    typedef CholmodBase<_MatrixType, _UpLo, CholmodSimplicialLDLT> Base;$/;"	t	class:Eigen::CholmodSimplicialLDLT
 Base	Eigen/src/CholmodSupport/CholmodSupport.h	/^    typedef CholmodBase<_MatrixType, _UpLo, CholmodSimplicialLLT> Base;$/;"	t	class:Eigen::CholmodSimplicialLLT
@@ -593,6 +597,8 @@ BuildType	Eigen/src/Core/BandMatrix.h	/^      typedef Block<CoefficientsType,1, 
 BuiltIn	Eigen/src/Core/util/Constants.h	/^  BuiltIn$/;"	e	enum:Eigen::SpecializedType
 c	Eigen/src/Jacobi/Jacobi.h	/^    Scalar c() const { return m_c; }$/;"	f	class:Eigen::JacobiRotation
 c	Eigen/src/Jacobi/Jacobi.h	/^    Scalar& c() { return m_c; }$/;"	f	class:Eigen::JacobiRotation
+calcDiffForRadian	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^double ExtractMeasurement::calcDiffForRadian(const double lhs_rad, const double rhs_rad)$/;"	f	language:C++	class:ExtractMeasurement
+calculateRMSE	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::calculateRMSE ()$/;"	f	language:C++	class:ExtractMeasurement
 CalculateRMSE	tools.cpp	/^VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,$/;"	f	class:Tools
 CameraAngle	render/render.h	/^enum CameraAngle$/;"	g
 CanVectorizeInner	Eigen/src/Core/products/CoeffBasedProduct.h	/^      CanVectorizeInner =    SameType$/;"	e	enum:Eigen::internal::traits::__anon193
@@ -700,22 +706,17 @@ CJMADD	Eigen/src/Core/products/GeneralBlockPanelKernel.h	1101;"	d
 clamp	Eigen/src/Eigen2Support/Geometry/AlignedBox.h	/^  inline AlignedBox& clamp(const AlignedBox& b)$/;"	f	class:Eigen::AlignedBox
 clamp	Eigen/src/Geometry/AlignedBox.h	/^  inline AlignedBox& clamp(const AlignedBox& b)$/;"	f	class:Eigen::AlignedBox
 clean	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    void clean()$/;"	f	class:Eigen::PastixBase
-clear	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::clear()$/;"	f	language:C++	class:Cluster
+clear	cluster.cpp	/^void Cluster::clear()$/;"	f	class:Cluster
 clear	Eigen/src/SparseCore/CompressedStorage.h	/^    inline void clear() { m_size = 0; }$/;"	f	class:Eigen::internal::CompressedStorage
+clear	matplotlibcpp.h	/^    bool clear() {$/;"	f	class:matplotlibcpp::Plot
 clearFactors	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    void clearFactors()$/;"	f	class:Eigen::SuperLUBase
 clearRays	render/render.cpp	/^void clearRays(pcl::visualization::PCLVisualizer::Ptr& viewer)$/;"	f
 clear_mark	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^static inline  Index clear_mark  \/* return the new value for tag_mark *\/$/;"	f	namespace:internal
+clf	matplotlibcpp.h	/^inline void clf() {$/;"	f	namespace:matplotlibcpp
+close	matplotlibcpp.h	/^inline void close()$/;"	f	namespace:matplotlibcpp
 cloud	sensors/lidar.h	/^	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;$/;"	m	struct:Lidar
-Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::Cluster()$/;"	f	language:C++	class:Cluster
+Cluster	cluster.cpp	/^Cluster::Cluster()$/;"	f	class:Cluster
 Cluster	cluster.hpp	/^class Cluster$/;"	c
-Cluster::clear	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::clear()$/;"	f	language:C++	class:Cluster
-Cluster::Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::Cluster()$/;"	f	language:C++	class:Cluster
-Cluster::GetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^pcl::PointCloud<pcl::PointXYZRGB>::Ptr Cluster::GetCloud()$/;"	f	language:C++	class:Cluster
-Cluster::SetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	f	language:C++	class:Cluster
-Cluster::SetCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetCluster (long long timestamp, unsigned int iClusterNumber, unsigned int r, unsigned int g, unsigned int b)$/;"	f	language:C++	class:Cluster
-Cluster::setPointCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::setPointCloud (pcl::PointCloud<pcl::PointXYZRGB>::Ptr pInputCloud)$/;"	f	language:C++	class:Cluster
-Cluster::size	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^size_t Cluster::size()$/;"	f	language:C++	class:Cluster
-Cluster::~Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::~Cluster()$/;"	f	language:C++	class:Cluster
 clusterPtr	cluster.hpp	/^typedef boost::shared_ptr<Cluster> clusterPtr;$/;"	t
 cmp_EQ	Eigen/src/Core/util/Constants.h	/^    cmp_EQ = 0,$/;"	e	enum:Eigen::internal::ComparisonName
 cmp_LE	Eigen/src/Core/util/Constants.h	/^    cmp_LE = 2,$/;"	e	enum:Eigen::internal::ComparisonName
@@ -1591,6 +1592,8 @@ cube	Eigen/src/plugins/ArrayCwiseUnaryOps.h	/^cube() const$/;"	f
 cube_height	render/box.h	/^    float cube_height;$/;"	m	struct:BoxQ
 cube_length	render/box.h	/^	float cube_length;$/;"	m	struct:BoxQ
 cube_width	render/box.h	/^    float cube_width;$/;"	m	struct:BoxQ
+CV_BGR2RGB	matplotlibcpp.h	28;"	d
+CV_BGRA2RGBA	matplotlibcpp.h	29;"	d
 Cwise	Eigen/src/Eigen2Support/Cwise.h	/^    inline Cwise(const ExpressionType& matrix) : m_matrix(matrix) {}$/;"	f	class:Eigen::Cwise
 cwise	Eigen/src/Eigen2Support/Cwise.h	/^inline const Cwise<Derived> MatrixBase<Derived>::cwise() const$/;"	f	class:Eigen::MatrixBase
 cwise	Eigen/src/Eigen2Support/Cwise.h	/^inline Cwise<Derived> MatrixBase<Derived>::cwise()$/;"	f	class:Eigen::MatrixBase
@@ -1669,7 +1672,6 @@ DataRowsAtCompileTime	Eigen/src/Core/BandMatrix.h	/^      DataRowsAtCompileTime 
 DataRowsAtCompileTime	Eigen/src/Core/BandMatrix.h	/^    DataRowsAtCompileTime = ((Supers!=Dynamic) && (Subs!=Dynamic)) ? 1 + Supers + Subs : Dynamic$/;"	e	enum:Eigen::internal::traits::__anon167
 DataRowsAtCompileTime	Eigen/src/Core/BandMatrix.h	/^    DataRowsAtCompileTime = ((Supers!=Dynamic) && (Subs!=Dynamic)) ? 1 + Supers + Subs : Dynamic$/;"	e	enum:Eigen::internal::traits::__anon168
 dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices)$/;"	f	language:C++	class:ExtractMeasurement
-dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);$/;"	p	language:C++	class:ExtractMeasurement
 dcomplex	Eigen/src/Core/util/MKL_support.h	/^typedef std::complex<double> dcomplex;$/;"	t	namespace:Eigen
 DEAD	Eigen/src/OrderingMethods/Eigen_Colamd.h	109;"	d
 DEAD_NON_PRINCIPAL	Eigen/src/OrderingMethods/Eigen_Colamd.h	113;"	d
@@ -1710,6 +1712,7 @@ DecompositionType	Eigen/src/misc/Image.h	/^  typedef _DecompositionType Decompos
 DecompositionType	Eigen/src/misc/Kernel.h	/^  typedef _DecompositionType DecompositionType;$/;"	t	struct:Eigen::internal::kernel_retval_base
 DecompositionType	Eigen/src/misc/Solve.h	/^  typedef _DecompositionType DecompositionType;$/;"	t	struct:Eigen::internal::solve_retval_base
 DecompositionType	Eigen/src/misc/SparseSolve.h	/^  typedef _DecompositionType DecompositionType;$/;"	t	struct:Eigen::internal::sparse_solve_retval_base
+decref	matplotlibcpp.h	/^    void decref() {$/;"	f	class:matplotlibcpp::Plot
 decrement_size	Eigen/src/Householder/Householder.h	/^template<int n> struct decrement_size$/;"	s	namespace:Eigen::internal
 Default	Eigen/src/Core/util/Constants.h	/^enum Default_t    { Default };$/;"	e	enum:Eigen::Default_t
 defaultEvalTo	Eigen/src/misc/SparseSolve.h	/^    inline void defaultEvalTo(SparseMatrix<DestScalar,DestOptions,DestIndex>& dst) const$/;"	f	struct:Eigen::internal::sparse_solve_retval_base
@@ -1824,7 +1827,9 @@ derived	Eigen/src/SparseCore/SparseMatrixBase.h	/^    inline const Derived& deri
 derived	Eigen/src/SparseCore/SparseMatrixBase.h	/^    inline Derived& derived() { return *static_cast<Derived*>(this); }$/;"	f	class:Eigen::SparseMatrixBase
 derived	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    const Derived& derived() const { return *static_cast<const Derived*>(this); }$/;"	f	class:Eigen::SuperLUBase
 derived	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    Derived& derived() { return *static_cast<Derived*>(this); }$/;"	f	class:Eigen::SuperLUBase
+Derived	matplotlibcpp.h	/^    struct Derived : T, Fallback { };$/;"	s	struct:matplotlibcpp::detail::is_callable_impl
 destruct_elements_of_array	Eigen/src/Core/util/Memory.h	/^template<typename T> inline void destruct_elements_of_array(T *ptr, size_t size)$/;"	f	namespace:Eigen::internal
+detail	matplotlibcpp.h	/^namespace detail {$/;"	n	namespace:matplotlibcpp
 detect_super_cols	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^static void detect_super_cols$/;"	f	namespace:internal
 determinant	Eigen/src/Core/PermutationMatrix.h	/^    Index determinant() const$/;"	f	class:Eigen::PermutationBase
 determinant	Eigen/src/Core/TriangularMatrix.h	/^    Scalar determinant() const$/;"	f	class:Eigen::TriangularView
@@ -1942,7 +1947,6 @@ direct_selfadjoint_eigenvalues	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^
 direct_selfadjoint_eigenvalues	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^template<typename SolverType> struct direct_selfadjoint_eigenvalues<SolverType,2,false>$/;"	s	namespace:Eigen::internal
 direct_selfadjoint_eigenvalues	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^template<typename SolverType> struct direct_selfadjoint_eigenvalues<SolverType,3,false>$/;"	s	namespace:Eigen::internal
 displayShape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::displayShape ()$/;"	f	language:C++	class:ExtractMeasurement
-displayShape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void displayShape ();$/;"	p	language:C++	class:ExtractMeasurement
 distance	Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h	/^  RealScalar distance(const VectorType& p) const { return ei_sqrt(squaredDistance(p)); }$/;"	f	class:Eigen::ParametrizedLine
 distance	Eigen/src/Geometry/ParametrizedLine.h	/^  RealScalar distance(const VectorType& p) const { using std::sqrt; return sqrt(squaredDistance(p)); }$/;"	f	class:Eigen::ParametrizedLine
 doComputeEigenvectors	Eigen/src/Eigenvalues/ComplexEigenSolver.h	/^void ComplexEigenSolver<MatrixType>::doComputeEigenvectors(const RealScalar& matrixnorm)$/;"	f	class:Eigen::ComplexEigenSolver
@@ -1958,15 +1962,15 @@ dot_nocheck	Eigen/src/Core/Dot.h	/^struct dot_nocheck<T, U, true>$/;"	s	namespac
 DoublePacket	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  struct DoublePacket$/;"	s	class:Eigen::internal::gebp_traits
 downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m)$/;"	f	language:C++	class:ExtractMeasurement
 downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::downsample (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pDownsampledCloud, float f_paramLeafSize_m)$/;"	f	language:C++	class:ExtractMeasurement
-downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);$/;"	p	language:C++	class:ExtractMeasurement
-downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void downsample (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);$/;"	p	language:C++	class:ExtractMeasurement
 dparm	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    Array<RealScalar,IPARM_SIZE,1>& dparm()$/;"	f	class:Eigen::PastixBase
 dparm	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    double& dparm(int idxparam)$/;"	f	class:Eigen::PastixBase
+draw	matplotlibcpp.h	/^inline void draw()$/;"	f	namespace:matplotlibcpp
 DstHasDirectAccess	Eigen/src/Core/Assign.h	/^    DstHasDirectAccess = Derived::Flags & DirectAccessBit,$/;"	e	enum:Eigen::internal::assign_traits::__anon223
 DstHasDirectAccess	Eigen/src/Core/Assign_MKL.h	/^      DstHasDirectAccess = Dst::Flags & DirectAccessBit,$/;"	e	enum:Eigen::internal::vml_assign_traits::__anon323
 DstIsAligned	Eigen/src/Core/Assign.h	/^    DstIsAligned = Derived::Flags & AlignedBit,$/;"	e	enum:Eigen::internal::assign_traits::__anon223
 DST_CHAN	Eigen/src/Core/arch/AltiVec/PacketMath.h	55;"	d
 DST_CTRL	Eigen/src/Core/arch/AltiVec/PacketMath.h	56;"	d
+dtype	matplotlibcpp.h	/^    typedef decltype(&Fallback::operator()) dtype;$/;"	t	struct:matplotlibcpp::detail::is_callable_impl
 dumpMemory	Eigen/src/CholmodSupport/CholmodSupport.h	/^    void dumpMemory(Stream& \/*s*\/)$/;"	f	class:Eigen::CholmodBase
 dumpMemory	Eigen/src/SparseCholesky/SimplicialCholesky.h	/^    void dumpMemory(Stream& s)$/;"	f	class:Eigen::SimplicialCholeskyBase
 dumpMemory	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    void dumpMemory(Stream& \/*s*\/)$/;"	f	class:Eigen::SuperLUBase
@@ -2912,6 +2916,7 @@ end	Eigen/src/Eigen2Support/VectorBlock.h	/^MatrixBase<Derived>::end(Index size)
 endFill	Eigen/src/SparseCore/SparseVector.h	/^    EIGEN_DEPRECATED void endFill() {}$/;"	f	class:Eigen::SparseVector
 epsilon	Eigen/src/SparseCore/SparseMatrix.h	/^    RealScalar epsilon;$/;"	m	struct:Eigen::SparseMatrix::default_prunning_func
 error	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  RealScalar error() const$/;"	f	class:Eigen::IterativeSolverBase
+errorbar	matplotlibcpp.h	/^bool errorbar(const std::vector<NumericX> &x, const std::vector<NumericY> &y, const std::vector<NumericX> &yerr, const std::map<std::string, std::string> &keywords = {})$/;"	f	namespace:matplotlibcpp
 essentialVector	Eigen/src/Householder/HouseholderSequence.h	/^    const EssentialVectorType essentialVector(Index k) const$/;"	f	class:Eigen::HouseholderSequence
 essentialVector	Eigen/src/Householder/HouseholderSequence.h	/^  static inline const EssentialVectorType essentialVector(const HouseholderSequenceType& h, Index k)$/;"	f	struct:Eigen::internal::hseq_side_dependent_impl
 EssentialVectorType	Eigen/src/Householder/HouseholderSequence.h	/^    typedef typename internal::hseq_side_dependent_impl<VectorsType,CoeffsType,Side>::EssentialVectorType EssentialVectorType;$/;"	t	class:Eigen::HouseholderSequence
@@ -3032,60 +3037,30 @@ extract	Eigen/src/Core/util/BlasUtil.h	/^  static inline ExtractType extract(con
 extract	Eigen/src/Core/util/BlasUtil.h	/^  static inline ExtractType extract(const XprType& x) { return x; }$/;"	f	struct:Eigen::internal::blas_traits
 extractData	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^void SuperLUBase<MatrixType,Derived>::extractData() const$/;"	f	class:Eigen::SuperLUBase
 extractData	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^void UmfPackLU<MatrixType>::extractData() const$/;"	f	class:Eigen::UmfPackLU
-ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ExtractMeasurement (unsigned int size);$/;"	p	language:C++	class:ExtractMeasurement
-ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^class ExtractMeasurement$/;"	c	language:C++
-EXTRACTMEASUREMENT	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	2;"	d	language:C++
-ExtractMeasurement::association	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::association(long long timestamp)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::association	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void association (long long timestamp);$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size) $/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement	extractMeasurement.h	/^class ExtractMeasurement$/;"	c
+ExtractMeasurement::association	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::association()$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::calcDiffForRadian	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^double ExtractMeasurement::calcDiffForRadian(const double lhs_rad, const double rhs_rad)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::calculateRMSE	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::calculateRMSE ()$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::dbscan(const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::dbscan	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void dbscan (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, std::vector<pcl::PointIndices>& vecClusterIndices);$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::displayShape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::displayShape ()$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::displayShape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void displayShape ();$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m)$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::downsample (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pDownsampledCloud, float f_paramLeafSize_m)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void downsample (const pcl::PointCloud<pcl::PointXYZ>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);$/;"	p	language:C++	class:ExtractMeasurement
-ExtractMeasurement::downsample	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void downsample (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pDownsampledCloud, float f_paramLeafSize_m);$/;"	p	language:C++	class:ExtractMeasurement
-ExtractMeasurement::ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ExtractMeasurement (unsigned int size);$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::ExtractMeasurement	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^ExtractMeasurement::ExtractMeasurement(unsigned int size) : m_measurementN (size) $/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::generateColor	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::generateColor(size_t indexNumber)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::generateColor	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void generateColor(size_t indexNumber);$/;"	p	language:C++	class:ExtractMeasurement
-ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);$/;"	p	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_arrShapes	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::MarkerArray m_arrShapes;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_arrShapesICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::MarkerArray m_arrShapesICP;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_bDoICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	bool m_bDoICP;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_dClusterErrRadius	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterErrRadius;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_dClusterMaxSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMaxSize; 	$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_dClusterMinSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMinSize;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_fMarkerDuration	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_fMarkerDuration;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_globalRGB	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<RGB> m_globalRGB;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_maxIndexNumber	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	unsigned int m_maxIndexNumber;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_measurementN	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	unsigned int m_measurementN;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_ObstacleTracking	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ObstacleTracking m_ObstacleTracking;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_Origin	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::Marker m_Origin;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_OriginalClusters	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<clusterPtr> m_OriginalClusters;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_pub_Origin	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_Origin;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_pub_result	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_result;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_pub_resultICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_resultICP;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_pub_shape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_shape;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_pub_shapeICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_shapeICP;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_tools	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	Tools m_tools;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_vecVehicleAccumulatedCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<clusterPtr> m_vecVehicleAccumulatedCloud;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::m_vecVehicleTrackingClouds	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>> m_vecVehicleTrackingClouds;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::nh	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::NodeHandle nh;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::point2pointICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::point2pointICP(long long timestamp)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::point2pointICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void point2pointICP (long long timestamp);$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::getPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::getPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::layed_based_ICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::layed_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^pcl::PointCloud<pcl::PointXYZ>::Ptr ExtractMeasurement::loadPCD (std::string file)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::NDT	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsInitSource)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::point2pointICPwithAccumulation	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::point2pointICPwithAccumulation2	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::point2pointICPwithAccumulation2 (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud,const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::process	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::process()$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::publish ()$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void publish ();$/;"	p	language:C++	class:ExtractMeasurement
 ExtractMeasurement::savePCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::savePCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);$/;"	p	language:C++	class:ExtractMeasurement
-ExtractMeasurement::setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp)$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp);$/;"	p	language:C++	class:ExtractMeasurement
+ExtractMeasurement::setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud)$/;"	f	language:C++	class:ExtractMeasurement
+ExtractMeasurement::setData	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setData (const std::vector<VectorXd>& vecVecXdRef, long long timestamp)$/;"	f	language:C++	class:ExtractMeasurement
 ExtractMeasurement::setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setParam()$/;"	f	language:C++	class:ExtractMeasurement
-ExtractMeasurement::setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void setParam ();$/;"	p	language:C++	class:ExtractMeasurement
-ExtractMeasurement::vecOf_accumMeasurementCSV	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<std::ofstream> vecOf_accumMeasurementCSV;$/;"	m	language:C++	class:ExtractMeasurement
-ExtractMeasurement::vecOf_measurementCSV	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<std::ofstream> vecOf_measurementCSV;$/;"	m	language:C++	class:ExtractMeasurement
+ExtractMeasurement::threshold	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::threshold (const pcl::PointCloud<pcl::PointXYZ> &inputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr &pOutput)$/;"	f	language:C++	class:ExtractMeasurement
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline const Scalar extractScalarFactor(const XprType&) { return Scalar(1); }$/;"	f	struct:Eigen::internal::blas_traits
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline Scalar extractScalarFactor(const XprType& x) { return Base::extractScalarFactor(x.nestedExpression()); }$/;"	f	struct:Eigen::internal::blas_traits
 extractScalarFactor	Eigen/src/Core/util/BlasUtil.h	/^  static inline Scalar extractScalarFactor(const XprType& x) { return conj(Base::extractScalarFactor(x.nestedExpression())); }$/;"	f	struct:Eigen::internal::blas_traits
@@ -3122,14 +3097,20 @@ factorize	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    void factorize(const I
 factorize_impl	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    void factorize_impl()$/;"	f	class:Eigen::UmfPackLU
 factorize_preordered	Eigen/src/SparseCholesky/SimplicialCholesky_impl.h	/^void SimplicialCholeskyBase<Derived>::factorize_preordered(const CholMatrixType& ap)$/;"	f	class:Eigen::SimplicialCholeskyBase
 FactorType	Eigen/src/IterativeLinearSolvers/IncompleteLUT.h	/^    typedef SparseMatrix<Scalar,RowMajor> FactorType;$/;"	t	class:Eigen::IncompleteLUT
+Fallback	matplotlibcpp.h	/^    struct Fallback { void operator()(); };$/;"	s	struct:matplotlibcpp::detail::is_callable_impl
 false_type	Eigen/src/Core/util/Meta.h	/^struct false_type { enum { value = 0 }; };$/;"	s	namespace:Eigen::internal
+fignum_exists	matplotlibcpp.h	/^inline bool fignum_exists(long number)$/;"	f	namespace:matplotlibcpp
+figure	matplotlibcpp.h	/^inline long figure(long number = -1)$/;"	f	namespace:matplotlibcpp
+figure_size	matplotlibcpp.h	/^inline void figure_size(size_t w, size_t h)$/;"	f	namespace:matplotlibcpp
 fill	Eigen/src/Core/CwiseNullaryOp.h	/^EIGEN_STRONG_INLINE void DenseBase<Derived>::fill(const Scalar& val)$/;"	f	class:Eigen::DenseBase
 fill	Eigen/src/Core/TriangularMatrix.h	/^    void fill(const Scalar& value) { setConstant(value); }$/;"	f	class:Eigen::TriangularView
 fill	Eigen/src/SparseCore/SparseVector.h	/^    EIGEN_DEPRECATED Scalar& fill(Index i)$/;"	f	class:Eigen::SparseVector
 fill	Eigen/src/SparseCore/SparseVector.h	/^    EIGEN_DEPRECATED Scalar& fill(Index r, Index c)$/;"	f	class:Eigen::SparseVector
+fill	matplotlibcpp.h	/^bool fill(const std::vector<Numeric>& x, const std::vector<Numeric>& y, const std::map<std::string, std::string>& keywords)$/;"	f	namespace:matplotlibcpp
 fillfactor	Eigen/src/SparseLU/SparseLU_Structs.h	/^  Index fillfactor; \/\/ The estimated fills factors for L and U, compared with A$/;"	m	struct:Eigen::internal::perfvalues
 fillrand	Eigen/src/SparseCore/SparseVector.h	/^    EIGEN_DEPRECATED Scalar& fillrand(Index i)$/;"	f	class:Eigen::SparseVector
 fillrand	Eigen/src/SparseCore/SparseVector.h	/^    EIGEN_DEPRECATED Scalar& fillrand(Index r, Index c)$/;"	f	class:Eigen::SparseVector
+fill_between	matplotlibcpp.h	/^bool fill_between(const std::vector<Numeric>& x, const std::vector<Numeric>& y1, const std::vector<Numeric>& y2, const std::map<std::string, std::string>& keywords)$/;"	f	namespace:matplotlibcpp
 finalize	Eigen/src/SparseCore/SparseMatrix.h	/^    inline void finalize()$/;"	f	class:Eigen::SparseMatrix
 finalize	Eigen/src/SparseCore/SparseVector.h	/^    inline void finalize() {}$/;"	f	class:Eigen::SparseVector
 findSmallDiagEntry	Eigen/src/Eigenvalues/RealQZ.h	/^    inline typename MatrixType::Index RealQZ<MatrixType>::findSmallDiagEntry(Index f, Index l)$/;"	f	class:Eigen::RealQZ
@@ -3335,6 +3316,7 @@ functor_traits	Eigen/src/Core/Functors.h	/^template<> struct functor_traits<scal
 functor_traits	Eigen/src/Core/Random.h	/^struct functor_traits<scalar_random_op<Scalar> >$/;"	s	namespace:Eigen::internal
 functor_traits	Eigen/src/Core/Visitor.h	/^struct functor_traits<max_coeff_visitor<Scalar> > {$/;"	s	namespace:Eigen::internal
 functor_traits	Eigen/src/Core/Visitor.h	/^struct functor_traits<min_coeff_visitor<Scalar> > {$/;"	s	namespace:Eigen::internal
+F_	kalman_filter.h	/^	Eigen::MatrixXd F_;$/;"	m	class:KalmanFilter
 g	render/render.h	/^	float r, g, b;$/;"	m	struct:Color
 garbage_collection	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^static Index garbage_collection  \/* returns the new value of pfree *\/$/;"	f	namespace:internal
 gebp_kernel	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^struct gebp_kernel$/;"	s	namespace:Eigen::internal
@@ -3396,7 +3378,6 @@ general_matrix_vector_product_gemv	Eigen/src/Core/products/GeneralMatrixVector_M
 general_product_to_triangular_selector	Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h	/^struct general_product_to_triangular_selector<MatrixType,ProductType,UpLo,false>$/;"	s	namespace:Eigen
 general_product_to_triangular_selector	Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h	/^struct general_product_to_triangular_selector<MatrixType,ProductType,UpLo,true>$/;"	s	namespace:Eigen
 generateColor	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::generateColor(size_t indexNumber)$/;"	f	language:C++	class:ExtractMeasurement
-generateColor	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void generateColor(size_t indexNumber);$/;"	p	language:C++	class:ExtractMeasurement
 Generic	Eigen/src/Core/util/Constants.h	/^    Generic = 0x0,$/;"	e	enum:Eigen::Architecture::Type
 GenericNumTraits	Eigen/src/Core/NumTraits.h	/^template<typename T> struct GenericNumTraits$/;"	s	namespace:Eigen
 GenericSparseBlockInnerIteratorImpl	Eigen/src/SparseCore/SparseBlock.h	/^    EIGEN_STRONG_INLINE GenericSparseBlockInnerIteratorImpl(const BlockType& block, Index outer = 0)$/;"	f	class:Eigen::internal::GenericSparseBlockInnerIteratorImpl
@@ -3406,8 +3387,11 @@ GenericSparseBlockInnerIteratorImpl	Eigen/src/SparseCore/SparseBlock.h	/^  class
 generic_aligned_realloc	Eigen/src/Core/util/Memory.h	/^inline void* generic_aligned_realloc(void* ptr, size_t size, size_t old_size)$/;"	f	namespace:Eigen::internal
 get	Eigen/src/SparseCore/SparseDenseProduct.h	/^    static Scalar get(const _RhsNested &rhs, Index outer, Dense = Dense())$/;"	f	class:Eigen::SparseDenseOuterProduct::InnerIterator
 get	Eigen/src/SparseCore/SparseDenseProduct.h	/^    static Scalar get(const _RhsNested &rhs, Index outer, Sparse = Sparse())$/;"	f	class:Eigen::SparseDenseOuterProduct::InnerIterator
+get	matplotlibcpp.h	/^    static _interpreter& get() {$/;"	f	struct:matplotlibcpp::detail::_interpreter
 GetAction	Eigen/src/Core/util/Constants.h	/^enum Action {GetAction, SetAction};$/;"	e	enum:Eigen::Action
-GetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^pcl::PointCloud<pcl::PointXYZRGB>::Ptr Cluster::GetCloud()$/;"	f	language:C++	class:Cluster
+GetCloud	cluster.cpp	/^pcl::PointCloud<pcl::PointXYZRGB>::Ptr Cluster::GetCloud()$/;"	f	class:Cluster
+getGroundTruth	highway.h	/^	std::vector<VectorXd> getGroundTruth()$/;"	f	class:Highway
+getIsFristRegistration	cluster.cpp	/^bool& Cluster::getIsFristRegistration()$/;"	f	class:Cluster
 getL	Eigen/src/Cholesky/LDLT.h	/^  static inline MatrixL getL(const MatrixType& m) { return m.adjoint(); }$/;"	f	struct:Eigen::internal::LDLT_Traits
 getL	Eigen/src/Cholesky/LDLT.h	/^  static inline MatrixL getL(const MatrixType& m) { return m; }$/;"	f	struct:Eigen::internal::LDLT_Traits
 getL	Eigen/src/Cholesky/LLT.h	/^  static inline MatrixL getL(const MatrixType& m) { return m.adjoint(); }$/;"	f	struct:Eigen::internal::LLT_Traits
@@ -3420,15 +3404,19 @@ getMaxIterations	Eigen/src/Eigenvalues/ComplexEigenSolver.h	/^    Index getMaxIt
 getMaxIterations	Eigen/src/Eigenvalues/ComplexSchur.h	/^    Index getMaxIterations()$/;"	f	class:Eigen::ComplexSchur
 getMaxIterations	Eigen/src/Eigenvalues/EigenSolver.h	/^    Index getMaxIterations()$/;"	f	class:Eigen::EigenSolver
 getMaxIterations	Eigen/src/Eigenvalues/RealSchur.h	/^    Index getMaxIterations()$/;"	f	class:Eigen::RealSchur
+getPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::getPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic)$/;"	f	language:C++	class:ExtractMeasurement
 getQuaternion	render/render.h	/^	Eigen::Quaternionf getQuaternion(float theta)$/;"	f	struct:Car
 getU	Eigen/src/Cholesky/LDLT.h	/^  static inline MatrixU getU(const MatrixType& m) { return m.adjoint(); }$/;"	f	struct:Eigen::internal::LDLT_Traits
 getU	Eigen/src/Cholesky/LDLT.h	/^  static inline MatrixU getU(const MatrixType& m) { return m; }$/;"	f	struct:Eigen::internal::LDLT_Traits
 getU	Eigen/src/Cholesky/LLT.h	/^  static inline MatrixU getU(const MatrixType& m) { return m.adjoint(); }$/;"	f	struct:Eigen::internal::LLT_Traits
 getU	Eigen/src/Cholesky/LLT.h	/^  static inline MatrixU getU(const MatrixType& m) { return m; }$/;"	f	struct:Eigen::internal::LLT_Traits
 getU	Eigen/src/SparseCholesky/SimplicialCholesky.h	/^  static inline MatrixU getU(const MatrixType& m) { return m.adjoint(); }$/;"	f	struct:Eigen::internal::traits
+get_2darray	matplotlibcpp.h	/^PyObject* get_2darray(const std::vector<::std::vector<Numeric>>& v)$/;"	f	namespace:matplotlibcpp
+get_array	matplotlibcpp.h	/^PyObject* get_array(const std::vector<Numeric>& v)$/;"	f	namespace:matplotlibcpp
 get_factor	Eigen/src/Core/util/BlasUtil.h	/^template<typename From,typename To> struct get_factor {$/;"	s	namespace:Eigen::internal
 get_factor	Eigen/src/Core/util/BlasUtil.h	/^template<typename Scalar> struct get_factor<Scalar,typename NumTraits<Scalar>::Real> {$/;"	s	namespace:Eigen::internal
 get_symmetrized_graph	Eigen/src/MetisSupport/MetisSupport.h	/^  void get_symmetrized_graph(const MatrixType& A)$/;"	f	class:Eigen::MetisOrdering
+ginput	matplotlibcpp.h	/^inline std::vector<std::array<double, 2>> ginput(const int numClicks = 1, const std::map<std::string, std::string>& keywords = {})$/;"	f	namespace:matplotlibcpp
 GlobalLU_t	Eigen/src/SparseLU/SparseLUImpl.h	/^    typedef LU_GlobalLU_t<IndexVector, ScalarVector> GlobalLU_t; $/;"	t	class:Eigen::internal::SparseLUImpl
 global_math_functions_filtering_base	Eigen/src/Core/MathFunctions.h	/^struct global_math_functions_filtering_base$/;"	s	namespace:Eigen::internal
 grabInput	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  void grabInput(const EigenBase<InputDerived>& A)$/;"	f	class:Eigen::IterativeSolverBase
@@ -3440,6 +3428,7 @@ grabMatrix	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    void grabMatrix(const M
 grapInput	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    void grapInput(const InputMatrixType& mat)$/;"	f	class:Eigen::UmfPackLU
 grapInput_impl	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    void grapInput_impl(const InputMatrixType& mat, internal::false_type)$/;"	f	class:Eigen::UmfPackLU
 grapInput_impl	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    void grapInput_impl(const InputMatrixType& mat, internal::true_type)$/;"	f	class:Eigen::UmfPackLU
+grid	matplotlibcpp.h	/^inline void grid(bool flag)$/;"	f	namespace:matplotlibcpp
 groundSlope	sensors/lidar.h	/^	double groundSlope;$/;"	m	struct:Lidar
 ground_truth	tools.h	/^	std::vector<VectorXd> ground_truth;$/;"	m	class:Tools
 HalfLength	Eigen/src/Core/Redux.h	/^    HalfLength = Length\/2$/;"	e	enum:Eigen::internal::redux_novec_unroller::__anon339
@@ -3583,8 +3572,9 @@ HessenbergDecomposition	Eigen/src/Eigenvalues/HessenbergDecomposition.h	/^templa
 HessenbergDecompositionMatrixHReturnType	Eigen/src/Eigenvalues/HessenbergDecomposition.h	/^    HessenbergDecompositionMatrixHReturnType(const HessenbergDecomposition<MatrixType>& hess) : m_hess(hess) { }$/;"	f	struct:Eigen::internal::HessenbergDecompositionMatrixHReturnType
 HessenbergDecompositionMatrixHReturnType	Eigen/src/Eigenvalues/HessenbergDecomposition.h	/^template<typename MatrixType> struct HessenbergDecompositionMatrixHReturnType$/;"	s	namespace:Eigen::internal
 hessenbergTriangular	Eigen/src/Eigenvalues/RealQZ.h	/^    void RealQZ<MatrixType>::hessenbergTriangular()$/;"	f	class:Eigen::RealQZ
-Highway	highway.h	/^	Highway(pcl::visualization::PCLVisualizer::Ptr& viewer)$/;"	f	class:Highway
+Highway	highway.h	/^	Highway()$/;"	f	class:Highway
 Highway	highway.h	/^class Highway$/;"	c
+hist	matplotlibcpp.h	/^bool hist(const std::vector<Numeric>& y, long bins=10,std::string color="b",$/;"	f	namespace:matplotlibcpp
 hnormalized	Eigen/src/Geometry/Homogeneous.h	/^MatrixBase<Derived>::hnormalized() const$/;"	f	class:Eigen::MatrixBase
 hnormalized	Eigen/src/Geometry/Homogeneous.h	/^VectorwiseOp<ExpressionType,Direction>::hnormalized() const$/;"	f	class:Eigen::VectorwiseOp
 HNormalizedReturnType	Eigen/src/Core/MatrixBase.h	/^                const ConstStartMinusOne > HNormalizedReturnType;$/;"	t	class:Eigen::MatrixBase
@@ -3657,6 +3647,7 @@ hypotNorm	Eigen/src/Core/StableNorm.h	/^MatrixBase<Derived>::hypotNorm() const$/
 hypotNorm	Eigen/src/Core/VectorwiseOp.h	/^    const typename ReturnType<internal::member_hypotNorm,RealScalar>::Type hypotNorm() const$/;"	f	class:Eigen::VectorwiseOp
 hypot_impl	Eigen/src/Core/MathFunctions.h	/^struct hypot_impl$/;"	s	namespace:Eigen::internal
 hypot_retval	Eigen/src/Core/MathFunctions.h	/^struct hypot_retval$/;"	s	namespace:Eigen::internal
+H_	kalman_filter.h	/^	Eigen::MatrixXd H_;$/;"	m	class:KalmanFilter
 icc_11_workaround	Eigen/src/Geometry/Transform.h	/^  template<int OtherMode,int OtherOptions> struct icc_11_workaround$/;"	s	class:Eigen::Transform
 Identity	Eigen/src/Core/CwiseNullaryOp.h	/^MatrixBase<Derived>::Identity()$/;"	f	class:Eigen::MatrixBase
 Identity	Eigen/src/Core/CwiseNullaryOp.h	/^MatrixBase<Derived>::Identity(Index nbRows, Index nbCols)$/;"	f	class:Eigen::MatrixBase
@@ -3671,6 +3662,7 @@ IdentityPreconditioner	Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h	/
 IdentityPreconditioner	Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h	/^    IdentityPreconditioner(const MatrixType& ) {}$/;"	f	class:Eigen::IdentityPreconditioner
 IdentityPreconditioner	Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h	/^class IdentityPreconditioner$/;"	c	namespace:Eigen
 IdentityReturnType	Eigen/src/Core/MatrixBase.h	/^    typedef CwiseNullaryOp<internal::scalar_identity_op<Scalar>,Derived> IdentityReturnType;$/;"	t	class:Eigen::MatrixBase
+ID_sort	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^bool ID_sort (const clusterPtr& ID1, const clusterPtr& ID2)$/;"	f	language:C++
 ignore_unused_variable	Eigen/src/Core/util/Macros.h	/^    template<typename T> void ignore_unused_variable(const T&) {}$/;"	f	namespace:Eigen::internal
 imag	Eigen/src/Core/MathFunctions.h	/^inline EIGEN_MATHFUNC_RETVAL(imag, Scalar) imag(const Scalar& x)$/;"	f	namespace:Eigen::numext
 imag	Eigen/src/plugins/CommonCwiseUnaryOps.h	/^imag() const { return derived(); }$/;"	f
@@ -3696,6 +3688,12 @@ Impl	Eigen/src/Core/Block.h	/^    typedef BlockImpl<XprType, BlockRows, BlockCol
 Impl	Eigen/src/Core/Block.h	/^    typedef internal::BlockImpl_dense<XprType, BlockRows, BlockCols, InnerPanel> Impl;$/;"	t	class:Eigen::BlockImpl
 impl	Eigen/src/Core/Functors.h	/^  const linspaced_op_impl<Scalar,RandomAccess> impl;$/;"	m	struct:Eigen::internal::linspaced_op
 IMPLICIT_CONVERSION_TO_SCALAR_IS_FOR_INNER_PRODUCT_ONLY	Eigen/src/Core/util/StaticAssert.h	/^        IMPLICIT_CONVERSION_TO_SCALAR_IS_FOR_INNER_PRODUCT_ONLY,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
+import_numpy	matplotlibcpp.h	/^    void *import_numpy() {$/;"	f	struct:matplotlibcpp::detail::_interpreter
+import_numpy	matplotlibcpp.h	/^    void import_numpy() {$/;"	f	struct:matplotlibcpp::detail::_interpreter
+imshow	matplotlibcpp.h	/^        inline void imshow(void *ptr, const NPY_TYPES type, const int rows, const int columns, const int colors, const std::map<std::string, std::string> &keywords)$/;"	f	namespace:matplotlibcpp::internal
+imshow	matplotlibcpp.h	/^    inline void imshow(const float *ptr, const int rows, const int columns, const int colors, const std::map<std::string, std::string> &keywords = {})$/;"	f	namespace:matplotlibcpp
+imshow	matplotlibcpp.h	/^    inline void imshow(const unsigned char *ptr, const int rows, const int columns, const int colors, const std::map<std::string, std::string> &keywords = {})$/;"	f	namespace:matplotlibcpp
+imshow	matplotlibcpp.h	/^    void imshow(const cv::Mat &image, const std::map<std::string, std::string> &keywords = {})$/;"	f	namespace:matplotlibcpp
 inbetween	render/render.h	/^	bool inbetween(double point, double center, double range)$/;"	f	struct:Car
 IncompleteLUT	Eigen/src/IterativeLinearSolvers/IncompleteLUT.h	/^    IncompleteLUT()$/;"	f	class:Eigen::IncompleteLUT
 IncompleteLUT	Eigen/src/IterativeLinearSolvers/IncompleteLUT.h	/^    IncompleteLUT(const MatrixType& mat, const RealScalar& droptol=NumTraits<Scalar>::dummy_precision(), int fillfactor = 10)$/;"	f	class:Eigen::IncompleteLUT
@@ -4313,6 +4311,7 @@ internal	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^namespace internal {$/;"	n	
 internal	Eigen/src/SVD/JacobiSVD.h	/^namespace internal {$/;"	n	namespace:Eigen
 internal	Eigen/src/SVD/UpperBidiagonalization.h	/^namespace internal {$/;"	n	namespace:Eigen
 internal	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^namespace internal {$/;"	n	namespace:Eigen
+internal	matplotlibcpp.h	/^    namespace internal {$/;"	n	namespace:matplotlibcpp
 intersection	Eigen/src/Eigen2Support/Geometry/Hyperplane.h	/^  VectorType intersection(const Hyperplane& other)$/;"	f	class:Eigen::Hyperplane
 intersection	Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h	/^inline _Scalar ParametrizedLine<_Scalar, _AmbientDim>::intersection(const Hyperplane<_Scalar, _AmbientDim>& hyperplane)$/;"	f	class:Eigen::ParametrizedLine
 intersection	Eigen/src/Geometry/AlignedBox.h	/^  inline AlignedBox intersection(const AlignedBox& b) const$/;"	f	class:Eigen::AlignedBox
@@ -4365,6 +4364,7 @@ inverse_impl	Eigen/src/LU/Inverse.h	/^  inverse_impl(const MatrixType& matrix)$/
 inverse_impl	Eigen/src/LU/Inverse.h	/^struct inverse_impl : public ReturnByValue<inverse_impl<MatrixType> >$/;"	s	namespace:Eigen::internal
 IOFormat	Eigen/src/Core/IO.h	/^  IOFormat(int _precision = StreamPrecision, int _flags = 0,$/;"	f	struct:Eigen::IOFormat
 IOFormat	Eigen/src/Core/IO.h	/^struct IOFormat$/;"	s	namespace:Eigen
+ion	matplotlibcpp.h	/^    inline void ion() {$/;"	f	namespace:matplotlibcpp
 iparm	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    Array<Index,IPARM_SIZE,1>& iparm()$/;"	f	class:Eigen::PastixBase
 iparm	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    int& iparm(int idxparam)$/;"	f	class:Eigen::PastixBase
 IsAligned	Eigen/src/Core/Map.h	/^    IsAligned = bool(EIGEN_ALIGN) && ((int(MapOptions)&Aligned)==Aligned),$/;"	e	enum:Eigen::internal::traits::__anon245
@@ -4516,6 +4516,9 @@ is_arithmetic	Eigen/src/Core/util/Meta.h	/^template<> struct is_arithmetic<unsig
 is_arithmetic	Eigen/src/Core/util/Meta.h	/^template<> struct is_arithmetic<unsigned long> { enum { value = true }; };$/;"	s	namespace:Eigen::internal
 is_arithmetic	Eigen/src/Core/util/Meta.h	/^template<> struct is_arithmetic<unsigned short>{ enum { value = true }; };$/;"	s	namespace:Eigen::internal
 is_arithmetic	Eigen/src/Core/util/Meta.h	/^template<typename T> struct is_arithmetic      { enum { value = false }; };$/;"	s	namespace:Eigen::internal
+is_callable	matplotlibcpp.h	/^struct is_callable$/;"	s	namespace:matplotlibcpp::detail
+is_callable_impl	matplotlibcpp.h	/^struct is_callable_impl<false, T>$/;"	s	namespace:matplotlibcpp::detail
+is_callable_impl	matplotlibcpp.h	/^struct is_callable_impl<true, T>$/;"	s	namespace:matplotlibcpp::detail
 is_const	Eigen/src/Core/util/Meta.h	/^template <typename T> struct is_const { enum { value = 0 }; };$/;"	s	namespace:Eigen::internal
 is_const	Eigen/src/Core/util/Meta.h	/^template <typename T> struct is_const<T const> { enum { value = 1 }; };$/;"	s	namespace:Eigen::internal
 is_diagonal	Eigen/src/Core/util/Meta.h	/^template<typename T, int S> struct is_diagonal<DiagonalMatrix<T,S> >$/;"	s	namespace:Eigen
@@ -4538,6 +4541,7 @@ Iterator	Eigen/src/SparseCore/AmbiVector.h	/^    Iterator(const AmbiVector& vec,
 Iterator	Eigen/src/SparseCore/AmbiVector.h	/^class AmbiVector<_Scalar,_Index>::Iterator$/;"	c	class:Eigen::internal::AmbiVector
 IterBase	Eigen/src/SparseCore/SparseView.h	/^  typedef typename _MatrixTypeNested::InnerIterator IterBase;$/;"	t	class:Eigen::SparseView::InnerIterator
 iTracksNumber	obstacle_tracking.hpp	/^	unsigned int iTracksNumber;$/;"	m	class:ObstacleTracking
+I_	kalman_filter.h	/^	Eigen::MatrixXd I_;$/;"	m	class:KalmanFilter
 JacobiRotation	Eigen/src/Jacobi/Jacobi.h	/^    JacobiRotation() {}$/;"	f	class:Eigen::JacobiRotation
 JacobiRotation	Eigen/src/Jacobi/Jacobi.h	/^    JacobiRotation(const Scalar& c, const Scalar& s) : m_c(c), m_s(s) {}$/;"	f	class:Eigen::JacobiRotation
 JacobiRotation	Eigen/src/Jacobi/Jacobi.h	/^template<typename Scalar> class JacobiRotation$/;"	c	namespace:Eigen
@@ -4550,6 +4554,9 @@ JacobiSVDType	Eigen/src/SVD/JacobiSVD.h	/^  typedef JacobiSVD<_MatrixType, QRPre
 JointAlignment	Eigen/src/Core/Assign.h	/^    JointAlignment = assign_traits<Derived1,Derived2>::JointAlignment$/;"	e	enum:Eigen::internal::assign_innervec_CompleteUnrolling::__anon230
 JointAlignment	Eigen/src/Core/Assign.h	/^    JointAlignment = bool(DstIsAligned) && bool(SrcIsAligned) ? Aligned : Unaligned$/;"	e	enum:Eigen::internal::assign_traits::__anon223
 JRs	Eigen/src/Eigenvalues/RealQZ.h	/^      typedef JacobiRotation<Scalar> JRs;$/;"	t	class:Eigen::RealQZ
+KalmanFilter	kalman_filter.cpp	/^KalmanFilter::KalmanFilter() $/;"	f	class:KalmanFilter
+KalmanFilter	kalman_filter.h	/^class KalmanFilter {$/;"	c
+KALMAN_FILTER_H_	kalman_filter.h	2;"	d
 kc	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    inline DenseIndex kc() const { return m_kc; }$/;"	f	class:Eigen::internal::level3_blocking
 KeepsPacketAccess	Eigen/src/Core/Map.h	/^    KeepsPacketAccess = bool(HasNoInnerStride)$/;"	e	enum:Eigen::internal::traits::__anon245
 keep_diag	Eigen/src/IterativeLinearSolvers/IncompleteLUT.h	/^    struct keep_diag {$/;"	s	class:Eigen::IncompleteLUT
@@ -4559,6 +4566,7 @@ KernelResultType	Eigen/src/Eigen2Support/LU.h	/^    > KernelResultType;$/;"	t	cl
 kernel_retval	Eigen/src/LU/FullPivLU.h	/^struct kernel_retval<FullPivLU<_MatrixType> >$/;"	s	namespace:Eigen::internal
 kernel_retval_base	Eigen/src/misc/Kernel.h	/^  kernel_retval_base(const DecompositionType& dec)$/;"	f	struct:Eigen::internal::kernel_retval_base
 kernel_retval_base	Eigen/src/misc/Kernel.h	/^template<typename _DecompositionType> struct kernel_retval_base$/;"	s	namespace:Eigen::internal
+KF	cluster.hpp	/^	KalmanFilter KF;$/;"	m	class:Cluster
 KILL_NON_PRINCIPAL_COL	Eigen/src/OrderingMethods/Eigen_Colamd.h	124;"	d
 KILL_PRINCIPAL_COL	Eigen/src/OrderingMethods/Eigen_Colamd.h	123;"	d
 KILL_ROW	Eigen/src/OrderingMethods/Eigen_Colamd.h	122;"	d
@@ -4574,6 +4582,7 @@ LASER	measurement_package.h	/^    LASER,$/;"	e	enum:MeasurementPackage::SensorTy
 lastCoeff	Eigen/src/SparseCore/SparseBlock.h	/^    const Scalar& lastCoeff() const$/;"	f	class:Eigen::BlockImpl
 lastErrorMessage	Eigen/src/SparseLU/SparseLU.h	/^    std::string lastErrorMessage() const$/;"	f	class:Eigen::SparseLU
 lastErrorMessage	Eigen/src/SparseQR/SparseQR.h	/^    std::string lastErrorMessage() const { return m_lastError; }$/;"	f	class:Eigen::SparseQR
+layed_based_ICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::layed_based_ICP (pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst)$/;"	f	language:C++	class:ExtractMeasurement
 lazy	Eigen/src/Eigen2Support/Lazy.h	/^MatrixBase<Derived>::lazy() const$/;"	f	class:Eigen::MatrixBase
 lazyAssign	Eigen/src/Core/Assign.h	/^  ::lazyAssign(const DenseBase<OtherDerived>& other)$/;"	f	class:Eigen::DenseBase
 lazyAssign	Eigen/src/Core/MatrixBase.h	/^    Derived& lazyAssign(const Flagged<OtherDerived, 0, EvalBeforeAssigningBit>& other)$/;"	f	class:Eigen::MatrixBase
@@ -4604,6 +4613,7 @@ leftCols	Eigen/src/plugins/BlockMethods.h	/^inline ColsBlockXpr leftCols(Index n
 leftCols	Eigen/src/plugins/BlockMethods.h	/^inline ConstColsBlockXpr leftCols(Index n) const$/;"	f
 leftCols	Eigen/src/plugins/BlockMethods.h	/^inline typename ConstNColsBlockXpr<N>::Type leftCols(Index n = N) const$/;"	f
 leftCols	Eigen/src/plugins/BlockMethods.h	/^inline typename NColsBlockXpr<N>::Type leftCols(Index n = N)$/;"	f
+legend	matplotlibcpp.h	/^inline void legend()$/;"	f	namespace:matplotlibcpp
 length	Eigen/src/Householder/HouseholderSequence.h	/^    Index length() const { return m_length; }  \/**< \\brief Returns the length of the Householder sequence. *\/$/;"	f	class:Eigen::HouseholderSequence
 length	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^  Index length ;  \/* number of principal columns in this row *\/$/;"	m	struct:internal::Colamd_Row
 length	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^  Index length ;  \/* number of rows in this column *\/$/;"	m	struct:internal::colamd_col
@@ -4675,11 +4685,11 @@ LhsScalar	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    typedef typename c
 LhsScalar	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    typedef _LhsScalar LhsScalar;$/;"	t	class:Eigen::internal::level3_blocking
 LhsScalar	Eigen/src/Core/SolveTriangular.h	/^  typedef typename Lhs::Scalar LhsScalar;$/;"	t	struct:Eigen::internal::triangular_solver_selector
 LhsUpLo	Eigen/src/Core/products/SelfadjointMatrixVector.h	/^    LhsUpLo = LhsMode&(Upper|Lower)$/;"	e	enum:Eigen::SelfadjointProductMatrix::__anon187
-lidar	highway.h	/^	Lidar* lidar;$/;"	m	class:Highway
 Lidar	sensors/lidar.h	/^	Lidar(std::vector<Car> setCars, double setGroundSlope)$/;"	f	struct:Lidar
 Lidar	sensors/lidar.h	/^struct Lidar$/;"	s
-lidarSense	tools.cpp	/^lmarker Tools::lidarSense(Car& car, pcl::visualization::PCLVisualizer::Ptr& viewer, long long timestamp, bool visualize)$/;"	f	class:Tools
+lidarSense	tools.cpp	/^lmarker Tools::lidarSense(Car& car, long long timestamp)$/;"	f	class:Tools
 LIDAR_H	sensors/lidar.h	2;"	d
+line	matplotlibcpp.h	/^    PyObject* line = nullptr;$/;"	m	class:matplotlibcpp::Plot
 linear	Eigen/src/Eigen2Support/Geometry/Transform.h	/^  inline ConstLinearPart linear() const { return m_matrix.template block<Dim,Dim>(0,0); }$/;"	f	class:Eigen::Transform
 linear	Eigen/src/Eigen2Support/Geometry/Transform.h	/^  inline LinearPart linear() { return m_matrix.template block<Dim,Dim>(0,0); }$/;"	f	class:Eigen::Transform
 linear	Eigen/src/Geometry/Transform.h	/^  inline ConstLinearPart linear() const { return ConstLinearPart(m_matrix,0,0); }$/;"	f	class:Eigen::Transform
@@ -4728,8 +4738,7 @@ lmarker	tools.h	/^	lmarker(double setX, double setY)$/;"	f	struct:lmarker
 lmarker	tools.h	/^struct lmarker$/;"	s
 LMatrixType	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    typedef TriangularView<LUMatrixType, Lower|UnitDiag>  LMatrixType;$/;"	t	class:Eigen::SuperLU
 loadLhs	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void loadLhs(const LhsScalar* a, LhsPacket& dest) const$/;"	f	class:Eigen::internal::gebp_traits
-loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize)$/;"	f	language:C++	class:ExtractMeasurement
-loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void loadPCD (pcl::PointCloud<pcl::PointXYZ>::Ptr& pCloudTraffic, long long timestamp, bool doVisualize);$/;"	p	language:C++	class:ExtractMeasurement
+loadPCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^pcl::PointCloud<pcl::PointXYZ>::Ptr ExtractMeasurement::loadPCD (std::string file)$/;"	f	language:C++	class:ExtractMeasurement
 loadPcd	tools.cpp	/^pcl::PointCloud<pcl::PointXYZ>::Ptr Tools::loadPcd(std::string file)$/;"	f	class:Tools
 loadRhs	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void loadRhs(const RhsScalar* b, DoublePacket& dest) const$/;"	f	class:Eigen::internal::gebp_traits
 loadRhs	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void loadRhs(const RhsScalar* b, ResPacket& dest) const { dest = *b; }$/;"	f	class:Eigen::internal::gebp_traits
@@ -4740,6 +4749,7 @@ logAbsDeterminant	Eigen/src/QR/ColPivHouseholderQR.h	/^typename MatrixType::Real
 logAbsDeterminant	Eigen/src/QR/FullPivHouseholderQR.h	/^typename MatrixType::RealScalar FullPivHouseholderQR<MatrixType>::logAbsDeterminant() const$/;"	f	class:Eigen::FullPivHouseholderQR
 logAbsDeterminant	Eigen/src/QR/HouseholderQR.h	/^typename MatrixType::RealScalar HouseholderQR<MatrixType>::logAbsDeterminant() const$/;"	f	class:Eigen::HouseholderQR
 logAbsDeterminant	Eigen/src/SparseLU/SparseLU.h	/^     Scalar logAbsDeterminant() const$/;"	f	class:Eigen::SparseLU
+loglog	matplotlibcpp.h	/^bool loglog(const std::vector<NumericX>& x, const std::vector<NumericY>& y, const std::string& s = "")$/;"	f	namespace:matplotlibcpp
 Lower	Eigen/src/Core/util/Constants.h	/^  Lower=0x1,                      $/;"	e	enum:Eigen::UpLoType
 LowerTriangular	Eigen/src/Eigen2Support/TriangularSolver.h	/^const unsigned int LowerTriangular = Lower;$/;"	m	namespace:Eigen
 LowerTriangularBit	Eigen/src/Eigen2Support/TriangularSolver.h	/^const unsigned int LowerTriangularBit = Lower;$/;"	m	namespace:Eigen
@@ -4775,7 +4785,7 @@ MADD	Eigen/src/Core/products/GeneralBlockPanelKernel.h	106;"	d
 MADD	Eigen/src/Core/products/GeneralBlockPanelKernel.h	131;"	d
 madd_impl	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void madd_impl(const LhsPacket& a, const RhsPacket& b, AccPacket& c, RhsPacket& tmp, const true_type&) const$/;"	f	class:Eigen::internal::gebp_traits
 madd_impl	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  EIGEN_STRONG_INLINE void madd_impl(const LhsScalar& a, const RhsScalar& b, ResScalar& c, RhsScalar& \/*tmp*\/, const false_type&) const$/;"	f	class:Eigen::internal::gebp_traits
-main	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/measurement.cpp	/^int main(int argc, char** argv)$/;"	f	language:C++
+main	measurement.cpp	/^int main(int argc, char** argv)$/;"	f
 makeAffine	Eigen/src/Geometry/Transform.h	/^  void makeAffine()$/;"	f	class:Eigen::Transform
 makeCompressed	Eigen/src/SparseCore/SparseMatrix.h	/^    void makeCompressed()$/;"	f	class:Eigen::SparseMatrix
 makeGivens	Eigen/src/Jacobi/Jacobi.h	/^void JacobiRotation<Scalar>::makeGivens(const Scalar& p, const Scalar& q, Scalar* r, internal::false_type)$/;"	f	class:Eigen::JacobiRotation
@@ -4859,6 +4869,7 @@ MaskPacketAccessBit	Eigen/src/Core/Block.h	/^    MaskPacketAccessBit = (InnerSiz
 match	Eigen/src/Core/Ref.h	/^  template<typename Derived> struct match {$/;"	s	struct:Eigen::internal::traits
 MatchAtCompileTime	Eigen/src/Core/Ref.h	/^      MatchAtCompileTime = HasDirectAccess && StorageOrderMatch && InnerStrideMatch && OuterStrideMatch && AlignmentMatch && ScalarTypeMatch$/;"	e	enum:Eigen::internal::traits::match::__anon238
 matchWithDistanceOnly	obstacle_tracking.cpp	/^void ObstacleTracking::matchWithDistanceOnly()$/;"	f	class:ObstacleTracking
+matplotlibcpp	matplotlibcpp.h	/^namespace matplotlibcpp {$/;"	n
 matPrefix	Eigen/src/Core/IO.h	/^  std::string matPrefix, matSuffix;$/;"	m	struct:Eigen::IOFormat
 matrix	Eigen/src/Core/ArrayBase.h	/^    const MatrixWrapper<const Derived> matrix() const { return derived(); }$/;"	f	class:Eigen::ArrayBase
 matrix	Eigen/src/Core/ArrayBase.h	/^    MatrixWrapper<Derived> matrix() { return derived(); }$/;"	f	class:Eigen::ArrayBase
@@ -5301,7 +5312,10 @@ mr	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^    mr = 2 * LhsPacketSiz
 mr	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^    mr = 2 * ResPacketSize,$/;"	e	enum:Eigen::internal::gebp_traits::__anon182
 mr	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^    mr = 2*ResPacketSize,$/;"	e	enum:Eigen::internal::gebp_traits::__anon183
 MulCost	Eigen/src/Core/NumTraits.h	/^    MulCost = 1$/;"	e	enum:Eigen::GenericNumTraits::__anon344
+MyTools	myTools.cpp	/^MyTools::MyTools() { }$/;"	f	class:MyTools
+MyTools	myTools.hpp	/^class MyTools$/;"	c
 m_actualAlpha	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    Scalar m_actualAlpha;$/;"	m	struct:Eigen::internal::gemm_functor
+m_addedPose	extractMeasurement.h	/^		pose m_addedPose;$/;"	m	class:ExtractMeasurement
 m_adjoint	Eigen/src/SVD/JacobiSVD.h	/^  TransposeTypeWithSameStorageOrder m_adjoint;$/;"	m	class:Eigen::internal::qr_preconditioner_impl
 m_allocatedElements	Eigen/src/SparseCore/AmbiVector.h	/^    Index m_allocatedElements;$/;"	m	class:Eigen::internal::AmbiVector
 m_allocatedSize	Eigen/src/SparseCore/AmbiVector.h	/^    Index m_allocatedSize;$/;"	m	class:Eigen::internal::AmbiVector
@@ -5324,17 +5338,24 @@ m_angle	Eigen/src/Eigen2Support/Geometry/AngleAxis.h	/^  Scalar m_angle;$/;"	m	c
 m_angle	Eigen/src/Eigen2Support/Geometry/Rotation2D.h	/^  Scalar m_angle;$/;"	m	class:Eigen::Rotation2D
 m_angle	Eigen/src/Geometry/AngleAxis.h	/^  Scalar m_angle;$/;"	m	class:Eigen::AngleAxis
 m_angle	Eigen/src/Geometry/Rotation2D.h	/^  Scalar m_angle;$/;"	m	class:Eigen::Rotation2D
-m_arrShapes	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::MarkerArray m_arrShapes;$/;"	m	language:C++	class:ExtractMeasurement
-m_arrShapesICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::MarkerArray m_arrShapesICP;$/;"	m	language:C++	class:ExtractMeasurement
+m_arrShapes	extractMeasurement.h	/^		visualization_msgs::MarkerArray m_arrShapes;$/;"	m	class:ExtractMeasurement
+m_arrShapesICP	extractMeasurement.h	/^		visualization_msgs::MarkerArray m_arrShapesICP;$/;"	m	class:ExtractMeasurement
+m_arrShapesKalman	extractMeasurement.h	/^		visualization_msgs::MarkerArray m_arrShapesKalman;$/;"	m	class:ExtractMeasurement
+m_arrShapesReference	extractMeasurement.h	/^		visualization_msgs::MarkerArray m_arrShapesReference;$/;"	m	class:ExtractMeasurement
 m_axis	Eigen/src/Eigen2Support/Geometry/AngleAxis.h	/^  Vector3 m_axis;$/;"	m	class:Eigen::AngleAxis
 m_axis	Eigen/src/Geometry/AngleAxis.h	/^  Vector3 m_axis;$/;"	m	class:Eigen::AngleAxis
-m_b	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        uint8_t m_b;$/;"	m	language:C++	struct:_rgb
 m_b	cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	class:Cluster
+m_b	extractMeasurement.h	/^	uint8_t m_b;$/;"	m	struct:_rgb
 m_base	Eigen/src/Core/Functors.h	/^  mutable Packet m_base;$/;"	m	struct:Eigen::internal::linspaced_op_impl
-m_bDoICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	bool m_bDoICP;$/;"	m	language:C++	class:ExtractMeasurement
+m_bDoICP	extractMeasurement.h	/^		bool m_bDoICP = false;$/;"	m	class:ExtractMeasurement
+m_bDoLayerBasedICP	extractMeasurement.h	/^		bool m_bDoLayerBasedICP = true;$/;"	m	class:ExtractMeasurement
+m_bDoNDT	extractMeasurement.h	/^		bool m_bDoNDT = false;$/;"	m	class:ExtractMeasurement
+m_bDoVisualize	extractMeasurement.h	/^		bool m_bDoVisualize;$/;"	m	class:ExtractMeasurement
 m_begin	Eigen/src/SparseCore/SparseBlock.h	/^      Index m_begin;$/;"	m	class:Eigen::BlockImpl::ReverseInnerIterator
 m_betas	Eigen/src/Eigenvalues/GeneralizedEigenSolver.h	/^    VectorType m_betas;$/;"	m	class:Eigen::GeneralizedEigenSolver
 m_bidiagonal	Eigen/src/SVD/UpperBidiagonalization.h	/^    BidiagonalType m_bidiagonal;$/;"	m	class:Eigen::internal::UpperBidiagonalization
+m_bIsFirstRegistration	cluster.hpp	/^	bool m_bIsFirstRegistration;$/;"	m	class:Cluster
+m_bIsInitialized	kalman_filter.h	/^	bool m_bIsInitialized = false;$/;"	m	class:KalmanFilter
 m_block	Eigen/src/SparseCore/SparseBlock.h	/^      const BlockType& m_block;$/;"	m	class:Eigen::BlockImpl::ReverseInnerIterator
 m_block	Eigen/src/SparseCore/SparseBlock.h	/^    const BlockType& m_block;$/;"	m	class:Eigen::internal::GenericSparseBlockInnerIteratorImpl
 m_blockA	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    LhsScalar* m_blockA;$/;"	m	class:Eigen::internal::level3_blocking
@@ -5399,6 +5420,7 @@ m_countPerRow	Eigen/src/SparseCore/SparseSelfAdjointView.h	/^    mutable VectorI
 m_cR	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    mutable cholmod_sparse *m_cR; \/\/ The sparse R factor in cholmod format$/;"	m	class:Eigen::SPQR
 m_currentBlockRows	Eigen/src/Core/CommaInitializer.h	/^  Index m_currentBlockRows; \/\/ current block height$/;"	m	struct:Eigen::CommaInitializer
 m_currentEl	Eigen/src/SparseCore/AmbiVector.h	/^    Index m_currentEl;            \/\/ the current element in sparse\/linked-list mode$/;"	m	class:Eigen::internal::AmbiVector::Iterator
+m_currentPose	extractMeasurement.h	/^		pose m_currentPose;$/;"	m	class:ExtractMeasurement
 m_data	Eigen/src/Core/DenseStorage.h	/^    internal::plain_array<T,Size,_Options> m_data;$/;"	m	class:Eigen::DenseStorage
 m_data	Eigen/src/Core/DenseStorage.h	/^    T *m_data;$/;"	m	class:Eigen::DenseStorage
 m_data	Eigen/src/Core/GeneralProduct.h	/^  internal::plain_array<Scalar,EIGEN_SIZE_MIN_PREFER_FIXED(Size,MaxSize),0> m_data;$/;"	m	struct:Eigen::internal::gemv_static_vector_if
@@ -5409,9 +5431,9 @@ m_data	Eigen/src/SparseCore/SparseMatrix.h	/^    Storage m_data;$/;"	m	class:Eig
 m_data	Eigen/src/SparseCore/SparseVector.h	/^    const internal::CompressedStorage<Scalar,Index>& m_data;$/;"	m	class:Eigen::SparseVector::InnerIterator
 m_data	Eigen/src/SparseCore/SparseVector.h	/^    const internal::CompressedStorage<Scalar,Index>& m_data;$/;"	m	class:Eigen::SparseVector::ReverseInnerIterator
 m_data	Eigen/src/SparseCore/SparseVector.h	/^    Storage m_data;$/;"	m	class:Eigen::SparseVector
-m_dClusterErrRadius	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterErrRadius;$/;"	m	language:C++	class:ExtractMeasurement
-m_dClusterMaxSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMaxSize; 	$/;"	m	language:C++	class:ExtractMeasurement
-m_dClusterMinSize	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_dClusterMinSize;$/;"	m	language:C++	class:ExtractMeasurement
+m_dClusterErrRadius	extractMeasurement.h	/^		double m_dClusterErrRadius;$/;"	m	class:ExtractMeasurement
+m_dClusterMaxSize	extractMeasurement.h	/^		double m_dClusterMaxSize; 	$/;"	m	class:ExtractMeasurement
+m_dClusterMinSize	extractMeasurement.h	/^		double m_dClusterMinSize;$/;"	m	class:ExtractMeasurement
 m_dDistanceToCenter	cluster.hpp	/^	double m_dDistanceToCenter;$/;"	m	class:Cluster
 m_deallocate	Eigen/src/Core/util/Memory.h	/^    bool m_deallocate;$/;"	m	class:Eigen::internal::aligned_stack_memory_handler
 m_dec	Eigen/src/misc/Image.h	/^    const DecompositionType& m_dec;$/;"	m	struct:Eigen::internal::image_retval_base
@@ -5433,6 +5455,10 @@ m_diagonal	Eigen/src/Core/DiagonalMatrix.h	/^    typename DiagonalVectorType::Ne
 m_diagonal	Eigen/src/Core/DiagonalProduct.h	/^    typename DiagonalType::Nested m_diagonal;$/;"	m	class:Eigen::DiagonalProduct
 m_diagpivotthresh	Eigen/src/SparseLU/SparseLU.h	/^    RealScalar m_diagpivotthresh; \/\/ Specifies the threshold used for a diagonal entry to be an acceptable pivot$/;"	m	class:Eigen::SparseLU
 m_diagSize	Eigen/src/SVD/JacobiSVD.h	/^    Index m_nonzeroSingularValues, m_rows, m_cols, m_diagSize;$/;"	m	class:Eigen::JacobiSVD
+m_diff_x	extractMeasurement.h	/^		double m_diff_x = 0.0; $/;"	m	class:ExtractMeasurement
+m_diff_y	extractMeasurement.h	/^		double m_diff_y = 0.0; $/;"	m	class:ExtractMeasurement
+m_diff_yaw	extractMeasurement.h	/^		double m_diff_yaw;  \/\/ current_pose - previous_pose$/;"	m	class:ExtractMeasurement
+m_diff_z	extractMeasurement.h	/^		double m_diff_z = 0.0; $/;"	m	class:ExtractMeasurement
 m_dimensions	cluster.hpp	/^	geometry_msgs::Vector3 m_dimensions;$/;"	m	class:Cluster
 m_direction	Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h	/^  VectorType m_origin, m_direction;$/;"	m	class:Eigen::ParametrizedLine
 m_direction	Eigen/src/Geometry/ParametrizedLine.h	/^  VectorType m_origin, m_direction;$/;"	m	class:Eigen::ParametrizedLine
@@ -5492,7 +5518,7 @@ m_factorizationIsOk	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    int m_factor
 m_factorizationIsOk	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    int m_factorizationIsOk;$/;"	m	class:Eigen::UmfPackLU
 m_fillfactor	Eigen/src/IterativeLinearSolvers/IncompleteLUT.h	/^    int m_fillfactor;$/;"	m	class:Eigen::IncompleteLUT
 m_firstRowElt	Eigen/src/SparseQR/SparseQR.h	/^    IndexVector m_firstRowElt;      \/\/ First element in each row$/;"	m	class:Eigen::SparseQR
-m_fMarkerDuration	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	double m_fMarkerDuration;$/;"	m	language:C++	class:ExtractMeasurement
+m_fMarkerDuration	extractMeasurement.h	/^		double m_fMarkerDuration;$/;"	m	class:ExtractMeasurement
 m_format	Eigen/src/Core/IO.h	/^    IOFormat m_format;$/;"	m	class:Eigen::WithFormat
 m_functor	Eigen/src/Core/CwiseBinaryOp.h	/^    const BinaryOp m_functor;$/;"	m	class:Eigen::CwiseBinaryOp
 m_functor	Eigen/src/Core/CwiseNullaryOp.h	/^    const NullaryOp m_functor;$/;"	m	class:Eigen::CwiseNullaryOp
@@ -5508,9 +5534,10 @@ m_functor	Eigen/src/SparseCore/SparseCwiseUnaryOp.h	/^    const UnaryOp m_functo
 m_functor	Eigen/src/SparseCore/SparseCwiseUnaryOp.h	/^    const UnaryOp m_functor;$/;"	m	class:Eigen::CwiseUnaryOpImpl::ReverseInnerIterator
 m_functor	Eigen/src/SparseCore/SparseCwiseUnaryOp.h	/^    const ViewOp m_functor;$/;"	m	class:Eigen::CwiseUnaryViewImpl::InnerIterator
 m_functor	Eigen/src/SparseCore/SparseCwiseUnaryOp.h	/^    const ViewOp m_functor;$/;"	m	class:Eigen::CwiseUnaryViewImpl::ReverseInnerIterator
-m_g	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        uint8_t m_g;$/;"	m	language:C++	struct:_rgb
 m_g	cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	class:Cluster
-m_globalRGB	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<RGB> m_globalRGB;$/;"	m	language:C++	class:ExtractMeasurement
+m_g	extractMeasurement.h	/^	uint8_t m_g;$/;"	m	struct:_rgb
+m_geomsgReferences	extractMeasurement.h	/^		geometry_msgs::PoseArray m_geomsgReferences;$/;"	m	class:ExtractMeasurement
+m_globalRGB	extractMeasurement.h	/^		std::vector<RGB> m_globalRGB;$/;"	m	class:ExtractMeasurement
 m_global_iter	Eigen/src/Eigenvalues/RealQZ.h	/^      Index m_global_iter;$/;"	m	class:Eigen::RealQZ
 m_glu	Eigen/src/SparseLU/SparseLU.h	/^    typename Base::GlobalLU_t m_glu; $/;"	m	class:Eigen::SparseLU
 m_glu	Eigen/src/SparseLU/SparseLU_column_dfs.h	/^  typename SparseLUImpl<Scalar, Index>::GlobalLU_t& m_glu;$/;"	m	struct:Eigen::internal::column_dfs_traits
@@ -5645,6 +5672,8 @@ m_lhsIter	Eigen/src/SparseCore/SparseCwiseBinaryOp.h	/^    LhsIterator m_lhsIter
 m_llCurrent	Eigen/src/SparseCore/AmbiVector.h	/^    Index m_llCurrent;$/;"	m	class:Eigen::internal::AmbiVector
 m_llSize	Eigen/src/SparseCore/AmbiVector.h	/^    Index m_llSize;$/;"	m	class:Eigen::internal::AmbiVector
 m_llStart	Eigen/src/SparseCore/AmbiVector.h	/^    Index m_llStart;$/;"	m	class:Eigen::internal::AmbiVector
+m_llTimestamp_s	extractMeasurement.h	/^		long long m_llTimestamp_s;$/;"	m	class:ExtractMeasurement
+m_localizerPose	extractMeasurement.h	/^		pose m_localizerPose;$/;"	m	class:ExtractMeasurement
 m_low	Eigen/src/Core/Functors.h	/^  const Scalar m_low;$/;"	m	struct:Eigen::internal::linspaced_op_impl
 m_lowPacket	Eigen/src/Core/Functors.h	/^  const Packet m_lowPacket;$/;"	m	struct:Eigen::internal::linspaced_op_impl
 m_Lstore	Eigen/src/SparseLU/SparseLU.h	/^    SCMatrix m_Lstore; \/\/ The lower triangular matrix (supernodal)$/;"	m	class:Eigen::SparseLU
@@ -5657,6 +5686,8 @@ m_mapL	Eigen/src/SparseLU/SparseLU.h	/^  const MatrixLType& m_mapL;$/;"	m	struct
 m_mapU	Eigen/src/SparseLU/SparseLU.h	/^  const MatrixUType& m_mapU;$/;"	m	struct:Eigen::SparseLUMatrixUReturnType
 m_marker	Eigen/src/SparseLU/SparseLU_panel_dfs.h	/^  Index* m_marker;$/;"	m	struct:Eigen::internal::panel_dfs_traits
 m_mat	Eigen/src/SparseLU/SparseLU.h	/^    NCMatrix m_mat; \/\/ The input (permuted ) matrix $/;"	m	class:Eigen::SparseLU
+m_mat4fBase2Local	extractMeasurement.h	/^		Eigen::Matrix4f m_mat4fBase2Local;$/;"	m	class:ExtractMeasurement
+m_mat4fLocal2Base	extractMeasurement.h	/^		Eigen::Matrix4f m_mat4fLocal2Base;$/;"	m	class:ExtractMeasurement
 m_matrix	Eigen/src/Cholesky/LDLT.h	/^    MatrixType m_matrix;$/;"	m	class:Eigen::LDLT
 m_matrix	Eigen/src/Cholesky/LLT.h	/^    MatrixType m_matrix;$/;"	m	class:Eigen::LLT
 m_matrix	Eigen/src/Core/CwiseUnaryView.h	/^    typename internal::nested<MatrixType>::type m_matrix;$/;"	m	class:Eigen::CwiseUnaryView
@@ -5711,7 +5742,7 @@ m_matV	Eigen/src/Eigen2Support/SVD.h	/^    MatrixVType m_matV;$/;"	m	class:Eigen
 m_matX	Eigen/src/Eigenvalues/ComplexEigenSolver.h	/^    EigenvectorType m_matX;$/;"	m	class:Eigen::ComplexEigenSolver
 m_max	Eigen/src/Eigen2Support/Geometry/AlignedBox.h	/^  VectorType m_min, m_max;$/;"	m	class:Eigen::AlignedBox
 m_max	Eigen/src/Geometry/AlignedBox.h	/^  VectorType m_min, m_max;$/;"	m	class:Eigen::AlignedBox
-m_maxIndexNumber	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	unsigned int m_maxIndexNumber;$/;"	m	language:C++	class:ExtractMeasurement
+m_maxIndexNumber	extractMeasurement.h	/^		unsigned int m_maxIndexNumber;$/;"	m	class:ExtractMeasurement
 m_maxIterations	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^    static const int m_maxIterations = 30;$/;"	m	class:Eigen::SelfAdjointEigenSolver
 m_maxIterations	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  int m_maxIterations;$/;"	m	class:Eigen::IterativeSolverBase
 m_maxIterationsPerRow	Eigen/src/Eigenvalues/ComplexSchur.h	/^    static const int m_maxIterationsPerRow = 30;$/;"	m	class:Eigen::ComplexSchur
@@ -5725,13 +5756,16 @@ m_maxpivot	Eigen/src/QR/FullPivHouseholderQR.h	/^    RealScalar m_prescribedThre
 m_MAX_ASSOCIATION_DISTANCE	obstacle_tracking.hpp	/^	double m_MAX_ASSOCIATION_DISTANCE;$/;"	m	class:ObstacleTracking
 m_max_point	cluster.hpp	/^	pcl::PointXYZ m_max_point;$/;"	m	class:Cluster
 m_mc	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    DenseIndex m_mc;$/;"	m	class:Eigen::internal::level3_blocking
-m_measurementN	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	unsigned int m_measurementN;$/;"	m	language:C++	class:ExtractMeasurement
+m_measurementN	extractMeasurement.h	/^		unsigned int m_measurementN;$/;"	m	class:ExtractMeasurement
 m_min	Eigen/src/Eigen2Support/Geometry/AlignedBox.h	/^  VectorType m_min, m_max;$/;"	m	class:Eigen::AlignedBox
 m_min	Eigen/src/Geometry/AlignedBox.h	/^  VectorType m_min, m_max;$/;"	m	class:Eigen::AlignedBox
 m_min_point	cluster.hpp	/^	pcl::PointXYZ m_min_point;$/;"	m	class:Cluster
 m_mode	Eigen/src/SparseCore/AmbiVector.h	/^    Index m_mode;$/;"	m	class:Eigen::internal::AmbiVector
 m_msglvl	Eigen/src/PardisoSupport/PardisoSupport.h	/^    Index m_type, m_msglvl;$/;"	m	class:Eigen::PardisoImpl
+m_myTools	extractMeasurement.h	/^		MyTools m_myTools;$/;"	m	class:ExtractMeasurement
 m_nc	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    DenseIndex m_nc;$/;"	m	class:Eigen::internal::level3_blocking
+m_ndt	extractMeasurement.h	/^		pcl::NormalDistributionsTransform<pcl::PointXYZRGB, pcl::PointXYZRGB> m_ndt; $/;"	m	class:ExtractMeasurement
+m_ndtPose	extractMeasurement.h	/^		pose m_ndtPose;$/;"	m	class:ExtractMeasurement
 m_nnz	Eigen/src/SparseCore/MappedSparseMatrix.h	/^    Index   m_nnz;$/;"	m	class:Eigen::MappedSparseMatrix
 m_nnzL	Eigen/src/SparseLU/SparseLU.h	/^    Index m_nnzL, m_nnzU; \/\/ Nonzeros in L and U factors$/;"	m	class:Eigen::SparseLU
 m_nnzU	Eigen/src/SparseLU/SparseLU.h	/^    Index m_nnzL, m_nnzU; \/\/ Nonzeros in L and U factors$/;"	m	class:Eigen::SparseLU
@@ -5748,12 +5782,11 @@ m_numeric	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    void* m_numeric;$/;"	m
 m_nzval	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    Scalar* m_nzval; \/\/array of nonzero values packed by column$/;"	m	class:Eigen::internal::MappedSuperNodalMatrix
 m_nzval_colptr	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    Index* m_nzval_colptr; \/\/nzval_colptr[j] Stores the location in nzval[] which starts column j $/;"	m	class:Eigen::internal::MappedSuperNodalMatrix
 m_object	Eigen/src/Core/Ref.h	/^    TPlainObjectType m_object;$/;"	m	class:Eigen::Ref
-m_ObstacleTracking	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ObstacleTracking m_ObstacleTracking;$/;"	m	language:C++	class:ExtractMeasurement
+m_ObstacleTracking	extractMeasurement.h	/^		ObstacleTracking m_ObstacleTracking;$/;"	m	class:ExtractMeasurement
 m_ordering	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    int m_ordering; \/\/ Ordering method to use, see SPQR's manual$/;"	m	class:Eigen::SPQR
-m_Origin	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	visualization_msgs::Marker m_Origin;$/;"	m	language:C++	class:ExtractMeasurement
 m_origin	Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h	/^  VectorType m_origin, m_direction;$/;"	m	class:Eigen::ParametrizedLine
 m_origin	Eigen/src/Geometry/ParametrizedLine.h	/^  VectorType m_origin, m_direction;$/;"	m	class:Eigen::ParametrizedLine
-m_OriginalClusters	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<clusterPtr> m_OriginalClusters;$/;"	m	language:C++	class:ExtractMeasurement
+m_OriginalClusters	extractMeasurement.h	/^		std::vector<clusterPtr> m_OriginalClusters;$/;"	m	class:ExtractMeasurement
 m_originalID	cluster.hpp	/^	int m_originalID;$/;"	m	class:Cluster
 m_originalMatrix	Eigen/src/Eigen2Support/LU.h	/^    const MatrixType& m_originalMatrix;$/;"	m	class:Eigen::LU
 m_originalMatrix	Eigen/src/misc/Image.h	/^    const MatrixType& m_originalMatrix;$/;"	m	struct:Eigen::internal::image_retval_base
@@ -5820,14 +5853,20 @@ m_prescribedThreshold	Eigen/src/LU/FullPivLU.h	/^    RealScalar m_maxpivot, m_pr
 m_prescribedThreshold	Eigen/src/QR/ColPivHouseholderQR.h	/^    RealScalar m_prescribedThreshold, m_maxpivot;$/;"	m	class:Eigen::ColPivHouseholderQR
 m_prescribedThreshold	Eigen/src/QR/FullPivHouseholderQR.h	/^    RealScalar m_prescribedThreshold, m_maxpivot;$/;"	m	class:Eigen::FullPivHouseholderQR
 m_prescribedThreshold	Eigen/src/SVD/JacobiSVD.h	/^    RealScalar m_prescribedThreshold;$/;"	m	class:Eigen::JacobiSVD
+m_previousPose	extractMeasurement.h	/^		pose m_previousPose;$/;"	m	class:ExtractMeasurement
 m_prod	Eigen/src/Core/ProductBase.h	/^    const NestedProduct& m_prod;$/;"	m	class:ScaledProduct
 m_pt	Eigen/src/PardisoSupport/PardisoSupport.h	/^    mutable void *m_pt[64];$/;"	m	class:Eigen::PardisoImpl
 m_ptr	Eigen/src/Core/util/Memory.h	/^    T* m_ptr;$/;"	m	class:Eigen::internal::aligned_stack_memory_handler
-m_pub_Origin	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_Origin;$/;"	m	language:C++	class:ExtractMeasurement
-m_pub_result	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_result;$/;"	m	language:C++	class:ExtractMeasurement
-m_pub_resultICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_resultICP;$/;"	m	language:C++	class:ExtractMeasurement
-m_pub_shape	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_shape;$/;"	m	language:C++	class:ExtractMeasurement
-m_pub_shapeICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::Publisher m_pub_shapeICP;$/;"	m	language:C++	class:ExtractMeasurement
+m_pub_final	extractMeasurement.h	/^		ros::Publisher m_pub_final;$/;"	m	class:ExtractMeasurement
+m_pub_output	extractMeasurement.h	/^		ros::Publisher m_pub_output;$/;"	m	class:ExtractMeasurement
+m_pub_result	extractMeasurement.h	/^		ros::Publisher m_pub_result;$/;"	m	class:ExtractMeasurement
+m_pub_resultICP	extractMeasurement.h	/^		ros::Publisher m_pub_resultICP;$/;"	m	class:ExtractMeasurement
+m_pub_shape	extractMeasurement.h	/^		ros::Publisher m_pub_shape;$/;"	m	class:ExtractMeasurement
+m_pub_shapeICP	extractMeasurement.h	/^		ros::Publisher m_pub_shapeICP;$/;"	m	class:ExtractMeasurement
+m_pub_shapeKalman	extractMeasurement.h	/^		ros::Publisher m_pub_shapeKalman;$/;"	m	class:ExtractMeasurement
+m_pub_shapeReference	extractMeasurement.h	/^		ros::Publisher m_pub_shapeReference;$/;"	m	class:ExtractMeasurement
+m_pub_source	extractMeasurement.h	/^		ros::Publisher m_pub_source;$/;"	m	class:ExtractMeasurement
+m_pub_target	extractMeasurement.h	/^		ros::Publisher m_pub_target;$/;"	m	class:ExtractMeasurement
 m_Q	Eigen/src/Eigenvalues/RealQZ.h	/^      MatrixType m_S, m_T, m_Q, m_Z;$/;"	m	class:Eigen::RealQZ
 m_q	Eigen/src/LU/FullPivLU.h	/^    PermutationQType m_q;$/;"	m	class:Eigen::FullPivLU
 m_Q	Eigen/src/SparseQR/SparseQR.h	/^    QRMatrixType m_Q;               \/\/ The orthogonal reflectors$/;"	m	class:Eigen::SparseQR
@@ -5843,10 +5882,10 @@ m_qr	Eigen/src/SparseQR/SparseQR.h	/^  const SparseQRType& m_qr;$/;"	m	struct:Ei
 m_qr	Eigen/src/SVD/JacobiSVD.h	/^  QRType m_qr;$/;"	m	class:Eigen::internal::qr_preconditioner_impl
 m_qr_precond_morecols	Eigen/src/SVD/JacobiSVD.h	/^    internal::qr_preconditioner_impl<MatrixType, QRPreconditioner, internal::PreconditionIfMoreColsThanRows> m_qr_precond_morecols;$/;"	m	class:Eigen::JacobiSVD
 m_qr_precond_morerows	Eigen/src/SVD/JacobiSVD.h	/^    internal::qr_preconditioner_impl<MatrixType, QRPreconditioner, internal::PreconditionIfMoreRowsThanCols> m_qr_precond_morerows;$/;"	m	class:Eigen::JacobiSVD
-m_r	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        uint8_t m_r;$/;"	m	language:C++	struct:_rgb
 m_r	cluster.hpp	/^	int m_r, m_g, m_b;$/;"	m	class:Cluster
 m_R	Eigen/src/SparseQR/SparseQR.h	/^    QRMatrixType m_R;               \/\/ The triangular factor matrix$/;"	m	class:Eigen::SparseQR
 m_R	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    mutable MatrixType m_R; \/\/ The sparse matrix R in Eigen format$/;"	m	class:Eigen::SPQR
+m_r	extractMeasurement.h	/^	uint8_t m_r;$/;"	m	struct:_rgb
 m_rank	Eigen/src/misc/Image.h	/^    Index m_rank, m_cols;$/;"	m	struct:Eigen::internal::image_retval_base
 m_rank	Eigen/src/misc/Kernel.h	/^    Index m_rank, m_cols;$/;"	m	struct:Eigen::internal::kernel_retval_base
 m_rank	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    mutable Index m_rank; \/\/ The rank of the matrix$/;"	m	class:Eigen::SPQR
@@ -5964,13 +6003,13 @@ m_temporary	Eigen/src/Cholesky/LDLT.h	/^    TmpMatrixType m_temporary;$/;"	m	cla
 m_then	Eigen/src/Core/Select.h	/^    typename ThenMatrixType::Nested m_then;$/;"	m	class:Eigen::Select
 m_threshold	Eigen/src/SparseQR/SparseQR.h	/^    RealScalar m_threshold;         \/\/ Threshold to determine null Householder reflections$/;"	m	class:Eigen::SparseQR
 m_timestamp	cluster.hpp	/^	double m_timestamp;$/;"	m	class:Cluster
+m_times_s	myTools.hpp	/^	std::vector<long long> m_times_s;$/;"	m	class:MyTools
 m_tmp	Eigen/src/Eigenvalues/EigenSolver.h	/^    ColumnVectorType m_tmp;$/;"	m	class:Eigen::EigenSolver
 m_tmp	Eigen/src/Eigenvalues/GeneralizedEigenSolver.h	/^    ColumnVectorType m_tmp;$/;"	m	class:Eigen::GeneralizedEigenSolver
 m_TmpTrackingObjects	obstacle_tracking.hpp	/^	std::vector<clusterPtr> m_TmpTrackingObjects;$/;"	m	class:ObstacleTracking
 m_tolerance	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  RealScalar m_tolerance;$/;"	m	class:Eigen::IterativeSolverBase
 m_tolerance	Eigen/src/SparseCore/SparseProduct.h	/^    RealScalar m_tolerance;$/;"	m	class:Eigen::SparseSparseProduct
 m_tolerance	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    RealScalar m_tolerance; \/\/ treat columns with 2-norm below this tolerance as zero$/;"	m	class:Eigen::SPQR
-m_tools	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	Tools m_tools;$/;"	m	language:C++	class:ExtractMeasurement
 m_TrackingObjects	obstacle_tracking.hpp	/^	std::vector<clusterPtr> m_TrackingObjects;$/;"	m	class:ObstacleTracking
 m_trans	Eigen/src/Householder/HouseholderSequence.h	/^    bool m_trans;$/;"	m	class:Eigen::HouseholderSequence
 m_transpose	Eigen/src/SparseQR/SparseQR.h	/^  bool m_transpose;$/;"	m	struct:Eigen::SparseQR_QProduct
@@ -5999,10 +6038,23 @@ m_values	Eigen/src/SparseCore/CompressedStorage.h	/^    Scalar* m_values;$/;"	m	
 m_values	Eigen/src/SparseCore/MappedSparseMatrix.h	/^    Scalar* m_values;$/;"	m	class:Eigen::MappedSparseMatrix
 m_values	Eigen/src/SparseCore/SparseMatrix.h	/^    const Scalar* m_values;$/;"	m	class:Eigen::SparseMatrix::InnerIterator
 m_values	Eigen/src/SparseCore/SparseMatrix.h	/^    const Scalar* m_values;$/;"	m	class:Eigen::SparseMatrix::ReverseInnerIterator
+m_vecD_AccumulationDistanceRMSE	myTools.hpp	/^	std::vector<double> m_vecD_AccumulationDistanceRMSE;$/;"	m	class:MyTools
+m_vecD_KalmanFilterDistanceRMSE	myTools.hpp	/^	std::vector<double> m_vecD_KalmanFilterDistanceRMSE;$/;"	m	class:MyTools
+m_vecD_OnlyBoxDistanceRMSE	myTools.hpp	/^	std::vector<double> m_vecD_OnlyBoxDistanceRMSE;$/;"	m	class:MyTools
+m_vecD_ResultDistanceRMSE	extractMeasurement.h	/^		std::vector<double> m_vecD_ResultDistanceRMSE;$/;"	m	class:ExtractMeasurement
 m_vector	Eigen/src/SparseCore/AmbiVector.h	/^    const AmbiVector& m_vector; \/\/ the target vector$/;"	m	class:Eigen::internal::AmbiVector::Iterator
 m_vectors	Eigen/src/Householder/HouseholderSequence.h	/^    typename VectorsType::Nested m_vectors;$/;"	m	class:Eigen::HouseholderSequence
-m_vecVehicleAccumulatedCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<clusterPtr> m_vecVehicleAccumulatedCloud;$/;"	m	language:C++	class:ExtractMeasurement
-m_vecVehicleTrackingClouds	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>> m_vecVehicleTrackingClouds;$/;"	m	language:C++	class:ExtractMeasurement
+m_vecVecXdAccumulationRMSE	myTools.hpp	/^	std::vector<VectorXd> m_vecVecXdAccumulationRMSE;$/;"	m	class:MyTools
+m_vecVecXdKalmanFilter	extractMeasurement.h	/^		std::vector<VectorXd> m_vecVecXdKalmanFilter;$/;"	m	class:ExtractMeasurement
+m_vecVecXdKalmanFilterRMSE	myTools.hpp	/^	std::vector<VectorXd> m_vecVecXdKalmanFilterRMSE;$/;"	m	class:MyTools
+m_vecVecXdOnlyBoundingbox	extractMeasurement.h	/^		std::vector<VectorXd> m_vecVecXdOnlyBoundingbox;$/;"	m	class:ExtractMeasurement
+m_vecVecXdOnlyBoundingBoxRMSE	myTools.hpp	/^	std::vector<VectorXd> m_vecVecXdOnlyBoundingBoxRMSE;$/;"	m	class:MyTools
+m_vecVecXdRef	extractMeasurement.h	/^		std::vector<VectorXd> m_vecVecXdRef;$/;"	m	class:ExtractMeasurement
+m_vecVecXdRefwithVelo	extractMeasurement.h	/^		std::vector<VectorXd> m_vecVecXdRefwithVelo;$/;"	m	class:ExtractMeasurement
+m_vecVecXdRegistrationAccum	extractMeasurement.h	/^		std::vector<VectorXd> m_vecVecXdRegistrationAccum;$/;"	m	class:ExtractMeasurement
+m_vecVecXdResultRMSE	extractMeasurement.h	/^		std::vector<VectorXd> m_vecVecXdResultRMSE;$/;"	m	class:ExtractMeasurement
+m_vecVehicleAccumulatedCloud	extractMeasurement.h	/^		std::vector<clusterPtr> m_vecVehicleAccumulatedCloud;$/;"	m	class:ExtractMeasurement
+m_vGroundTruth	highway.h	/^	std::vector<VectorXd> m_vGroundTruth;$/;"	m	class:Highway
 m_view	Eigen/src/SparseCore/SparseView.h	/^  const SparseView& m_view;$/;"	m	class:Eigen::SparseView::InnerIterator
 m_width	cluster.hpp	/^	float m_length, m_width, m_height;$/;"	m	class:Cluster
 m_workMatrix	Eigen/src/SVD/JacobiSVD.h	/^    WorkMatrixType m_workMatrix;$/;"	m	class:Eigen::JacobiSVD
@@ -6020,11 +6072,18 @@ m_Z	Eigen/src/Eigenvalues/RealQZ.h	/^      MatrixType m_S, m_T, m_Q, m_Z;$/;"	m	
 m_zero	Eigen/src/SparseCore/AmbiVector.h	/^    Scalar m_zero;$/;"	m	class:Eigen::internal::AmbiVector
 n	Eigen/src/SparseLU/SparseLU_Structs.h	/^  Index   n; \/\/ Number of columns in the matrix  $/;"	m	struct:Eigen::internal::LU_GlobalLU_t
 name	render/render.h	/^	std::string name;$/;"	m	struct:Car
+named_hist	matplotlibcpp.h	/^bool named_hist(std::string label,const std::vector<Numeric>& y, long bins=10, std::string color="b", double alpha=1.0)$/;"	f	namespace:matplotlibcpp
+named_loglog	matplotlibcpp.h	/^bool named_loglog(const std::string& name, const std::vector<Numeric>& x, const std::vector<Numeric>& y, const std::string& format = "")$/;"	f	namespace:matplotlibcpp
+named_plot	matplotlibcpp.h	/^bool named_plot(const std::string& name, const std::vector<Numeric>& x, const std::vector<Numeric>& y, const std::string& format = "")$/;"	f	namespace:matplotlibcpp
+named_plot	matplotlibcpp.h	/^bool named_plot(const std::string& name, const std::vector<Numeric>& y, const std::string& format = "")$/;"	f	namespace:matplotlibcpp
+named_semilogx	matplotlibcpp.h	/^bool named_semilogx(const std::string& name, const std::vector<Numeric>& x, const std::vector<Numeric>& y, const std::string& format = "")$/;"	f	namespace:matplotlibcpp
+named_semilogy	matplotlibcpp.h	/^bool named_semilogy(const std::string& name, const std::vector<Numeric>& x, const std::vector<Numeric>& y, const std::string& format = "")$/;"	f	namespace:matplotlibcpp
 NaturalOrdering	Eigen/src/OrderingMethods/Ordering.h	/^class NaturalOrdering$/;"	c	namespace:Eigen
 nbThreads	Eigen/src/Core/products/Parallelizer.h	/^inline int nbThreads()$/;"	f	namespace:Eigen
 nc	Eigen/src/Core/products/GeneralMatrixMatrix.h	/^    inline DenseIndex nc() const { return m_nc; }$/;"	f	class:Eigen::internal::level3_blocking
 NCMatrix	Eigen/src/SparseLU/SparseLU.h	/^    typedef SparseMatrix<Scalar,ColMajor,Index> NCMatrix;$/;"	t	class:Eigen::SparseLU
 NColsBlockXpr	Eigen/src/plugins/BlockMethods.h	/^template<int N> struct NColsBlockXpr { typedef Block<Derived, internal::traits<Derived>::RowsAtCompileTime, N, !IsRowMajor> Type; };$/;"	s
+NDT	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::NDT (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsInitSource)$/;"	f	language:C++	class:ExtractMeasurement
 NeedsToAlign	Eigen/src/Core/PlainObjectBase.h	/^    enum { NeedsToAlign = SizeAtCompileTime != Dynamic && (internal::traits<Derived>::Flags & AlignedBit) != 0 };$/;"	e	enum:Eigen::PlainObjectBase::__anon31
 NeedToConjugate	Eigen/src/Core/util/BlasUtil.h	/^    NeedToConjugate = Base::NeedToConjugate ? 0 : IsComplex$/;"	e	enum:Eigen::internal::blas_traits::__anon261
 NeedToConjugate	Eigen/src/Core/util/BlasUtil.h	/^    NeedToConjugate = false,$/;"	e	enum:Eigen::internal::blas_traits::__anon260
@@ -6066,7 +6125,7 @@ NewInf	Eigen/src/Eigen2Support/Meta.h	/^      NewInf = int(TakeInf) ? InfX : int
 NewSup	Eigen/src/Core/util/Meta.h	/^      NewSup = int(TakeInf) ? int(MidX) : SupX$/;"	m	namespace:Eigen::internal
 NewSup	Eigen/src/Eigen2Support/Meta.h	/^      NewSup = int(TakeInf) ? int(MidX) : SupX$/;"	m	namespace:Eigen
 next	Eigen/src/SparseCore/AmbiVector.h	/^      Index next;$/;"	m	struct:Eigen::internal::AmbiVector::ListEl
-nh	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	ros::NodeHandle nh;$/;"	m	language:C++	class:ExtractMeasurement
+nh	extractMeasurement.h	/^		ros::NodeHandle nh;$/;"	m	class:ExtractMeasurement
 NIS_laser_	ukf.h	/^  double NIS_laser_;$/;"	m	class:UKF
 NIS_radar_	ukf.h	/^  double NIS_radar_;$/;"	m	class:UKF
 nnz	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    union {int nnz;int lda;};$/;"	m	union:Eigen::SluMatrix::__anon28::__anon29
@@ -6077,6 +6136,8 @@ NoChange	Eigen/src/Core/util/Constants.h	/^enum NoChange_t   { NoChange };$/;"	e
 NoChange_t	Eigen/src/Core/util/Constants.h	/^enum NoChange_t   { NoChange };$/;"	g	namespace:Eigen
 NoConvergence	Eigen/src/Core/util/Constants.h	/^  NoConvergence = 2,$/;"	e	enum:Eigen::ComputationInfo
 noise	tools.cpp	/^double Tools::noise(double stddev, long long seedNum)$/;"	f	class:Tools
+noise_ax	kalman_filter.h	/^	double noise_ax;$/;"	m	class:KalmanFilter
+noise_ay	kalman_filter.h	/^	double noise_ay;$/;"	m	class:KalmanFilter
 NonConstImagReturnType	Eigen/src/plugins/CommonCwiseUnaryOps.h	/^typedef CwiseUnaryView<internal::scalar_imag_ref_op<Scalar>, Derived> NonConstImagReturnType;$/;"	t
 NonConstRealReturnType	Eigen/src/plugins/CommonCwiseUnaryOps.h	/^                  >::type NonConstRealReturnType;$/;"	t
 noncopyable	Eigen/src/Core/util/Meta.h	/^  noncopyable() {}$/;"	f	class:Eigen::internal::noncopyable
@@ -6124,6 +6185,7 @@ NormalReturnType	Eigen/src/Eigen2Support/Geometry/Hyperplane.h	/^  typedef Block
 NormalReturnType	Eigen/src/Geometry/Hyperplane.h	/^  typedef Block<Coefficients,AmbientDimAtCompileTime,1> NormalReturnType;$/;"	t	class:Eigen::Hyperplane
 NoUnrolling	Eigen/src/Core/util/Constants.h	/^  NoUnrolling,$/;"	e	enum:Eigen::UnrollingType
 no_assignment_operator	Eigen/src/Core/util/XprHelper.h	/^class no_assignment_operator$/;"	c	namespace:Eigen::internal
+NPY_NO_DEPRECATED_API	matplotlibcpp.h	16;"	d
 nr	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^    nr = 2,$/;"	e	enum:Eigen::internal::gebp_traits::__anon182
 nr	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^    nr = 4,$/;"	e	enum:Eigen::internal::gebp_traits::__anon183
 nr	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^    nr = NumberOfRegisters\/4,$/;"	e	enum:Eigen::internal::gebp_traits::__anon180
@@ -6256,6 +6318,8 @@ operator ()	Eigen/src/OrderingMethods/Ordering.h	/^    void operator()(const Mat
 operator ()	Eigen/src/OrderingMethods/Ordering.h	/^    void operator()(const SparseSelfAdjointView<SrcType, SrcUpLo>& mat, PermutationType& perm)$/;"	f	class:Eigen::AMDOrdering
 operator ()	Eigen/src/SparseCholesky/SimplicialCholesky.h	/^      inline bool operator() (const Index& row, const Index& col, const Scalar&) const$/;"	f	struct:Eigen::SimplicialCholeskyBase::keep_diag
 operator ()	Eigen/src/SparseCore/SparseMatrix.h	/^    inline bool operator() (const Index&, const Index&, const Scalar& value) const$/;"	f	struct:Eigen::SparseMatrix::default_prunning_func
+operator ()	matplotlibcpp.h	/^    bool operator()(const Iterable& ticks, const Callable& f, const std::string& format)$/;"	f	struct:matplotlibcpp::detail::plot_impl
+operator ()	matplotlibcpp.h	/^    bool operator()(const IterableX& x, const IterableY& y, const std::string& format)$/;"	f	struct:matplotlibcpp::detail::plot_impl
 operator *	Eigen/src/Core/DiagonalMatrix.h	/^    operator*(const MatrixBase<MatrixDerived> &matrix) const$/;"	f	class:Eigen::DiagonalBase
 operator *	Eigen/src/Core/DiagonalMatrix.h	/^    operator*(const Scalar& scalar) const$/;"	f	class:Eigen::DiagonalBase
 operator *	Eigen/src/Core/DiagonalMatrix.h	/^    operator*(const Scalar& scalar, const DiagonalBase& other)$/;"	f	class:Eigen::DiagonalBase
@@ -7106,7 +7170,6 @@ PartialReduxExpr	Eigen/src/Core/VectorwiseOp.h	/^class PartialReduxExpr : intern
 partial_lu_impl	Eigen/src/LU/PartialPivLU.h	/^struct partial_lu_impl$/;"	s	namespace:Eigen::internal
 partial_lu_inplace	Eigen/src/LU/PartialPivLU.h	/^void partial_lu_inplace(MatrixType& lu, TranspositionType& row_transpositions, typename TranspositionType::Index& nb_transpositions)$/;"	f	namespace:Eigen::internal
 pasin	Eigen/src/Core/GenericPacketMath.h	/^Packet pasin(const Packet& a) { using std::asin; return asin(a); }$/;"	f	namespace:Eigen::internal
-pass	highway.h	/^	bool pass = true;$/;"	m	class:Highway
 PastixBase	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    PastixBase() : m_initisOk(false), m_analysisIsOk(false), m_factorizationIsOk(false), m_isInitialized(false), m_pastixdata(0), m_size(0)$/;"	f	class:Eigen::PastixBase
 PastixBase	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^class PastixBase : internal::noncopyable$/;"	c	namespace:Eigen
 PastixLDLT	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    PastixLDLT():Base()$/;"	f	class:Eigen::PastixLDLT
@@ -7125,6 +7188,7 @@ PASTIX_DCOMPLEX	Eigen/src/PaStiXSupport/PaStiXSupport.h	18;"	d
 pastix_traits	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^  struct pastix_traits< PastixLDLT<_MatrixType,Options> >$/;"	s	namespace:Eigen::internal
 pastix_traits	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^  struct pastix_traits< PastixLLT<_MatrixType,Options> >$/;"	s	namespace:Eigen::internal
 pastix_traits	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^  struct pastix_traits< PastixLU<_MatrixType> >$/;"	s	namespace:Eigen::internal
+pause	matplotlibcpp.h	/^inline void pause(Numeric interval)$/;"	f	namespace:matplotlibcpp
 pconj	Eigen/src/Core/arch/AltiVec/Complex.h	/^template<> EIGEN_STRONG_INLINE Packet2cf pconj(const Packet2cf& a) { return Packet2cf((Packet4f)vec_xor((Packet4ui)a.v, p4ui_CONJ_XOR)); }$/;"	f	namespace:Eigen::internal
 pconj	Eigen/src/Core/arch/AltiVec/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4f pconj(const Packet4f& a) { return a; }$/;"	f	namespace:Eigen::internal
 pconj	Eigen/src/Core/arch/AltiVec/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4i pconj(const Packet4i& a) { return a; }$/;"	f	namespace:Eigen::internal
@@ -7228,7 +7292,9 @@ pfirst	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE int
 pfirst	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE int    pfirst<Packet4i>(const Packet4i& a) { return _mm_cvtsi128_si32(a); }$/;"	f	namespace:Eigen::internal
 pfirst	Eigen/src/Core/GenericPacketMath.h	/^template<typename Packet> inline typename unpacket_traits<Packet>::type pfirst(const Packet& a)$/;"	f	namespace:Eigen::internal
 phi	tools.h	/^	double rho, phi, rho_dot;$/;"	m	struct:rmarker
+PI	kalman_filter.cpp	2;"	d	file:
 pi	sensors/lidar.h	/^const double pi = 3.1415;$/;"	v
+pitch	extractMeasurement.h	/^	double pitch;$/;"	m	struct:pose
 Pivoting	Eigen/src/Core/util/Constants.h	/^  Pivoting            = 0x01, $/;"	e	enum:Eigen::DecompositionOptions
 pivotL	Eigen/src/SparseLU/SparseLU_pivotL.h	/^Index SparseLUImpl<Scalar,Index>::pivotL(const Index jcol, const RealScalar& diagpivotthresh, IndexVector& perm_r, IndexVector& iperm_c, Index& pivrow, GlobalLU_t& glu)$/;"	f	class:Eigen::internal::SparseLUImpl
 PlainObject	Eigen/src/Core/Array.h	/^    typedef typename Base::PlainObject PlainObject;$/;"	t	class:Eigen::Array
@@ -7302,6 +7368,23 @@ ploadu	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Pac
 ploadu	Eigen/src/Core/GenericPacketMath.h	/^ploadu(const typename unpacket_traits<Packet>::type* from) { return *from; }$/;"	f	namespace:Eigen::internal
 plog	Eigen/src/Core/arch/SSE/MathFunctions.h	/^Packet4f plog<Packet4f>(const Packet4f& _x)$/;"	f	namespace:Eigen::internal
 plog	Eigen/src/Core/GenericPacketMath.h	/^Packet plog(const Packet& a) { using std::log; return log(a); }$/;"	f	namespace:Eigen::internal
+Plot	matplotlibcpp.h	/^    Plot(const std::string& name = "", const std::string& format = "")$/;"	f	class:matplotlibcpp::Plot
+Plot	matplotlibcpp.h	/^    Plot(const std::string& name, const std::vector<Numeric>& x, const std::vector<Numeric>& y, const std::string& format = "") {$/;"	f	class:matplotlibcpp::Plot
+plot	matplotlibcpp.h	/^bool plot() { return true; }$/;"	f	namespace:matplotlibcpp
+plot	matplotlibcpp.h	/^bool plot(const A& a, const B& b, const std::string& format, Args... args)$/;"	f	namespace:matplotlibcpp
+plot	matplotlibcpp.h	/^bool plot(const std::vector<Numeric> &x, const std::vector<Numeric> &y, const std::map<std::string, std::string>& keywords)$/;"	f	namespace:matplotlibcpp
+plot	matplotlibcpp.h	/^bool plot(const std::vector<Numeric>& y, const std::map<std::string, std::string>& keywords)$/;"	f	namespace:matplotlibcpp
+plot	matplotlibcpp.h	/^bool plot(const std::vector<Numeric>& y, const std::string& format = "")$/;"	f	namespace:matplotlibcpp
+plot	matplotlibcpp.h	/^bool plot(const std::vector<NumericX>& x, const std::vector<NumericY>& y, const std::string& s = "")$/;"	f	namespace:matplotlibcpp
+Plot	matplotlibcpp.h	/^class Plot$/;"	c	namespace:matplotlibcpp
+plot	matplotlibcpp.h	/^inline bool plot(const std::vector<double>& x, const std::vector<double>& y, const std::map<std::string, std::string>& keywords) {$/;"	f	namespace:matplotlibcpp
+plot	matplotlibcpp.h	/^inline bool plot(const std::vector<double>& x, const std::vector<double>& y, const std::string& format = "") {$/;"	f	namespace:matplotlibcpp
+plot	matplotlibcpp.h	/^inline bool plot(const std::vector<double>& y, const std::string& format = "") {$/;"	f	namespace:matplotlibcpp
+plotting	myTools.cpp	/^void MyTools::plotting()$/;"	f	class:MyTools
+plot_impl	matplotlibcpp.h	/^struct plot_impl { };$/;"	s	namespace:matplotlibcpp::detail
+plot_impl	matplotlibcpp.h	/^struct plot_impl<std::false_type>$/;"	s	namespace:matplotlibcpp::detail
+plot_impl	matplotlibcpp.h	/^struct plot_impl<std::true_type>$/;"	s	namespace:matplotlibcpp::detail
+plot_surface	matplotlibcpp.h	/^void plot_surface(const std::vector<::std::vector<Numeric>> &x,$/;"	f	namespace:matplotlibcpp
 plset	Eigen/src/Core/arch/AltiVec/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4f plset<float>(const float& a) { return vec_add(pset1<Packet4f>(a), p4f_COUNTDOWN); }$/;"	f	namespace:Eigen::internal
 plset	Eigen/src/Core/arch/AltiVec/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4i plset<int>(const int& a)     { return vec_add(pset1<Packet4i>(a), p4i_COUNTDOWN); }$/;"	f	namespace:Eigen::internal
 plset	Eigen/src/Core/arch/NEON/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4f plset<float>(const float& a)$/;"	f	namespace:Eigen::internal
@@ -7383,8 +7466,8 @@ pnegate	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Pa
 pnegate	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4f pnegate(const Packet4f& a)$/;"	f	namespace:Eigen::internal
 pnegate	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4i pnegate(const Packet4i& a)$/;"	f	namespace:Eigen::internal
 pnegate	Eigen/src/Core/GenericPacketMath.h	/^pnegate(const Packet& a) { return -a; }$/;"	f	namespace:Eigen::internal
-point2pointICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::point2pointICP(long long timestamp)$/;"	f	language:C++	class:ExtractMeasurement
-point2pointICP	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void point2pointICP (long long timestamp);$/;"	p	language:C++	class:ExtractMeasurement
+point2pointICPwithAccumulation	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::point2pointICPwithAccumulation (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud, pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool& bIsFirst)$/;"	f	language:C++	class:ExtractMeasurement
+point2pointICPwithAccumulation2	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::point2pointICPwithAccumulation2 (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputSourceCloud,const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputTargetCloud, bool bIsFirst)$/;"	f	language:C++	class:ExtractMeasurement
 pointAt	Eigen/src/Geometry/ParametrizedLine.h	/^ParametrizedLine<_Scalar, _AmbientDim,_Options>::pointAt(const _Scalar& t) const$/;"	f	class:Eigen::ParametrizedLine
 pointer	Eigen/src/Core/util/Memory.h	/^  typedef T*              pointer;$/;"	t	class:Eigen::aligned_allocator
 pointer	Eigen/src/StlSupport/details.h	/^    typedef T*        pointer;$/;"	t	class:Eigen::aligned_allocator_indirection
@@ -7405,9 +7488,11 @@ por	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet
 por	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4f por<Packet4f>(const Packet4f& a, const Packet4f& b) { return _mm_or_ps(a,b); }$/;"	f	namespace:Eigen::internal
 por	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4i por<Packet4i>(const Packet4i& a, const Packet4i& b) { return _mm_or_si128(a,b); }$/;"	f	namespace:Eigen::internal
 por	Eigen/src/Core/GenericPacketMath.h	/^por(const Packet& a, const Packet& b) { return a | b; }$/;"	f	namespace:Eigen::internal
+pose	extractMeasurement.h	/^struct pose$/;"	s
 position	render/render.h	/^	Vect3 position, dimensions;$/;"	m	struct:Car
 position	sensors/lidar.h	/^	Vect3 position;$/;"	m	struct:Lidar
 PositiveSemiDef	Eigen/src/Cholesky/LDLT.h	/^  enum SignMatrix { PositiveSemiDef, NegativeSemiDef, ZeroSign, Indefinite };$/;"	e	enum:Eigen::internal::SignMatrix
+pOutputCloud	extractMeasurement.h	/^		pcl::PointCloud<pcl::PointXYZRGB>::Ptr pOutputCloud;$/;"	m	class:ExtractMeasurement
 pow	Eigen/src/Core/GlobalFunctions.h	/^  pow(const Eigen::ArrayBase<Derived>& x, const Eigen::ArrayBase<Derived>& exponents) $/;"	f	namespace:Eigen
 pow	Eigen/src/Core/GlobalFunctions.h	/^  pow(const Eigen::ArrayBase<Derived>& x, const typename Derived::Scalar& exponent) {$/;"	f	namespace:Eigen
 pow	Eigen/src/Core/MathFunctions.h	/^inline EIGEN_MATHFUNC_RETVAL(pow, Scalar) pow(const Scalar& x, const Scalar& y)$/;"	f	namespace:Eigen::numext
@@ -7428,6 +7513,7 @@ preconditioner	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  Precon
 Preconditioner	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  typedef typename internal::traits<Derived>::Preconditioner Preconditioner;$/;"	t	class:Eigen::IterativeSolverBase
 PreconditionIfMoreColsThanRows	Eigen/src/SVD/JacobiSVD.h	/^enum { PreconditionIfMoreColsThanRows, PreconditionIfMoreRowsThanCols };$/;"	e	enum:Eigen::internal::__anon426
 PreconditionIfMoreRowsThanCols	Eigen/src/SVD/JacobiSVD.h	/^enum { PreconditionIfMoreColsThanRows, PreconditionIfMoreRowsThanCols };$/;"	e	enum:Eigen::internal::__anon426
+Predict	kalman_filter.cpp	/^void KalmanFilter::Predict(double delta_t) $/;"	f	class:KalmanFilter
 Prediction	ukf.cpp	/^void UKF::Prediction(double delta_t) {$/;"	f	class:UKF
 predux	Eigen/src/Core/arch/AltiVec/Complex.h	/^template<> EIGEN_STRONG_INLINE std::complex<float> predux<Packet2cf>(const Packet2cf& a)$/;"	f	namespace:Eigen::internal
 predux	Eigen/src/Core/arch/AltiVec/PacketMath.h	/^template<> EIGEN_STRONG_INLINE float predux<Packet4f>(const Packet4f& a)$/;"	f	namespace:Eigen::internal
@@ -7522,6 +7608,8 @@ preverse	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE P
 preverse	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4i preverse(const Packet4i& a)$/;"	f	namespace:Eigen::internal
 preverse	Eigen/src/Core/GenericPacketMath.h	/^template<typename Packet> inline Packet preverse(const Packet& a)$/;"	f	namespace:Eigen::internal
 print_matrix	Eigen/src/Core/IO.h	/^std::ostream & print_matrix(std::ostream & s, const Derived& _m, const IOFormat& fmt)$/;"	f	namespace:Eigen::internal
+process	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::process()$/;"	f	language:C++	class:ExtractMeasurement
+ProcessMeasurement	kalman_filter.cpp	/^void KalmanFilter::ProcessMeasurement(MeasurementPackage meas_package) $/;"	f	class:KalmanFilter
 ProcessMeasurement	ukf.cpp	/^void UKF::ProcessMeasurement(MeasurementPackage meas_package) {$/;"	f	class:UKF
 prod	Eigen/src/Core/Redux.h	/^DenseBase<Derived>::prod() const$/;"	f	class:Eigen::DenseBase
 prod	Eigen/src/Core/VectorwiseOp.h	/^    const typename ReturnType<internal::member_prod>::Type prod() const$/;"	f	class:Eigen::VectorwiseOp
@@ -7671,7 +7759,6 @@ psub	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packe
 psub	Eigen/src/Core/GenericPacketMath.h	/^psub(const Packet& a,$/;"	f	namespace:Eigen::internal
 ptan	Eigen/src/Core/GenericPacketMath.h	/^Packet ptan(const Packet& a) { using std::tan; return tan(a); }$/;"	f	namespace:Eigen::internal
 publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::publish ()$/;"	f	language:C++	class:ExtractMeasurement
-publish	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void publish ();$/;"	p	language:C++	class:ExtractMeasurement
 punpackp	Eigen/src/Core/arch/SSE/PacketMath.h	/^EIGEN_STRONG_INLINE void punpackp(Packet4f* vecs)$/;"	f	namespace:Eigen::internal
 pushDownZero	Eigen/src/Eigenvalues/RealQZ.h	/^    inline void RealQZ<MatrixType>::pushDownZero(Index z, Index f, Index l)$/;"	f	class:Eigen::RealQZ
 push_back	Eigen/src/StlSupport/StdDeque.h	/^  void push_back(const value_type& x)$/;"	f	class:std::deque
@@ -7690,6 +7777,10 @@ pxor	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packe
 pxor	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4f pxor<Packet4f>(const Packet4f& a, const Packet4f& b) { return _mm_xor_ps(a,b); }$/;"	f	namespace:Eigen::internal
 pxor	Eigen/src/Core/arch/SSE/PacketMath.h	/^template<> EIGEN_STRONG_INLINE Packet4i pxor<Packet4i>(const Packet4i& a, const Packet4i& b) { return _mm_xor_si128(a,b); }$/;"	f	namespace:Eigen::internal
 pxor	Eigen/src/Core/GenericPacketMath.h	/^pxor(const Packet& a, const Packet& b) { return a ^ b; }$/;"	f	namespace:Eigen::internal
+PyInt_FromLong	matplotlibcpp.h	35;"	d
+PyString_FromString	matplotlibcpp.h	34;"	d
+PyString_FromString	matplotlibcpp.h	36;"	d
+P_	kalman_filter.h	/^	Eigen::MatrixXd P_;$/;"	m	class:KalmanFilter
 P_	ukf.h	/^  Eigen::MatrixXd P_;$/;"	m	class:UKF
 QR	Eigen/src/Eigen2Support/QR.h	/^    explicit QR(const T& t) : Base(t) {}$/;"	f	class:Eigen::QR
 QR	Eigen/src/Eigen2Support/QR.h	/^    QR() : Base() {}$/;"	f	class:Eigen::QR
@@ -7757,9 +7848,11 @@ queryCacheSizes_intel_direct	Eigen/src/Core/util/Memory.h	/^inline void queryCac
 queryL1CacheSize	Eigen/src/Core/util/Memory.h	/^inline int queryL1CacheSize()$/;"	f	namespace:Eigen::internal
 queryTopLevelCacheSize	Eigen/src/Core/util/Memory.h	/^inline int queryTopLevelCacheSize()$/;"	f	namespace:Eigen::internal
 QuickSplit	Eigen/src/IterativeLinearSolvers/IncompleteLUT.h	/^Index QuickSplit(VectorV &row, VectorI &ind, Index ncut)$/;"	f	namespace:Eigen::internal
+quiver	matplotlibcpp.h	/^bool quiver(const std::vector<NumericX>& x, const std::vector<NumericY>& y, const std::vector<NumericU>& u, const std::vector<NumericW>& w, const std::map<std::string, std::string>& keywords = {})$/;"	f	namespace:matplotlibcpp
+Q_	kalman_filter.h	/^	Eigen::MatrixXd Q_;$/;"	m	class:KalmanFilter
 r	render/render.h	/^	float r, g, b;$/;"	m	struct:Color
 RADAR	measurement_package.h	/^    RADAR$/;"	e	enum:MeasurementPackage::SensorType
-radarSense	tools.cpp	/^rmarker Tools::radarSense(Car& car, Car ego, pcl::visualization::PCLVisualizer::Ptr& viewer, long long timestamp, bool visualize)$/;"	f	class:Tools
+radarSense	tools.cpp	/^rmarker Tools::radarSense(Car& car, Car ego, long long timestamp)$/;"	f	class:Tools
 random	Eigen/src/Core/MathFunctions.h	/^inline EIGEN_MATHFUNC_RETVAL(random, Scalar) random()$/;"	f	namespace:Eigen::internal
 random	Eigen/src/Core/MathFunctions.h	/^inline EIGEN_MATHFUNC_RETVAL(random, Scalar) random(const Scalar& x, const Scalar& y)$/;"	f	namespace:Eigen::internal
 Random	Eigen/src/Core/Random.h	/^DenseBase<Derived>::Random()$/;"	f	class:Eigen::DenseBase
@@ -7940,6 +8033,7 @@ reference	Eigen/src/SparseCore/SparseMatrix.h	/^    Scalar reference;$/;"	m	stru
 reference	Eigen/src/StlSupport/details.h	/^    typedef T&        reference;$/;"	t	class:Eigen::aligned_allocator_indirection
 relax	Eigen/src/SparseLU/SparseLU_Structs.h	/^  Index relax; \/\/ To control degree of relaxing supernodes. If the number of nodes (columns) $/;"	m	struct:Eigen::internal::perfvalues
 relax_snode	Eigen/src/SparseLU/SparseLU_relax_snode.h	/^void SparseLUImpl<Scalar,Index>::relax_snode (const Index n, IndexVector& et, const Index relax_columns, IndexVector& descendants, IndexVector& relax_end)$/;"	f	class:Eigen::internal::SparseLUImpl
+remove	matplotlibcpp.h	/^    void remove() {$/;"	f	class:matplotlibcpp::Plot
 RemovedBits	Eigen/src/SparseCore/SparseProduct.h	/^    RemovedBits = ~(EvalToRowMajor ? 0 : RowMajorBit),$/;"	e	enum:Eigen::internal::traits::__anon395
 remove_all	Eigen/src/Core/util/Meta.h	/^template<typename T> struct remove_all { typedef T type; };$/;"	s	namespace:Eigen::internal
 remove_all	Eigen/src/Core/util/Meta.h	/^template<typename T> struct remove_all<const T>   { typedef typename remove_all<T>::type type; };$/;"	s	namespace:Eigen::internal
@@ -8187,7 +8281,7 @@ ReverseRow	Eigen/src/Core/Reverse.h	/^      ReverseRow = (Direction == Vertical)
 reverse_packet	Eigen/src/Core/Reverse.h	/^    typedef internal::reverse_packet_cond<PacketScalar,ReversePacket> reverse_packet;$/;"	t	class:Eigen::Reverse
 reverse_packet_cond	Eigen/src/Core/Reverse.h	/^template<typename PacketScalar, bool ReversePacket> struct reverse_packet_cond$/;"	s	namespace:Eigen::internal
 reverse_packet_cond	Eigen/src/Core/Reverse.h	/^template<typename PacketScalar> struct reverse_packet_cond<PacketScalar,false>$/;"	s	namespace:Eigen::internal
-RGB	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^typedef struct _rgb RGB;$/;"	t	language:C++	typeref:struct:_rgb
+RGB	extractMeasurement.h	/^typedef struct _rgb RGB;$/;"	t	typeref:struct:_rgb
 rho	tools.h	/^	double rho, phi, rho_dot;$/;"	m	struct:rmarker
 rho_dot	tools.h	/^	double rho, phi, rho_dot;$/;"	m	struct:rmarker
 rhs	Eigen/src/Core/CwiseBinaryOp.h	/^    const _RhsNested& rhs() const { return m_rhs; }$/;"	f	class:Eigen::CwiseBinaryOp
@@ -8265,8 +8359,7 @@ rightCols	Eigen/src/plugins/BlockMethods.h	/^inline typename NColsBlockXpr<N>::T
 rightHouseholderSequence	Eigen/src/Householder/HouseholderSequence.h	/^HouseholderSequence<VectorsType,CoeffsType,OnTheRight> rightHouseholderSequence(const VectorsType& v, const CoeffsType& h)$/;"	f	namespace:Eigen
 rmarker	tools.h	/^	rmarker(double setRho, double setPhi, double setRhoDot)$/;"	f	struct:rmarker
 rmarker	tools.h	/^struct rmarker$/;"	s
-rmseFailLog	highway.h	/^	std::vector<double> rmseFailLog = {0.0,0.0,0.0,0.0};$/;"	m	class:Highway
-rmseThreshold	highway.h	/^	std::vector<double> rmseThreshold = {0.30,0.16,0.95,0.70};$/;"	m	class:Highway
+roll	extractMeasurement.h	/^	double roll;$/;"	m	struct:pose
 rotate	Eigen/src/Eigen2Support/Geometry/Transform.h	/^Transform<Scalar,Dim>::rotate(const RotationType& rotation)$/;"	f	class:Eigen::Transform
 rotate	Eigen/src/Geometry/Transform.h	/^Transform<Scalar,Dim,Mode,Options>::rotate(const RotationType& rotation)$/;"	f	class:Eigen::Transform
 rotation	Eigen/src/Eigen2Support/Geometry/Transform.h	/^Transform<Scalar,Dim>::rotation() const$/;"	f	class:Eigen::Transform
@@ -8717,16 +8810,18 @@ run	Eigen/src/SVD/JacobiSVD.h	/^  bool run(JacobiSVD<MatrixType, HouseholderQRPr
 run	Eigen/src/SVD/JacobiSVD.h	/^  bool run(JacobiSVD<MatrixType, QRPreconditioner>&, const MatrixType&)$/;"	f	class:Eigen::internal::qr_preconditioner_impl
 run	Eigen/src/SVD/JacobiSVD.h	/^  static bool run(typename SVD::WorkMatrixType& work_matrix, SVD& svd, Index p, Index q, RealScalar& maxDiagEntry)$/;"	f	struct:Eigen::internal::svd_precondition_2x2_block_to_be_real
 run	Eigen/src/SVD/JacobiSVD.h	/^  static bool run(typename SVD::WorkMatrixType&, SVD&, Index, Index, RealScalar&) { return true; }$/;"	f	struct:Eigen::internal::svd_precondition_2x2_block_to_be_real
+R_	kalman_filter.h	/^	Eigen::MatrixXd R_;$/;"	m	class:KalmanFilter
 R_lidar_	ukf.h	/^  Eigen::MatrixXd R_lidar_;$/;"	m	class:UKF
 R_radar_	ukf.h	/^  Eigen::MatrixXd R_radar_;$/;"	m	class:UKF
 S	Eigen/src/Core/SolveTriangular.h	/^    S = IsLower ? 0     : RowIndex+1$/;"	e	enum:Eigen::internal::triangular_solver_unroller::__anon222
 s	Eigen/src/Jacobi/Jacobi.h	/^    Scalar s() const { return m_s; }$/;"	f	class:Eigen::JacobiRotation
 s	Eigen/src/Jacobi/Jacobi.h	/^    Scalar& s() { return m_s; }$/;"	f	class:Eigen::JacobiRotation
+safe_import	matplotlibcpp.h	/^    PyObject* safe_import(PyObject* module, std::string fname) {$/;"	f	struct:matplotlibcpp::detail::_interpreter
 SameType	Eigen/src/Core/CwiseBinaryOp.h	/^    SameType = is_same<typename _LhsNested::Scalar,typename _RhsNested::Scalar>::value,$/;"	e	enum:Eigen::internal::traits::__anon243
 SameType	Eigen/src/Core/products/CoeffBasedProduct.h	/^      SameType = is_same<typename _LhsNested::Scalar,typename _RhsNested::Scalar>::value,$/;"	e	enum:Eigen::internal::traits::__anon193
 sample	Eigen/src/Geometry/AlignedBox.h	/^  inline VectorType sample() const$/;"	f	class:Eigen::AlignedBox
+save	matplotlibcpp.h	/^inline void save(const std::string& filename)$/;"	f	namespace:matplotlibcpp
 savePCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud)$/;"	f	language:C++	class:ExtractMeasurement
-savePCD	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void savePCD (const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& pInputCloud);$/;"	p	language:C++	class:ExtractMeasurement
 savePcd	tools.cpp	/^void Tools::savePcd(typename pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, std::string file)$/;"	f	class:Tools
 Scalar	Eigen/src/Cholesky/LDLT.h	/^    typedef typename MatrixType::Scalar Scalar;$/;"	t	class:Eigen::LDLT
 Scalar	Eigen/src/Cholesky/LLT.h	/^    typedef typename MatrixType::Scalar Scalar;$/;"	t	class:Eigen::LLT
@@ -9038,6 +9133,7 @@ Scaling3f	Eigen/src/Eigen2Support/Geometry/Scaling.h	/^typedef Scaling<float, 3>
 ScalingType	Eigen/src/Eigen2Support/Geometry/Transform.h	/^  typedef Scaling<Scalar,Dim> ScalingType;$/;"	t	class:Eigen::Transform
 ScalingType	Eigen/src/Eigen2Support/Geometry/Translation.h	/^  typedef Scaling<Scalar,Dim> ScalingType;$/;"	t	class:Eigen::Translation
 scan	sensors/lidar.h	/^	pcl::PointCloud<pcl::PointXYZ>::Ptr scan()$/;"	f	struct:Lidar
+scatter	matplotlibcpp.h	/^bool scatter(const std::vector<NumericX>& x,$/;"	f	namespace:matplotlibcpp
 SCMatrix	Eigen/src/SparseLU/SparseLU.h	/^    typedef internal::MappedSuperNodalMatrix<Scalar, Index> SCMatrix; $/;"	t	class:Eigen::SparseLU
 scomplex	Eigen/src/Core/util/MKL_support.h	/^typedef std::complex<float>  scomplex;$/;"	t	namespace:Eigen
 score	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^    Index score ; \/* the score used to maintain heap, if col is alive *\/$/;"	m	union:internal::colamd_col::__anon2
@@ -9058,6 +9154,18 @@ Select	Eigen/src/Core/Select.h	/^class Select : internal::no_assignment_operator
 select	Eigen/src/Core/Select.h	/^DenseBase<Derived>::select(const DenseBase<ThenDerived>& thenMatrix,$/;"	f	class:Eigen::DenseBase
 select	Eigen/src/Core/Select.h	/^DenseBase<Derived>::select(const typename ElseDerived::Scalar& thenScalar,$/;"	f	class:Eigen::DenseBase
 selector	Eigen/src/Core/GeneralProduct.h	/^  typedef product_type_selector<rows_select, cols_select, depth_select> selector;$/;"	t	struct:Eigen::internal::product_type
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<bool> { const static NPY_TYPES type = NPY_BOOL; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<double> { const static NPY_TYPES type = NPY_DOUBLE; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<float> { const static NPY_TYPES type = NPY_FLOAT; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<int16_t> { const static NPY_TYPES type = NPY_SHORT; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<int32_t> { const static NPY_TYPES type = NPY_INT; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<int64_t> { const static NPY_TYPES type = NPY_INT64; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<int8_t> { const static NPY_TYPES type = NPY_INT8; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<uint16_t> { const static NPY_TYPES type = NPY_USHORT; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<uint32_t> { const static NPY_TYPES type = NPY_ULONG; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<uint64_t> { const static NPY_TYPES type = NPY_UINT64; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <> struct select_npy_type<uint8_t> { const static NPY_TYPES type = NPY_UINT8; };$/;"	s	namespace:matplotlibcpp
+select_npy_type	matplotlibcpp.h	/^template <typename T> struct select_npy_type { const static NPY_TYPES type = NPY_NOTYPE; }; \/\/Default$/;"	s	namespace:matplotlibcpp
 SelfAdjoint	Eigen/src/Core/util/Constants.h	/^  SelfAdjoint=0x10,$/;"	e	enum:Eigen::UpLoType
 SelfAdjointBit	Eigen/src/Eigen2Support/TriangularSolver.h	/^const unsigned int SelfAdjointBit = SelfAdjoint;$/;"	m	namespace:Eigen
 SelfAdjointEigenSolver	Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h	/^    SelfAdjointEigenSolver()$/;"	f	class:Eigen::SelfAdjointEigenSolver
@@ -9090,6 +9198,8 @@ selfadjoint_rank2_update_selector	Eigen/src/Core/products/SelfadjointRank2Update
 selfadjoint_rank2_update_selector	Eigen/src/Core/products/SelfadjointRank2Update.h	/^struct selfadjoint_rank2_update_selector<Scalar,Index,UType,VType,Upper>$/;"	s	namespace:Eigen::internal
 SelfCwiseBinaryOp	Eigen/src/Core/SelfCwiseBinaryOp.h	/^    inline SelfCwiseBinaryOp(Lhs& xpr, const BinaryOp& func = BinaryOp()) : m_matrix(xpr), m_functor(func) {}$/;"	f	class:Eigen::SelfCwiseBinaryOp
 SelfCwiseBinaryOp	Eigen/src/Core/SelfCwiseBinaryOp.h	/^template<typename BinaryOp, typename Lhs, typename Rhs> class SelfCwiseBinaryOp$/;"	c	namespace:Eigen
+semilogx	matplotlibcpp.h	/^bool semilogx(const std::vector<NumericX>& x, const std::vector<NumericY>& y, const std::string& s = "")$/;"	f	namespace:matplotlibcpp
+semilogy	matplotlibcpp.h	/^bool semilogy(const std::vector<NumericX>& x, const std::vector<NumericY>& y, const std::string& s = "")$/;"	f	namespace:matplotlibcpp
 SensorType	measurement_package.h	/^  enum SensorType{$/;"	g	class:MeasurementPackage
 sensor_type_	measurement_package.h	/^  } sensor_type_;$/;"	m	class:MeasurementPackage	typeref:enum:MeasurementPackage::SensorType
 Sequential	Eigen/src/Core/util/Constants.h	/^enum Sequential_t { Sequential };$/;"	e	enum:Eigen::Sequential_t
@@ -9097,17 +9207,19 @@ SequentialLinSpacedReturnType	Eigen/src/Core/DenseBase.h	/^    typedef CwiseNull
 Sequential_t	Eigen/src/Core/util/Constants.h	/^enum Sequential_t { Sequential };$/;"	g	namespace:Eigen
 set	Eigen/src/Core/GeneralProduct.h	/^    struct set  { template<typename Dst, typename Src> void operator()(const Dst& dst, const Src& src) const { dst.const_cast_derived()  = src; } };$/;"	s	class:Eigen::GeneralProduct
 setAcceleration	render/render.h	/^	void setAcceleration(float setAcc)$/;"	f	struct:Car
+setAccumulationDistanceRMSE	myTools.cpp	/^void MyTools::setAccumulationDistanceRMSE (double inputDistance)$/;"	f	class:MyTools
+setAccumulationRMSE	myTools.cpp	/^void MyTools::setAccumulationRMSE (VectorXd inputVectorXd)$/;"	f	class:MyTools
 SetAction	Eigen/src/Core/util/Constants.h	/^enum Action {GetAction, SetAction};$/;"	e	enum:Eigen::Action
 setBounds	Eigen/src/SparseCore/AmbiVector.h	/^    void setBounds(Index start, Index end) { m_start = start; m_end = end; }$/;"	f	class:Eigen::internal::AmbiVector
-SetCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	f	language:C++	class:Cluster
-SetCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::SetCluster (long long timestamp, unsigned int iClusterNumber, unsigned int r, unsigned int g, unsigned int b)$/;"	f	language:C++	class:Cluster
-setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp)$/;"	f	language:C++	class:ExtractMeasurement
-setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud, long long timestamp);$/;"	p	language:C++	class:ExtractMeasurement
+SetCloud	cluster.cpp	/^void Cluster::SetCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud,$/;"	f	class:Cluster
+setCluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setCluster (const std::vector<pcl::PointIndices> vecClusterIndices, const pcl::PointCloud<pcl::PointXYZ>::Ptr pInputCloud)$/;"	f	language:C++	class:ExtractMeasurement
+SetCluster	cluster.cpp	/^void Cluster::SetCluster (long long timestamp, unsigned int iClusterNumber, unsigned int r, unsigned int g, unsigned int b)$/;"	f	class:Cluster
 setConstant	Eigen/src/Core/CwiseNullaryOp.h	/^EIGEN_STRONG_INLINE Derived& DenseBase<Derived>::setConstant(const Scalar& val)$/;"	f	class:Eigen::DenseBase
 setConstant	Eigen/src/Core/CwiseNullaryOp.h	/^PlainObjectBase<Derived>::setConstant(Index nbRows, Index nbCols, const Scalar& val)$/;"	f	class:Eigen::PlainObjectBase
 setConstant	Eigen/src/Core/CwiseNullaryOp.h	/^PlainObjectBase<Derived>::setConstant(Index size, const Scalar& val)$/;"	f	class:Eigen::PlainObjectBase
 setConstant	Eigen/src/Core/TriangularMatrix.h	/^    TriangularView& setConstant(const Scalar& value)$/;"	f	class:Eigen::TriangularView
 setCpuCacheSizes	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^inline void setCpuCacheSizes(std::ptrdiff_t l1, std::ptrdiff_t l2)$/;"	f	namespace:Eigen
+setData	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setData (const std::vector<VectorXd>& vecVecXdRef, long long timestamp)$/;"	f	language:C++	class:ExtractMeasurement
 SetDiag	Eigen/src/Core/products/TriangularMatrixMatrix.h	/^    SetDiag = (Mode&(ZeroDiag|UnitDiag)) ? 0 : 1$/;"	e	enum:Eigen::internal::product_triangular_matrix_matrix::__anon197
 SetDiag	Eigen/src/Core/products/TriangularMatrixMatrix.h	/^    SetDiag = (Mode&(ZeroDiag|UnitDiag)) ? 0 : 1$/;"	e	enum:Eigen::internal::product_triangular_matrix_matrix::__anon198
 setDroptol	Eigen/src/IterativeLinearSolvers/IncompleteLUT.h	/^void IncompleteLUT<Scalar>::setDroptol(const RealScalar& droptol)$/;"	f	class:Eigen::IncompleteLUT
@@ -9131,6 +9243,9 @@ setIdentity	Eigen/src/SparseCore/SparseMatrix.h	/^    inline void setIdentity()$
 setIdentity_impl	Eigen/src/Core/CwiseNullaryOp.h	/^struct setIdentity_impl<Derived, true>$/;"	s	namespace:Eigen::internal
 setInfos	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    void setInfos(Index m, Index n, ScalarVector& nzval, IndexVector& nzval_colptr, IndexVector& rowind, $/;"	f	class:Eigen::internal::MappedSuperNodalMatrix
 setInstructions	render/render.h	/^	void setInstructions(std::vector<accuation> setIn)$/;"	f	struct:Car
+setIsFirstRegistration	cluster.cpp	/^void Cluster::setIsFirstRegistration(bool isRegistration)$/;"	f	class:Cluster
+setKalmanFilterDistanceRMSE	myTools.cpp	/^void MyTools::setKalmanFilterDistanceRMSE (double inputDistance)$/;"	f	class:MyTools
+setKalmanFilterRMSE	myTools.cpp	/^void MyTools::setKalmanFilterRMSE (VectorXd inputVectorXd)$/;"	f	class:MyTools
 setLength	Eigen/src/Householder/HouseholderSequence.h	/^    HouseholderSequence& setLength(Index length)$/;"	f	class:Eigen::HouseholderSequence
 setLinSpaced	Eigen/src/Core/CwiseNullaryOp.h	/^EIGEN_STRONG_INLINE Derived& DenseBase<Derived>::setLinSpaced(const Scalar& low, const Scalar& high)$/;"	f	class:Eigen::DenseBase
 setLinSpaced	Eigen/src/Core/CwiseNullaryOp.h	/^EIGEN_STRONG_INLINE Derived& DenseBase<Derived>::setLinSpaced(Index newSize, const Scalar& low, const Scalar& high)$/;"	f	class:Eigen::DenseBase
@@ -9150,12 +9265,13 @@ setOnes	Eigen/src/Core/CwiseNullaryOp.h	/^EIGEN_STRONG_INLINE Derived& DenseBase
 setOnes	Eigen/src/Core/CwiseNullaryOp.h	/^PlainObjectBase<Derived>::setOnes(Index nbRows, Index nbCols)$/;"	f	class:Eigen::PlainObjectBase
 setOnes	Eigen/src/Core/CwiseNullaryOp.h	/^PlainObjectBase<Derived>::setOnes(Index newSize)$/;"	f	class:Eigen::PlainObjectBase
 setOnes	Eigen/src/Core/TriangularMatrix.h	/^    TriangularView& setOnes() { return setConstant(Scalar(1)); }$/;"	f	class:Eigen::TriangularView
+setOnlyBoundingBoxRMSE	myTools.cpp	/^void MyTools::setOnlyBoundingBoxRMSE (VectorXd inputVectorXd)$/;"	f	class:MyTools
+setOnlyBoxDistanceRMSE	myTools.cpp	/^void MyTools::setOnlyBoxDistanceRMSE (double inputDistance)$/;"	f	class:MyTools
 setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::setParam()$/;"	f	language:C++	class:ExtractMeasurement
-setParam	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	void setParam ();$/;"	p	language:C++	class:ExtractMeasurement
 setPivotThreshold	Eigen/src/SparseLU/SparseLU.h	/^    void setPivotThreshold(const RealScalar& thresh)$/;"	f	class:Eigen::SparseLU
 setPivotThreshold	Eigen/src/SparseQR/SparseQR.h	/^    void setPivotThreshold(const RealScalar& threshold)$/;"	f	class:Eigen::SparseQR
 setPivotThreshold	Eigen/src/SPQRSupport/SuiteSparseQRSupport.h	/^    void setPivotThreshold(const RealScalar& tol)$/;"	f	class:Eigen::SPQR
-setPointCloud	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^void Cluster::setPointCloud (pcl::PointCloud<pcl::PointXYZRGB>::Ptr pInputCloud)$/;"	f	language:C++	class:Cluster
+setPointCloud	cluster.cpp	/^void Cluster::setPointCloud (pcl::PointCloud<pcl::PointXYZRGB>::Ptr pInputCloud)$/;"	f	class:Cluster
 setRandom	Eigen/src/Core/Random.h	/^inline Derived& DenseBase<Derived>::setRandom()$/;"	f	class:Eigen::DenseBase
 setRandom	Eigen/src/Core/Random.h	/^PlainObjectBase<Derived>::setRandom(Index nbRows, Index nbCols)$/;"	f	class:Eigen::PlainObjectBase
 setRandom	Eigen/src/Core/Random.h	/^PlainObjectBase<Derived>::setRandom(Index newSize)$/;"	f	class:Eigen::PlainObjectBase
@@ -9174,6 +9290,7 @@ setThreshold	Eigen/src/QR/FullPivHouseholderQR.h	/^    FullPivHouseholderQR& set
 setThreshold	Eigen/src/QR/FullPivHouseholderQR.h	/^    FullPivHouseholderQR& setThreshold(Default_t)$/;"	f	class:Eigen::FullPivHouseholderQR
 setThreshold	Eigen/src/SVD/JacobiSVD.h	/^    JacobiSVD& setThreshold(const RealScalar& threshold)$/;"	f	class:Eigen::JacobiSVD
 setThreshold	Eigen/src/SVD/JacobiSVD.h	/^    JacobiSVD& setThreshold(Default_t)$/;"	f	class:Eigen::JacobiSVD
+setTime	myTools.cpp	/^void MyTools::setTime (long long time)$/;"	f	class:MyTools
 setTolerance	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  Derived& setTolerance(const RealScalar& tolerance)$/;"	f	class:Eigen::IterativeSolverBase
 setTrans	Eigen/src/Householder/HouseholderSequence.h	/^    HouseholderSequence& setTrans(bool trans)$/;"	f	class:Eigen::HouseholderSequence
 setUKF	render/render.h	/^	void setUKF(UKF tracker)$/;"	f	struct:Car
@@ -9187,6 +9304,7 @@ setZero	Eigen/src/Core/TriangularMatrix.h	/^    TriangularView& setZero() { retu
 setZero	Eigen/src/SparseCore/AmbiVector.h	/^void AmbiVector<_Scalar,_Index>::setZero()$/;"	f	class:Eigen::internal::AmbiVector
 setZero	Eigen/src/SparseCore/SparseMatrix.h	/^    inline void setZero()$/;"	f	class:Eigen::SparseMatrix
 setZero	Eigen/src/SparseCore/SparseVector.h	/^    inline void setZero() { m_data.clear(); }$/;"	f	class:Eigen::SparseVector
+set_data_fct	matplotlibcpp.h	/^    PyObject* set_data_fct = nullptr;$/;"	m	class:matplotlibcpp::Plot
 set_from_triplets	Eigen/src/SparseCore/SparseMatrix.h	/^void set_from_triplets(const InputIterator& begin, const InputIterator& end, SparseMatrixType& mat, int Options = 0)$/;"	f	namespace:Eigen::internal
 set_is_malloc_allowed	Eigen/src/Core/util/Memory.h	/^inline bool set_is_malloc_allowed(bool new_value) { return is_malloc_allowed_impl(true, new_value); }$/;"	f	namespace:Eigen::internal
 shared1	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^  } shared1 ;$/;"	m	struct:internal::colamd_col	typeref:union:internal::colamd_col::__anon1
@@ -9198,6 +9316,7 @@ shared4	Eigen/src/OrderingMethods/Eigen_Colamd.h	/^  } shared4 ;$/;"	m	struct:in
 shear	Eigen/src/Eigen2Support/Geometry/Transform.h	/^Transform<Scalar,Dim>::shear(Scalar sx, Scalar sy)$/;"	f	class:Eigen::Transform
 shear	Eigen/src/Geometry/Transform.h	/^Transform<Scalar,Dim,Mode,Options>::shear(const Scalar& sx, const Scalar& sy)$/;"	f	class:Eigen::Transform
 shift	Eigen/src/Householder/HouseholderSequence.h	/^    Index shift() const { return m_shift; }    \/**< \\brief Returns the shift of the Householder sequence. *\/$/;"	f	class:Eigen::HouseholderSequence
+show	matplotlibcpp.h	/^inline void show(const bool block = true)$/;"	f	namespace:matplotlibcpp
 Side	Eigen/src/Core/GeneralProduct.h	/^    enum { Side = Lhs::IsVectorAtCompileTime ? OnTheLeft : OnTheRight };$/;"	e	enum:Eigen::GeneralProduct::__anon161
 Side	render/render.h	/^	XY, TopDown, Side, FPS$/;"	e	enum:CameraAngle
 SideType	Eigen/src/Core/util/Constants.h	/^enum SideType {$/;"	g	namespace:Eigen
@@ -9232,7 +9351,7 @@ singularValues	Eigen/src/SVD/JacobiSVD.h	/^    const SingularValuesType& singula
 SingularValuesType	Eigen/src/Eigen2Support/SVD.h	/^    typedef Matrix<Scalar, MinSize, 1> SingularValuesType;$/;"	t	class:Eigen::SVD
 SingularValuesType	Eigen/src/SVD/JacobiSVD.h	/^    typedef typename internal::plain_diag_type<MatrixType, RealScalar>::type SingularValuesType;$/;"	t	class:Eigen::JacobiSVD
 sinNegTheta	render/render.h	/^	double sinNegTheta;$/;"	m	struct:Car
-size	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^size_t Cluster::size()$/;"	f	language:C++	class:Cluster
+size	cluster.cpp	/^size_t Cluster::size()$/;"	f	class:Cluster
 size	Eigen/src/Core/arch/AltiVec/Complex.h	/^    size = 2,$/;"	e	enum:Eigen::internal::packet_traits::__anon41
 size	Eigen/src/Core/arch/AltiVec/Complex.h	/^template<> struct unpacket_traits<Packet2cf> { typedef std::complex<float> type; enum {size=2}; };$/;"	e	enum:Eigen::internal::unpacket_traits::__anon42
 size	Eigen/src/Core/arch/AltiVec/PacketMath.h	/^    size=4$/;"	e	enum:Eigen::internal::packet_traits::__anon44
@@ -9549,6 +9668,7 @@ std	Eigen/src/StlSupport/StdDeque.h	/^namespace std {$/;"	n
 std	Eigen/src/StlSupport/StdList.h	/^namespace std$/;"	n
 std	Eigen/src/StlSupport/StdVector.h	/^namespace std {$/;"	n
 std_a_	ukf.h	/^  double std_a_;$/;"	m	class:UKF
+std_laspx_	kalman_filter.h	/^	double std_laspx_;$/;"	m	class:KalmanFilter
 std_laspx_	ukf.h	/^  double std_laspx_;$/;"	m	class:UKF
 std_laspy_	ukf.h	/^  double std_laspy_;$/;"	m	class:UKF
 std_radphi_	ukf.h	/^  double std_radphi_;$/;"	m	class:UKF
@@ -9557,10 +9677,13 @@ std_radr_	ukf.h	/^  double std_radr_;$/;"	m	class:UKF
 std_yawdd_	ukf.h	/^  double std_yawdd_;$/;"	m	class:UKF
 steering	render/render.h	/^	float steering;$/;"	m	struct:accuation
 steering	render/render.h	/^	float steering;$/;"	m	struct:Car
+stem	matplotlibcpp.h	/^bool stem(const std::vector<Numeric> &x, const std::vector<Numeric> &y, const std::map<std::string, std::string>& keywords)$/;"	f	namespace:matplotlibcpp
+stem	matplotlibcpp.h	/^bool stem(const std::vector<Numeric>& y, const std::string& format = "")$/;"	f	namespace:matplotlibcpp
+stem	matplotlibcpp.h	/^bool stem(const std::vector<NumericX>& x, const std::vector<NumericY>& y, const std::string& s = "")$/;"	f	namespace:matplotlibcpp
 StemFunction	Eigen/src/Core/MatrixBase.h	/^    typedef typename internal::stem_function<Scalar>::type StemFunction;$/;"	t	class:Eigen::MatrixBase
 stem_function	Eigen/src/Core/util/ForwardDeclarations.h	/^struct stem_function$/;"	s	namespace:Eigen::internal
 step	Eigen/src/Eigenvalues/RealQZ.h	/^    inline void RealQZ<MatrixType>::step(Index f, Index l, Index iter)$/;"	f	class:Eigen::RealQZ
-stepHighway	highway.h	/^	void stepHighway(double egoVelocity, long long timestamp, int frame_per_sec, pcl::visualization::PCLVisualizer::Ptr& viewer)$/;"	f	class:Highway
+stepHighway	highway.h	/^	void stepHighway(double egoVelocity, long long timestamp, int frame_per_sec)$/;"	f	class:Highway
 Storage	Eigen/src/SparseCore/SparseMatrix.h	/^    typedef internal::CompressedStorage<Scalar,Index> Storage;$/;"	t	class:Eigen::SparseMatrix
 Storage	Eigen/src/SparseCore/SparseVector.h	/^    typedef internal::CompressedStorage<Scalar,Index> Storage;$/;"	t	class:Eigen::SparseVector
 storage	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^  } storage;$/;"	m	struct:Eigen::SluMatrix	typeref:struct:Eigen::SluMatrix::__anon28
@@ -9642,6 +9765,8 @@ subDiagonal	Eigen/src/Eigenvalues/Tridiagonalization.h	/^Tridiagonalization<Matr
 subdiagonalEntryIsNeglegible	Eigen/src/Eigenvalues/ComplexSchur.h	/^inline bool ComplexSchur<MatrixType>::subdiagonalEntryIsNeglegible(Index i)$/;"	f	class:Eigen::ComplexSchur
 SubDiagonalReturnType	Eigen/src/Eigenvalues/Tridiagonalization.h	/^            >::type SubDiagonalReturnType;$/;"	t	class:Eigen::Tridiagonalization
 SubDiagonalType	Eigen/src/Eigenvalues/Tridiagonalization.h	/^    typedef Matrix<RealScalar, SizeMinusOne, 1, Options & ~RowMajor, MaxSizeMinusOne, 1> SubDiagonalType;$/;"	t	class:Eigen::Tridiagonalization
+subplot	matplotlibcpp.h	/^inline void subplot(long nrows, long ncols, long plot_number)$/;"	f	namespace:matplotlibcpp
+subplots_adjust	matplotlibcpp.h	/^inline bool subplots_adjust(const std::map<std::string, double>& keywords = {})$/;"	f	namespace:matplotlibcpp
 Subs	Eigen/src/Core/BandMatrix.h	/^      Subs   = internal::traits<Derived>::Subs,$/;"	e	enum:Eigen::internal::BandMatrixBase::__anon164
 subs	Eigen/src/Core/BandMatrix.h	/^    inline Index subs() const { return derived().subs(); }$/;"	f	class:Eigen::internal::BandMatrixBase
 subs	Eigen/src/Core/BandMatrix.h	/^    inline Index subs() const { return m_subs.value(); }$/;"	f	class:Eigen::internal::BandMatrix
@@ -9686,6 +9811,7 @@ supIndex	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    inline Index supIn
 supno	Eigen/src/SparseLU/SparseLU_Structs.h	/^  IndexVector supno; \/\/ Supernode number corresponding to this column (column to supernode mapping)$/;"	m	struct:Eigen::internal::LU_GlobalLU_t
 SupportedAccessPatterns	Eigen/src/SparseCore/SparseMatrix.h	/^    SupportedAccessPatterns = InnerRandomAccessPattern$/;"	e	enum:Eigen::internal::traits::__anon391
 SupportedAccessPatterns	Eigen/src/SparseCore/SparseVector.h	/^    SupportedAccessPatterns = InnerRandomAccessPattern$/;"	e	enum:Eigen::internal::traits::__anon400
+suptitle	matplotlibcpp.h	/^inline void suptitle(const std::string &suptitlestr, const std::map<std::string, std::string> &keywords = {})$/;"	f	namespace:matplotlibcpp
 supToCol	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    const Index* supToCol() const $/;"	f	class:Eigen::internal::MappedSuperNodalMatrix
 supToCol	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    Index* supToCol() { return m_sup_to_col; }$/;"	f	class:Eigen::internal::MappedSuperNodalMatrix
 SVA_Inner	Eigen/src/SparseCore/SparseVector.h	/^  SVA_Inner,$/;"	e	enum:Eigen::internal::__anon401
@@ -9719,6 +9845,50 @@ Symmetric	Eigen/src/Core/util/Constants.h	/^  Symmetric=0x20$/;"	e	enum:Eigen::U
 symm_pack_lhs	Eigen/src/Core/products/SelfadjointMatrixMatrix.h	/^struct symm_pack_lhs$/;"	s	namespace:Eigen::internal
 symm_pack_rhs	Eigen/src/Core/products/SelfadjointMatrixMatrix.h	/^struct symm_pack_rhs$/;"	s	namespace:Eigen::internal
 sync	Eigen/src/Core/products/Parallelizer.h	/^  int volatile sync;$/;"	m	struct:Eigen::internal::GemmParallelInfo
+s_backend	matplotlibcpp.h	/^static std::string s_backend;$/;"	m	namespace:matplotlibcpp::detail
+s_python_colormap	matplotlibcpp.h	/^    PyObject *s_python_colormap;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_empty_tuple	matplotlibcpp.h	/^    PyObject *s_python_empty_tuple;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_annotate	matplotlibcpp.h	/^    PyObject *s_python_function_annotate;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_axis	matplotlibcpp.h	/^    PyObject *s_python_function_axis;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_bar	matplotlibcpp.h	/^    PyObject *s_python_function_bar;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_clf	matplotlibcpp.h	/^    PyObject *s_python_function_clf;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_close	matplotlibcpp.h	/^    PyObject *s_python_function_close;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_draw	matplotlibcpp.h	/^    PyObject *s_python_function_draw;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_errorbar	matplotlibcpp.h	/^    PyObject *s_python_function_errorbar;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_fignum_exists	matplotlibcpp.h	/^    PyObject *s_python_function_fignum_exists;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_figure	matplotlibcpp.h	/^    PyObject *s_python_function_figure;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_fill	matplotlibcpp.h	/^    PyObject *s_python_function_fill;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_fill_between	matplotlibcpp.h	/^    PyObject *s_python_function_fill_between;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_ginput	matplotlibcpp.h	/^    PyObject *s_python_function_ginput;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_grid	matplotlibcpp.h	/^    PyObject *s_python_function_grid;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_hist	matplotlibcpp.h	/^    PyObject *s_python_function_hist;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_imshow	matplotlibcpp.h	/^    PyObject *s_python_function_imshow;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_ion	matplotlibcpp.h	/^    PyObject *s_python_function_ion;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_legend	matplotlibcpp.h	/^    PyObject *s_python_function_legend;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_loglog	matplotlibcpp.h	/^    PyObject *s_python_function_loglog;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_pause	matplotlibcpp.h	/^    PyObject *s_python_function_pause;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_plot	matplotlibcpp.h	/^    PyObject *s_python_function_plot;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_quiver	matplotlibcpp.h	/^    PyObject *s_python_function_quiver;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_save	matplotlibcpp.h	/^    PyObject *s_python_function_save;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_scatter	matplotlibcpp.h	/^    PyObject *s_python_function_scatter;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_semilogx	matplotlibcpp.h	/^    PyObject *s_python_function_semilogx;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_semilogy	matplotlibcpp.h	/^    PyObject *s_python_function_semilogy;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_show	matplotlibcpp.h	/^    PyObject *s_python_function_show;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_stem	matplotlibcpp.h	/^    PyObject *s_python_function_stem;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_subplot	matplotlibcpp.h	/^    PyObject *s_python_function_subplot;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_subplot2grid	matplotlibcpp.h	/^    PyObject *s_python_function_subplot2grid;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_subplots_adjust	matplotlibcpp.h	/^    PyObject *s_python_function_subplots_adjust;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_suptitle	matplotlibcpp.h	/^    PyObject *s_python_function_suptitle;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_text	matplotlibcpp.h	/^    PyObject *s_python_function_text;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_tight_layout	matplotlibcpp.h	/^    PyObject *s_python_function_tight_layout;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_title	matplotlibcpp.h	/^    PyObject *s_python_function_title;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_xkcd	matplotlibcpp.h	/^    PyObject *s_python_function_xkcd;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_xlabel	matplotlibcpp.h	/^    PyObject *s_python_function_xlabel;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_xlim	matplotlibcpp.h	/^    PyObject *s_python_function_xlim;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_xticks	matplotlibcpp.h	/^    PyObject *s_python_function_xticks;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_ylabel	matplotlibcpp.h	/^    PyObject *s_python_function_ylabel;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_ylim	matplotlibcpp.h	/^    PyObject *s_python_function_ylim;$/;"	m	struct:matplotlibcpp::detail::_interpreter
+s_python_function_yticks	matplotlibcpp.h	/^    PyObject *s_python_function_yticks;$/;"	m	struct:matplotlibcpp::detail::_interpreter
 tail	Eigen/src/plugins/BlockMethods.h	/^inline ConstSegmentReturnType tail(Index n) const$/;"	f
 tail	Eigen/src/plugins/BlockMethods.h	/^inline SegmentReturnType tail(Index n)$/;"	f
 tail	Eigen/src/plugins/BlockMethods.h	/^inline typename ConstFixedSegmentReturnType<N>::Type tail(Index n = N) const$/;"	f
@@ -9729,6 +9899,7 @@ take_matrix_for_product	Eigen/src/Geometry/Homogeneous.h	/^struct take_matrix_fo
 take_matrix_for_product	Eigen/src/Geometry/Homogeneous.h	/^struct take_matrix_for_product<Transform<Scalar, Dim, Projective, Options> >$/;"	s	namespace:Eigen::internal
 tan	Eigen/src/plugins/ArrayCwiseUnaryOps.h	/^tan() const$/;"	f
 Target	Eigen/src/Core/util/Constants.h	/^    Target = SSE$/;"	e	enum:Eigen::Architecture::Type
+text	matplotlibcpp.h	/^void text(Numeric x, Numeric y, const std::string& s = "")$/;"	f	namespace:matplotlibcpp
 thenMatrix	Eigen/src/Core/Select.h	/^    const ThenMatrixType& thenMatrix() const$/;"	f	class:Eigen::Select
 ThenMatrixNested	Eigen/src/Core/Select.h	/^  typedef typename ThenMatrixType::Nested ThenMatrixNested;$/;"	t	struct:Eigen::internal::traits
 THE_BRACKET_OPERATOR_IS_ONLY_FOR_VECTORS__USE_THE_PARENTHESIS_OPERATOR_INSTEAD	Eigen/src/Core/util/StaticAssert.h	/^        THE_BRACKET_OPERATOR_IS_ONLY_FOR_VECTORS__USE_THE_PARENTHESIS_OPERATOR_INSTEAD,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
@@ -9752,6 +9923,7 @@ THIS_METHOD_IS_ONLY_FOR_OBJECTS_OF_A_SPECIFIC_SIZE	Eigen/src/Core/util/StaticAss
 THIS_METHOD_IS_ONLY_FOR_ROW_MAJOR_MATRICES	Eigen/src/Core/util/StaticAssert.h	/^        THIS_METHOD_IS_ONLY_FOR_ROW_MAJOR_MATRICES,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
 THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS	Eigen/src/Core/util/StaticAssert.h	/^        THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
 THIS_METHOD_IS_ONLY_FOR_VECTORS_OF_A_SPECIFIC_SIZE	Eigen/src/Core/util/StaticAssert.h	/^        THIS_METHOD_IS_ONLY_FOR_VECTORS_OF_A_SPECIFIC_SIZE,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
+threshold	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.cpp	/^void ExtractMeasurement::threshold (const pcl::PointCloud<pcl::PointXYZ> &inputCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr &pOutput)$/;"	f	language:C++	class:ExtractMeasurement
 threshold	Eigen/src/LU/FullPivLU.h	/^    RealScalar threshold() const$/;"	f	class:Eigen::FullPivLU
 threshold	Eigen/src/QR/ColPivHouseholderQR.h	/^    RealScalar threshold() const$/;"	f	class:Eigen::ColPivHouseholderQR
 threshold	Eigen/src/QR/FullPivHouseholderQR.h	/^    RealScalar threshold() const$/;"	f	class:Eigen::FullPivHouseholderQR
@@ -9763,9 +9935,12 @@ Through	Eigen/src/Geometry/Hyperplane.h	/^  static inline Hyperplane Through(con
 Through	Eigen/src/Geometry/Hyperplane.h	/^  static inline Hyperplane Through(const VectorType& p0, const VectorType& p1, const VectorType& p2)$/;"	f	class:Eigen::Hyperplane
 Through	Eigen/src/Geometry/ParametrizedLine.h	/^  static inline ParametrizedLine Through(const VectorType& p0, const VectorType& p1)$/;"	f	class:Eigen::ParametrizedLine
 throw_std_bad_alloc	Eigen/src/Core/util/Memory.h	/^inline void throw_std_bad_alloc()$/;"	f	namespace:Eigen::internal
+tight_layout	matplotlibcpp.h	/^inline void tight_layout() {$/;"	f	namespace:matplotlibcpp
 timestamp_	measurement_package.h	/^  long timestamp_;$/;"	m	class:MeasurementPackage
 time_us	render/render.h	/^	long long time_us;$/;"	m	struct:accuation
+time_us_	kalman_filter.h	/^	long long time_us_;$/;"	m	class:KalmanFilter
 time_us_	ukf.h	/^  long long time_us_;$/;"	m	class:UKF
+title	matplotlibcpp.h	/^inline void title(const std::string &titlestr, const std::map<std::string, std::string> &keywords = {})$/;"	f	namespace:matplotlibcpp
 TmpFlags	Eigen/src/Geometry/Homogeneous.h	/^    TmpFlags = _MatrixTypeNested::Flags & HereditaryBits,$/;"	e	enum:Eigen::internal::traits::__anon364
 TmpMatrixType	Eigen/src/Cholesky/LDLT.h	/^    typedef Matrix<Scalar, RowsAtCompileTime, 1, Options, MaxRowsAtCompileTime, 1> TmpMatrixType;$/;"	t	class:Eigen::LDLT
 toDense	Eigen/src/SparseCore/SparseMatrixBase.h	/^    Matrix<Scalar,RowsAtCompileTime,ColsAtCompileTime> toDense() const$/;"	f	class:Eigen::SparseMatrixBase
@@ -10326,12 +10501,27 @@ type	Eigen/src/SparseCore/SparseUtil.h	/^    typedef SparseMatrix<_Scalar, _Opti
 type	Eigen/src/SparseCore/SparseUtil.h	/^    typedef SparseMatrix<_Scalar, _Options, _Index> type;$/;"	t	struct:Eigen::internal::sparse_eval
 type	Eigen/src/SparseCore/SparseUtil.h	/^    typedef SparseVector<_Scalar, ColMajor, _Index> type;$/;"	t	struct:Eigen::internal::sparse_eval
 type	Eigen/src/SparseCore/SparseUtil.h	/^    typedef SparseVector<_Scalar, RowMajor, _Index> type;$/;"	t	struct:Eigen::internal::sparse_eval
+type	matplotlibcpp.h	/^    typedef decltype(test<Derived>(nullptr)) type;$/;"	t	struct:matplotlibcpp::detail::is_callable_impl
+type	matplotlibcpp.h	/^    typedef is_function<T> type;$/;"	t	struct:matplotlibcpp::detail::is_callable_impl
+type	matplotlibcpp.h	/^    typedef typename is_callable_impl<std::is_class<T>::value, T>::type type;$/;"	t	struct:matplotlibcpp::detail::is_callable
+type	matplotlibcpp.h	/^template <> struct select_npy_type<bool> { const static NPY_TYPES type = NPY_BOOL; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<double> { const static NPY_TYPES type = NPY_DOUBLE; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<float> { const static NPY_TYPES type = NPY_FLOAT; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<int16_t> { const static NPY_TYPES type = NPY_SHORT; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<int32_t> { const static NPY_TYPES type = NPY_INT; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<int64_t> { const static NPY_TYPES type = NPY_INT64; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<int8_t> { const static NPY_TYPES type = NPY_INT8; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<uint16_t> { const static NPY_TYPES type = NPY_USHORT; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<uint32_t> { const static NPY_TYPES type = NPY_ULONG; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<uint64_t> { const static NPY_TYPES type = NPY_UINT64; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <> struct select_npy_type<uint8_t> { const static NPY_TYPES type = NPY_UINT8; };$/;"	m	struct:matplotlibcpp::select_npy_type
+type	matplotlibcpp.h	/^template <typename T> struct select_npy_type { const static NPY_TYPES type = NPY_NOTYPE; }; \/\/Default$/;"	m	struct:matplotlibcpp::select_npy_type
 ucol	Eigen/src/SparseLU/SparseLU_Structs.h	/^  ScalarVector  ucol; \/\/ nonzero values of U ordered by columns $/;"	m	struct:Eigen::internal::LU_GlobalLU_t
 UCOL	Eigen/src/SparseLU/SparseLU_Structs.h	/^typedef enum {LUSUP, UCOL, LSUB, USUB, LLVL, ULVL} MemType; $/;"	e	enum:Eigen::internal::__anon23
 ukf	render/render.h	/^	UKF ukf;$/;"	m	struct:Car
 UKF	ukf.cpp	/^UKF::UKF() {$/;"	f	class:UKF
 UKF	ukf.h	/^class UKF {$/;"	c
-ukfResults	tools.cpp	/^void Tools::ukfResults(Car car, pcl::visualization::PCLVisualizer::Ptr& viewer, double time, int steps)$/;"	f	class:Tools
+ukfResults	tools.cpp	/^void Tools::ukfResults(Car car, double time, int steps)$/;"	f	class:Tools
 UKF_H	ukf.h	2;"	d
 ULVL	Eigen/src/SparseLU/SparseLU_Structs.h	/^typedef enum {LUSUP, UCOL, LSUB, USUB, LLVL, ULVL} MemType; $/;"	e	enum:Eigen::internal::__anon23
 UMatrixType	Eigen/src/SuperLUSupport/SuperLUSupport.h	/^    typedef TriangularView<LUMatrixType,  Upper>           UMatrixType;$/;"	t	class:Eigen::SuperLU
@@ -10420,6 +10610,8 @@ Unusable	Eigen/src/Core/ReturnByValue.h	/^    class Unusable{$/;"	c	class:Eigen:
 Unusable	Eigen/src/Core/ReturnByValue.h	66;"	d
 update	Eigen/src/Cholesky/LDLT.h	/^  static bool update(MatrixType& mat, const TranspositionType& transpositions, Workspace& tmp, const WType& w, const typename MatrixType::RealScalar& sigma=1)$/;"	f	struct:Eigen::internal::ldlt_inplace
 update	Eigen/src/Cholesky/LDLT.h	/^  static EIGEN_STRONG_INLINE bool update(MatrixType& mat, TranspositionType& transpositions, Workspace& tmp, WType& w, const typename MatrixType::RealScalar& sigma=1)$/;"	f	struct:Eigen::internal::ldlt_inplace
+Update	kalman_filter.cpp	/^void KalmanFilter::Update(const VectorXd &z) $/;"	f	class:KalmanFilter
+update	matplotlibcpp.h	/^    bool update(const std::vector<Numeric>& x, const std::vector<Numeric>& y) {$/;"	f	class:matplotlibcpp::Plot
 updateCars	sensors/lidar.h	/^	void updateCars(std::vector<Car> setCars)$/;"	f	struct:Lidar
 updateInPlace	Eigen/src/Cholesky/LDLT.h	/^  static bool updateInPlace(MatrixType& mat, MatrixBase<WDerived>& w, const typename MatrixType::RealScalar& sigma=1)$/;"	f	struct:Eigen::internal::ldlt_inplace
 UpdateLidar	ukf.cpp	/^void UKF::UpdateLidar(MeasurementPackage meas_package) {$/;"	f	class:UKF
@@ -10512,6 +10704,7 @@ value	Eigen/src/SparseCore/SparseUtil.h	/^  const Scalar& value() const { return
 value	Eigen/src/SparseCore/SparseVector.h	/^    inline Scalar value() const { return m_data.value(m_id); }$/;"	f	class:Eigen::SparseVector::InnerIterator
 value	Eigen/src/SparseCore/SparseVector.h	/^    inline Scalar value() const { return m_data.value(m_id-1); }$/;"	f	class:Eigen::SparseVector::ReverseInnerIterator
 value	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    inline Scalar value() const { return m_matrix.valuePtr()[m_idval]; }$/;"	f	class:Eigen::internal::MappedSuperNodalMatrix::InnerIterator
+value	matplotlibcpp.h	/^    static constexpr bool value = type::value;$/;"	m	struct:matplotlibcpp::detail::is_callable_impl
 valuePtr	Eigen/src/SparseCore/CompressedStorage.h	/^    const Scalar* valuePtr() const { return m_values; }$/;"	f	class:Eigen::internal::CompressedStorage
 valuePtr	Eigen/src/SparseCore/CompressedStorage.h	/^    Scalar* valuePtr() { return m_values; }$/;"	f	class:Eigen::internal::CompressedStorage
 valuePtr	Eigen/src/SparseCore/MappedSparseMatrix.h	/^    inline const Scalar* valuePtr() const { return m_values; }$/;"	f	class:Eigen::MappedSparseMatrix
@@ -10546,8 +10739,9 @@ vec4f_swizzle1	Eigen/src/Core/arch/SSE/PacketMath.h	33;"	d
 vec4f_swizzle2	Eigen/src/Core/arch/SSE/PacketMath.h	42;"	d
 vec4i_swizzle1	Eigen/src/Core/arch/SSE/PacketMath.h	36;"	d
 vec4i_swizzle2	Eigen/src/Core/arch/SSE/PacketMath.h	45;"	d
-vecOf_accumMeasurementCSV	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<std::ofstream> vecOf_accumMeasurementCSV;$/;"	m	language:C++	class:ExtractMeasurement
-vecOf_measurementCSV	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^	std::vector<std::ofstream> vecOf_measurementCSV;$/;"	m	language:C++	class:ExtractMeasurement
+vecOf_accumMeasurementCSV	extractMeasurement.h	/^		std::vector<std::ofstream> vecOf_accumMeasurementCSV;$/;"	m	class:ExtractMeasurement
+vecOf_KalmanFilterCSV	extractMeasurement.h	/^		std::vector<std::ofstream> vecOf_KalmanFilterCSV;$/;"	m	class:ExtractMeasurement
+vecOf_measurementCSV	extractMeasurement.h	/^		std::vector<std::ofstream> vecOf_measurementCSV;$/;"	m	class:ExtractMeasurement
 vecOf_refCSV	highway.h	/^	std::vector<std::ofstream> vecOf_refCSV;$/;"	m	class:Highway
 Vect3	render/render.h	/^	Vect3(double setX, double setY, double setZ)$/;"	f	struct:Vect3
 Vect3	render/render.h	/^struct Vect3$/;"	s
@@ -10637,9 +10831,6 @@ visit	Eigen/src/Core/Visitor.h	/^void DenseBase<Derived>::visit(Visitor& visitor
 visitor_impl	Eigen/src/Core/Visitor.h	/^struct visitor_impl$/;"	s	namespace:Eigen::internal
 visitor_impl	Eigen/src/Core/Visitor.h	/^struct visitor_impl<Visitor, Derived, 1>$/;"	s	namespace:Eigen::internal
 visitor_impl	Eigen/src/Core/Visitor.h	/^struct visitor_impl<Visitor, Derived, Dynamic>$/;"	s	namespace:Eigen::internal
-visualize_lidar	highway.h	/^	bool visualize_lidar = true;$/;"	m	class:Highway
-visualize_pcd	highway.h	/^	bool visualize_pcd = true;$/;"	m	class:Highway
-visualize_radar	highway.h	/^	bool visualize_radar = true;$/;"	m	class:Highway
 vld1q_f32	Eigen/src/Core/arch/NEON/PacketMath.h	/^EIGEN_STRONG_INLINE float32x4_t vld1q_f32(const float* x) { return ::vld1q_f32((const float32_t*)x); }$/;"	f	namespace:Eigen::internal
 vld1_f32	Eigen/src/Core/arch/NEON/PacketMath.h	/^EIGEN_STRONG_INLINE float32x2_t vld1_f32 (const float* x) { return ::vld1_f32 ((const float32_t*)x); }$/;"	f	namespace:Eigen::internal
 VmlSize	Eigen/src/Core/Assign_MKL.h	/^      VmlSize = MightLinearize ? MaxSizeAtCompileTime : InnerMaxSize,$/;"	e	enum:Eigen::internal::vml_assign_traits::__anon323
@@ -10706,8 +10897,13 @@ x	Eigen/src/Geometry/Quaternion.h	/^  inline Scalar x() const { return this->der
 x	Eigen/src/Geometry/Quaternion.h	/^  inline Scalar& x() { return this->derived().coeffs().coeffRef(0); }$/;"	f	class:Eigen::QuaternionBase
 x	Eigen/src/Geometry/Translation.h	/^  inline Scalar x() const { return m_coeffs.x(); }$/;"	f	class:Eigen::Translation
 x	Eigen/src/Geometry/Translation.h	/^  inline Scalar& x() { return m_coeffs.x(); }$/;"	f	class:Eigen::Translation
+x	extractMeasurement.h	/^	double x;$/;"	m	struct:pose
 x	render/render.h	/^	double x, y, z;$/;"	m	struct:Vect3
 x	tools.h	/^	double x, y;$/;"	m	struct:lmarker
+xkcd	matplotlibcpp.h	/^inline void xkcd() {$/;"	f	namespace:matplotlibcpp
+xlabel	matplotlibcpp.h	/^inline void xlabel(const std::string &str, const std::map<std::string, std::string> &keywords = {})$/;"	f	namespace:matplotlibcpp
+xlim	matplotlibcpp.h	/^inline double* xlim()$/;"	f	namespace:matplotlibcpp
+xlim	matplotlibcpp.h	/^void xlim(Numeric left, Numeric right)$/;"	f	namespace:matplotlibcpp
 xlsub	Eigen/src/SparseLU/SparseLU_Structs.h	/^  IndexVector xlsub; \/\/ pointers to the beginning of each column in lsub$/;"	m	struct:Eigen::internal::LU_GlobalLU_t
 xlusup	Eigen/src/SparseLU/SparseLU_Structs.h	/^  IndexVector xlusup; \/\/ pointers to the beginning of each column in lusup$/;"	m	struct:Eigen::internal::LU_GlobalLU_t
 XprBase	Eigen/src/Core/Array.h	/^  typedef ArrayBase<Array<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols> > XprBase;$/;"	t	struct:Eigen::internal::traits
@@ -10739,8 +10935,11 @@ XprTypeNested	Eigen/src/Core/Block.h	/^  typedef typename nested<XprType>::type 
 XprTypeNested	Eigen/src/Core/CwiseUnaryOp.h	/^  typedef typename XprType::Nested XprTypeNested;$/;"	t	struct:Eigen::internal::traits
 Xsig_pred_	ukf.h	/^  Eigen::MatrixXd Xsig_pred_;$/;"	m	class:UKF
 xsup	Eigen/src/SparseLU/SparseLU_Structs.h	/^  IndexVector xsup; \/\/First supernode column ... xsup(s) points to the beginning of the s-th supernode$/;"	m	struct:Eigen::internal::LU_GlobalLU_t
+xticks	matplotlibcpp.h	/^inline void xticks(const std::vector<Numeric> &ticks, const std::map<std::string, std::string>& keywords)$/;"	f	namespace:matplotlibcpp
+xticks	matplotlibcpp.h	/^inline void xticks(const std::vector<Numeric> &ticks, const std::vector<std::string> &labels = {}, const std::map<std::string, std::string>& keywords = {})$/;"	f	namespace:matplotlibcpp
 xusub	Eigen/src/SparseLU/SparseLU_Structs.h	/^  IndexVector xusub; \/\/ Pointers to the beginning of each column of U in ucol $/;"	m	struct:Eigen::internal::LU_GlobalLU_t
 XY	render/render.h	/^	XY, TopDown, Side, FPS$/;"	e	enum:CameraAngle
+x_	kalman_filter.h	/^	Eigen::VectorXd x_;$/;"	m	class:KalmanFilter
 x_	ukf.h	/^  Eigen::VectorXd x_;$/;"	m	class:UKF
 x_max	render/box.h	/^	float x_max;$/;"	m	struct:Box
 x_min	render/box.h	/^	float x_min;$/;"	m	struct:Box
@@ -10752,8 +10951,13 @@ y	Eigen/src/Geometry/Quaternion.h	/^  inline Scalar y() const { return this->der
 y	Eigen/src/Geometry/Quaternion.h	/^  inline Scalar& y() { return this->derived().coeffs().coeffRef(1); }$/;"	f	class:Eigen::QuaternionBase
 y	Eigen/src/Geometry/Translation.h	/^  inline Scalar y() const { return m_coeffs.y(); }$/;"	f	class:Eigen::Translation
 y	Eigen/src/Geometry/Translation.h	/^  inline Scalar& y() { return m_coeffs.y(); }$/;"	f	class:Eigen::Translation
+y	extractMeasurement.h	/^	double y;$/;"	m	struct:pose
 y	render/render.h	/^	double x, y, z;$/;"	m	struct:Vect3
 y	tools.h	/^	double x, y;$/;"	m	struct:lmarker
+yaw	extractMeasurement.h	/^	double yaw;$/;"	m	struct:pose
+ylabel	matplotlibcpp.h	/^inline void ylabel(const std::string &str, const std::map<std::string, std::string>& keywords = {})$/;"	f	namespace:matplotlibcpp
+ylim	matplotlibcpp.h	/^inline double* ylim()$/;"	f	namespace:matplotlibcpp
+ylim	matplotlibcpp.h	/^void ylim(Numeric left, Numeric right)$/;"	f	namespace:matplotlibcpp
 YOU_ALREADY_SPECIFIED_THIS_STRIDE	Eigen/src/Core/util/StaticAssert.h	/^        YOU_ALREADY_SPECIFIED_THIS_STRIDE,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
 YOU_ARE_TRYING_TO_USE_AN_INDEX_BASED_ACCESSOR_ON_AN_EXPRESSION_THAT_DOES_NOT_SUPPORT_THAT	Eigen/src/Core/util/StaticAssert.h	/^        YOU_ARE_TRYING_TO_USE_AN_INDEX_BASED_ACCESSOR_ON_AN_EXPRESSION_THAT_DOES_NOT_SUPPORT_THAT,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
 YOU_CALLED_A_DYNAMIC_SIZE_METHOD_ON_A_FIXED_SIZE_MATRIX_OR_VECTOR	Eigen/src/Core/util/StaticAssert.h	/^        YOU_CALLED_A_DYNAMIC_SIZE_METHOD_ON_A_FIXED_SIZE_MATRIX_OR_VECTOR,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
@@ -10767,6 +10971,8 @@ YOU_PASSED_A_COLUMN_VECTOR_BUT_A_ROW_VECTOR_WAS_EXPECTED	Eigen/src/Core/util/Sta
 YOU_PASSED_A_ROW_VECTOR_BUT_A_COLUMN_VECTOR_WAS_EXPECTED	Eigen/src/Core/util/StaticAssert.h	/^        YOU_PASSED_A_ROW_VECTOR_BUT_A_COLUMN_VECTOR_WAS_EXPECTED,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
 YOU_PERFORMED_AN_INVALID_TRANSFORMATION_CONVERSION	Eigen/src/Core/util/StaticAssert.h	/^        YOU_PERFORMED_AN_INVALID_TRANSFORMATION_CONVERSION,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
 YOU_TRIED_CALLING_A_VECTOR_METHOD_ON_A_MATRIX	Eigen/src/Core/util/StaticAssert.h	/^        YOU_TRIED_CALLING_A_VECTOR_METHOD_ON_A_MATRIX,$/;"	e	enum:Eigen::internal::static_assertion::__anon259
+yticks	matplotlibcpp.h	/^inline void yticks(const std::vector<Numeric> &ticks, const std::map<std::string, std::string>& keywords)$/;"	f	namespace:matplotlibcpp
+yticks	matplotlibcpp.h	/^inline void yticks(const std::vector<Numeric> &ticks, const std::vector<std::string> &labels = {}, const std::map<std::string, std::string>& keywords = {})$/;"	f	namespace:matplotlibcpp
 y_max	render/box.h	/^	float y_max;$/;"	m	struct:Box
 y_min	render/box.h	/^	float y_min;$/;"	m	struct:Box
 z	Eigen/src/Core/DenseCoeffsBase.h	/^    z() const { return (*this)[2]; }$/;"	f	class:Eigen::DenseCoeffsBase
@@ -10777,6 +10983,7 @@ z	Eigen/src/Geometry/Quaternion.h	/^  inline Scalar z() const { return this->der
 z	Eigen/src/Geometry/Quaternion.h	/^  inline Scalar& z() { return this->derived().coeffs().coeffRef(2); }$/;"	f	class:Eigen::QuaternionBase
 z	Eigen/src/Geometry/Translation.h	/^  inline Scalar z() const { return m_coeffs.z(); }$/;"	f	class:Eigen::Translation
 z	Eigen/src/Geometry/Translation.h	/^  inline Scalar& z() { return m_coeffs.z(); }$/;"	f	class:Eigen::Translation
+z	extractMeasurement.h	/^	double z;$/;"	m	struct:pose
 z	render/render.h	/^	double x, y, z;$/;"	m	struct:Vect3
 Zero	Eigen/src/Core/CwiseNullaryOp.h	/^DenseBase<Derived>::Zero()$/;"	f	class:Eigen::DenseBase
 Zero	Eigen/src/Core/CwiseNullaryOp.h	/^DenseBase<Derived>::Zero(Index nbRows, Index nbCols)$/;"	f	class:Eigen::DenseBase
@@ -10820,6 +11027,8 @@ _Index	Eigen/src/SparseCore/SparseUtil.h	/^    typedef typename traits<T>::Index
 _Index	Eigen/src/SparseCore/SparseUtil.h	/^  typedef typename traits<T>::Index _Index;$/;"	t	struct:Eigen::internal::plain_matrix_type
 _init2	Eigen/src/Core/PlainObjectBase.h	/^    EIGEN_STRONG_INLINE void _init2(const Scalar& val0, const Scalar& val1, typename internal::enable_if<Base::SizeAtCompileTime==2,T0>::type* = 0)$/;"	f	class:Eigen::PlainObjectBase
 _init2	Eigen/src/Core/PlainObjectBase.h	/^    EIGEN_STRONG_INLINE void _init2(Index nbRows, Index nbCols, typename internal::enable_if<Base::SizeAtCompileTime!=2,T0>::type* = 0)$/;"	f	class:Eigen::PlainObjectBase
+_interpreter	matplotlibcpp.h	/^    _interpreter() {$/;"	f	struct:matplotlibcpp::detail::_interpreter
+_interpreter	matplotlibcpp.h	/^struct _interpreter {$/;"	s	namespace:matplotlibcpp::detail
 _Lhs	Eigen/src/Core/GeneralProduct.h	/^  typedef typename remove_all<Lhs>::type _Lhs;$/;"	t	struct:Eigen::internal::product_type
 _Lhs	Eigen/src/SparseCore/SparseDiagonalProduct.h	/^  typedef typename remove_all<Lhs>::type _Lhs;$/;"	t	struct:Eigen::internal::traits
 _LhsNested	Eigen/src/Core/CwiseBinaryOp.h	/^    typedef typename internal::remove_reference<LhsNested>::type _LhsNested;$/;"	t	class:Eigen::CwiseBinaryOp
@@ -10862,14 +11071,9 @@ _Options	Eigen/src/SparseCore/SparseUtil.h	/^  enum { _Options = ((traits<T>::Fl
 _resize_to_match	Eigen/src/Core/PlainObjectBase.h	/^    EIGEN_STRONG_INLINE void _resize_to_match(const EigenBase<OtherDerived>& other)$/;"	f	class:Eigen::PlainObjectBase
 _ResPacket	Eigen/src/Core/products/GeneralBlockPanelKernel.h	/^  typedef typename packet_traits<ResScalar>::type  _ResPacket;$/;"	t	class:Eigen::internal::gebp_traits
 _ResPacket	Eigen/src/Core/products/GeneralMatrixVector.h	/^typedef typename packet_traits<ResScalar>::type  _ResPacket;$/;"	t	struct:Eigen::internal::general_matrix_vector_product
-_rgb	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        _rgb ()$/;"	f	language:C++	struct:_rgb
-_rgb	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        _rgb (uint8_t r, uint8_t g, uint8_t b)$/;"	f	language:C++	struct:_rgb
-_rgb	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^struct _rgb$/;"	s	language:C++
-_rgb::m_b	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        uint8_t m_b;$/;"	m	language:C++	struct:_rgb
-_rgb::m_g	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        uint8_t m_g;$/;"	m	language:C++	struct:_rgb
-_rgb::m_r	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        uint8_t m_r;$/;"	m	language:C++	struct:_rgb
-_rgb::_rgb	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        _rgb ()$/;"	f	language:C++	struct:_rgb
-_rgb::_rgb	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/extractMeasurement.h	/^        _rgb (uint8_t r, uint8_t g, uint8_t b)$/;"	f	language:C++	struct:_rgb
+_rgb	extractMeasurement.h	/^	_rgb ()$/;"	f	struct:_rgb
+_rgb	extractMeasurement.h	/^	_rgb (uint8_t r, uint8_t g, uint8_t b)$/;"	f	struct:_rgb
+_rgb	extractMeasurement.h	/^struct _rgb$/;"	s
 _Rhs	Eigen/src/Core/GeneralProduct.h	/^  typedef typename remove_all<Rhs>::type _Rhs;$/;"	t	struct:Eigen::internal::product_type
 _Rhs	Eigen/src/SparseCore/SparseDiagonalProduct.h	/^  typedef typename remove_all<Rhs>::type _Rhs;$/;"	t	struct:Eigen::internal::traits
 _RhsNested	Eigen/src/Core/CwiseBinaryOp.h	/^    typedef typename internal::remove_reference<RhsNested>::type _RhsNested;$/;"	t	class:Eigen::CwiseBinaryOp
@@ -10916,11 +11120,13 @@ _StorageOrder	Eigen/src/Core/DiagonalProduct.h	/^    _StorageOrder = MatrixType:
 _swap	Eigen/src/Core/PlainObjectBase.h	/^    void _swap(DenseBase<OtherDerived> const & other)$/;"	f	class:Eigen::PlainObjectBase
 _transformVector	Eigen/src/Geometry/Quaternion.h	/^QuaternionBase<Derived>::_transformVector(const Vector3& v) const$/;"	f	class:Eigen::QuaternionBase
 _transformVector	Eigen/src/Geometry/RotationBase.h	/^    inline VectorType _transformVector(const OtherVectorType& v) const$/;"	f	class:Eigen::RotationBase
+_USE_MATH_DEFINES	myTools.hpp	4;"	d
 _Vectorizable	Eigen/src/Core/DiagonalProduct.h	/^    _Vectorizable = bool(int(MatrixType::Flags)&PacketAccessBit) && _SameTypes && (_ScalarAccessOnDiag || (bool(int(DiagonalType::DiagonalVectorType::Flags)&PacketAccessBit))),$/;"	e	enum:Eigen::internal::traits::__anon254
 _XprTypeNested	Eigen/src/Core/Block.h	/^  typedef typename remove_reference<XprTypeNested>::type _XprTypeNested;$/;"	t	struct:Eigen::internal::traits
 _XprTypeNested	Eigen/src/Core/CwiseUnaryOp.h	/^  typedef typename remove_reference<XprTypeNested>::type _XprTypeNested;$/;"	t	struct:Eigen::internal::traits
 __CLUSTER_H__	cluster.hpp	2;"	d
 __has_feature	Eigen/src/Core/util/Macros.h	365;"	d
+__MYTOOLS_HPP__	myTools.hpp	2;"	d
 __OBSTACLE_TRACKING_H__	obstacle_tracking.hpp	2;"	d
 ~AlignedBox	Eigen/src/Eigen2Support/Geometry/AlignedBox.h	/^  ~AlignedBox() {}$/;"	f	class:Eigen::AlignedBox
 ~AlignedBox	Eigen/src/Geometry/AlignedBox.h	/^  ~AlignedBox() {}$/;"	f	class:Eigen::AlignedBox
@@ -10934,7 +11140,7 @@ __OBSTACLE_TRACKING_H__	obstacle_tracking.hpp	2;"	d
 ~CholmodSimplicialLDLT	Eigen/src/CholmodSupport/CholmodSupport.h	/^    ~CholmodSimplicialLDLT() {}$/;"	f	class:Eigen::CholmodSimplicialLDLT
 ~CholmodSimplicialLLT	Eigen/src/CholmodSupport/CholmodSupport.h	/^    ~CholmodSimplicialLLT() {}$/;"	f	class:Eigen::CholmodSimplicialLLT
 ~CholmodSupernodalLLT	Eigen/src/CholmodSupport/CholmodSupport.h	/^    ~CholmodSupernodalLLT() {}$/;"	f	class:Eigen::CholmodSupernodalLLT
-~Cluster	/workspace/TrackingWithRegistration/src/tracking_with_registration/src/cluster.cpp	/^Cluster::~Cluster()$/;"	f	language:C++	class:Cluster
+~Cluster	cluster.cpp	/^Cluster::~Cluster()$/;"	f	class:Cluster
 ~CommaInitializer	Eigen/src/Core/CommaInitializer.h	/^  inline ~CommaInitializer()$/;"	f	struct:Eigen::CommaInitializer
 ~CompressedStorage	Eigen/src/SparseCore/CompressedStorage.h	/^    ~CompressedStorage()$/;"	f	class:Eigen::internal::CompressedStorage
 ~ConjugateGradient	Eigen/src/IterativeLinearSolvers/ConjugateGradient.h	/^  ~ConjugateGradient() {}$/;"	f	class:Eigen::ConjugateGradient
@@ -10946,6 +11152,7 @@ __OBSTACLE_TRACKING_H__	obstacle_tracking.hpp	2;"	d
 ~Hyperplane	Eigen/src/Eigen2Support/Geometry/Hyperplane.h	/^  ~Hyperplane() {}$/;"	f	class:Eigen::Hyperplane
 ~Hyperplane	Eigen/src/Geometry/Hyperplane.h	/^  ~Hyperplane() {}$/;"	f	class:Eigen::Hyperplane
 ~IterativeSolverBase	Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h	/^  ~IterativeSolverBase() {}$/;"	f	class:Eigen::IterativeSolverBase
+~KalmanFilter	kalman_filter.cpp	/^KalmanFilter::~KalmanFilter() {}$/;"	f	class:KalmanFilter
 ~Lidar	sensors/lidar.h	/^	~Lidar()$/;"	f	struct:Lidar
 ~MappedSparseMatrix	Eigen/src/SparseCore/MappedSparseMatrix.h	/^    inline ~MappedSparseMatrix() {}$/;"	f	class:Eigen::MappedSparseMatrix
 ~MappedSuperNodalMatrix	Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h	/^    ~MappedSuperNodalMatrix()$/;"	f	class:Eigen::internal::MappedSuperNodalMatrix
@@ -10955,6 +11162,7 @@ __OBSTACLE_TRACKING_H__	obstacle_tracking.hpp	2;"	d
 ~ParametrizedLine	Eigen/src/Geometry/ParametrizedLine.h	/^  ~ParametrizedLine() {}$/;"	f	class:Eigen::ParametrizedLine
 ~PardisoImpl	Eigen/src/PardisoSupport/PardisoSupport.h	/^    ~PardisoImpl()$/;"	f	class:Eigen::PardisoImpl
 ~PastixBase	Eigen/src/PaStiXSupport/PaStiXSupport.h	/^    ~PastixBase() $/;"	f	class:Eigen::PastixBase
+~Plot	matplotlibcpp.h	/^    ~Plot() {$/;"	f	class:matplotlibcpp::Plot
 ~SimplicialCholeskyBase	Eigen/src/SparseCholesky/SimplicialCholesky.h	/^    ~SimplicialCholeskyBase()$/;"	f	class:Eigen::SimplicialCholeskyBase
 ~SparseLU	Eigen/src/SparseLU/SparseLU.h	/^    ~SparseLU()$/;"	f	class:Eigen::SparseLU
 ~SparseMatrix	Eigen/src/SparseCore/SparseMatrix.h	/^    inline ~SparseMatrix()$/;"	f	class:Eigen::SparseMatrix
@@ -10966,3 +11174,4 @@ __OBSTACLE_TRACKING_H__	obstacle_tracking.hpp	2;"	d
 ~Tools	tools.cpp	/^Tools::~Tools() {}$/;"	f	class:Tools
 ~UKF	ukf.cpp	/^UKF::~UKF() {}$/;"	f	class:UKF
 ~UmfPackLU	Eigen/src/UmfPackSupport/UmfPackSupport.h	/^    ~UmfPackLU()$/;"	f	class:Eigen::UmfPackLU
+~_interpreter	matplotlibcpp.h	/^    ~_interpreter() {$/;"	f	struct:matplotlibcpp::detail::_interpreter
