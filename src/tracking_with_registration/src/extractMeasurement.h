@@ -99,8 +99,8 @@ class ExtractMeasurement
 		unsigned int m_maxIndexNumber;
 
 		bool m_bDoICP = false;
-		bool m_bDoNDT = false;
-		bool m_bDoLayerBasedICP = true;
+		bool m_bDoNDT = true;
+		bool m_bDoLayerBasedICP = false;
 		bool m_bDoVisualize = true;
 		long long m_llTimestamp_s;
 
